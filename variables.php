@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
     $gen_m = 1;
     $gen_f = 2;
@@ -27,8 +26,6 @@
     $tarjeta_credito = 4;
     $tarjeta_debito = 5;
     $transferencia_b = 2;
-=======
-<?php
     $gen_m = 1;
     $gen_f = 2;
     $admin = 1;
@@ -56,5 +53,4 @@
     $tarjeta_credito = 4;
     $tarjeta_debito = 5;
     $transferencia_b = 2;
->>>>>>> c5c15f1562fb2ea6cff3f892727885527cf2b0ec
 ?>
