@@ -1,0 +1,698 @@
+$(document).ready(function() {
+    $('#div_cci_table').hide();
+    $('#div_cce_table').hide();
+    $('#div_ciet_table').hide();
+    $('#div_btn_pdf').hide(); 
+
+    $("#select_usuario").attr('disabled', 'disabled');
+
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var f_actual = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    
+    $('#fecha_cc').attr('value', f_actual);
+    $('#fecha_cc').attr('max', f_actual);
+    
+    var c_ingresos = [];
+    var c_egresos = [];
+
+    //Comprobar si está un rol seleccionado y cargar los usuarios de acuerdo al rol
+    $("#select_rol").change( function (e) { 
+        e.preventDefault();
+        if ($("#select_rol").val() != "") {
+            $("#select_usuario").removeAttr('disabled');
+            if (Number($("#select_rol").val()) == 1) {
+                getAdmin();
+            }
+            if (Number($("#select_rol").val()) == 2) {
+                getCaje();
+            }
+            if (Number($("#select_rol").val()) == 3) {
+                getRece();
+            }
+        }else{
+            $("#select_usuario").attr('disabled', 'disabled');
+        }
+    });
+
+    function getAdmin(){
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../php/administrador/admin-usr-get.php",
+            success: function (response) {
+                const resp = JSON.parse(response);
+                let template = '<option selected="selected"></option>';
+                resp.forEach(r => {
+                    template += `
+                    <option value="${r.id_usuario}">${r.nom_ape}</option>
+                    `;
+                });
+                $('#select_usuario').html(template);
+            }
+        });
+    }
+
+    function getCaje(){
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../php/cajero/caje-usr-get.php",
+            success: function (response) {
+                const resp = JSON.parse(response);
+                let template = '<option selected="selected"></option>';
+                resp.forEach(r => {
+                    template += `
+                    <option value="${r.id_usuario}">${r.nom_ape}</option>
+                    `;
+                });
+                $('#select_usuario').html(template);
+            }
+        });
+    }
+
+    function getRece(){
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "../php/recepcionista/rece-usr-get.php",
+            success: function (response) {
+                const resp = JSON.parse(response);
+                let template = '<option selected="selected"></option>';
+                resp.forEach(r => {
+                    template += `
+                    <option value="${r.id_usuario}">${r.nom_ape}</option>
+                    `;
+                });
+                $('#select_usuario').html(template);
+            }
+        });
+    }
+
+    
+    function listarIngresos(id_u){
+        const fecha = $('#fecha_cc').val();
+        const id_usuario = id_u;
+        $.ajax({
+            type: "POST", 
+            data: {fecha, id_usuario},
+            url: '../php/cuadre_caja/citas_ingresos.php',
+            success: function(response) {
+                $("#cci_body tr").remove();
+                if (response == false) {
+                    $('#texto_modal').html("No se encuentran citas en ingresos");
+                    $('#modal_icon').attr('style', "color: orange");
+                    $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                    $('#div_cci_table').hide();
+                } else { 
+                    const citas = JSON.parse(response);
+                    
+                    var t_efectivo = 0;
+                    var t_transferencia_b = 0;
+                    var t_tarjeta_c = 0;
+                    var t_tarjeta_d = 0;
+                    var t_cheque = 0;
+                    var t_letra_c = 0;
+                    
+                    let template = '';
+                    citas.forEach(cita => {
+                        const id_cita = cita.id_cita;
+                        var adicionales = 0;
+                        var otros = 0;
+                        
+                        var efectivo = 0;
+                        var transferencia_b = 0;
+                        var tarjeta_c = 0;
+                        var tarjeta_d = 0;
+                        var cheque = 0;
+                        var letra_c = 0;
+                        
+                        const r = $.ajax({
+                            type: "POST",
+                            url: "../php/adicional-read.php",
+                            data: { id_cita },
+                            global: false,
+                            async: false,
+                            success: function(response) {
+                                return response;
+                                
+                            }
+                        }).responseText;
+                        if (r != false) {
+                            const resp = JSON.parse(r);
+                                resp.forEach(r => {
+                                adicionales += Number(r.costo);
+                            });
+                        }
+    
+                        const o = $.ajax({
+                            type: "POST",
+                            url: "../php/otros_c/otros_c-get.php",
+                            data: { id_cita },
+                            global: false,
+                            async: false,
+                            success: function(response) {
+                                return response;
+                            }
+                        }).responseText;
+                        if (o != false) {
+                            const ot = JSON.parse(o);
+                                ot.forEach(o => {
+                                otros += Number(o.costo);
+                            });
+                        }
+                        
+                        const cit_p = $.ajax({
+                            type: "POST",
+                            url: "../php/cuadre_caja/cita_pago-get.php",
+                            data: { id_cita, fecha },
+                            global: false,
+                            async: false,
+                            success: function(response) {
+                                return response;
+                            }
+                        }).responseText;
+                        if (cit_p != false) {
+                            const resp = JSON.parse(cit_p);
+                                resp.forEach(r => {
+                                switch (Number(r.id_f_pago)) {
+                                    case 1:
+                                        efectivo = r.costo;
+                                        break;
+                                    case 2:
+                                        transferencia_b = r.costo;
+                                        break;
+                                    case 4:
+                                        tarjeta_c = r.costo;
+                                        break;
+                                    case 5:
+                                        tarjeta_d = r.costo;
+                                        break;
+                                    case 6:
+                                        cheque = r.costo;
+                                        break;
+                                    case 7:
+                                        letra_c = r.costo;
+                                        break;
+                                }
+                            });
+                        }
+                        t_efectivo += Number(efectivo);
+                        t_transferencia_b += Number(transferencia_b);
+                        t_tarjeta_c += Number(tarjeta_c);
+                        t_tarjeta_d += Number(tarjeta_d);
+                        t_cheque += Number(cheque);
+                        t_letra_c += Number(letra_c);
+                        
+                        const hora = cita.hora_p.slice(0, -3);
+                        var tipo_cita = "";
+                        var tarifa = 0;
+                        
+                        if (cita.tipo_cita == "1") {
+                            tipo_cita = "Normal";
+                            tarifa = cita.tarifa;
+                        }else{
+                            if (cita.tipo_cita == "0") {
+                                tipo_cita = "Control";
+                                tarifa = cita.tarifa_control;
+                            }
+                        }
+                           
+    
+                        //========Separaci贸n de un nombre y un apellido MEDICO ===================
+                        const nombrem = cita.nombres_medi;
+                        const apellidom = cita.apellidos_medi;
+                        const nom_apem = cita.sufijo + " " + nombrem + " " + apellidom;
+                        //========Uni贸n de un nombre y un apellido PACIENTE ===================
+                        const nom_apep = cita.nombres_paci1 + " " + cita.nombres_paci2 + " " + cita.apellidos_paci1 + " " + cita.apellidos_paci2;
+                        const total = tarifa - cita.descuento + adicionales + otros;
+                        
+                        template += `
+                                    <tr class="bg-blue" citaID="${cita.id_cita}" citaTotal="${total}">
+                                        <td class="pt-3">${cita.fecha_p}</td>
+                                        <td class="pt-3">${hora}h</td>
+                                        <td class="pt-3">${nom_apep}</td>
+                                        <td class="pt-3">${nom_apem}</td>
+                                        <td class="pt-3">${tipo_cita}</td>
+                                        <td class="pt-3">$${tarifa}</td>
+                                        <td class="pt-3">$${cita.descuento}</td>
+                                        <td class="pt-3">$${Number(adicionales).toFixed(2)}</td>
+                                        <td class="pt-3">$${Number(otros).toFixed(2)}</td>
+                                        <td class="pt-3"><B>$${Number(total).toFixed(2)}</B></td>
+                                    `;
+                                    
+                        if(Number(efectivo)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(efectivo).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(efectivo).toFixed(2)}</I></td>`;
+                        }
+                        if(Number(transferencia_b)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(transferencia_b).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(transferencia_b).toFixed(2)}</I></td>`;
+                        }
+                        if(Number(tarjeta_c)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(tarjeta_c).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(tarjeta_c).toFixed(2)}</I></td>`;
+                        }
+                        if(Number(tarjeta_d)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(tarjeta_d).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(tarjeta_d).toFixed(2)}</I></td>`;
+                        }
+                        if(Number(cheque)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(cheque).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(cheque).toFixed(2)}</I></td>`;
+                        }
+                        if(Number(letra_c)>0){
+                            template += `<td class="pt-3"><I><B>$${Number(letra_c).toFixed(2)}</B></I></td>`;
+                        }else{
+                            template += `<td class="pt-3"><I>$${Number(letra_c).toFixed(2)}</I></td>`;
+                        }
+                        
+                        template += `</tr>`;
+                        
+                    
+                    });
+                    const datIng = {
+                      t_efectivo,
+                      t_transferencia_b,
+                      t_tarjeta_c,
+                      t_tarjeta_d,
+                      t_cheque,
+                      t_letra_c
+                    };
+                    c_ingresos.push(datIng);
+                    template += `
+                                <tr class="bg-blue">
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"><B>$${Number(t_efectivo).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_transferencia_b).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_tarjeta_c).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_tarjeta_d).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_cheque).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_letra_c).toFixed(2)}</B></td>
+                                </tr>
+                                `;
+                    $('#cci_body').html(template);
+                    $('#div_cci_table').show();
+                    listarEgresos(id_usuario);
+                }
+            }
+        });
+    }
+    
+    function listarEgresos(id_u) {
+        const fecha = $('#fecha_cc').val();
+        const id_usuario = id_u;
+        $.ajax({
+            type: "POST",
+            url: "../php/cuadre_caja/medico_pago-get.php",
+            data: {fecha, id_usuario},
+            success: function (response) {
+                if(response==false){
+                     $('#texto_modal').html("No se encuentran citas en egresos");
+                    $('#modal_icon').attr('style', "color: orange");
+                    $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                    $('#div_cce_table').hide();
+                } else {
+                    $('#div_cce_table').show();
+                    const pagos = JSON.parse(response);
+                    var template = '';
+                    //Totalo de los metodos de pago del medico
+                    var t_efectivo = 0;
+                    var t_transferencia_b = 0;
+                    var t_tarjeta_c = 0;
+                    var t_tarjeta_d = 0;
+                    var t_cheque = 0;
+                    var t_letra_c = 0;
+                    pagos.forEach(p => {
+                        //Variables que se usarán de forma global para cargar los totales y cargarlos posteriormente al template
+                        const fecha_p = p.fecha_p;
+                        const hora_p = p.hora_p.slice(0, -3);
+                        const id_pago = p.id_pago;
+                        var medico = "";
+                        var t_tarifas = 0;
+                        var t_descuentos = 0;
+                        var t_adicionales = 0;
+                        var t_comisiones_ban = 0;
+                        var t_retenciones_cli = 0;
+                        var t_comisiones_c = 0;
+                        var t_comisiones_a = 0;
+                        var t_pagado = 0;
+                        
+                        
+                        //Consulta las citas de cada id_pago
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/cuadre_caja/citas_egresos.php",
+                            async: false,
+                            data: {id_pago},
+                            success: function (response) {
+                                const citas = JSON.parse(response);
+                                //Datos del médico
+                                const nombrem = citas[0].nombres_medi;
+                                const apellidom = citas[0].apellidos_medi;
+                                medico = citas[0].sufijo + " " + nombrem + " " + apellidom;
+                                //Variables para ver las formas de pago
+                                var efectivo = 0;
+                                var transferencia_b = 0;
+                                var tarjeta_c = 0;
+                                var tarjeta_d = 0;
+                                var cheque = 0;
+                                var letra_c = 0;
+                                
+                                citas.forEach(c => {
+                                    const id_cita = c.id_cita;
+                                    const com_c = Number(c.comision_c);
+                                    const com_a = Number(c.comision_a);
+                                    //Calcular la tarifa que fue de la cita y sumarlos al total
+                                    var tarifa = 0;
+                                    if (c.tipo_cita == "1") {
+                                        tarifa = Number(c.tarifa);
+                                    }else{
+                                        if (c.tipo_cita == "0") {
+                                            tarifa = Number(c.tarifa_control);
+                                        }
+                                    }
+                                    t_tarifas += Number(tarifa);
+                                    //Calcular los descuentos que fueron de la cita
+                                    t_descuentos += Number(c.descuento);
+                                    //Calcular los adicionales de cada cita y sumarlos al total
+                                    var adicionales = 0;
+                                    const r = $.ajax({
+                                        type: "POST", 
+                                        url: "../php/adicional-read.php",
+                                        data: { id_cita },
+                                        global: false,
+                                        async: false,
+                                        success: function(response) {
+                                            return response;   
+                                        }
+                                    }).responseText;
+                                    if (r != false) {
+                                        const resp = JSON.parse(r);
+                                            resp.forEach(r => {
+                                            adicionales += Number(r.costo);
+                                        });
+                                    }
+                                    t_adicionales += Number(adicionales);
+                                    //Calcular las comisiones del banco y retenciones de la clínica y sumarlos al total
+                                    var val_comision_ban = 0;
+                                    var val_retencion_cli = 0;
+                                    const cbrt = $.ajax({
+                                        type: "POST",
+                                        url: "../php/p_tarjeta/p_tarjeta-get.php",
+                                        data: { id_cita },
+                                        global: false,
+                                        async: false,
+                                        success: function(response) {
+                                            return response;
+                                        }
+                                    }).responseText;
+                                    if (cbrt != false) {
+                                        const values = JSON.parse(cbrt);
+                                            values.forEach(cbrt => {
+                                            val_comision_ban += Number(cbrt.comision_ban);
+                                            val_retencion_cli += Number(cbrt.retencion_cli);
+                                        });
+                                    }
+                                    t_comisiones_ban += Number(val_comision_ban);
+                                    t_retenciones_cli += Number(val_retencion_cli);
+                                    //Calcular las comisiones de las consultas y las comisiones de los adicionales y sumarlos a los totales
+                                    var comision_c = 0;
+                                    var comision_a = 0;
+                                    if (Number(com_c)>5) {
+                                        comision_c = (((Number(tarifa)-Number(c.descuento))*Number(com_c))/100);  
+                                    }else{
+                                        comision_c =  Number(com_c);  
+                                    }
+                                    comision_a = (((Number(adicionales))*Number(com_a))/100);
+                                    t_comisiones_c += Number(comision_c);
+                                    t_comisiones_a += Number(comision_a);
+                                });
+                                
+                                const medi_p = $.ajax({
+                                    type: "POST",
+                                    url: "../php/medico_pago/medico_pago-get.php",
+                                    data: { id_pago },
+                                    global: false,
+                                    async: false,
+                                    success: function(response) {
+                                        return response;
+                                    }
+                                }).responseText;
+                                if (medi_p != false) {
+                                    const resp = JSON.parse(medi_p);
+                                        resp.forEach(r => {
+                                        switch (Number(r.id_f_pago)) {
+                                            case 1:
+                                                efectivo = r.costo;
+                                                break;
+                                            case 2:
+                                                transferencia_b = r.costo;
+                                                break;
+                                            case 4:
+                                                tarjeta_c = r.costo;
+                                                break;
+                                            case 5:
+                                                tarjeta_d = r.costo;
+                                                break;
+                                            case 6:
+                                                cheque = r.costo;
+                                                break;
+                                            case 7:
+                                                letra_c = r.costo;
+                                                break;
+                                        }
+                                    });
+                                }
+                                t_efectivo += Number(efectivo);
+                                t_transferencia_b += Number(transferencia_b);
+                                t_tarjeta_c += Number(tarjeta_c);
+                                t_tarjeta_d += Number(tarjeta_d);
+                                t_cheque += Number(cheque);
+                                t_letra_c += Number(letra_c);
+                                
+                                t_pagado = t_tarifas - t_descuentos + t_adicionales - t_comisiones_ban - t_retenciones_cli - t_comisiones_c - t_comisiones_a;
+                                
+                                template += `
+                                        <tr class="bg-blue">
+                                            <td class="pt-3">${fecha_p}</td>
+                                            <td class="pt-3">${hora_p}h</td>
+                                            <td class="pt-3">${id_pago}</td>
+                                            <td class="pt-3">${medico}</td>
+                                            <td class="pt-3">$${Number(t_tarifas).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_descuentos).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_adicionales).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_comisiones_ban).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_retenciones_cli).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_comisiones_c).toFixed(2)}</td>
+                                            <td class="pt-3">$${Number(t_comisiones_a).toFixed(2)}</td>
+                                            <td class="pt-3"><B>$${Number(t_pagado).toFixed(2)}</B></td>
+                                    `;
+                                    
+                                if(Number(efectivo)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(efectivo).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(efectivo).toFixed(2)}</I></td>`;
+                                }
+                                if(Number(transferencia_b)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(transferencia_b).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(transferencia_b).toFixed(2)}</I></td>`;
+                                }
+                                if(Number(tarjeta_c)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(tarjeta_c).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(tarjeta_c).toFixed(2)}</I></td>`;
+                                }
+                                if(Number(tarjeta_d)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(tarjeta_d).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(tarjeta_d).toFixed(2)}</I></td>`;
+                                }
+                                if(Number(cheque)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(cheque).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(cheque).toFixed(2)}</I></td>`;
+                                }
+                                if(Number(letra_c)>0){
+                                    template += `<td class="pt-3"><I><B>$${Number(letra_c).toFixed(2)}</B></I></td>`;
+                                }else{
+                                    template += `<td class="pt-3"><I>$${Number(letra_c).toFixed(2)}</I></td>`;
+                                }
+                                
+                                template += `</tr>`;
+                            }
+                        });
+                    });
+                    template += `
+                                <tr class="bg-blue">
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"></td>
+                                    <td class="pt-3"><B>$${Number(t_efectivo).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_transferencia_b).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_tarjeta_c).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_tarjeta_d).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_cheque).toFixed(2)}</B></td>
+                                    <td class="pt-3"><B>$${Number(t_letra_c).toFixed(2)}</B></td>
+                                </tr>
+                                `;
+                    
+                    const datEgr = {
+                      t_efectivo,
+                      t_transferencia_b,
+                      t_tarjeta_c,
+                      t_tarjeta_d,
+                      t_cheque,
+                      t_letra_c
+                    };
+                    c_egresos.push(datEgr);
+                    $('#cce_body').html(template);
+                    listarCiet();
+                }
+            }
+        });
+    }
+    
+    function listarCiet(){
+        const ti = c_ingresos[0];
+        const te = c_egresos[0];
+        const template = `
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>EFECTIVO</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_efectivo).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_efectivo).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_efectivo)-Number(te.t_efectivo)).toFixed(2)}</B></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TRANSFERENCIA BANCARIA</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_transferencia_b).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_transferencia_b).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_transferencia_b)-Number(te.t_transferencia_b)).toFixed(2)}</B></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TARJETA DE CRÉDITO</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_tarjeta_c).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_tarjeta_c).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_tarjeta_c)-Number(te.t_tarjeta_c)).toFixed(2)}</B></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TARJETA DE DÉBITO</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_tarjeta_d).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_tarjeta_d).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_tarjeta_d)-Number(te.t_tarjeta_d)).toFixed(2)}</B></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>CHEQUE</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_cheque).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_cheque).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_cheque)-Number(te.t_cheque)).toFixed(2)}</B></td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>LETRA DE CAMBIO</I></B></td>
+                        <td class="pt-3">$${Number(ti.t_letra_c).toFixed(2)}</td>
+                        <td class="pt-3">$${Number(te.t_letra_c).toFixed(2)}</td>
+                        <td class="pt-3"><B>$${(Number(ti.t_letra_c)-Number(te.t_letra_c)).toFixed(2)}</B></td>
+                    </tr>
+                    `;
+        $('#ciet_body').html(template);
+        
+        const t_caja = (Number(ti.t_efectivo)-Number(te.t_efectivo)).toFixed(2);
+        const t_cuentas = (Number(ti.t_transferencia_b)-Number(te.t_transferencia_b))+(Number(ti.t_tarjeta_c)-Number(te.t_tarjeta_c))+(Number(ti.t_tarjeta_d)-Number(te.t_tarjeta_d));
+        const t_cheques = (Number(ti.t_cheque)-Number(te.t_cheque)).toFixed(2);
+        const t_letras_c = (Number(ti.t_letra_c)-Number(te.t_letra_c)).toFixed(2);
+        const t_total = Number(t_caja) + Number(t_cuentas) + Number(t_cheques) + Number(t_letras_c);
+        const template2 = `
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TOTAL CAJA</I></B></td>
+                        <td class="pt-3">$${Number(t_caja).toFixed(2)}</td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TOTAL CUENTAS</I></B></td>
+                        <td class="pt-3">$${Number(t_cuentas).toFixed(2)}</td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TOTAL CHEQUES</I></B></td>
+                        <td class="pt-3">$${Number(t_cheques).toFixed(2)}</td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TOTAL LETRAS DE CAMBIO</I></B></td>
+                        <td class="pt-3">$${Number(t_letras_c).toFixed(2)}</td>
+                    </tr>
+                    <tr class="bg-blue">
+                        <td class="pt-3"><B><I>TOTAL</I></B></td>
+                        <td class="pt-3"><B>$${Number(t_total).toFixed(2)}</B></td>
+                    </tr>
+                    `;
+        $('#tot_body').html(template2);
+        $('#div_ciet_table').show();
+        $('#div_btn_pdf').show();
+    }
+    
+    $("#gen_reporte").on("click", function () {
+        if (($("#select_rol").val() != "") && ($("#select_usuario").val() != "")) {
+            const id_usuario = $("#select_usuario").val();
+            c_ingresos = [];
+            c_egresos = [];
+            $('#div_cci_table').hide();
+            $('#div_cce_table').hide();
+            $('#div_ciet_table').hide();
+            $('#div_btn_pdf').hide();
+            listarIngresos(id_usuario);
+        }else{
+            $('#texto_modal').html("Por favor seleccione los datos solicitados");
+            $('#modal_icon').attr('style', "color: orange");
+            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+            $('#modalPush').modal("show");
+        }
+        
+    });
+    
+    $("#btn_pdf").on("click", function () {
+        const fecha = $('#fecha_cc').val();
+        const id_usuario = $("#select_usuario").val();
+        window.open(`../php/reportes/reporte_cuadre_c.php?fecha=${fecha}&id_usuario=${id_usuario}`, '_blank');
+    });
+    
+    
+    $("#btn_exportar").on("click", function () {
+        //exportTableToExcel("cci_table", filename = 'cuadre_caja');
+        $tabla = document.querySelector("#cci_table");
+        //var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        let tableExport = new TableExport($tabla, {
+            exportButtons: false, // No queremos botones
+            filename: "Cuadre_caja", //Nombre del archivo de Excel
+            sheetname: "Cuadre_caja", //Título de la hoja
+        });
+        let datos = tableExport.getExportData();
+        let preferenciasDocumento = datos.cci_table.xlsx;
+        tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
+    });
+    
+});

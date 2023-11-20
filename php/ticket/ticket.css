@@ -1,0 +1,37 @@
+* {
+    font-size: 15px;
+    font-family: 'Times New Roman';
+}
+
+#turno {
+    font-size: 25px;
+    font-family: 'Times New Roman';
+}
+
+td,
+th,
+tr,
+table {
+    border-collapse: collapse;
+}*
+
+td,
+th{
+    width: 290px;
+    max-width: 290px;
+    word-break: break-all;
+}
+
+.centrado {
+    text-align: center;
+    align-content: center;
+}
+
+.ticket {
+    width: 290px;
+    max-width: 290px;
+}
+
+/* img {
+    max-width: inherit;
+} */
