@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
     $gen_m = 1;
     $gen_f = 2;
@@ -26,4 +27,34 @@
     $tarjeta_credito = 4;
     $tarjeta_debito = 5;
     $transferencia_b = 2;
+=======
+<?php
+    $gen_m = 1;
+    $gen_f = 2;
+    $admin = 1;
+    $rece = 2;
+    $paci = 3;
+    $medi = 4;
+    $caje = 5;
+    $asis = 6;
+    $caso_abierto = 1;
+    $caso_cerrado = 2;
+    $cita_agendada = 1;
+    $cita_espera = 3;
+    $cita_reagendada = 4;
+    $cita_cancelada = 5;
+    $cita_atendida = 6;
+    $cita_cobrada = 7;
+    $cita_finalizada = 8;
+    $cita_resultado = 9;
+    $examen = 1;
+    $procedimiento = 2;
+    $c_normal = 1;
+    $c_control = 0;
+    $datos_actualizados = 1;
+    $datos_no_actualizados = 0;
+    $tarjeta_credito = 4;
+    $tarjeta_debito = 5;
+    $transferencia_b = 2;
+>>>>>>> c5c15f1562fb2ea6cff3f892727885527cf2b0ec
 ?>
