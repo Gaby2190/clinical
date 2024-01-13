@@ -12,7 +12,7 @@ else
     if (isset($_SESSION['rol'])) {
         switch ($_SESSION['rol']) {
             case $admin:
-                echo "Ingresa a menu administrador";
+               // echo "Ingresa a menu administrador";
               //  header("Location: ../admin/admin.php");
                 echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
@@ -41,7 +41,7 @@ else
         INNER JOIN rol AS r
             ON r.id = u.id_rol
         WHERE u.usuario = '{$usr}'";
-         $result = mysqli_query($conn, $query);
+        $result = mysqli_query($conn, $query);
         $nusr = mysqli_num_rows($result);
         $dato_usr = mysqli_fetch_array($result);
          if (($nusr == 1) && (password_verify($pass,$dato_usr['clave']))) {
@@ -51,7 +51,7 @@ else
             $_SESSION['rol'] = $rol;
             switch ($_SESSION['rol']) {
                case $admin:
-                echo "Ingresa a menu administrador";
+                //echo "Ingresa a menu administrador";
                 echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
             case $rece:
