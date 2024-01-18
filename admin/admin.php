@@ -1,14 +1,14 @@
 <?php
-include_once("../sesion.php");
-include_once("../variables.php");
+    include_once("../sesion.php");
+    include_once("../variables.php");
 
-if (trim($_SESSION['rol']) != trim($admin)) {
-   // echo"<script>window.location.replace('../index.php');</script>";
-     echo"<script>
-    alert(".$_SESSION['rol'].");
-    window.location.replace('../index.php');</script>";
-   
-}
+    if (trim($_SESSION['rol']) != trim($admin)) {
+    // echo"<script>window.location.replace('../index.php');</script>";
+        echo"<script>
+        alert(".$_SESSION['rol'].");
+        window.location.replace('../index.php');</script>";
+    
+    }
 ?>
 <!doctype html>
 <html lang="es">

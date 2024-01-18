@@ -13,7 +13,7 @@
         die('Consulta Fallida');
     }
 
-    echo "Especialidad registrada exitosamente";  
+    echo "Registro exitoso de la Especialidad";  
 
 
 ?>

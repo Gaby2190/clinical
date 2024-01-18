@@ -12,7 +12,7 @@
     if (!$result) {
     die('Actualización Fallida');
     }
-    echo "Forma de pago modificada satisfactoriamente"; 
+    echo "Modificación exitosa de la forma de pago"; 
 
 
 ?>

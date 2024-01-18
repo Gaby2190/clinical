@@ -19,7 +19,7 @@
     <input type="text" id="id_usuario" value="<?php echo($_SESSION["id_usuario"]);?>" hidden>
         <!-- sidebar nav start -->
         <ul class="nav nav-pills nav-stacked custom-nav">
-            <li class="active"><a href="medi.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+            <li class="active"><a href="medi.php"><i class="fa fa-tachometer"></i><span>INICIO</span></a>
             </li>
             <li class="menu-list">
                 <a href="#"><i class="fa fa-address-book"></i>

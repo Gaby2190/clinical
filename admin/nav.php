@@ -19,7 +19,7 @@
     <input type="text" id="id_usuario" value="<?php echo($_SESSION["id_usuario"]);?>" hidden>
         <!-- sidebar nav start -->
         <ul class="nav nav-pills nav-stacked custom-nav">
-            <li class="active"><a href="admin.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+            <li class="active"><a href="admin.php"><i class="fa fa-tachometer"></i><span>INICIO</span></a>
             </li>
             <li class="menu-list">
                 <a href="#"><i class="fa fa-graduation-cap"></i>
@@ -31,7 +31,7 @@
             </li>
             <li class="menu-list">
                 <a href="#"><i class="fa fa-credit-card"></i>
-                <span class="text-uppercase">Formas de pago<i class="lnr lnr-chevron-right"></i></span></a>
+                <span class="text-uppercase">Forma de pago<i class="lnr lnr-chevron-right"></i></span></a>
                 <ul class="sub-menu-list">
                     <li><a href="fpago_create.php">Registrar</a> </li>
                     <li><a href="fpago_read.php">Actualizar</a> </li>
@@ -64,8 +64,6 @@
                     <li><a href="actualizacion.php">Actualización de datos</a> </li>
                 </ul>
             </li>
-
-
             <li class="menu-list">
                 <a href="#"><i class="fa fa-hospital-o"></i>
                 <span class="text-uppercase">Caja<i class="lnr lnr-chevron-right"></i></span></a>
@@ -76,7 +74,6 @@
                     <li><a href="cuadre_caja.php">Cuadre de caja diario</a> </li>
                 </ul>
             </li>
-
         </ul>
         <!-- //sidebar nav end -->
         <!-- toggle button start -->

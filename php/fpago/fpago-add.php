@@ -13,7 +13,7 @@
         die('Consulta Fallida');
     }
 
-    echo "Forma de pago registrada exitosamente";  
+    echo "Registro exitoso de la forma de pago";  
 
 
 ?>

@@ -12,7 +12,7 @@
     if (!$result) {
     die('Actualización Fallida');
     }
-    echo "Especialidad modificada satisfactoriamente"; 
+    echo "Modificación exitosa de la especialidad"; 
 
 
 ?>

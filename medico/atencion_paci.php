@@ -170,7 +170,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
 
                                     <div class="card-block">
                                         <h6 class="p-b-5 b-b-default f-w-600 tit text-uppercase"><span style="color: red;">*</span>motivo de consulta</h6>
-                                        <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO)</label>
+                                        <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO, Se requiere el motivo por el cual el paciente acude a la cita)</label>
                                         <br>
                                         <label class="text-muted f-w-400">Ingrese máximo 2000 caracteres</label>
                                         <div class="row">
@@ -182,7 +182,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
 
                                     <div class="card-block">
                                         <h6 class="p-b-5 b-b-default f-w-600 tit text-uppercase"><span style="color: red;">*</span>enfermedad o problema actual</h6>
-                                        <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO)</label>
+                                        <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO, Se refiere al estado en el que el Médico encuentra al paciente)</label>
                                         <br>
                                         <label class="text-muted f-w-400">Ingrese máximo 2000 caracteres</label>
                                         <div class="row">
@@ -766,7 +766,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     </thead>
                                                     <tbody id="medicamento_body"></tbody>
                                                 </table>
-                                                <button class="btn btn-secondary" data-toggle="modal" id="add_medicamento" style="color: #fff"><span class="fa fa-plus"></span> Añadir receta médica</button>
+                                                <button class="btn btn-secondary" data-toggle="modal" id="add_medicamento" style="color: #fff"><span class="fa fa-plus"></span> Añadir medicamento a receta</button>
                                             </div>
                                         </div> 
                                         <div class="row">
@@ -1081,7 +1081,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                             <div class="modal-body mx-3">
                                 <div class="row">
                                     <div class="input-group mb-4 col-sm-7">
-                                        <p class="f-w-600 col-sm-12 mb-2">Filtrar CIE:</p>
+                                        <p class="f-w-600 col-sm-12 mb-2">Filtrar nombre enfermedad:</p>
                                         <input class="text-muted f-w-400 form-control" id="busc_cie" placeholder="Por diagnostico..." maxlength="255"></input>
                                     </div>
                                     <div class="input-group mb-4 col-sm-5">

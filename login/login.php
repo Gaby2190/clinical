@@ -1,14 +1,14 @@
 <?php
-include_once("../sesion.php");
-include_once("../dbconnection.php");
-include_once("../variables.php");
+include_once "../sesion.php";
+include_once "../dbconnection.php";
+include_once "../variables.php";
 if (isset($_GET['cerrar_sesion'])) {
     session_unset();
     session_destroy();
    echo"<script>window.location.replace('../index.php');</script>";
 }
 else
-{    
+{
     if (isset($_SESSION['rol'])) {
         switch ($_SESSION['rol']) {
             case $admin:
