@@ -96,31 +96,31 @@ $(document).ready(function() {
     }
 
 
-    $(document).on('click', '#add_item', (e) => {
-        const elemento = $(this)[0].activeElement.parentElement.parentElement;
-        const id_paciente = $(elemento).attr('pacienteID');
-        const id_usuario = $(elemento).attr('pacienteUSR');
-        console.log(id_usuario);
-        $.ajax({
+    $(document).on('click', '#add_item', (e) => {//clic seleccionando el paciente
+        const elemento = $(this)[0].activeElement.parentElement.parentElement;// Selecciona el elemento elegido
+        const id_paciente = $(elemento).attr('pacienteID');// Extrae del elemento la id del paciente
+        const id_usuario = $(elemento).attr('pacienteUSR');// Extrae del elemento la id del usuario
+        console.log(id_usuario); //imprime en la consola la id_usuario por seguimiento
+        $.ajax({//envia mediante ajax la is_usuario al paciente-list-dat.php
             type: "POST",
             url: '../php/paciente/paciente-list-dat.php',
             data: { id_usuario },
-            success: function(response) {
-                const paciente = JSON.parse(response);
-                $('#nombres_paci1').val(paciente.nombres_paci1);
+            success: function(response) {//respuesta exitosa
+                const paciente = JSON.parse(response);//extrae el array paciente
+                $('#nombres_paci1').val(paciente.nombres_paci1);//toma nombres_paci1 del paciente
                 $('#nombres_paci2').val(paciente.nombres_paci2);
                 $('#apellidos_paci1').val(paciente.apellidos_paci1);
                 $('#apellidos_paci2').val(paciente.apellidos_paci2);
-                $('#modalBusqueda').modal("hide");
-                $.ajax({
+                $('#modalBusqueda').modal("hide");// Cierra el modal de la busqueda.
+                $.ajax({// mediante ajax busca los casos que tenga la id_paciente
                     type: "POST",
                     url: '../php/caso/caso-list-pac.php',
                     data: { id_paciente },
-                    success: function(response) {
-                        const casos = JSON.parse(response);
+                    success: function(response) {//respuesa exitosa
+                        const casos = JSON.parse(response);//almacena en casos la respuesta
                         console.log(casos);
                         let template = '';
-                        casos.forEach(caso => {
+                        casos.forEach(caso => {//extrae los datos de los casos encontrados
                             const id_caso = caso.id_caso;
                             //========Separación de un nombre y un apellido ===================
                             const nombre = caso.nombres_medi;
@@ -134,8 +134,7 @@ $(document).ready(function() {
                             } else {
                                 detalle = caso.descripcion;
                             }
-
-                            if (ult_fecha.ok == false) {
+                            if (ult_fecha.ok == false) {// Imprime en la tabla el resultado
                                 template += `
                                         <tr class="bg-blue" casoID="${caso.id_caso}">
                                             <td class="pt-3" hidden>${caso.id_caso}</td>
@@ -166,9 +165,9 @@ $(document).ready(function() {
 
                         $('#casos_body').html(template);
                         if (casos.length != 0) {
-                            $('#div_table_casos').show();
+                            $('#div_table_casos').show();// muestra el resultado de la tabla
                         } else {
-                            $('#div_table_casos').hide();
+                            $('#div_table_casos').hide();// oculta el resultado de la tabla y muestra mensaje cuando no hay casos
                             $('#texto_modal').html(`El paciente ${paciente.nombres_paci1} ${paciente.apellidos_paci1} no cuenta con un caso registrado`);
                             $('#modal_icon').attr('style', "color: orange");
                             $('#modal_icon').attr("class", "fa fa-user fa-4x animated rotateIn mb-4");

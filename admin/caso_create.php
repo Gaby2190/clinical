@@ -7,36 +7,24 @@ if (trim($_SESSION['rol']) != trim($admin)) {
 ?>
 <!doctype html>
 <html lang="es">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Nuevo Caso</title>
-
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style-starter.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/caso_create.css">
-
-
     <!-- //google fonts -->
     <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
 </head>
-
 <body class="sidebar-menu-collapsed">
-
     <section>
         <?php include_once("nav.php") ?>
-
         <div class="main-content">
-
         <!-- content -->
-         
             <div class="container-fluid content-top-gap">
-
                 <div class="d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
                         <div class="card user-card-full">

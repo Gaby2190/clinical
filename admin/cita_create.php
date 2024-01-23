@@ -148,9 +148,6 @@ if (trim($_SESSION['rol']) != trim($admin)) {
         </div>
         <!-- main content end-->
     </section>
-
-
-
     <!----------------------------------------------------------------------------footer section start--------------------------------------------------------->
     <?php include_once("footer.php") ?>
     <!--footer section end-->

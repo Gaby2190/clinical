@@ -1,19 +1,17 @@
 <?php
-include_once "../sesion.php";
-include_once "../dbconnection.php";
-include_once "../variables.php";
-if (isset($_GET['cerrar_sesion'])) {
-    session_unset();
-    session_destroy();
-   echo"<script>window.location.replace('../index.php');</script>";
+include_once "../sesion.php"; //Configuración de la duración e inicio de sesión
+include_once "../dbconnection.php"; //Configuración de los datos de conexión a la base de datos
+include_once "../variables.php"; // definición de las variables globales
+if (isset($_GET['cerrar_sesion'])) { //Recibe "cerrar_sesion" y evalua si se debe destruir la sesión
+    session_unset();// Limpia la sesión
+    session_destroy();// Destruye la sesión
+   echo"<script>window.location.replace('../index.php');</script>";//redirecciona al pagina inicial del sistema
 }
-else
+else // Cuando "cerrar_sesion" es null
 {
-    if (isset($_SESSION['rol'])) {
-        switch ($_SESSION['rol']) {
+    if (isset($_SESSION['rol'])) { //Recibe y evalua si "rol" en sesion tenga un contenido
+        switch ($_SESSION['rol']) { //Si "rol" tiene un valor lo compara, y redirige.
             case $admin:
-               // echo "Ingresa a menu administrador";
-              //  header("Location: ../admin/admin.php");
                 echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
             case $rece:
@@ -33,25 +31,24 @@ else
                 break;
         } 
     }
-    elseif (isset($_POST['usuario']) && isset($_POST['password'])) {
-       $usr = $_POST['usuario'];
-       $pass = $_POST['password'];
+    elseif (isset($_POST['usuario']) && isset($_POST['password'])) {//recibe y evalua "usuario" y "password"
+       $usr = $_POST['usuario'];//almacena en usr el valor del POST usuario
+       $pass = $_POST['password'];// almacena en pass el valor del POST password
        $query = "SELECT u.*, r.nombre
         FROM usuario AS u 
         INNER JOIN rol AS r
             ON r.id = u.id_rol
-        WHERE u.usuario = '{$usr}'";
-        $result = mysqli_query($conn, $query);
-        $nusr = mysqli_num_rows($result);
-        $dato_usr = mysqli_fetch_array($result);
-         if (($nusr == 1) && (password_verify($pass,$dato_usr['clave']))) {
-            $rol = $dato_usr['id_rol'];
-            $id_usuario = $dato_usr['id_usuario'];
-            $_SESSION['id_usuario'] = $id_usuario;
-            $_SESSION['rol'] = $rol;
-            switch ($_SESSION['rol']) {
+        WHERE u.usuario = '{$usr}'";//Consulta SQL seleccionando los datos si existe el usuario logeado
+        $result = mysqli_query($conn, $query);//Ejecuta la consulta y almacena el resultado en result
+        $nusr = mysqli_num_rows($result);// Obtiene el numero de filas del resultado y guarda en nusr
+        $dato_usr = mysqli_fetch_array($result);//Guarda en resultado en un formato array y lo guarda en dato_usr
+         if (($nusr == 1) && (password_verify($pass,$dato_usr['clave']))) {//evalua que nusr sea 1 y que las claves sean iguales
+            $rol = $dato_usr['id_rol']; //Define rol y toma el valor del dato_usr.id_rol
+            $id_usuario = $dato_usr['id_usuario'];//Define id_usuario y toma el valor del dato_usr.id_usuario 
+            $_SESSION['id_usuario'] = $id_usuario;//Define Sesion.id_usuario y asigna el valor de id_usuario
+            $_SESSION['rol'] = $rol; //Define en sesion.rol y asegina el valor de rol
+            switch ($_SESSION['rol']) {//Compara el rol con las variables globales y redirige.
                case $admin:
-                //echo "Ingresa a menu administrador";
                 echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
             case $rece:
@@ -70,12 +67,13 @@ else
                 echo"<script>window.location.replace('../asistente/asis.php');</script>";
                 break;
             } 
-        }else{
+        }else{// cuando al contraseña no coindice o nusr no es 1
             echo "<script>$(#modalPush).modal('show')</script>";
             echo "Usuario o contraseña incorrectos";
         }
     }
-}?>
+}// Cuando no ingrese en ninguna de las clausulas if, se procede a crear el formulario en HTML
+?>
 <!doctype html>
 <html lang="es">
 <head>

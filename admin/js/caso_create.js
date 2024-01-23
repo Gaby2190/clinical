@@ -416,33 +416,31 @@ $(document).ready(function() {
     }
 
 
-    $('#caso-datos').submit(function(e) {
-        e.preventDefault();
-        const id_medico = $("#select_medico").val();
-        const id_especialidad = $("#select_especialidad").val();
-        $.ajax({
-            type: "POST",
-            url: "../php/caso/caso-paci-verif.php",
-            data: {id_medico, id_especialidad, id_paciente},
-            success: function (response) {
-                if (response != false) {
-                    const id_caso = JSON.parse(response).id_caso;
+    $('#caso-datos').submit(function(e) {//click en el boton registrar del formulario
+        e.preventDefault();// se previene el llamado del evento
+        const id_medico = $("#select_medico").val();// Toma el valor del select_medico
+        const id_especialidad = $("#select_especialidad").val();// Toma el valor del select_especialidad
+        $.ajax({// se define ajax para enviar valores a un php
+            type: "POST", //define el metodo de envio de los datos
+            url: "../php/caso/caso-paci-verif.php", //se indica el destino 
+            data: {id_medico, id_especialidad, id_paciente}, //se definen los datos a enviar
+            success: function (response) { //en caso la respuesta de la ejecucion se axitosa.
+                if (response != false) {// evalua su la respuesta es falsa
+                    const id_caso = JSON.parse(response).id_caso; //toma el valor de id_caso de la respues
                     $('#pregunta_modal').html("El paciente tiene un Caso Abierto para el médico y especialidad indicados. <br/> Consulte al paciente si es una cita de control. <br/> Porfavor Seleccione el tipo de cita que desea el paciente.");
                     $('#modal_icono').attr('style', "color: #22445d");
                     $('#modal_icono').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
                     $('#modalConfirm').modal("show");
-                  //  setTimeout(function() { window.location.href = `cita_create.php?id_caso=${id_caso}&id=0`; }, 4000);
-                  
-                $("#cita_nueva").click(function (e) {
-                      if (stat_verif == false) {
-                        guardarPaci();
+                  //  fin del modal de confirmacion en caso de que ya exista con el mismo medico y especialidad
+                $("#cita_nueva").click(function (e) {// si da clic en cita nueva
+                      if (stat_verif == false) {//verifica si el paciente existe en la base
+                        guardarPaci(); //invoca a la funcion guardarPaci.
                     } else {
-                        guardarCaso(id_paciente);
+                        guardarCaso(id_paciente); //invoca a la funcion guardarCaso
                     }
-            
-                    id_paciente = 0;
-                    id_caso = 0;
-            
+                    //dentro de cualquiera de la dos funciones al final redirecciona al formulario de registo cita normal
+                    id_paciente = 0; // se resetea el formulario
+                    id_caso = 0;            
                     $('#caso-datos').trigger('reset');
                     $('#nombres_paci1').attr('disabled', 'disabled');
                     $('#nombres_paci2').attr('disabled', 'disabled');
@@ -450,31 +448,30 @@ $(document).ready(function() {
                     $('#apellidos_paci2').attr('disabled', 'disabled');
                     $('#celular_paci').attr('disabled', 'disabled');
                     $('#datos_btn').attr('disabled', 'disabled');
-                    $("#select_nacionalidad").val('53'); 
-                    
-                     
+                    $("#select_nacionalidad").val('53');                    
                     })
                 
                 
-                $("#cita_control").click(function (e) {
-                     const nombres1 = $('#nombres_paci1').val();
-                     const nombres2 = $('#nombres_paci2').val();
-                     const apellidos1 = $('#apellidos_paci1').val();
-                     const apellidos2 = $('#apellidos_paci2').val();
-                     // window.location.href = `cita_create.php?id_caso=${id_caso}&id=0`;
+                $("#cita_control").click(function (e) {// si da clic en cita control
+                     const nombres1 = $('#nombres_paci1').val();//toma el valor de nombres_paci1
+                     const nombres2 = $('#nombres_paci2').val();//toma el valor de nombres_paci2
+                     const apellidos1 = $('#apellidos_paci1').val();//toma el valor de apellidos_paci1
+                     const apellidos2 = $('#apellidos_paci2').val();//toma el valor de apellidos_paci2
+                     // redirecciona al registro por cita de control
                       window.location.href = `cita_control-det.php?id_paciente=${id_paciente}&id_medico=${id_medico}&id_especialidad=${id_especialidad}&nombres1=${nombres1}&nombres2=${nombres2}&apellidos1=${apellidos1}&apellidos2=${apellidos2}`;
                     })
                   
 
                   
-                }else {
+                }else {// cuando la verificaicon de caso es afirmativa
                     
-                    if (stat_verif == false) {
-                        guardarPaci();
+                    if (stat_verif == false) {// verifica estado
+                        guardarPaci();//invoca a guardar Paci
                     } else {
-                        guardarCaso(id_paciente);
+                        guardarCaso(id_paciente);//invoca a guardarCaso
                     }
-            
+                    //al final de la funciones hay las redirecciones
+                    // se resetea el formulario
                     id_paciente = 0;
                     id_caso = 0;
             
