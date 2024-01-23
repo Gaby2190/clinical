@@ -1,7 +1,7 @@
 <?php
-include_once "../sesion.php"; //Configuración de la duración e inicio de sesión
-include_once "../dbconnection.php"; //Configuración de los datos de conexión a la base de datos
-include_once "../variables.php"; // definición de las variables globales
+include_once ("../sesion.php"); //Configuración de la duración e inicio de sesión
+include_once ("../dbconnection.php"); //Configuración de los datos de conexión a la base de datos
+include_once ("../variables.php"); // definición de las variables globales
 if (isset($_GET['cerrar_sesion'])) { //Recibe "cerrar_sesion" y evalua si se debe destruir la sesión
     session_unset();// Limpia la sesión
     session_destroy();// Destruye la sesión
@@ -34,11 +34,7 @@ else // Cuando "cerrar_sesion" es null
     elseif (isset($_POST['usuario']) && isset($_POST['password'])) {//recibe y evalua "usuario" y "password"
        $usr = $_POST['usuario'];//almacena en usr el valor del POST usuario
        $pass = $_POST['password'];// almacena en pass el valor del POST password
-       $query = "SELECT u.*, r.nombre
-        FROM usuario AS u 
-        INNER JOIN rol AS r
-            ON r.id = u.id_rol
-        WHERE u.usuario = '{$usr}'";//Consulta SQL seleccionando los datos si existe el usuario logeado
+       $query = "SELECT u.*, r.nombre FROM usuario AS u INNER JOIN rol AS r ON r.id = u.id_rol WHERE u.usuario = '".$usr."'";//Consulta SQL seleccionando los datos si existe el usuario logeado
         $result = mysqli_query($conn, $query);//Ejecuta la consulta y almacena el resultado en result
         $nusr = mysqli_num_rows($result);// Obtiene el numero de filas del resultado y guarda en nusr
         $dato_usr = mysqli_fetch_array($result);//Guarda en resultado en un formato array y lo guarda en dato_usr
