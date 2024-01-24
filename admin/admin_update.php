@@ -1,6 +1,6 @@
 <?php
-use "../sesion.php";
-use "../variables.php";
+include_once("../sesion.php");
+include_once("../variables.php");
 header("Content-Type: text/plain");
 if (trim($_SESSION['rol']) != trim($admin)) {
     echo"<script>window.location.replace('../index.php');</script>";
@@ -29,7 +29,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
 
 <body class="sidebar-menu-collapsed">
     <section>
-       <?php include_once "nav.php"; ?>
+       <?php include_once("nav.php") ?>
         <!-- main content start -->
         <div class="main-content">
         <?php
@@ -142,7 +142,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
 
 
     <!----------------------------------------------------------------------------footer section start--------------------------------------------------------->
-    <?php include_once "footer.php"; ?>
+    <?php include_once("footer.php") ?>
     <!--footer section end-->
 
 
