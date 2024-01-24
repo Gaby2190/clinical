@@ -45,8 +45,8 @@ else // Cuando "cerrar_sesion" es null
             $_SESSION['rol'] = $rol; //Define en sesion.rol y asegina el valor de rol
             switch ($_SESSION['rol']) {//Compara el rol con las variables globales y redirige.
                case $admin:
-               echo $query;
-               // echo"<script>window.location.replace('../admin/admin.php');</script>";
+              
+               echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
             case $rece:
                 echo"<script>window.location.replace('../recepcionista/rece.php');</script>";
