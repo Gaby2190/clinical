@@ -1,59 +1,70 @@
-$(document).ready(function() {
+
+$(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagina HTML 
+    //Oculta visualmente los div t_med y s_med
     $("#div_tmed").hide();
     $("#div_smed").hide();
-     
-    getEspecialidades();
-    getNacionalidad();
-    $('#nombres_paci1').attr('disabled', 'disabled');
+  
+    getEspecialidades();   //Llama a la funcion get especialidades - carga las especialidades en el SELECT_ESPECIALIDADES
+    getNacionalidad(); //Llama a la funcion get nacionalidad - carga las nacionalidades en el SELECT_NACIONALIDAD
+    $('#nombres_paci1').attr('disabled', 'disabled'); //deshabilita en objeto input nombres_paci1
     $('#nombres_paci2').attr('disabled', 'disabled');
     $('#apellidos_paci1').attr('disabled', 'disabled');
     $('#apellidos_paci2').attr('disabled', 'disabled');
     $('#celular_paci').attr('disabled', 'disabled');
-    $('#datos_btn').attr('disabled', 'disabled');
+    $('#datos_btn').attr('disabled', 'disabled'); //deshabilita el objeto boton datos_btn
  
-    var id_paciente = 0;
-    var id_caso = 0;
+    var id_paciente = 0; //establece una variable global id_paciente
+    var id_caso = 0; //establece una variable global id_caso
 
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
+    var d = new Date(); //se obtiene la fecha actual
+    var month = d.getMonth() + 1; //se extrae de la fecha actual el mes
+    var day = d.getDate(); // se extrae de la fecha actual el dia
     var f_actual = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    // se da un nuevo formato a la fecha actual
+    var rol = 'P'; // se establece el rol en P de paciente
 
-    var rol = 'P';
-
-    var stat_verif = false;
+    var stat_verif = false; // stat_verif se utiliza para verificar si los datos del paciente son correctos, 
+                            //se establece por defecto en false
     
-
-    // Buscar en base a la cedula ingresada
-    $('#cedula_paci').keyup(function() {
-        $('#nombres_paci1').attr('disabled', 'disabled');
+                            
+    $('#cedula_paci').keyup(function() {//mediante jQuery se ejecutar una funcion cuando el 
+                                        //usuario ingresa un caracter en el objeto input cedula_paci
+        $('#nombres_paci1').attr('disabled', 'disabled'); //Deshabilita el input nombres_paci1
         $('#nombres_paci2').attr('disabled', 'disabled');
         $('#apellidos_paci1').attr('disabled', 'disabled');
         $('#apellidos_paci2').attr('disabled', 'disabled');
         $('#celular_paci').attr('disabled', 'disabled');
         $('#datos_btn').attr('disabled', 'disabled');
-        $('#nombres_paci1').val("");
+        $('#nombres_paci1').val(""); // Pone el valor en vacio del input nombres paci1
         $('#apellidos_paci1').val("");
         $('#nombres_paci2').val("");
         $('#apellidos_paci2').val("");
         $('#celular_paci').val("");
-        if ($('#cedula_paci').val()) {
-            let cedula = $('#cedula_paci').val();
+        // se realiza una deshabilitacion de los input y se vacia el contenido que hayan tendido
+
+        if ($('#cedula_paci').val()) {// se evalua si hay un valor en cedula_paci
+            let cedula = $('#cedula_paci').val(); //se toma el valor de cedula_paci y se almacena en la variable cedula
+            // Se evalua Si el valor del select_nacionalidad  es igual a 53 Y el largo del valor de cedula_paci es igual a 10
             if (($('#select_nacionalidad').val() == '53') && ($('#cedula_paci').val().length == 10)) {
+                // se evalua la validez de la cedula enviandole el valor a la funcion validarCedula
                 if (validarCedula(cedula) == true) {
-                    verificarUsr();
-                } else {
+                    //si la cedula es valida se ejecuta la funcion verificarUsr
+                    verificarUsr(); //la funcion modificara el estado del stat_verif sea como true o como false
+                } else {// Si la nacionalidad es ecuatoriana y la cedula tiene 10 digitos pero no pasa la validacion 
+                        // se emite un mensaje en un modal indicando que la cedula no es valida
                     $('#texto_modal').html(validarCedula(cedula));
                     $('#modal_icon').attr('style', "color: orange");
                     $('#modal_icon').attr("class", "fa fa-id-card fa-4x animated rotateIn mb-4");
                     $('#modalPush').modal("show");
                 }
-            } else {
-                if ($('#select_nacionalidad').val() != '53') {
-                    verificarUsr();
+            } else {//Si la cedula no tiene 10 digitos o no es ecuatoriana
+                if ($('#select_nacionalidad').val() != '53') {// se evalua si la cedula no es ecuatoriana
+                    //aqui se evalua si ya existe el paciente de nacionalidad extranjero
+                    verificarUsr();// se llama a la funcion verificarUsr
                 }
             }
         } else {
+            //desahibilita los objetos que recoplian la informacion del paciente.
             $('#nombres_paci1').attr('disabled', 'disabled');
             $('#nombres_paci2').attr('disabled', 'disabled');
             $('#apellidos_paci1').attr('disabled', 'disabled');
@@ -63,23 +74,26 @@ $(document).ready(function() {
         }
     });
 
-    //Comprobar nacionalidad para habilitar número
+    //Comprobar nacionalidad para habilitar número maximo de caracteres
     $("#select_nacionalidad").change(function (e) { 
         e.preventDefault();
+        //Evalua si el valor del select nacionalidad es Ecuatoriano
         if ($('#select_nacionalidad').val() != '53') {
+            //Si no es ecuatoriano el atributo maxlength(maximo de caracteres permitido en el input) sea 20
             $("#cedula_paci").attr('maxlength', '20');
         } else {
+            //Si es ecuatoriano el atributo maxlength(maximo de caracteres permitido en el input) sea 10
             $("#cedula_paci").attr('maxlength', '10');
         }
     });
 
-    //Busqueda en la tabla de pacientes
+    //Busqueda en la tabla de pacientes del modal cuando ingresa un indicio del paciente que busca y dar ENTER
     $('#busc_paci').keypress(function (e) {
-        const key = e.which;
-        if(key == 13)  // the enter key code
+        const key = e.which; //toma el codigo ascii de la tecla presionada
+        if(key == 13)  // Evalua que el codigo ascci presionado sea igual a 13 que corresponde a la tecla ENTER
          {
-           const txt__search = $("#busc_paci").val();
-           listarPacientes(txt__search);
+           const txt__search = $("#busc_paci").val();//toma el valor del objeto busca_paci y almacena en txt_search
+           listarPacientes(txt__search);//llama a la funcion listarPacientes y le entrega el parametro de busqueda
          }
     });
 
@@ -119,21 +133,21 @@ $(document).ready(function() {
     });
 
     // Obtener Especialidades
-    function getEspecialidades() {
+    function getEspecialidades() {//declara la funcion especialidades
         $.ajax({
-            url: '../php/especialidad/especialidades-list.php',
+            url: '../php/especialidad/especialidades-list.php',//abrir el archivo especialidades-list.php sin parametro
             type: 'POST',
             async: false,
             success: function(response) {
-                const especialidades = JSON.parse(response);
+                const especialidades = JSON.parse(response);//toma una cadena JSON y la transforma en un objeto de JavaScript
                 let template = '<option selected="selected"></option>';
-                especialidades.forEach(espe => {
+                especialidades.forEach(espe => {//recorre las filas del resultado de la consulta
                     template += `
                         <option value="${espe.id}">${espe.nombre}</option>
-                        `;
+                        `;// agrega el registro mediante un option al select
                 });
 
-                $('#select_especialidad').html(template);
+                $('#select_especialidad').html(template);// carga en el select todos los option generados
 
             }
         });
@@ -241,41 +255,41 @@ $(document).ready(function() {
     }
 
     function verificarUsr() {
-        const usuario = rol + $('#cedula_paci').val();
-        $.ajax({
-            type: "POST",
-            url: '../php/paciente/paciente-list-usr.php',
-            data: { usuario },
-            success: function(response) {
-                if (response != false) {
-                    const id_usuario = JSON.parse(response).id_usuario;
-                    $.ajax({
-                        type: "POST",
-                        url: '../php/paciente/paciente-list-dat.php',
-                        data: { id_usuario },
-                        success: function(response) { 
-                            const paciente = JSON.parse(response);
-                            id_paciente = paciente.id_paciente;
-                            $('#nombres_paci1').val(paciente.nombres_paci1);
-                            $('#nombres_paci2').val(paciente.nombres_paci2);
-                            $('#apellidos_paci1').val(paciente.apellidos_paci1);
-                            $('#apellidos_paci2').val(paciente.apellidos_paci2);
-                            $('#celular_paci').val(paciente.celular_paci);
-                            $('#datos_btn').removeAttr('disabled');
-                            stat_verif = true;
-                        }
-                    });
-                } else {
+        const usuario = $('#cedula_paci').val(); //toma el rol y contatena con el valor de cedula_paci 
+        $.ajax({ //mediante AJAX hacemos una consulta hacia la base de datos mediante un archivo php
+            type: "POST", //metodo por el cual se envian los datos al archivo php
+            url: '../php/paciente/paciente-list-ced.php', //Archivo PHP de destino
+            data: { usuario }, //datos que se envian al archivo php de destino
+            success: function(response) { //Cuando el archivo de destino responde de manera positiva se recibe un resultado response
+                if (response != false) {//Evalua si el response no es false
+                    const paciente = JSON.parse(response);//toma una cadena JSON y 
+                                                          //la transforma en un objeto de JavaScript
+                                                          //y lo almacena en paciente
+                    id_paciente = paciente.id_paciente; //En la variable global id_paciente almacena del 
+                                                        //objeto paciente la id_paciente que retorno la consulta SQL
+                    $('#nombres_paci1').val(paciente.nombres_paci1);//en el valor del objeto nombres_pac1 le asigna el valor del 
+                                                                    //objeto paciente el nombres_paci1 que retorno la consulta SQL
+                    $('#nombres_paci2').val(paciente.nombres_paci2); //Mismo proceso del nombres_paci2 se realiza con el nombres_paci2
+                    $('#apellidos_paci1').val(paciente.apellidos_paci1);
+                    $('#apellidos_paci2').val(paciente.apellidos_paci2);
+                    $('#celular_paci').val(paciente.celular_paci);
+                    $('#datos_btn').removeAttr('disabled'); //remueve el atributo deshabilitado del boton datos_btn, quedando habilitado
+                    stat_verif = true; // el estado de la verificacion se devuelve true
+                } else { //si el valor de response devuelto por la consulta sql es vacio
+                    //Se habilita todos los objeto que llevan la informacion del paciente 
+                    //para que se puedan ingresar los datos del paciente nuevo
                     $('#nombres_paci1').removeAttr('disabled');
                     $('#apellidos_paci1').removeAttr('disabled');
                     $('#nombres_paci2').removeAttr('disabled');
                     $('#apellidos_paci2').removeAttr('disabled');
                     $('#celular_paci').removeAttr('disabled');
                     $('#datos_btn').removeAttr('disabled');
-                    stat_verif = false;
+                    stat_verif = false;// y el estado de la verificacion del usuario se devuelve false
                 }
             }
         });
+                
+            
     }
 
     function guardarPaci() {

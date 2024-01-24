@@ -1,8 +1,8 @@
 <?php
-include_once("../sesion.php");
-include_once("../variables.php");
-if (trim($_SESSION['rol']) != trim($admin)) {
-    echo"<script>window.location.replace('../index.php');</script>";
+include_once("../sesion.php");//configuración tiempo sesión 
+include_once("../variables.php");//globales
+if (trim($_SESSION['rol']) != trim($admin)) {//Verifica si el rol pertenece al formulario 
+    echo"<script>window.location.replace('../index.php');</script>";// caso contrario redirige al index.php
 }
 ?>
 <!doctype html>
@@ -10,19 +10,19 @@ if (trim($_SESSION['rol']) != trim($admin)) {
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!--manejo responsivo de la pagina-->
     <title>Nuevo Caso</title>
     <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style-starter.css">
+    <link rel="stylesheet" href="../assets/css/style-starter.css"><!-- llama a la hoja de estilos de la plantilla-->
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/caso_create.css">
-    <!-- //google fonts -->
+    <!-- //google fonts tipo de letra a utilizar -->
     <link href="//fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap" rel="stylesheet">
 </head>
 <body class="sidebar-menu-collapsed">
     <section>
-        <?php include_once("nav.php") ?>
-        <div class="main-content">
+        <?php include_once("nav.php"); // incluye al archivo nav que tiene las opciones de navegación ?>
+        <div class="main-content"> <!-- contenedor principal -->
         <!-- content -->
             <div class="container-fluid content-top-gap">
                 <div class="d-flex justify-content-center">
@@ -31,35 +31,44 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                             <div class="row m-l-0 m-r-0">
                                 <div class="col-sm-12">
                                     <div class="card-block">
+                                        <!-- Nombre del formulario -->
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">caso nuevo</h6>
+                                        <!-- declaro un formulario -->
                                         <form id="caso-datos">
                                             <div class="row form-group">
+                                                <!-- Elementos del control de especialidad mediante un Select -->
                                                 <div class="col-sm-4 my-2 pt-2">
                                                     <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione una Especialidad:</p>
                                                 </div>
                                                 <div class="col-sm-8 my-2 pt-1">
                                                     <select class="custom-select" id="select_especialidad" required></select>
                                                 </div>
+                                                <!-- Elementos del control de Medico mediante un Select -->
                                                 <div class="col-sm-4 my-2 pt-2" id="div_tmed">
                                                     <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione un Médico:</p>
                                                 </div>
                                                 <div class="col-sm-8 my-2 pt-1" id="div_smed">
                                                     <select class="custom-select" id="select_medico" required></select>
                                                 </div>
+
                                                 <div class="col-sm-12 mb-1 mt-4">
                                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit">Datos del paciente</h6>
                                                 </div>
+                                                <!-- Elementos del control de Nacionalidad mediante un Select -->
                                                 <div class="col-sm-4 my-2">
                                                     <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Nacionalidad:</p>
                                                     <select class="custom-select" id="select_nacionalidad" required></select>
                                                 </div>
+                                                <!-- Elementos del control de cedula del paciente mediante un input -->
                                                 <div class="col-sm-4 my-2">
                                                     <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Cédula:</p>
                                                     <input type="text" class="text-muted f-w-400 form-control" id="cedula_paci" ondrop="return false;" onpaste="return false;" onkeypress="return event.charCode>=48 && event.charCode<=57" size="10" maxlength="10" required>
                                                 </div>
+                                                <!-- Boton para abrir un modal de busqueda por nombre -->
                                                 <div class="col-sm-4 mt-4 pt-3 my-2 pb-0 text-center">
                                                     <a style="color: #fff;" class="btn" id="buscar_btn"><span class="fa fa-search"></span> Realizar busqueda por nombres</a>
                                                 </div>
+
                                                 <div class="col-sm-6 my-2">
                                                     <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Primer nombre:</p>
                                                     <input type="text" class="text-muted f-w-400 form-control" id="nombres_paci1" size="50" maxlength="50" required>
@@ -81,7 +90,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                     <input type="tel" class="text-muted f-w-400 form-control" id="celular_paci" pattern="[0-9]{10}" size="10" maxlength="10" autocomplete="of" required>
                                                 </div>
                                             </div>
-
+                                            <!-- Boton de registrar la cita. -->
                                             <div class="col-sm-12 my-2">
                                                 <button class="btn btn-primary text-uppercase btn-lg float-right my-4" type="submit" id="datos_btn"><span class="fa fa-floppy-o"></span> Registrar</button>
                                             </div>
