@@ -1,7 +1,7 @@
 <?php
 include_once("../sesion.php");
 include_once("../variables.php");
-header("Content-Type: text/plain");
+
 if (trim($_SESSION['rol']) != trim($admin)) {
     echo"<script>window.location.replace('../index.php');</script>";
 }
