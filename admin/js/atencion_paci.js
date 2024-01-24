@@ -11,12 +11,12 @@ $(document).ready(function() {
         data: {id_cita},
         success: function (response) {
             const tipo_cita = Number(JSON.parse(response).tipo_cita);
-            if (tipo_cita == 1) {
+            if (tipo_cita === 1) {
                 $("#ros_control").remove();
                 $("#efr_control").remove();
                 $("#div_evolucion").hide();
             }
-            if (tipo_cita == 0) {
+            if (tipo_cita === 0) {
                 $("#ros_normal").remove();
                 $("#efr_normal").remove();
                 $("#div_evolucion").show();
