@@ -865,7 +865,7 @@ $(document).ready(function() {
                                 var color="";
                                 var c_txt ="";
                                 if (edad>=18) {
-                                    if (sva.peso == "" || sva.peso == NaN || sva.peso == null || sva.peso == 0 || sva.talla == "" || sva.talla == NaN || sva.talla == null || sva.talla == 0) {
+                                    if (sva.peso == "" || isNaN(sva.peso) || sva.peso == null || sva.peso == 0 || sva.talla == "" || isNaN(sva.talla) || sva.talla == null || sva.talla == 0) {
                                         imc = 0;
                                     }else{
                                         imc = imc = (sva.peso/(Math.pow((sva.talla/100),2))).toFixed(2);
@@ -910,13 +910,13 @@ $(document).ready(function() {
         const frecuencia_c = fc;
         const sat_o = so;
         var peso = 0;
-        if (p == "" || p == NaN || p == null || p == 0) {
+        if (p == "" || isNaN(p) || p == null || p == 0) {
             peso = 0;
         }else{
             peso = p;
         }
         var talla = 0;
-        if (t == "" || t == NaN || t == null || t == 0) {
+        if (t == "" || isNaN(t)|| t == null || t == 0) {
             talla = 0;
         }else{
             talla = t;
@@ -927,7 +927,7 @@ $(document).ready(function() {
         var color="";
         var c_txt ="";
         if (edad>=18) {
-            if (p == "" || p == NaN || p == null || p == 0 || t == "" || t == NaN || t == null || t == 0) {
+            if (p == "" || isNaN(p) || p == null || p == 0 || t == "" || isNaN(t) || t == null || t == 0) {
                 imc = 0;
             }else{
                 imc = imc = (p/(Math.pow((t/100),2))).toFixed(2);
@@ -1386,7 +1386,7 @@ $(document).ready(function() {
         const c_medicamento = $('#c_medicamento').val();
         const indicaciones = $('#indicaciones').val();
 
-        if (d_medicamento == "" || (c_medicamento == "" || c_medicamento == 0 || c_medicamento == NaN) || indicaciones == "") {
+        if (d_medicamento == "" || (c_medicamento == "" || c_medicamento == 0 || isNaN(c_medicamento)) || indicaciones == "") {
             $('#texto_modal').html('Ingrese datos en los campos obligatorios');
             $('#modal_icon').attr('style', "color: orange");
             $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
