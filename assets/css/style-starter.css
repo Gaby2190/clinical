@@ -16419,19 +16419,19 @@ a.github {
     opacity: 1;
 }
 
-.card_border:hover i.lnr.lnr-users {
+.card_border:hover i.lnr.lnr-calendar-full {
     color: var(--primary);
 }
 
-.card_border:hover i.lnr.lnr-eye {
+.card_border:hover i.lnr.lnr-users {
     color: var(--secondary);
 }
 
-.card_border:hover i.lnr.lnr-cloud-download {
+.card_border:hover i.lnr.lnr-arrow-up-circle {
     color: var(--success);
 }
 
-.card_border:hover i.lnr.lnr-cart {
+.card_border:hover i.lnr.lnr-arrow-down-circle {
     color: var(--danger);
 }
 

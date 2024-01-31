@@ -13,7 +13,8 @@ if (trim($_SESSION['rol']) != trim($admin)) {//Verifica si el rol pertenece al f
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!--manejo responsivo de la pagina-->
     <title>Nuevo Caso</title>
     <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style-starter.css"><!-- llama a la hoja de estilos de la plantilla-->
+    <!-- llama a la hoja de estilos de la plantilla-->
+    <link rel="stylesheet" href="../assets/css/style-starter.css">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/caso_create.css">
     <!-- //google fonts tipo de letra a utilizar -->
@@ -258,10 +259,13 @@ if (trim($_SESSION['rol']) != trim($admin)) {//Verifica si el rol pertenece al f
     <!--// loading-gif Js -->
 
     <!-- Bootstrap Core JavaScript -->
+<!-- Llama a los archivos js que le corresponde -->
+
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="js/admin.js"></script>
 
     <script src="js/caso_create.js"></script>
+    
     <script src="../lib/gen-pass.js"></script>
     <script src="../lib/val_ced.js"></script>
 </body>

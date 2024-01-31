@@ -1,18 +1,17 @@
 <?php
+
+//ConfiguraciÃ³n de la base de datos 
 $servername = "localhost";
 $database = "cesmedec_clinical";
-//$username = "cesmedec_clinical";
-//$password = "Cesmed1994*";
-
 $username = "root";
 $password = "";
 
-// Crear conexi¨®n
+// Crear conexiï¿½ï¿½n con la extenciÃ³n mysqli
 $conn = new mysqli($servername, $username, $password, $database);
 $conn->set_charset("utf8");
-// Verificar Conexi¨®n 
+// Verificar Conexiï¿½ï¿½n 
 if (!$conn) {
-    die("Conex¨®n fallida: " . mysqli_connect_error());
+    die("Conexï¿½ï¿½n fallida: " . mysqli_connect_error());
 }
 
 ?>

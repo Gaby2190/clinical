@@ -2,9 +2,9 @@
 
 include('../../dbconnection.php');
 
-if(isset($_POST['id_usuario'])) {
+if(isset($_POST['usuario'])) {
 
-  $id_usuario = $_POST['id_usuario'];
+  $id_usuario = $_POST['usuario'];
  
   $query = "SELECT * from paciente where cedula_paci = '{$id_usuario}'";
     

@@ -350,6 +350,10 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                     success: function(response) {
                                         var paciente = JSON.parse(response);
                                         id_paciente = paciente.id_paciente;
+                                        
+                                        
+                                        
+ //Una vez preparada la DATA a enviar                                   
                                         const postCaso = {
                                             fecha_registro: f_actual,
                                             id_medico: id_medico,
@@ -358,24 +362,27 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                             id: 1
                                         };
 
-                                        $.ajax({
+                                        $.ajax({//se guarda el caso en la bd
                                             type: "POST",
+
                                             url: '../php/caso/caso-add.php',
                                             data: postCaso,
                                             success: function(response) {
-                                                console.log(response);
+                                                console.log(response);// se imprime en la consola el mesnaje devuelto
                                                 const datosCaso = {
                                                     fecha_registro: f_actual,
                                                     id_paciente: id_paciente,
                                                     id_medico: id_medico
                                                 };
-                                                $.ajax({
+                                                $.ajax({//Realizo otra Consulta para saber cual es la id del caso guardado
                                                     type: "POST",
-                                                    url: '../php/caso/caso-list.php',
+                                                    url: '../php/caso/caso-list.php', 
                                                     data: datosCaso,
                                                     success: function(response) {
                                                         const datos = JSON.parse(response);
                                                         id_caso = datos.id_caso;
+
+                                                        //redirige al form cita_create.php con la id del caso
                                                         $(location).attr('href', `cita_create.php?id_caso=${id_caso}&id=1`);
                                                     }
                                                 });
