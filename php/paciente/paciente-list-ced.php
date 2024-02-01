@@ -1,13 +1,13 @@
 <?php
 
-include('../../dbconnection.php');
+include '../../dbconnection.php';
 
 if(isset($_POST['usuario'])) {
 
   $id_usuario = $_POST['usuario'];
  
-  $query = sprintf("SELECT * from paciente where cedula_paci = '%id'",mysqli_real_escape_string($conn,$id_usuario));
-  //$query = sprintf("SELECT u.*, r.nombre FROM usuario WHERE u.usuario = '%s'", mysqli_real_escape_string($conn, $usr));//Consulta SQL seleccionando los datos si existe el usuario logeado
+  $query = sprintf("SELECT * from paciente where cedula_paci = '%s'",mysqli_real_escape_string($conn,$id_usuario));
+  
   $result = mysqli_query($conn, $query);
 
   if(!$result) {
