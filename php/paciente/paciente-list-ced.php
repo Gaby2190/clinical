@@ -9,11 +9,18 @@ if(isset($_POST['usuario'])) {
   $query = sprintf("SELECT * from paciente where cedula_paci = '%s'",mysqli_real_escape_string($conn,$id_usuario));
   
   $result = mysqli_query($conn, $query);
+  
 
   if(!$result) {
     die('Error en consulta '.mysqli_error($conn));
   }
-
+  $filas_result = mysqli_num_rows($result);
+  if($filas_result==0)
+  {
+    $jsonstring=false;
+  }
+  else
+  {
     $json = array();
     while($row = mysqli_fetch_array($result)) {
         $json[] = array(
@@ -42,6 +49,7 @@ if(isset($_POST['usuario'])) {
     }
 
     $jsonstring = json_encode($json[0]);
+  }
     echo $jsonstring;
 }
 
