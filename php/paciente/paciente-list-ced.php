@@ -1,6 +1,6 @@
 <?php
 
-include '../../dbconnection.php';
+include_once '../../dbconnection.php';
 
 if(isset($_POST['usuario'])) {
 
@@ -52,5 +52,3 @@ if(isset($_POST['usuario'])) {
   }
     echo $jsonstring;
 }
-
-?>
