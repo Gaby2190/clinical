@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $query = "SELECT * FROM medico WHERE estado_medi = 1 order by apellidos_medi ASC";
     

@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
  
   $query = "SELECT ca.*, me.sufijo, me.nombres_medi, me.apellidos_medi, pa.apellidos_paci1, pa.apellidos_paci2, pa.nombres_paci1, pa.nombres_paci2, esp.nombre 
             FROM caso as ca

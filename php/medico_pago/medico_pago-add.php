@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
     $id_f_pago = $_POST['id_f_pago'];
     $descripcion = mb_strtoupper($_POST['descripcion']);
     $costo = $_POST['costo'];

@@ -1,6 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+ 
 
   $query = "SELECT nombres_admin, apellidos_admin, id_usuario FROM administrador";
   

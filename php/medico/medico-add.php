@@ -1,7 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
-    include('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
     $cedula_medi = $_POST['cedula_medi'];
     $gen_id = $_POST['gen_id'];

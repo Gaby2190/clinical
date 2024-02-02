@@ -1,7 +1,7 @@
 <?php
 
-include('../dbconnection.php');
-include('../variables.php');
+include_once '../dbconnection.php';
+include_once '../variables.php';
 
     $id_cita = $_POST['id_cita'];
     $query = "UPDATE cita SET actualizacion = '$datos_actualizados' WHERE id_cita = '$id_cita'";

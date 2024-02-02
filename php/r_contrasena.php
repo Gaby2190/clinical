@@ -1,6 +1,6 @@
 <?php
-include_once("../dbconnection.php");
-include_once("../variables.php");
+include_once '../dbconnection.php';
+include_once '../variables.php';
 
 if (isset($_POST['id_usuario']) && isset($_POST['cont_ant']) && isset($_POST['cont_new'])) {
     $id_usuario = $_POST['id_usuario'];

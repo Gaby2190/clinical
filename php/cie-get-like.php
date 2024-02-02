@@ -1,6 +1,6 @@
 <?php
 
-    include('../dbconnection.php');
+include_once '../dbconnection.php';
 
      $valor = strtr(trim($_POST['descripcion']), " ", "%");
     $query = "SELECT * FROM diagnosticoscie10 where descripcion like '%$valor%'";

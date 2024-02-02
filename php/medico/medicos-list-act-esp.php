@@ -1,6 +1,5 @@
 <?php
-
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $id_especialidad = $_POST['id_esp'];
     $query = "SELECT me.*, es.*

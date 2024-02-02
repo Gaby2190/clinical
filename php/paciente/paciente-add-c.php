@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $cedula_paci = $_POST['cedula_paci'];
     $nombres_paci1 = trim(mb_strtoupper($_POST['nombres_paci1']));

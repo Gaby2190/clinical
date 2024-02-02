@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $id_enfermedad = $_POST['id_enfermedad'];
     $descripcion = mb_strtoupper($_POST['descripcion']);

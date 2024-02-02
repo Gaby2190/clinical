@@ -1,6 +1,6 @@
 <?php
-require('../FPDF/fpdf.php');
-include('../../dbconnection.php');
+require_once '../FPDF/fpdf.php';
+include_once '../../dbconnection.php';
 date_default_timezone_set('America/Guayaquil'); 
 $fecha = $_GET['fecha'];
 $id_usuario = $_GET['id_usuario'];

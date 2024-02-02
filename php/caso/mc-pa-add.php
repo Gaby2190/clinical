@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $id_caso = $_POST['id_caso'];
     $motivo_con = mb_strtoupper($_POST['motivo_con']);

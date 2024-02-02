@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $fecha = $_POST['fecha'];
     $temperatura = $_POST['temperatura'];

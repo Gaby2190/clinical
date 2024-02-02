@@ -1,7 +1,7 @@
 <?php
-require('../FPDF/fpdf.php');
-include('../../dbconnection.php');
-require_once('../lib/numeroaletras.php');
+require '../FPDF/fpdf.php';
+include_once '../../dbconnection.php';
+require_once '../lib/numeroaletras.php';
 date_default_timezone_set('America/Guayaquil'); 
 $id_cita = $_GET['id_cita'];
 

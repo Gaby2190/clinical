@@ -1,6 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+
 
     $fecha = $_POST['fecha'];
     $descripcion = mb_strtoupper($_POST['descripcion']);

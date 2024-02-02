@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php'); 
+include_once '../../dbconnection.php';
  
     $id_paciente = $_POST['id_paciente'];
     $cedula_paci = $_POST['cedula_paci'];

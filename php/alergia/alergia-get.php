@@ -1,6 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+
 
     $id_paciente = $_POST['id_paciente'];
 

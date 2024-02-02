@@ -1,6 +1,6 @@
 <?php
 
-include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $fecha_registro = $_POST['fecha_registro'];
     $id_paciente = $_POST['id_paciente'];

@@ -1,6 +1,6 @@
 <?php
+include_once '../dbconnection.php';
 
-    include('../dbconnection.php');
 
     $query = "SELECT * FROM enfermedad LIMIT 10";
     

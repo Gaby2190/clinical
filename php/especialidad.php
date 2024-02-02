@@ -1,5 +1,5 @@
 <?php
-    include('../dbconnection.php');
+include_once '../dbconnection.php';
    
     $universidad = mb_strtoupper($_POST['universidad']);
     $pais = mb_strtoupper($_POST['pais']);

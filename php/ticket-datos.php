@@ -1,5 +1,5 @@
 <?php
-include("../dbconnection.php");
+include_once '../dbconnection.php';
 $id_cita = $_POST['id_cita'];
 
 $query = "SELECT ci.*, ca.id_medico, me.sufijo, me.nombres_medi, me.apellidos_medi, me.pago_ingreso, me.tarifa, me.tarifa_control, pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2

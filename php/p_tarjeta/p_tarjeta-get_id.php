@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $retencion_cli= $_POST['retencion_cli'];
     $comision_ban= $_POST['comision_ban'];

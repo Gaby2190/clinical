@@ -1,7 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
-    include('../../variables.php');
+include_once '../../dbconnection.php';
+    include_once '../../variables.php';
     $query = "SELECT pa.* 
               FROM paciente AS pa
               INNER JOIN caso as ca

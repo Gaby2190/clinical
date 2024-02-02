@@ -1,6 +1,6 @@
 <?php
 
-include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
   $query = "SELECT nombres_caje, apellidos_caje, id_usuario FROM cajero";
   

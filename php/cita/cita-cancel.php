@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include_once('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 $conteo=2;
 $id_caso=0;
  $id_cita = $_POST['id_cita'];

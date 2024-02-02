@@ -1,7 +1,7 @@
 <?php
-require('../FPDF/fpdf.php');
-include('../../dbconnection.php');
-include('../../variables.php');
+require_once '../FPDF/fpdf.php';
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 $id_medico = $_GET['id_medico'];
 $id_pago = $_GET['id_pago'];
 

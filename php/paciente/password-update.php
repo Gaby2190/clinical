@@ -1,6 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+    
 
     $id_usuario = $_POST['id_usuario'];
     $clave = password_hash($_POST['clave'], PASSWORD_DEFAULT);

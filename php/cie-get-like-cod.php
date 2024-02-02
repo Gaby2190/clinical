@@ -1,6 +1,6 @@
 <?php
 
-    include('../dbconnection.php');
+include_once '../dbconnection.php';
 
     $valor = $_POST['codigo'];
     $query = "SELECT * FROM diagnosticoscie10 where clave like '%$valor%'";

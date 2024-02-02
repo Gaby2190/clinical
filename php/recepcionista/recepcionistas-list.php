@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $query = "SELECT * FROM recepcionista ORDER BY nombres_rece ASC";
     

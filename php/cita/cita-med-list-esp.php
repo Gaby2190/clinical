@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include_once('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
 if(isset($_POST['fecha'])) {
 

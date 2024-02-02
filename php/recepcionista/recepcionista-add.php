@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $cedula_rece = $_POST['cedula_rece'];
     $nombres_rece = mb_strtoupper($_POST['nombres_rece']);

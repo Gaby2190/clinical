@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $examen_fr = $_POST['examen_fr'];
     $cp = $_POST['cp'];

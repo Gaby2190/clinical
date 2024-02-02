@@ -1,5 +1,5 @@
 <?php
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $fecha_gen = $_POST['fecha_gen'];
     $id_usuario = $_POST['id_usuario'];

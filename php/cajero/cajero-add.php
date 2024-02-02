@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $cedula_caje = $_POST['cedula_caje'];
     $nombres_caje = mb_strtoupper($_POST['nombres_caje']);

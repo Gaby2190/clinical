@@ -1,5 +1,5 @@
 <?php
-include("../../dbconnection.php");
+include_once '../../dbconnection.php';
 require __DIR__ . '/autoload.php';
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;

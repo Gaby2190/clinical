@@ -1,7 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
-
+include_once '../../dbconnection.php';
+  
     $cedula_admin = $_POST['cedula_admin'];
     $nombres_admin = mb_strtoupper($_POST['nombres_admin']);
     $apellidos_admin = mb_strtoupper($_POST['apellidos_admin']);

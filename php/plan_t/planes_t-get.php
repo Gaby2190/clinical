@@ -1,5 +1,5 @@
 <?php
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $id_cita = $_POST['id_cita'];
 

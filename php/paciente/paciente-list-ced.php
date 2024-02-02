@@ -1,5 +1,5 @@
 <?php
-
+//use CLINICAL\dbconnection\conn;
 include_once '../../dbconnection.php';
 
 if(isset($_POST['usuario'])) {

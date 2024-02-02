@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $query = "SELECT * FROM administrador ORDER BY nombres_admin ASC";
     

@@ -1,6 +1,7 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+
 
     $id_administrador = $_POST['id_administrador'];
     $cedula_admin = $_POST['cedula_admin'];

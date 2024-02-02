@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
 
     $comision_ban = $_POST['comision_ban'];
@@ -17,7 +17,7 @@
         echo "fallo";
     }
 
-    echo "Comisi¨®n del banco y retenci¨®n de la cl¨ªnica registrados exitÃ³samente";  
+    echo "Comisiï¿½ï¿½n del banco y retenciï¿½ï¿½n de la clï¿½ï¿½nica registrados exitÃ³samente";  
 
 
 ?>

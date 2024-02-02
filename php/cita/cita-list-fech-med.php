@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include_once('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
     $fecha = $_POST['fecha'];
     $id_medico = $_POST['id_medico'];

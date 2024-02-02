@@ -1,7 +1,7 @@
 <?php
-require('../FPDF/fpdf.php');
-include('../../dbconnection.php');
-include('../../variables.php');
+require_once '../FPDF/fpdf.php';
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
 date_default_timezone_set('America/Guayaquil'); 
 $id_caso = $_GET['id_caso'];

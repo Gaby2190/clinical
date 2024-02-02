@@ -1,6 +1,6 @@
 <?php
-require('../FPDF/fpdf.php');
-include('../../dbconnection.php');
+require_once '../FPDF/fpdf.php';
+include_once '../../dbconnection.php';
 $id_cita = $_GET['id_cita']; 
 require_once "../lib/numeroaletras.php";
 //llamamos a la(s) clases

@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $id_p_tarjeta = $_POST['id_p_tarjeta'];
 
@@ -13,7 +13,7 @@
         echo "fallo";
     }
 
-    echo "Comisi¨®n banco y retenci¨®n cl¨ªnica eliminados exitÃ³samente";  
+    echo "Comisiï¿½ï¿½n banco y retenciï¿½ï¿½n clï¿½ï¿½nica eliminados exitÃ³samente";  
 
 
 ?>

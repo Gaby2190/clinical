@@ -1,6 +1,7 @@
 <?php
 
-include('../dbconnection.php');
+include_once '../dbconnection.php';
+
 
     $id_cita = $_POST['id_cita'];
     $detalle_certificado = mb_strtoupper($_POST['detalle_certificado']);

@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $datos_m = mb_strtoupper($_POST['datos_m']);
     $via_a = $_POST['via_a'];

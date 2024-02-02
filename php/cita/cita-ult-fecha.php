@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include_once('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
     $id_caso = $_POST['id_caso'];
     $query = "SELECT * FROM cita WHERE id_caso = '{$id_caso}' and id = '{$cita_cobrada}' ORDER BY fecha DESC";

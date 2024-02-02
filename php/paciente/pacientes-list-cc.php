@@ -1,7 +1,8 @@
 <?php
 
     
-include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+
     
     $paciente = mb_strtoupper($_POST['txt_search']);
     $query = "SELECT * FROM paciente WHERE concat_ws(' ', nombres_paci1,nombres_paci2,apellidos_paci1,apellidos_paci2) like '%$paciente%' ORDER BY nombres_paci1 ASC";

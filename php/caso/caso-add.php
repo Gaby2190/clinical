@@ -1,5 +1,5 @@
 <?php
-    include('../../dbconnection.php');// Llama la conexion a la base de datos
+    include_once '../../dbconnection.php'; Llama la conexion a la base de datos
    // Recibe los parametros por el POST
     $fecha_registro = $_POST['fecha_registro'];
     $id_medico = $_POST['id_medico'];

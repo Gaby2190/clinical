@@ -1,6 +1,6 @@
 <?php
-include('../../../dbconnection.php');
-include('../../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
 
  $query = "SELECT ci.* 

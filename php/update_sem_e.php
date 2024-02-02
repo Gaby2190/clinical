@@ -1,6 +1,6 @@
 <?php
 
-include('../dbconnection.php');
+include_once '../dbconnection.php';
 
     $id_caso = $_POST['id_caso'];
     $semana_embarazo = $_POST['semana_embarazo'];

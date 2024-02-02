@@ -1,6 +1,6 @@
 <?php
 
-    include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
     $orga_sist = $_POST['orga_sist'];
     $cp = $_POST['cp'];

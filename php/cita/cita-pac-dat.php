@@ -1,7 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
-include_once('../../variables.php');
+include_once '../../dbconnection.php';
+include_once '../../variables.php';
 
     $id_cita = $_POST['id_cita'];
     $query = "SELECT ci.*, ca.id_medico, ca.motivo_con, ca.problema_act, me.tarifa, me.tarifa_control, me.sufijo, me.nombres_medi, me.apellidos_medi

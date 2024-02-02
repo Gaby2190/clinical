@@ -1,6 +1,7 @@
 <?php
 
-include('../../dbconnection.php');
+include_once '../../dbconnection.php';
+  
 
 if(isset($_POST['id_usuario'])) {
 

@@ -1,6 +1,6 @@
 <?php
 
-  include('../../dbconnection.php');
+include_once '../../dbconnection.php';
 
   $id_medico = $_POST['id_medico'];
   $query = "SELECT esp.* 
