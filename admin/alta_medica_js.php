@@ -194,7 +194,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="js/admin.js"></script>
 
-    <script src="js/alta_medica.js"></script>
+    <script src="js/alta_medica_js.js"></script>
 
 </body>
 
