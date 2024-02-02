@@ -125,7 +125,8 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <!-- Button trigger modal -->
-                                                    <a href="cita_age_read.php" class="btn btn-primary btn-style">Mostrar</a>
+                                                    <a href="cita_age_read.php" 
+                                                    class="btn btn-primary btn-style">Mostrar</a>
                                                 </div>
                                             </div>
                                         </div>
