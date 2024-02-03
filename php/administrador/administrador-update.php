@@ -3,15 +3,15 @@
 include_once '../../dbconnection.php';
 
 
-    $id_administrador = $_POST['id_administrador'];
-    $cedula_admin = $_POST['cedula_admin'];
-    $nombres_admin = mb_strtoupper($_POST['nombres_admin']);
-    $apellidos_admin = mb_strtoupper($_POST['apellidos_admin']);
-    $telefono_admin = $_POST['telefono_admin'];
-    $celular_admin = $_POST['celular_admin'];
-    $correo_admin = $_POST['correo_admin'];
-    $direccion_admin = mb_strtoupper($_POST['direccion_admin']);
-    $id_usuario = $_POST['id_usuario'];
+    $id_administrador = mysqli_real_escape_string($conn,$_POST['id_administrador']);
+    $cedula_admin = mysqli_real_escape_string($conn,$_POST['cedula_admin']);
+    $nombres_admin = mb_strtoupper(mysqli_real_escape_string($conn,$_POST['nombres_admin']));
+    $apellidos_admin = mb_strtoupper(mysqli_real_escape_string($conn,$_POST['apellidos_admin']));
+    $telefono_admin = mysqli_real_escape_string($conn,$_POST['telefono_admin']);
+    $celular_admin = mysqli_real_escape_string($conn,$_POST['celular_admin']);
+    $correo_admin = mysqli_real_escape_string($conn,$_POST['correo_admin']);
+    $direccion_admin = mb_strtoupper(mysqli_real_escape_string($conn,$_POST['direccion_admin']));
+    $id_usuario = mysqli_real_escape_string($conn,$_POST['id_usuario']);
     $usuario = 'A'.$cedula_admin;
     //$estado_admin = $_POST['estado_admin'];
     //$imagen = $_POST['imagen'];

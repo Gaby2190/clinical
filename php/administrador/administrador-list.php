@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 
 if(isset($_POST['id_administrador'])) {
 
-  $id_administrador = $_POST['id_administrador'];
+  $id_administrador = mysqli_real_escape_string($conn,$_POST['id_administrador']);
  
   $query = "SELECT * from administrador where id_administrador = '{$id_administrador}'";
   $result = mysqli_query($conn, $query);

@@ -3,10 +3,10 @@
 include_once '../../dbconnection.php';
 
 
-    $fecha = $_POST['fecha'];
-    $descripcion = mb_strtoupper($_POST['descripcion']);
-    $id_medico = $_POST['id_medico'];
-    $id_paciente = $_POST['id_paciente'];
+    $fecha = mysqli_real_escape_string($conn,$_POST['fecha']);
+    $descripcion = mb_strtoupper(mysqli_real_escape_string($conn,$_POST['descripcion']));
+    $id_medico = mysqli_real_escape_string($conn,$_POST['id_medico']);
+    $id_paciente = mysqli_real_escape_string($conn,$_POST['id_paciente']);
     
 
 

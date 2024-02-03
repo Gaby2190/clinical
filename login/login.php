@@ -32,9 +32,9 @@ else // Cuando "cerrar_sesion" es null
         } 
     }
     elseif (isset($_POST['usuario']) && isset($_POST['password'])) {//recibe y evalua "usuario" y "password"
-       $usr = $_POST['usuario'];//almacena en usr el valor del POST usuario
+       $usr = mysqli_real_escape_string($conn,$_POST['usuario']);//escapa almacena en usr el valor del POST usuario
        $pass = $_POST['password'];// almacena en pass el valor del POST password
-       $query = sprintf("SELECT u.*, r.nombre FROM usuario AS u INNER JOIN rol AS r ON r.id = u.id_rol WHERE u.usuario = '%s'", mysqli_real_escape_string($conn, $usr));//Consulta SQL seleccionando los datos si existe el usuario logeado
+       $query = "SELECT u.*, r.nombre FROM usuario AS u INNER JOIN rol AS r ON r.id = u.id_rol WHERE u.usuario = '$usr'";//Consulta SQL seleccionando los datos si existe el usuario logeado
         $result = mysqli_query($conn, $query);//Ejecuta la consulta y almacena el resultado en result
         $nusr = mysqli_num_rows($result);// Obtiene el numero de filas del resultado y guarda en nusr
         $dato_usr = mysqli_fetch_array($result);//Guarda en resultado en un formato array y lo guarda en dato_usr
@@ -45,8 +45,7 @@ else // Cuando "cerrar_sesion" es null
             $_SESSION['rol'] = $rol; //Define en sesion.rol y asegina el valor de rol
             switch ($_SESSION['rol']) {//Compara el rol con las variables globales y redirige.
                case $admin:
-              
-               echo"<script>window.location.replace('../admin/admin.php');</script>";
+            echo"<script>window.location.replace('../admin/admin.php');</script>";
                 break;
             case $rece:
                 echo"<script>window.location.replace('../recepcionista/rece.php');</script>";

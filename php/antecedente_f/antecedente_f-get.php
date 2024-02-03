@@ -3,7 +3,7 @@
 include_once '../../dbconnection.php';
 
 
-    $id_paciente = $_POST['id_paciente'];
+    $id_paciente = mysqli_real_escape_string($conn,$_POST['id_paciente']);
 
     $query = "SELECT an.*, en.nombre
               FROM antecedente_f AS an

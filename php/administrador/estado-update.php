@@ -2,8 +2,8 @@
 
 include_once '../../dbconnection.php';
 
-    $id_usuario = $_POST['id_usuario'];
-    $estado = $_POST['estado'];
+    $id_usuario = mysqli_real_escape_string($conn,$_POST['id_usuario']);
+    $estado = mysqli_real_escape_string($conn,$_POST['estado']);
   
     
     if ($estado == 'true') {

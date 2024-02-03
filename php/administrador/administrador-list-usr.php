@@ -5,7 +5,7 @@ include_once '../../dbconnection.php';
 
 if(isset($_POST['usuario'])) {
 
-  $usuario = $_POST['usuario'];
+  $usuario = mysqli_real_escape_string($conn,$_POST['usuario']);
  
   $query = "SELECT * from usuario where usuario = '{$usuario}'";
   $result = mysqli_query($conn, $query);

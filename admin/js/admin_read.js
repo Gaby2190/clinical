@@ -4,7 +4,7 @@ $(document).ready(function() {
     function listarAdministradores() {
         $.post('../php/administrador/administradores-list.php', (response) => {
             let administradores = JSON.parse(response);
-            console.log(administradores);
+            //console.log(administradores);
             let template = '';
             administradores.forEach(admin => {
                 //========Separación de un nombre y un apellido ===================

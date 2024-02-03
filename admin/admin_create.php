@@ -5,7 +5,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
     echo"<script>window.location.replace('../index.php');</script>";
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>

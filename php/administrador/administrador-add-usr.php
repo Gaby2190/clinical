@@ -3,11 +3,11 @@
 include_once '../../dbconnection.php';
 
 
-    $usuario = $_POST['usuario'];
+    $usuario = mysqli_real_escape_string($conn,$_POST['usuario']);
     $clave = password_hash($_POST['clave'], PASSWORD_DEFAULT);
-    $fecha_registro = $_POST['fecha_registro'];
-    $estado_usr = $_POST['estado_usr'];
-    $id_rol = $_POST['id_rol'];
+    $fecha_registro = mysqli_real_escape_string($conn,$_POST['fecha_registro']);
+    $estado_usr = mysqli_real_escape_string($conn,$_POST['estado_usr']);
+    $id_rol = mysqli_real_escape_string($conn,$_POST['id_rol']);
 
 
     $query = "INSERT into usuario(usuario, clave, fecha_registro, estado_usr, id_rol) VALUES ('$usuario', '$clave', '$fecha_registro', '$estado_usr', '$id_rol')";
