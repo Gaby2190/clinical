@@ -43,7 +43,7 @@ $id_caso=$_GET['id_caso'];
                                     <div class="card-block">
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">Alta Médica</h6>
                                         <div class="row justify-content-center">
-                                            <input type="text" id="id_caso" value="<?php echo($id_caso);?>" required disabled hidden>
+                                            <input type="text" id="id_caso" value="<?php echo(htmlspecialchars($id_caso));?>" required disabled hidden>
                                             <div class="col-sm-6 my-2">
                                                 <p class="f-w-400" style="font-size: 20px;">Condición de Alta</p>
                                             </div>
