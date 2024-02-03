@@ -4,6 +4,7 @@ include_once("../variables.php");
 if (trim($_SESSION['rol']) != trim($medi)) {
     echo"<script>window.location.replace('../index.php');</script>";
 }
+$id_caso=$_GET['id_caso'];
 ?>
 <!doctype html>
 <html lang="es">
@@ -31,9 +32,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
        <?php include_once("nav.php") ?>
         <!-- main content start -->
         <div class="main-content">
-        <?php
-        $id_caso=$_GET['id_caso'];
-        ?>
+        
             <!-- content -->
             <div class="container-fluid content-top-gap">
                 <div class="d-flex justify-content-center">
