@@ -16,7 +16,7 @@
 
     <div class="sidebar-menu-inner" id="barra-lateral">
     
-    <input type="text" id="id_usuario" value="<?php echo($_SESSION["id_usuario"]);?>" hidden>
+    <input type="text" id="id_usuario" value="<?php echo(htmlspecialchars($_SESSION["id_usuario"]));?>" hidden>
         <!-- sidebar nav start -->
         <ul class="nav nav-pills nav-stacked custom-nav">
             <li class="active"><a href="admin.php"><i class="fa fa-tachometer"></i><span>INICIO</span></a>

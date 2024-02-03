@@ -1,6 +1,6 @@
 <?php
-include_once("../sesion.php");;
-include_once("../variables.php");
+include_once "../sesion.php";
+include_once "../variables.php";
 if (trim($_SESSION['rol']) != trim($medi)) {
     echo"<script>window.location.replace('../index.php');</script>";
 }
@@ -29,7 +29,7 @@ $id_caso=$_GET['id_caso'];
 
 <body class="sidebar-menu-collapsed">
     <section>
-       <?php include_once("nav.php") ?>
+       <?php include_once "nav.php";?>
         <!-- main content start -->
         <div class="main-content">
         
