@@ -257,13 +257,13 @@ $(document).ready(function() {
         if (motivo_con == "" || motivo_con == null) {
             $("#motivo_consulta").removeAttr('disabled');
         }else{
-            $("#motivo_consulta").attr('disabled', 'disabled');
+           // $("#motivo_consulta").attr('disabled', 'disabled');
             $("#motivo_consulta").val(motivo_con);
         }
         if (problema_act == "" || problema_act == null) {
             $("#problema_actual").removeAttr('disabled');
         }else{
-            $("#problema_actual").attr('disabled', 'disabled');
+          //  $("#problema_actual").attr('disabled', 'disabled');
             $("#problema_actual").val(problema_act);
         }
     }
@@ -323,8 +323,10 @@ $(document).ready(function() {
     var d = new Date();
     var month = d.getMonth() + 1;
     var day = d.getDate();
+    var horas = d.getHours();
+    var minutos = d.getMinutes();
     var f_actual = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-
+    var h_actual = horas+':'+minutos;
     //==========Variable de antecedentes personales para tabla=========//
     var antecedentes = [];
     //==========Variable de antecedentes familiares para tabla=========//
@@ -356,6 +358,109 @@ $(document).ready(function() {
         success: function (response) {
                 const actualizacion = Number(JSON.parse(response).actualizacion);
                 if (actualizacion === 1) {
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/paciente/paciente-list-comp.php",
+                        data: { id_paciente },
+                        success: function(response) {
+                            console.log(response);
+                            const paciente = JSON.parse(response);
+                            $('#id_paciente').html(paciente.id_paciente);
+                            $('#cedula_paci').html(paciente.cedula_paci);
+                            $('#nombres_paci1').html(paciente.nombres_paci1);
+                            $('#nombres_paci2').html(paciente.nombres_paci2);
+                            $('#apellidos_paci1').html(paciente.apellidos_paci1);
+                            $('#apellidos_paci2').html(paciente.apellidos_paci2);
+                            $('#fechan_paci').html(paciente.fechan_paci);
+                            $("#genero_paci").html(paciente.genero);
+                            $("#nacionalidad_paci").html(paciente.nacionalidad);
+                            $("#sangre_paci").html(paciente.sangre);
+                            $('#telefono_paci').html(paciente.telefono_paci);
+                            $('#celular_paci').html(paciente.celular_paci);
+                            $('#correo_paci').html(paciente.correo_paci);
+                            $('#direccion_paci').html(paciente.direccion_paci);
+                            $('#contacto_nom').html(paciente.contacto_nom);
+                            $('#contacto_ape').html(paciente.contacto_ape);
+                            $('#contacto_par').html(paciente.contacto_par);
+                            $('#contacto_num').html(paciente.contacto_num);
+                            $('#edad_paci').html(calcularEdad(paciente.fechan_paci));
+                        
+                            if (Number(paciente.id_gen) == 1) {
+                                $("#div_semana_embarazo").hide();
+                                $("#semana_embarazo").val(0);
+            
+                            }
+                            if (Number(paciente.id_gen) == 2) {
+                                $("#div_semana_embarazo").show();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../php/cita/cita-read-id.php",
+                                    data: {id_cita},
+                                    success: function (response) {
+                                        const semana_embarazo = Number(JSON.parse(response).semana_embarazo);
+                                        const id_caso = JSON.parse(response).id_caso;    
+                                        var new_sem_e = 0;
+            
+                                        if (semana_embarazo == 0) {
+                                            $("#semana_embarazo").val(0);
+                                        }else{
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "../php/cita/cita-ult-se.php",
+                                                data: {id_caso},
+                                                success: function (response) {
+                                                    const dat_fecha = JSON.parse(response).fecha;
+                                                    fecha_actual = new Date();
+                                                    fecha_new = new Date(dat_fecha);
+                                                    const dias = Math.floor((fecha_actual - fecha_new) / (24 * 60 * 60 * 1000));
+                                                    var semanas = Number(Math.ceil(( fecha_actual.getDay() + 1 + dias) / 7));
+                                                    if (Math.sign(Number(semanas)) == (-1)) {
+                                                        semanas = semanas * (-1);
+                                                    }
+            
+                                                    new_sem_e = semana_embarazo + semanas;
+            
+                                                    if (new_sem_e >= 40) {
+                                                        $("#semana_embarazo").val(0);
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "../php/update_sem_e.php",
+                                                            data: {
+                                                                id_caso: id_caso,
+                                                                semana_embarazo: 0
+                                                            },
+                                                            success: function (response) {
+                                                                console.log(response);
+                                                            }
+                                                        });
+                                                    }
+                                                    if ((new_sem_e > 0) && (new_sem_e < 40)) {
+                                                        $("#semana_embarazo").val(new_sem_e);
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "../php/update_sem_e.php",
+                                                            data: {
+                                                                id_caso: id_caso,
+                                                                semana_embarazo: new_sem_e
+                                                            },
+                                                            success: function (response) {
+                                                                console.log(response);
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            });  
+                                        }
+                                                             
+                                    }
+                                });
+                            }
+                           
+            
+                        }
+                    });
+                }
+                if (actualizacion === 0){
                     $.ajax({
                         type: "POST",
                         url: "../php/paciente/paciente-list-comp.php",
@@ -449,109 +554,6 @@ $(document).ready(function() {
                             $('#celular_paci').html(paciente.celular_paci);
                             $('#correo_paci').html(paciente.correo_paci);
                             $('#direccion_paci').html(paciente.direccion_paci);
-                            $('#contacto_nom').html(paciente.contacto_nom);
-                            $('#contacto_ape').html(paciente.contacto_ape);
-                            $('#contacto_par').html(paciente.contacto_par);
-                            $('#contacto_num').html(paciente.contacto_num);
-                            $('#edad_paci').html(calcularEdad(paciente.fechan_paci));
-            
-                        }
-                    });
-                }
-                if (actualizacion === 0){
-                    $.ajax({
-                        type: "POST",
-                        url: "../php/paciente/paciente-list-incomp.php",
-                        data: { id_paciente },
-                        success: function(response) {
-                            console.log(response);
-                            const paciente = JSON.parse(response);
-                            $('#id_paciente').html(paciente.id_paciente);
-                            $('#cedula_paci').html(paciente.cedula_paci);
-                            $('#nombres_paci1').html(paciente.nombres_paci1);
-                            $('#nombres_paci2').html(paciente.nombres_paci2);
-                            $('#apellidos_paci1').html(paciente.apellidos_paci1);
-                            $('#apellidos_paci2').html(paciente.apellidos_paci2);
-                            $('#fechan_paci').html(paciente.fechan_paci);
-                            $("#genero_paci").html(paciente.genero);
-                        
-                            if (Number(paciente.id_gen) == 1) {
-                                $("#div_semana_embarazo").hide();
-                                $("#semana_embarazo").val(0);
-            
-                            }
-                            if (Number(paciente.id_gen) == 2) {
-                                $("#div_semana_embarazo").show();
-                                $.ajax({
-                                    type: "POST",
-                                    url: "../php/cita/cita-read-id.php",
-                                    data: {id_cita},
-                                    success: function (response) {
-                                        const semana_embarazo = Number(JSON.parse(response).semana_embarazo);
-                                        const id_caso = JSON.parse(response).id_caso;    
-                                        var new_sem_e = 0;
-            
-                                        if (semana_embarazo == 0) {
-                                            $("#semana_embarazo").val(0);
-                                        }else{
-                                            $.ajax({
-                                                type: "POST",
-                                                url: "../php/cita/cita-ult-se.php",
-                                                data: {id_caso},
-                                                success: function (response) {
-                                                    const dat_fecha = JSON.parse(response).fecha;
-                                                    fecha_actual = new Date();
-                                                    fecha_new = new Date(dat_fecha);
-                                                    const dias = Math.floor((fecha_actual - fecha_new) / (24 * 60 * 60 * 1000));
-                                                    var semanas = Number(Math.ceil(( fecha_actual.getDay() + 1 + dias) / 7));
-                                                    if (Math.sign(Number(semanas)) == (-1)) {
-                                                        semanas = semanas * (-1);
-                                                    }
-            
-                                                    new_sem_e = semana_embarazo + semanas;
-            
-                                                    if (new_sem_e >= 40) {
-                                                        $("#semana_embarazo").val(0);
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "../php/update_sem_e.php",
-                                                            data: {
-                                                                id_caso: id_caso,
-                                                                semana_embarazo: 0
-                                                            },
-                                                            success: function (response) {
-                                                                console.log(response);
-                                                            }
-                                                        });
-                                                    }
-                                                    if ((new_sem_e > 0) && (new_sem_e < 40)) {
-                                                        $("#semana_embarazo").val(new_sem_e);
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: "../php/update_sem_e.php",
-                                                            data: {
-                                                                id_caso: id_caso,
-                                                                semana_embarazo: new_sem_e
-                                                            },
-                                                            success: function (response) {
-                                                                console.log(response);
-                                                            }
-                                                        });
-                                                    }
-                                                }
-                                            });  
-                                        }
-                                                             
-                                    }
-                                });
-                            }
-            
-                            $("#nacionalidad_paci").html(paciente.nacionalidad);
-                            $("#sangre_paci").html("");
-                            $('#telefono_paci').html(paciente.telefono_paci);
-                            $('#celular_paci').html(paciente.celular_paci);
-                            $('#correo_paci').html("");
-                            $('#direccion_paci').html("");
                             $('#contacto_nom').html(paciente.contacto_nom);
                             $('#contacto_ape').html(paciente.contacto_ape);
                             $('#contacto_par').html(paciente.contacto_par);
@@ -724,7 +726,7 @@ $(document).ready(function() {
                                                 </tr>`);
     }
 
-    ///======== Botón de eliminar eantecedente=====/////
+    ///======== Botón de eliminar antecedente=====/////
     $(document).on('click', '#eliminar_ante', (e) => {
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const medico = $(element).attr('med_ante');
@@ -899,6 +901,11 @@ $(document).ready(function() {
         const peso = $('#peso').val();
         const talla = $('#talla').val();
         const perimetro = $('#perimetro').val();
+        const p_abdominal = $('#p_abdominal').val();
+        const hemo_cap = $('#hemo_cap').val();
+        const gluc_cap = $('#gluc_cap').val();
+        const pulsio = $('#pulsio').val();
+       
 
         if (temperatura == "" || presion_as == "" || presion_ad == "" || pulso == "") {
             $('#texto_modal').html('Ingrese datos en los campos obligatorios');
@@ -907,10 +914,11 @@ $(document).ready(function() {
             $('#modalPush').modal("show");
         } else {
 
-                addSignosVA(f_actual, temperatura, presion_as, presion_ad, pulso, frecuencia_r,frecuencia_c,sat_o, peso, talla, perimetro);
+                addSignosVA(f_actual, h_actual, temperatura, presion_as, presion_ad, pulso, frecuencia_r,frecuencia_c,sat_o, peso, talla, perimetro, p_abdominal, hemo_cap, gluc_cap, pulsio);
                 //==============================Añadir los datos al arreglo definido arriba===============//
                 const dat = {
                     fecha: f_actual,
+                    hora: h_actual,
                     temperatura: temperatura,
                     presion_as: presion_as,
                     presion_ad: presion_ad,
@@ -920,7 +928,11 @@ $(document).ready(function() {
                     sat_o: sat_o,
                     peso: peso,
                     talla: talla,
-                    perimetro: perimetro
+                    perimetro: perimetro,
+                    p_abdominal: p_abdominal,
+                    hemo_cap: hemo_cap,
+                    gluc_cap: gluc_cap,
+                    pulsio: pulsio
                 };
                 console.log(dat);
                 signosva.push(dat);
@@ -942,6 +954,10 @@ $(document).ready(function() {
                 $('#peso').val('');
                 $('#talla').val('');
                 $('#perimetro').val('');
+                $('#p_abdominal').val('');
+                $('#hemo_cap').val('');
+                $('#gluc_cap').val('');
+                $('#pulsio').val('');
         }
 
     });
@@ -1008,11 +1024,7 @@ $(document).ready(function() {
                             const signosv_ant = JSON.parse(response);
                             cont_sva += signosv_ant.length;
                             console.log(cont_sva);
-                            if (cont_sva == 4) {
-                                $("#btn_sva").hide();
-                            }else{
-                                $("#btn_sva").show();
-                            }
+                            
                             signosv_ant.forEach(sva => {
                                 var imc = 0;
                                 var color="";
@@ -1029,17 +1041,21 @@ $(document).ready(function() {
                                     imc = 0;
                                 }
                                 $("#hsva_table>tbody").append(`<tr>
-                                                                <td>${sva.fecha}</td>
-                                                                <td>${sva.temperatura} °C</td>
-                                                                <td>${sva.presion_as}/${sva.presion_ad}</td>
-                                                                <td>${sva.pulso}</td>
-                                                                <td>${sva.frecuencia_r}</td>
-                                                                <td>${sva.frecuencia_c}</td>
-                                                                <td>${sva.sat_o}%</td>
-                                                                <td>${sva.peso}kg</td>
-                                                                <td>${sva.talla}cm</td>
-                                                                <td style="background-color: ${color}; color: ${c_txt}">${imc}</td>
-                                                            </tr>`);
+                                    <td>${sva.fecha} ${sva.hora}</td>
+                                    <td>${sva.temperatura} °C</td>
+                                    <td>${sva.presion_as}/${sva.presion_ad}</td>
+                                    <td>${sva.pulso}</td>
+                                    <td>${sva.frecuencia_r}</td>
+                                    <td>${sva.frecuencia_c}</td>
+                                    <td>${sva.sat_o}%</td>
+                                    <td>${sva.peso}kg</td>
+                                    <td>${sva.talla}cm</td>
+                                    <td style="background-color: ${color}; color: ${c_txt}">${imc}</td>
+                                    <td>${sva.p_abdominal}cm</td>
+                                    <td>${sva.h_capilar}g/dl</td>
+                                    <td>${sva.g_capilar}mg/dl</td>
+                                    <td>${sva.pulsio}%</td>
+                                </tr>`);
                             });
                         }
                     });
@@ -1053,8 +1069,70 @@ $(document).ready(function() {
         $("#modalSva").modal("show");
     });
 
-    function addSignosVA(fe, te, pas,pad, pu, fr,fc,so, p, t, perim) {
+    //===========================================Función historial Motivo COnsulta a la tabla recibiendo datos=====================================//
+   
+    
+    $.ajax({
+        type: "POST",
+        url: "../php/cita/cita-read-id-caso.php",
+        data: {id_cita},
+        async: false,
+        success: function (response) {
+                console.log(response);
+               
+                
+                const citas = JSON.parse(response);
+                citas.forEach(cita => {
+                    const fecha = cita.fecha;
+                    const motivo_con = cita.motivo_con;
+                    const problema_act = cita.problema_act;
+                    const evolucion = cita.evolucion;
+
+                    $("#hmc_table>tbody").append(`<tr>
+                        <td>${fecha}</td>
+                        <td>${motivo_con}</td>
+                        
+                    </tr>`);
+
+                    $("#hpa_table>tbody").append(`<tr>
+                        <td>${fecha}</td>
+                        <td>${problema_act}</td>
+                        
+                    </tr>`);
+                    $("#hevo_table>tbody").append(`<tr>
+                        <td>${fecha}</td>
+                        <td>${evolucion}</td>
+                        
+                    </tr>`);
+                });
+
+
+               
+                   
+                
+            
+            
+        }
+    });
+
+    $("#btn_hmc").click(function (e) { 
+        e.preventDefault();      
+        $("#modalhmc").modal("show");
+    });
+
+    $("#btn_hpa").click(function (e) { 
+        e.preventDefault();      
+        $("#modalhpa").modal("show");
+    });
+
+    $("#btn_hevo").click(function (e) { 
+        e.preventDefault();      
+        $("#modalhevo").modal("show");
+    });
+
+    function addSignosVA(fe, ha ,te, pas,pad, pu, fr,fc,so, p, t, perim, p_abdo, hemo_cap, gluc_cap, pulsio) {
         const fecha = fe;
+        const hora = ha;
         const temperatura = te;
         const presion_as = pas;
         const presion_ad = pad;
@@ -1062,6 +1140,12 @@ $(document).ready(function() {
         const frecuencia_r = fr;
         const frecuencia_c = fc;
         const sat_o = so;
+
+        const p_abdominal = p_abdo;
+        const hemo_capilar = hemo_cap;
+        const gluc_capilar = gluc_cap;
+        const pulsiometria = pulsio;
+        
         var peso = 0;
         if (p == "" || p == NaN || p == null || p == 0) {
             peso = 0;
@@ -1117,24 +1201,27 @@ $(document).ready(function() {
         {
             imc=0;
         }
-        
+             
 
         
 
-        
-
-        $("#signosva_table>tbody").append(`<tr fe_sva="${fecha}" te_sva="${temperatura}" pas_sva="${presion_as}" pad_sva="${presion_ad}" pu_sva="${pulso}" fr_sva="${frecuencia_r}" fc_sva="${frecuencia_c}" so_sva="${sat_o}" p_sva="${peso}" t_sva="${talla}" per_sva="${perimetro}">
-                                                    <td id='fe'>${fecha}</td>
+        $("#signosva_table>tbody").append(`<tr fe_sva="${fecha}" hor_sva="${hora}" te_sva="${temperatura}" pas_sva="${presion_as}" pad_sva="${presion_ad}" pu_sva="${pulso}" fr_sva="${frecuencia_r}" fc_sva="${frecuencia_c}" so_sva="${sat_o}" p_sva="${peso}" t_sva="${talla}" per_sva="${perimetro}" padb_sva="${p_abdominal}" hemoc_sva="${hemo_capilar}" glucc_sva="${gluc_capilar}" pulsio_sva="${pulsiometria}">
+                                                    <td id='fe'>${fecha} ${hora}</td>
+                                                    <td id='hr' class='d-none'>${hora}</td>
                                                     <td id='te'>${temperatura} °C</td>
                                                     <td id='pa'>${presion_as}/${presion_ad}</td>
                                                     <td id='pu'>${pulso}</td>
                                                     <td id='fr'>${frecuencia_r}</td>
-                                                    <td id='fc'>${frecuencia_c}</td>
+                                                    <td id='fc' >${frecuencia_c}</td>
                                                     <td id='so'>${sat_o}%</td>
                                                     <td id='p'>${peso}kg</td>
                                                     <td id='t'>${talla}cm</td>
                                                     <td id='per'>${perimetro}cm</td>
                                                     <td id='imc' style="background-color: ${color}; color: ${c_txt}">${imc}</td>
+                                                    <td id='pabdo'>${p_abdominal}cm</td>
+                                                    <td id='hcap'>${hemo_capilar}g/dl</td>
+                                                    <td id='gcap'>${gluc_capilar}mg/dl</td>
+                                                    <td id='pulsio'>${pulsiometria}%</td>
                                                     <td><button id='eliminar_sva' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
                                                 </tr>`);
     }
@@ -1143,6 +1230,7 @@ $(document).ready(function() {
     $(document).on('click', '#eliminar_sva', (e) => {
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const fecha = $(element).attr('fe_sva');
+        const hora = $(element).attr('hor_sva');
         const temperatura = $(element).attr('te_sva');
         const presion_as = $(element).attr('pas_sva');
         const presion_ad = $(element).attr('pad_sva');
@@ -1152,9 +1240,15 @@ $(document).ready(function() {
         const sat_o = $(element).attr('so_sva');
         const peso = $(element).attr('p_sva');
         const talla = $(element).attr('t_sva');
+        const p_abdominal = $(element).attr('pabd_sva');
+        const hemo_capilar = $(element).attr('hemoc_sva');
+        const gluc_capilar = $(element).attr('glucc_sva');
+        const pulsiometria = $(element).attr('pulsio_sva');
+        const perimetro = $(element).attr('per_sva');
 
         const busqueda = JSON.stringify({
             fecha: fecha,
+            hora: hora,
             temperatura: temperatura,
             presion_as: presion_as,
             presion_ad: presion_ad,
@@ -1163,20 +1257,27 @@ $(document).ready(function() {
             frecuencia_c: frecuencia_c,
             sat_o: sat_o,
             peso: peso,
-            talla: talla
+            talla: talla,
+            p_abdominal: p_abdominal,
+            hemo_capilar: hemo_capilar,
+            gluc_capilar: gluc_capilar,
+            pulsiometria: pulsiometria,
+            perimetro: perimetro
         });
 
+        
+
         let indice = signosva.findIndex(sva => JSON.stringify(sva) === busqueda);
+        console.log(signosva);
         signosva.splice(indice, 1);
+        
         $("#signosva_body > tr").remove();
+        console.log(signosva);
         cont_sva -= 1;
-        if (cont_sva == 4) {
-            $("#btn_sva").hide();
-        }else{
-            $("#btn_sva").show();
-        }
+        
         signosva.forEach(sva => {
-            addSignosVA(sva.fecha, sva.temperatura, sva.presion_as, sva.presion_ad, sva.pulso, sva.frecuencia_r, sva.frecuencia_c, sva.sat_o, sva.peso, sva.talla);
+         
+            addSignosVA(sva.fecha, sva.hora, sva.temperatura, sva.presion_as, sva.presion_ad, sva.pulso, sva.frecuencia_r, sva.frecuencia_c, sva.sat_o, sva.peso, sva.talla, sva.perimetro, sva.p_abdominal, sva.hemo_cap, sva.gluc_cap, sva.pulsio);
         });
 
 
@@ -2049,9 +2150,9 @@ $(document).ready(function() {
                             const datCaso = {
                                 motivo_con: $("#motivo_consulta").val(),
                                 problema_act: $("#problema_actual").val(),
-                                id_caso: id_caso
+                                id_caso: id_caso,
+                                id_cita: id_cita
                             };
-    
                             $.ajax({
                                 type: "POST",
                                 url: "../php/caso/mc-pa-add.php",
@@ -2060,6 +2161,14 @@ $(document).ready(function() {
                                     console.log(response);
                                 }
                             });
+                            $.ajax({
+                                    type: "POST",
+                                    url: "../php/cita/mc-pa-add.php",
+                                    data: datCaso,
+                                    success: function (response) {
+                                        console.log(response);
+                                    }
+                                });
     
                             //Almacenar la revisión actual de órganos y sistemas
                             $.ajax({
@@ -2119,7 +2228,7 @@ $(document).ready(function() {
                                             cp_genital = 1;
                                         }
                                         const dat_genital = {
-                                            orga_sist: 'Genital',
+                                            orga_sist: 'Genito - Urinario',
                                             cp: cp_genital,
                                             descripcion: $("#genital_i").val(),
                                             id_cita: id_cita
@@ -2130,7 +2239,7 @@ $(document).ready(function() {
                                             cp_urinario = 1;
                                         }
                                         const dat_urinario = {
-                                            orga_sist: 'Urinario',
+                                            orga_sist: 'Piel - Anexos',
                                             cp: cp_urinario,
                                             descripcion: $("#urinario_i").val(),
                                             id_cita: id_cita
@@ -2206,7 +2315,8 @@ $(document).ready(function() {
                             //Almacenar los signos vitales y antropometría
                             signosva.forEach(sva => {
                                 const datSVA = {
-                                    fecha: f_actual,
+                                    fecha: sva.fecha, // ojo
+                                    hora: sva.hora,
                                     temperatura: sva.temperatura,
                                     presion_as: sva.presion_as,
                                     presion_ad: sva.presion_ad,
@@ -2216,6 +2326,11 @@ $(document).ready(function() {
                                     sat_o: sva.sat_o,
                                     peso: sva.peso,
                                     talla: sva.talla,
+                                    perimetro: sva.perimetro,
+                                    p_abdominal: sva.p_abdominal,
+                                    hemo_cap: sva.hemo_cap,
+                                    gluc_cap: sva.gluc_cap,
+                                    pulsio: sva.pulsio,
                                     id_cita: id_cita
                                 };
                                 $.ajax({
@@ -2237,74 +2352,297 @@ $(document).ready(function() {
                                 success: function (response) {
                                     const tipo_cita = Number(JSON.parse(response).tipo_cita);
                                     if (tipo_cita == 1) {
-                                        var cp_cabeza = 0;
-                                        if (!$("#cabeza_i").attr('disabled')) {
-                                            cp_cabeza = 1;
-                                        }
-                                        const dat_cabeza = {
-                                            examen_fr: 'Cabeza',
-                                            cp: cp_cabeza,
-                                            descripcion: $("#cabeza_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_cuello = 0;
-                                        if (!$("#cuello_i").attr('disabled')) {
-                                            cp_cuello = 1;
-                                        }
-                                        const dat_cuello = {
-                                            examen_fr: 'Cuello',
-                                            cp: cp_cuello,
-                                            descripcion: $("#cuello_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_torax = 0;
-                                        if (!$("#torax_i").attr('disabled')) {
-                                            cp_torax = 1;
-                                        }
-                                        const dat_torax = {
-                                            examen_fr: 'Tórax',
-                                            cp: cp_torax,
-                                            descripcion: $("#torax_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_abdomen = 0;
-                                        if (!$("#abdomen_i").attr('disabled')) {
-                                            cp_abdomen = 1;
-                                        }
-                                        const dat_abdomen = {
-                                            examen_fr: 'Abdomen',
-                                            cp: cp_abdomen,
-                                            descripcion: $("#abdomen_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_pelvis = 0;
-                                        if (!$("#pelvis_i").attr('disabled')) {
-                                            cp_pelvis = 1;
-                                        }
-                                        const dat_pelvis = {
-                                            examen_fr: 'Pelvis',
-                                            cp: cp_pelvis,
-                                            descripcion: $("#pelvis_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_extremidades = 0;
-                                        if (!$("#extremidades_i").attr('disabled')) {
-                                            cp_extremidades = 1;
-                                        }
-                                        const dat_extremidades = {
-                                            examen_fr: 'Extremidades',
-                                            cp: cp_extremidades,
-                                            descripcion: $("#extremidades_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        const efr = [dat_cabeza,dat_cuello,dat_torax,dat_abdomen,dat_pelvis,dat_extremidades];
-    
+                                                           //================================== PIEL - FANERAS ========================
+                    var cp_piel = 0;
+                    if (!$("#piel").attr('disabled')) {
+                        cp_piel = 1;
+                    }
+                    const dat_piel = {
+                        examen_fr: 'Piel - Faneras',
+                        cp: cp_piel,
+                        descripcion: $("#piel").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== CABEZA ========================
+                    var cp_cabeza = 0;
+                    if (!$("#cabeza_i").attr('disabled')) {
+                        cp_cabeza = 1;
+                    }
+                    const dat_cabeza = {
+                        examen_fr: 'Cabeza',
+                        cp: cp_cabeza,
+                        descripcion: $("#cabeza_i").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== OJOS ========================
+                    var cp_ojos = 0;
+                    if (!$("#ojos").attr('disabled')) {
+                        cp_ojos = 1;
+                    }
+                    const dat_ojos = {
+                        examen_fr: 'Ojos',
+                        cp: cp_ojos,
+                        descripcion: $("#ojos").val(),
+                        id_cita: id_cita
+                    }
+
+                    
+                    //================================== OIDOS ========================
+                    var cp_oidos = 0;
+                    if (!$("#oidos").attr('disabled')) {
+                        cp_oidos = 1;
+                    }
+                    const dat_oidos = {
+                        examen_fr: 'Oidos',
+                        cp: cp_oidos,
+                        descripcion: $("#oidos").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== NARIZ ========================
+                    var cp_nariz = 0;
+                    if (!$("#nariz").attr('disabled')) {
+                        cp_nariz = 1;
+                    }
+                    const dat_nariz = {
+                        examen_fr: 'Nariz',
+                        cp: cp_nariz,
+                        descripcion: $("#nariz").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== BOCA ========================
+                    var cp_boca = 0;
+                    if (!$("#boca").attr('disabled')) {
+                        cp_boca = 1;
+                    }
+                    const dat_boca = {
+                        examen_fr: 'Boca',
+                        cp: cp_boca,
+                        descripcion: $("#boca").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== OROFARINGE ========================
+                    var cp_orofaringe = 0;
+                    if (!$("#orofaringe").attr('disabled')) {
+                        cp_orofaringe = 1;
+                    }
+                    const dat_orofaringe = {
+                        examen_fr: 'Orofaringe',
+                        cp: cp_orofaringe,
+                        descripcion: $("#orofaringe").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== CUELLO ========================
+                    var cp_cuello = 0;
+                    if (!$("#cuello_i").attr('disabled')) {
+                        cp_cuello = 1;
+                    }
+                    const dat_cuello = {
+                        examen_fr: 'Cuello',
+                        cp: cp_cuello,
+                        descripcion: $("#cuello_i").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== AXILAS - MAMAS ========================
+                    var cp_axilas = 0;
+                    if (!$("#axilas").attr('disabled')) {
+                        cp_axilas = 1;
+                    }
+                    const dat_axilas = {
+                        examen_fr: 'Axilas - Mamas',
+                        cp: cp_axilas,
+                        descripcion: $("#axilas").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== TORAX ========================
+                    var cp_torax = 0;
+                    if (!$("#torax_i").attr('disabled')) {
+                        cp_torax = 1;
+                    }
+                    const dat_torax = {
+                        examen_fr: 'Torax',
+                        cp: cp_torax,
+                        descripcion: $("#torax_i").val(),
+                        id_cita: id_cita
+                    }
+                    
+                   //================================== ABDOMEN ========================
+                   var cp_abdomen = 0;
+                   if (!$("#abdomen_i").attr('disabled')) {
+                       cp_abdomen = 1;
+                   }
+                   const dat_abdomen = {
+                       examen_fr: 'Abdomen',
+                       cp: cp_abdomen,
+                       descripcion: $("#abdomen_i").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== COLUMNA VERTEBRAL ========================
+                   var cp_columna = 0;
+                   if (!$("#columna").attr('disabled')) {
+                       cp_columna = 1;
+                   }
+                   const dat_columna = {
+                       examen_fr: 'Columna',
+                       cp: cp_columna,
+                       descripcion: $("#columna").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== INGLE - PERINE ========================
+                   var cp_ingle = 0;
+                   if (!$("#ingle").attr('disabled')) {
+                       cp_ingle = 1;
+                   }
+                   const dat_ingle = {
+                       examen_fr: 'Ingle',
+                       cp: cp_ingle,
+                       descripcion: $("#ingle").val(),
+                       id_cita: id_cita
+                   }
+
+                   
+                   //================================== MIEMBROS SUPERIORES ========================
+                   var cp_msup = 0;
+                   if (!$("#msup").attr('disabled')) {
+                       cp_msup = 1;
+                   }
+                   const dat_msup = {
+                       examen_fr: 'Miembros Superiores',
+                       cp: cp_msup,
+                       descripcion: $("#msup").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== MIEMBROS INFERIORES ========================
+                   var cp_minf = 0;
+                   if (!$("#minf").attr('disabled')) {
+                       cp_minf = 1;
+                   }
+                   const dat_minf = {
+                       examen_fr: 'Miembros Inferiores',
+                       cp: cp_minf,
+                       descripcion: $("#minf").val(),
+                       id_cita: id_cita
+                   }
+
+                   //================================== ORGANOS DE LOS SENTIDOS ========================
+                   var cp_sorganos = 0;
+                   if (!$("#sorganos").attr('disabled')) {
+                       cp_sorganos = 1;
+                   }
+                   const dat_sorganos = {
+                       examen_fr: 'Organos de los Sentidos',
+                       cp: cp_sorganos,
+                       descripcion: $("#sorganos").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== RESPIRATORIO ========================
+                   var cp_srespiratorio = 0;
+                   if (!$("#srespiratorio").attr('disabled')) {
+                       cp_srespiratorio = 1;
+                   }
+                   const dat_srespiratorio = {
+                       examen_fr: 'Respiratorio',
+                       cp: cp_srespiratorio,
+                       descripcion: $("#srespiratorio").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== CARDIO - VASCULAR ========================
+                   var cp_scardio = 0;
+                   if (!$("#scardio").attr('disabled')) {
+                       cp_scardio = 1;
+                   }
+                   const dat_scardio = {
+                       examen_fr: 'Cardio - Vascular',
+                       cp: cp_scardio,
+                       descripcion: $("#scardio").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== DIGESTIVO ========================
+                   var cp_sdigestivo = 0;
+                   if (!$("#sdigestivo").attr('disabled')) {
+                       cp_sdigestivo = 1;
+                   }
+                   const dat_sdigestivo = {
+                       examen_fr: 'Digestivo',
+                       cp: cp_sdigestivo,
+                       descripcion: $("#sdigestivo").val(),
+                       id_cita: id_cita
+                   }
+
+                   //================================== GENITAL ========================
+                   var cp_sgenital = 0;
+                   if (!$("#sgenital").attr('disabled')) {
+                       cp_sgenital = 1;
+                   }
+                   const dat_sgenital = {
+                       examen_fr: 'Genital',
+                       cp: cp_sgenital,
+                       descripcion: $("#sgenital").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== URINARIO ========================
+                   var cp_surinario = 0;
+                   if (!$("#surinario").attr('disabled')) {
+                       cp_surinario = 1;
+                   }
+                   const dat_surinario = {
+                       examen_fr: 'Urinario',
+                       cp: cp_surinario,
+                       descripcion: $("#surinario").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== MUSCULO ESQUELETICO ========================
+                   var cp_smusculo = 0;
+                   if (!$("#smusculo").attr('disabled')) {
+                       cp_smusculo = 1;
+                   }
+                   const dat_smusculo = {
+                       examen_fr: 'Musculo Esqueletico',
+                       cp: cp_smusculo,
+                       descripcion: $("#smusculo").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== ENDOCRINO ========================
+                   var cp_sendocrino = 0;
+                   if (!$("#sendocrino").attr('disabled')) {
+                       cp_sendocrino = 1;
+                   }
+                   const dat_sendocrino = {
+                       examen_fr: 'Endocrino',
+                       cp: cp_sendocrino,
+                       descripcion: $("#sendocrino").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== HEMO - LINFATICO ========================
+                   var cp_shemo = 0;
+                   if (!$("#shemo").attr('disabled')) {
+                       cp_shemo = 1;
+                   }
+                   const dat_shemo = {
+                       examen_fr: 'Hemo - Linfatico',
+                       cp: cp_shemo,
+                       descripcion: $("#shemo").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== NEUROLOGICO ========================
+                   var cp_sneurologico = 0;
+                   if (!$("#sneurologico").attr('disabled')) {
+                       cp_sneurologico = 1;
+                   }
+                   const dat_sneurologico = {
+                       examen_fr: 'Neurologico',
+                       cp: cp_sneurologico,
+                       descripcion: $("#sneurologico").val(),
+                       id_cita: id_cita
+                   }
+
+                    const efr = [dat_piel, dat_cabeza, dat_ojos, dat_oidos, dat_nariz, dat_boca, 
+                        dat_orofaringe, dat_cuello, dat_axilas, dat_torax, dat_abdomen, 
+                        dat_columna, dat_ingle, dat_msup, dat_minf, dat_sorganos, 
+                        dat_srespiratorio, dat_scardio, dat_sdigestivo, dat_sgenital, 
+                        dat_surinario, dat_smusculo, dat_sendocrino, dat_shemo, dat_sneurologico];
                                         efr.forEach(e => {
                                             const datEfr = {
                                                 examen_fr: e.examen_fr,
@@ -2570,9 +2908,9 @@ $(document).ready(function() {
                             const datCaso = {
                                 motivo_con: $("#motivo_consulta").val(),
                                 problema_act: $("#problema_actual").val(),
-                                id_caso: id_caso
+                                id_caso: id_caso,
+                                id_cita: id_cita
                             };
-    
                             $.ajax({
                                 type: "POST",
                                 url: "../php/caso/mc-pa-add.php",
@@ -2581,6 +2919,14 @@ $(document).ready(function() {
                                     console.log(response);
                                 }
                             });
+                            $.ajax({
+                                 type: "POST",
+                                 url: "../php/cita/mc-pa-add.php",
+                                 data: datCaso,
+                                 success: function (response) {
+                                     console.log(response);
+                                 }
+                             });
     
                             //Almacenar la revisión actual de órganos y sistemas
                             $.ajax({
@@ -2758,74 +3104,298 @@ $(document).ready(function() {
                                 success: function (response) {
                                     const tipo_cita = Number(JSON.parse(response).tipo_cita);
                                     if (tipo_cita == 1) {
-                                        var cp_cabeza = 0;
-                                        if (!$("#cabeza_i").attr('disabled')) {
-                                            cp_cabeza = 1;
-                                        }
-                                        const dat_cabeza = {
-                                            examen_fr: 'Cabeza',
-                                            cp: cp_cabeza,
-                                            descripcion: $("#cabeza_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_cuello = 0;
-                                        if (!$("#cuello_i").attr('disabled')) {
-                                            cp_cuello = 1;
-                                        }
-                                        const dat_cuello = {
-                                            examen_fr: 'Cuello',
-                                            cp: cp_cuello,
-                                            descripcion: $("#cuello_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_torax = 0;
-                                        if (!$("#torax_i").attr('disabled')) {
-                                            cp_torax = 1;
-                                        }
-                                        const dat_torax = {
-                                            examen_fr: 'Tórax',
-                                            cp: cp_torax,
-                                            descripcion: $("#torax_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_abdomen = 0;
-                                        if (!$("#abdomen_i").attr('disabled')) {
-                                            cp_abdomen = 1;
-                                        }
-                                        const dat_abdomen = {
-                                            examen_fr: 'Abdomen',
-                                            cp: cp_abdomen,
-                                            descripcion: $("#abdomen_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_pelvis = 0;
-                                        if (!$("#pelvis_i").attr('disabled')) {
-                                            cp_pelvis = 1;
-                                        }
-                                        const dat_pelvis = {
-                                            examen_fr: 'Pelvis',
-                                            cp: cp_pelvis,
-                                            descripcion: $("#pelvis_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        var cp_extremidades = 0;
-                                        if (!$("#extremidades_i").attr('disabled')) {
-                                            cp_extremidades = 1;
-                                        }
-                                        const dat_extremidades = {
-                                            examen_fr: 'Extremidades',
-                                            cp: cp_extremidades,
-                                            descripcion: $("#extremidades_i").val(),
-                                            id_cita: id_cita
-                                        }
-    
-                                        const efr = [dat_cabeza,dat_cuello,dat_torax,dat_abdomen,dat_pelvis,dat_extremidades];
-    
+                   //================================== PIEL - FANERAS ========================
+                   var cp_piel = 0;
+                   if (!$("#piel").attr('disabled')) {
+                       cp_piel = 1;
+                   }
+                   const dat_piel = {
+                       examen_fr: 'Piel - Faneras',
+                       cp: cp_piel,
+                       descripcion: $("#piel").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== CABEZA ========================
+                   var cp_cabeza = 0;
+                   if (!$("#cabeza_i").attr('disabled')) {
+                       cp_cabeza = 1;
+                   }
+                   const dat_cabeza = {
+                       examen_fr: 'Cabeza',
+                       cp: cp_cabeza,
+                       descripcion: $("#cabeza_i").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== OJOS ========================
+                   var cp_ojos = 0;
+                   if (!$("#ojos").attr('disabled')) {
+                       cp_ojos = 1;
+                   }
+                   const dat_ojos = {
+                       examen_fr: 'Ojos',
+                       cp: cp_ojos,
+                       descripcion: $("#ojos").val(),
+                       id_cita: id_cita
+                   }
+
+                   
+                   //================================== OIDOS ========================
+                   var cp_oidos = 0;
+                   if (!$("#oidos").attr('disabled')) {
+                       cp_oidos = 1;
+                   }
+                   const dat_oidos = {
+                       examen_fr: 'Oidos',
+                       cp: cp_oidos,
+                       descripcion: $("#oidos").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== NARIZ ========================
+                   var cp_nariz = 0;
+                   if (!$("#nariz").attr('disabled')) {
+                       cp_nariz = 1;
+                   }
+                   const dat_nariz = {
+                       examen_fr: 'Nariz',
+                       cp: cp_nariz,
+                       descripcion: $("#nariz").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== BOCA ========================
+                   var cp_boca = 0;
+                   if (!$("#boca").attr('disabled')) {
+                       cp_boca = 1;
+                   }
+                   const dat_boca = {
+                       examen_fr: 'Boca',
+                       cp: cp_boca,
+                       descripcion: $("#boca").val(),
+                       id_cita: id_cita
+                   }
+                  
+                   //================================== OROFARINGE ========================
+                   var cp_orofaringe = 0;
+                   if (!$("#orofaringe").attr('disabled')) {
+                       cp_orofaringe = 1;
+                   }
+                   const dat_orofaringe = {
+                       examen_fr: 'Orofaringe',
+                       cp: cp_orofaringe,
+                       descripcion: $("#orofaringe").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== CUELLO ========================
+                   var cp_cuello = 0;
+                   if (!$("#cuello_i").attr('disabled')) {
+                       cp_cuello = 1;
+                   }
+                   const dat_cuello = {
+                       examen_fr: 'Cuello',
+                       cp: cp_cuello,
+                       descripcion: $("#cuello_i").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== AXILAS - MAMAS ========================
+                   var cp_axilas = 0;
+                   if (!$("#axilas").attr('disabled')) {
+                       cp_axilas = 1;
+                   }
+                   const dat_axilas = {
+                       examen_fr: 'Axilas - Mamas',
+                       cp: cp_axilas,
+                       descripcion: $("#axilas").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== TORAX ========================
+                   var cp_torax = 0;
+                   if (!$("#torax_i").attr('disabled')) {
+                       cp_torax = 1;
+                   }
+                   const dat_torax = {
+                       examen_fr: 'Torax',
+                       cp: cp_torax,
+                       descripcion: $("#torax_i").val(),
+                       id_cita: id_cita
+                   }
+                   
+                  //================================== ABDOMEN ========================
+                  var cp_abdomen = 0;
+                  if (!$("#abdomen_i").attr('disabled')) {
+                      cp_abdomen = 1;
+                  }
+                  const dat_abdomen = {
+                      examen_fr: 'Abdomen',
+                      cp: cp_abdomen,
+                      descripcion: $("#abdomen_i").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== COLUMNA VERTEBRAL ========================
+                  var cp_columna = 0;
+                  if (!$("#columna").attr('disabled')) {
+                      cp_columna = 1;
+                  }
+                  const dat_columna = {
+                      examen_fr: 'Columna',
+                      cp: cp_columna,
+                      descripcion: $("#columna").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== INGLE - PERINE ========================
+                  var cp_ingle = 0;
+                  if (!$("#ingle").attr('disabled')) {
+                      cp_ingle = 1;
+                  }
+                  const dat_ingle = {
+                      examen_fr: 'Ingle',
+                      cp: cp_ingle,
+                      descripcion: $("#ingle").val(),
+                      id_cita: id_cita
+                  }
+
+                  
+                  //================================== MIEMBROS SUPERIORES ========================
+                  var cp_msup = 0;
+                  if (!$("#msup").attr('disabled')) {
+                      cp_msup = 1;
+                  }
+                  const dat_msup = {
+                      examen_fr: 'Miembros Superiores',
+                      cp: cp_msup,
+                      descripcion: $("#msup").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== MIEMBROS INFERIORES ========================
+                  var cp_minf = 0;
+                  if (!$("#minf").attr('disabled')) {
+                      cp_minf = 1;
+                  }
+                  const dat_minf = {
+                      examen_fr: 'Miembros Inferiores',
+                      cp: cp_minf,
+                      descripcion: $("#minf").val(),
+                      id_cita: id_cita
+                  }
+
+                  //================================== ORGANOS DE LOS SENTIDOS ========================
+                  var cp_sorganos = 0;
+                  if (!$("#sorganos").attr('disabled')) {
+                      cp_sorganos = 1;
+                  }
+                  const dat_sorganos = {
+                      examen_fr: 'Organos de los Sentidos',
+                      cp: cp_sorganos,
+                      descripcion: $("#sorganos").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== RESPIRATORIO ========================
+                  var cp_srespiratorio = 0;
+                  if (!$("#srespiratorio").attr('disabled')) {
+                      cp_srespiratorio = 1;
+                  }
+                  const dat_srespiratorio = {
+                      examen_fr: 'Respiratorio',
+                      cp: cp_srespiratorio,
+                      descripcion: $("#srespiratorio").val(),
+                      id_cita: id_cita
+                  }
+                  
+                  //================================== CARDIO - VASCULAR ========================
+                  var cp_scardio = 0;
+                  if (!$("#scardio").attr('disabled')) {
+                      cp_scardio = 1;
+                  }
+                  const dat_scardio = {
+                      examen_fr: 'Cardio - Vascular',
+                      cp: cp_scardio,
+                      descripcion: $("#scardio").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== DIGESTIVO ========================
+                  var cp_sdigestivo = 0;
+                  if (!$("#sdigestivo").attr('disabled')) {
+                      cp_sdigestivo = 1;
+                  }
+                  const dat_sdigestivo = {
+                      examen_fr: 'Digestivo',
+                      cp: cp_sdigestivo,
+                      descripcion: $("#sdigestivo").val(),
+                      id_cita: id_cita
+                  }
+
+                  //================================== GENITAL ========================
+                  var cp_sgenital = 0;
+                  if (!$("#sgenital").attr('disabled')) {
+                      cp_sgenital = 1;
+                  }
+                  const dat_sgenital = {
+                      examen_fr: 'Genital',
+                      cp: cp_sgenital,
+                      descripcion: $("#sgenital").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== URINARIO ========================
+                  var cp_surinario = 0;
+                  if (!$("#surinario").attr('disabled')) {
+                      cp_surinario = 1;
+                  }
+                  const dat_surinario = {
+                      examen_fr: 'Urinario',
+                      cp: cp_surinario,
+                      descripcion: $("#surinario").val(),
+                      id_cita: id_cita
+                  }
+                  
+                  //================================== MUSCULO ESQUELETICO ========================
+                  var cp_smusculo = 0;
+                  if (!$("#smusculo").attr('disabled')) {
+                      cp_smusculo = 1;
+                  }
+                  const dat_smusculo = {
+                      examen_fr: 'Musculo Esqueletico',
+                      cp: cp_smusculo,
+                      descripcion: $("#smusculo").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== ENDOCRINO ========================
+                  var cp_sendocrino = 0;
+                  if (!$("#sendocrino").attr('disabled')) {
+                      cp_sendocrino = 1;
+                  }
+                  const dat_sendocrino = {
+                      examen_fr: 'Endocrino',
+                      cp: cp_sendocrino,
+                      descripcion: $("#sendocrino").val(),
+                      id_cita: id_cita
+                  }
+                  
+                  //================================== HEMO - LINFATICO ========================
+                  var cp_shemo = 0;
+                  if (!$("#shemo").attr('disabled')) {
+                      cp_shemo = 1;
+                  }
+                  const dat_shemo = {
+                      examen_fr: 'Hemo - Linfatico',
+                      cp: cp_shemo,
+                      descripcion: $("#shemo").val(),
+                      id_cita: id_cita
+                  }
+                  //================================== NEUROLOGICO ========================
+                  var cp_sneurologico = 0;
+                  if (!$("#sneurologico").attr('disabled')) {
+                      cp_sneurologico = 1;
+                  }
+                  const dat_sneurologico = {
+                      examen_fr: 'Neurologico',
+                      cp: cp_sneurologico,
+                      descripcion: $("#sneurologico").val(),
+                      id_cita: id_cita
+                  }
+
+                   const efr = [dat_piel, dat_cabeza, dat_ojos, dat_oidos, dat_nariz, dat_boca, 
+                       dat_orofaringe, dat_cuello, dat_axilas, dat_torax, dat_abdomen, 
+                       dat_columna, dat_ingle, dat_msup, dat_minf, dat_sorganos, 
+                       dat_srespiratorio, dat_scardio, dat_sdigestivo, dat_sgenital, 
+                       dat_surinario, dat_smusculo, dat_sendocrino, dat_shemo, dat_sneurologico];
                                         efr.forEach(e => {
                                             const datEfr = {
                                                 examen_fr: e.examen_fr,
@@ -3085,7 +3655,8 @@ $(document).ready(function() {
            const datCaso = {
                motivo_con: $("#motivo_consulta").val(),
                problema_act: $("#problema_actual").val(),
-               id_caso: id_caso
+               id_caso: id_caso,
+               id_cita: id_cita
            };
            $.ajax({
                type: "POST",
@@ -3095,6 +3666,14 @@ $(document).ready(function() {
                    console.log(response);
                }
            });
+           $.ajax({
+                type: "POST",
+                url: "../php/cita/mc-pa-add.php",
+                data: datCaso,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
 
            //Almacenar la revisión actual de órganos y sistemas
            $.ajax({
@@ -3275,6 +3854,19 @@ $(document).ready(function() {
             success: function (response) {
                 const tipo_cita = Number(JSON.parse(response).tipo_cita);
                 if (tipo_cita == 1) {
+                    
+                   //================================== PIEL - FANERAS ========================
+                    var cp_piel = 0;
+                    if (!$("#piel").attr('disabled')) {
+                        cp_piel = 1;
+                    }
+                    const dat_piel = {
+                        examen_fr: 'Piel - Faneras',
+                        cp: cp_piel,
+                        descripcion: $("#piel").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== CABEZA ========================
                     var cp_cabeza = 0;
                     if (!$("#cabeza_i").attr('disabled')) {
                         cp_cabeza = 1;
@@ -3285,7 +3877,65 @@ $(document).ready(function() {
                         descripcion: $("#cabeza_i").val(),
                         id_cita: id_cita
                     }
+                    //================================== OJOS ========================
+                    var cp_ojos = 0;
+                    if (!$("#ojos").attr('disabled')) {
+                        cp_ojos = 1;
+                    }
+                    const dat_ojos = {
+                        examen_fr: 'Ojos',
+                        cp: cp_ojos,
+                        descripcion: $("#ojos").val(),
+                        id_cita: id_cita
+                    }
 
+                    
+                    //================================== OIDOS ========================
+                    var cp_oidos = 0;
+                    if (!$("#oidos").attr('disabled')) {
+                        cp_oidos = 1;
+                    }
+                    const dat_oidos = {
+                        examen_fr: 'Oidos',
+                        cp: cp_oidos,
+                        descripcion: $("#oidos").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== NARIZ ========================
+                    var cp_nariz = 0;
+                    if (!$("#nariz").attr('disabled')) {
+                        cp_nariz = 1;
+                    }
+                    const dat_nariz = {
+                        examen_fr: 'Nariz',
+                        cp: cp_nariz,
+                        descripcion: $("#nariz").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== BOCA ========================
+                    var cp_boca = 0;
+                    if (!$("#boca").attr('disabled')) {
+                        cp_boca = 1;
+                    }
+                    const dat_boca = {
+                        examen_fr: 'Boca',
+                        cp: cp_boca,
+                        descripcion: $("#boca").val(),
+                        id_cita: id_cita
+                    }
+                
+                    //================================== OROFARINGE ========================
+                    var cp_orofaringe = 0;
+                    if (!$("#orofaringe").attr('disabled')) {
+                        cp_orofaringe = 1;
+                    }
+                    const dat_orofaringe = {
+                        examen_fr: 'Orofaringe',
+                        cp: cp_orofaringe,
+                        descripcion: $("#orofaringe").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== CUELLO ========================
                     var cp_cuello = 0;
                     if (!$("#cuello_i").attr('disabled')) {
                         cp_cuello = 1;
@@ -3296,52 +3946,207 @@ $(document).ready(function() {
                         descripcion: $("#cuello_i").val(),
                         id_cita: id_cita
                     }
-
+                    //================================== AXILAS - MAMAS ========================
+                    var cp_axilas = 0;
+                    if (!$("#axilas").attr('disabled')) {
+                        cp_axilas = 1;
+                    }
+                    const dat_axilas = {
+                        examen_fr: 'Axilas - Mamas',
+                        cp: cp_axilas,
+                        descripcion: $("#axilas").val(),
+                        id_cita: id_cita
+                    }
+                    //================================== TORAX ========================
                     var cp_torax = 0;
                     if (!$("#torax_i").attr('disabled')) {
                         cp_torax = 1;
                     }
                     const dat_torax = {
-                        examen_fr: 'Tórax',
+                        examen_fr: 'Torax',
                         cp: cp_torax,
                         descripcion: $("#torax_i").val(),
                         id_cita: id_cita
                     }
+                    
+                   //================================== ABDOMEN ========================
+                   var cp_abdomen = 0;
+                   if (!$("#abdomen_i").attr('disabled')) {
+                       cp_abdomen = 1;
+                   }
+                   const dat_abdomen = {
+                       examen_fr: 'Abdomen',
+                       cp: cp_abdomen,
+                       descripcion: $("#abdomen_i").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== COLUMNA VERTEBRAL ========================
+                   var cp_columna = 0;
+                   if (!$("#columna").attr('disabled')) {
+                       cp_columna = 1;
+                   }
+                   const dat_columna = {
+                       examen_fr: 'Columna',
+                       cp: cp_columna,
+                       descripcion: $("#columna").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== INGLE - PERINE ========================
+                   var cp_ingle = 0;
+                   if (!$("#ingle").attr('disabled')) {
+                       cp_ingle = 1;
+                   }
+                   const dat_ingle = {
+                       examen_fr: 'Ingle',
+                       cp: cp_ingle,
+                       descripcion: $("#ingle").val(),
+                       id_cita: id_cita
+                   }
 
-                    var cp_abdomen = 0;
-                    if (!$("#abdomen_i").attr('disabled')) {
-                        cp_abdomen = 1;
-                    }
-                    const dat_abdomen = {
-                        examen_fr: 'Abdomen',
-                        cp: cp_abdomen,
-                        descripcion: $("#abdomen_i").val(),
-                        id_cita: id_cita
-                    }
+                   
+                   //================================== MIEMBROS SUPERIORES ========================
+                   var cp_msup = 0;
+                   if (!$("#msup").attr('disabled')) {
+                       cp_msup = 1;
+                   }
+                   const dat_msup = {
+                       examen_fr: 'Miembros Superiores',
+                       cp: cp_msup,
+                       descripcion: $("#msup").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== MIEMBROS INFERIORES ========================
+                   var cp_minf = 0;
+                   if (!$("#minf").attr('disabled')) {
+                       cp_minf = 1;
+                   }
+                   const dat_minf = {
+                       examen_fr: 'Miembros Inferiores',
+                       cp: cp_minf,
+                       descripcion: $("#minf").val(),
+                       id_cita: id_cita
+                   }
 
-                    var cp_pelvis = 0;
-                    if (!$("#pelvis_i").attr('disabled')) {
-                        cp_pelvis = 1;
-                    }
-                    const dat_pelvis = {
-                        examen_fr: 'Pelvis',
-                        cp: cp_pelvis,
-                        descripcion: $("#pelvis_i").val(),
-                        id_cita: id_cita
-                    }
+                   //================================== ORGANOS DE LOS SENTIDOS ========================
+                   var cp_sorganos = 0;
+                   if (!$("#sorganos").attr('disabled')) {
+                       cp_sorganos = 1;
+                   }
+                   const dat_sorganos = {
+                       examen_fr: 'Organos de los Sentidos',
+                       cp: cp_sorganos,
+                       descripcion: $("#sorganos").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== RESPIRATORIO ========================
+                   var cp_srespiratorio = 0;
+                   if (!$("#srespiratorio").attr('disabled')) {
+                       cp_srespiratorio = 1;
+                   }
+                   const dat_srespiratorio = {
+                       examen_fr: 'Respiratorio',
+                       cp: cp_srespiratorio,
+                       descripcion: $("#srespiratorio").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== CARDIO - VASCULAR ========================
+                   var cp_scardio = 0;
+                   if (!$("#scardio").attr('disabled')) {
+                       cp_scardio = 1;
+                   }
+                   const dat_scardio = {
+                       examen_fr: 'Cardio - Vascular',
+                       cp: cp_scardio,
+                       descripcion: $("#scardio").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== DIGESTIVO ========================
+                   var cp_sdigestivo = 0;
+                   if (!$("#sdigestivo").attr('disabled')) {
+                       cp_sdigestivo = 1;
+                   }
+                   const dat_sdigestivo = {
+                       examen_fr: 'Digestivo',
+                       cp: cp_sdigestivo,
+                       descripcion: $("#sdigestivo").val(),
+                       id_cita: id_cita
+                   }
 
-                    var cp_extremidades = 0;
-                    if (!$("#extremidades_i").attr('disabled')) {
-                        cp_extremidades = 1;
-                    }
-                    const dat_extremidades = {
-                        examen_fr: 'Extremidades',
-                        cp: cp_extremidades,
-                        descripcion: $("#extremidades_i").val(),
-                        id_cita: id_cita
-                    }
+                   //================================== GENITAL ========================
+                   var cp_sgenital = 0;
+                   if (!$("#sgenital").attr('disabled')) {
+                       cp_sgenital = 1;
+                   }
+                   const dat_sgenital = {
+                       examen_fr: 'Genital',
+                       cp: cp_sgenital,
+                       descripcion: $("#sgenital").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== URINARIO ========================
+                   var cp_surinario = 0;
+                   if (!$("#surinario").attr('disabled')) {
+                       cp_surinario = 1;
+                   }
+                   const dat_surinario = {
+                       examen_fr: 'Urinario',
+                       cp: cp_surinario,
+                       descripcion: $("#surinario").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== MUSCULO ESQUELETICO ========================
+                   var cp_smusculo = 0;
+                   if (!$("#smusculo").attr('disabled')) {
+                       cp_smusculo = 1;
+                   }
+                   const dat_smusculo = {
+                       examen_fr: 'Musculo Esqueletico',
+                       cp: cp_smusculo,
+                       descripcion: $("#smusculo").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== ENDOCRINO ========================
+                   var cp_sendocrino = 0;
+                   if (!$("#sendocrino").attr('disabled')) {
+                       cp_sendocrino = 1;
+                   }
+                   const dat_sendocrino = {
+                       examen_fr: 'Endocrino',
+                       cp: cp_sendocrino,
+                       descripcion: $("#sendocrino").val(),
+                       id_cita: id_cita
+                   }
+                   
+                   //================================== HEMO - LINFATICO ========================
+                   var cp_shemo = 0;
+                   if (!$("#shemo").attr('disabled')) {
+                       cp_shemo = 1;
+                   }
+                   const dat_shemo = {
+                       examen_fr: 'Hemo - Linfatico',
+                       cp: cp_shemo,
+                       descripcion: $("#shemo").val(),
+                       id_cita: id_cita
+                   }
+                   //================================== NEUROLOGICO ========================
+                   var cp_sneurologico = 0;
+                   if (!$("#sneurologico").attr('disabled')) {
+                       cp_sneurologico = 1;
+                   }
+                   const dat_sneurologico = {
+                       examen_fr: 'Neurologico',
+                       cp: cp_sneurologico,
+                       descripcion: $("#sneurologico").val(),
+                       id_cita: id_cita
+                   }
 
-                    const efr = [dat_cabeza,dat_cuello,dat_torax,dat_abdomen,dat_pelvis,dat_extremidades];
+                    const efr = [dat_piel, dat_cabeza, dat_ojos, dat_oidos, dat_nariz, dat_boca, 
+                        dat_orofaringe, dat_cuello, dat_axilas, dat_torax, dat_abdomen, 
+                        dat_columna, dat_ingle, dat_msup, dat_minf, dat_sorganos, 
+                        dat_srespiratorio, dat_scardio, dat_sdigestivo, dat_sgenital, 
+                        dat_surinario, dat_smusculo, dat_sendocrino, dat_shemo, dat_sneurologico];
 
                     efr.forEach(e => {
                         const datEfr = {
@@ -3538,6 +4343,21 @@ $(document).ready(function() {
     });
 
     //======================Botones de Exámen físico regional=========================================
+    //====================== 1R PIEL FANERAS ====================================
+    $("#cp_piel").click(function(e) {
+        e.preventDefault();
+        $("#piel").removeAttr('disabled');
+        $("#sp_piel").removeAttr('disabled');
+        $("#cp_piel").attr('disabled', 'disabled');
+    });
+    $("#sp_piel").click(function(e) {
+        e.preventDefault();
+        $("#piel").attr('disabled', 'disabled');
+        $("#piel").val('');
+        $("#cp_piel").removeAttr('disabled');
+        $("#sp_piel").attr('disabled', 'disabled');
+    });
+    //====================== 2R CABEZA   ========================================
     $("#cp_cabeza").click(function(e) {
         e.preventDefault();
         $("#cabeza_i").removeAttr('disabled');
@@ -3551,7 +4371,77 @@ $(document).ready(function() {
         $("#cp_cabeza").removeAttr('disabled');
         $("#sp_cabeza").attr('disabled', 'disabled');
     });
-
+    //====================== 3R OJOS   ========================================
+    $("#cp_ojos").click(function(e) {
+        e.preventDefault();
+        $("#ojos").removeAttr('disabled');
+        $("#sp_ojos").removeAttr('disabled');
+        $("#cp_ojos").attr('disabled', 'disabled');
+    });
+    $("#sp_ojos").click(function(e) {
+        e.preventDefault();
+        $("#ojos").attr('disabled', 'disabled');
+        $("#ojos").val('');
+        $("#cp_ojos").removeAttr('disabled');
+        $("#sp_ojos").attr('disabled', 'disabled');
+    });
+    //====================== 4R OIDOS   ========================================
+    $("#cp_oidos").click(function(e) {
+        e.preventDefault();
+        $("#oidos").removeAttr('disabled');
+        $("#sp_oidos").removeAttr('disabled');
+        $("#cp_oidos").attr('disabled', 'disabled');
+    });
+    $("#sp_oidos").click(function(e) {
+        e.preventDefault();
+        $("#oidos").attr('disabled', 'disabled');
+        $("#oidos").val('');
+        $("#cp_oidos").removeAttr('disabled');
+        $("#sp_oidos").attr('disabled', 'disabled');
+    });
+    //====================== 5R NARIZ   ========================================
+    $("#cp_nariz").click(function(e) {
+        e.preventDefault();
+        $("#nariz").removeAttr('disabled');
+        $("#sp_nariz").removeAttr('disabled');
+        $("#cp_nariz").attr('disabled', 'disabled');
+    });
+    $("#sp_nariz").click(function(e) {
+        e.preventDefault();
+        $("#nariz").attr('disabled', 'disabled');
+        $("#nariz").val('');
+        $("#cp_nariz").removeAttr('disabled');
+        $("#sp_nariz").attr('disabled', 'disabled');
+    });
+    //====================== 6R BOCA   ========================================
+    $("#cp_boca").click(function(e) {
+        e.preventDefault();
+        $("#boca").removeAttr('disabled');
+        $("#sp_boca").removeAttr('disabled');
+        $("#cp_boca").attr('disabled', 'disabled');
+    });
+    $("#sp_boca").click(function(e) {
+        e.preventDefault();
+        $("#boca").attr('disabled', 'disabled');
+        $("#boca").val('');
+        $("#cp_boca").removeAttr('disabled');
+        $("#sp_boca").attr('disabled', 'disabled');
+    });
+    //====================== 7R OROFARINGE   ========================================
+    $("#cp_orofaringe").click(function(e) {
+        e.preventDefault();
+        $("#orofaringe").removeAttr('disabled');
+        $("#sp_orofaringe").removeAttr('disabled');
+        $("#cp_orofaringe").attr('disabled', 'disabled');
+    });
+    $("#sp_orofaringe").click(function(e) {
+        e.preventDefault();
+        $("#orofaringe").attr('disabled', 'disabled');
+        $("#orofaringe").val('');
+        $("#cp_orofaringe").removeAttr('disabled');
+        $("#sp_orofaringe").attr('disabled', 'disabled');
+    });
+  //============================ 8R CUELLO =======================================
     $("#cp_cuello").click(function(e) {
         e.preventDefault();
         $("#cuello_i").removeAttr('disabled');
@@ -3566,21 +4456,39 @@ $(document).ready(function() {
         $("#sp_cuello").attr('disabled', 'disabled');
     });
 
-    $("#cp_torax").click(function(e) {
+  //============================ 9R AXILAS =======================================
+    $("#cp_axilas").click(function(e) {
         e.preventDefault();
-        $("#torax_i").removeAttr('disabled');
-        $("#sp_torax").removeAttr('disabled');
-        $("#cp_torax").attr('disabled', 'disabled');
+        $("#axilas").removeAttr('disabled');
+        $("#sp_axilas").removeAttr('disabled');
+        $("#cp_axilas").attr('disabled', 'disabled');
     });
-    $("#sp_torax").click(function(e) {
+    $("#sp_axilas").click(function(e) {
         e.preventDefault();
-        $("#torax_i").attr('disabled', 'disabled');
-        $("#torax_i").val('');
-        $("#cp_torax").removeAttr('disabled');
-        $("#sp_torax").attr('disabled', 'disabled');
+        $("#axilas").attr('disabled', 'disabled');
+        $("#axilas").val('');
+        $("#cp_axilas").removeAttr('disabled');
+        $("#sp_axilas").attr('disabled', 'disabled');
     });
+//============================ 10R TORAX =======================================
 
-    $("#cp_abdomen").click(function(e) {
+$("#cp_torax").click(function(e) {
+    e.preventDefault();
+    $("#torax_i").removeAttr('disabled');
+    $("#sp_torax").removeAttr('disabled');
+    $("#cp_torax").attr('disabled', 'disabled');
+});
+$("#sp_torax").click(function(e) {
+    e.preventDefault();
+    $("#torax_i").attr('disabled', 'disabled');
+    $("#torax_i").val('');
+    $("#cp_torax").removeAttr('disabled');
+    $("#sp_torax").attr('disabled', 'disabled');
+});
+
+//============================ 11R ABDOMEN =======================================
+
+$("#cp_abdomen").click(function(e) {
         e.preventDefault();
         $("#abdomen_i").removeAttr('disabled');
         $("#sp_abdomen").removeAttr('disabled');
@@ -3593,32 +4501,201 @@ $(document).ready(function() {
         $("#cp_abdomen").removeAttr('disabled');
         $("#sp_abdomen").attr('disabled', 'disabled');
     });
+//============================ 12R COLUMNA VERTEBRAL =======================================
+    $("#cp_columna").click(function(e) {
+        e.preventDefault();
+        $("#columna").removeAttr('disabled');
+        $("#sp_columna").removeAttr('disabled');
+        $("#cp_columna").attr('disabled', 'disabled');
+    });
+    $("#sp_columna").click(function(e) {
+        e.preventDefault();
+        $("#columna").attr('disabled', 'disabled');
+        $("#columna").val('');
+        $("#cp_columna").removeAttr('disabled');
+        $("#sp_columna").attr('disabled', 'disabled');
+    });
+//============================ 13R INGLE =======================================
+    $("#cp_ingle").click(function(e) {
+        e.preventDefault();
+        $("#ingle").removeAttr('disabled');
+        $("#sp_ingle").removeAttr('disabled');
+        $("#cp_ingle").attr('disabled', 'disabled');
+    });
+    $("#sp_ingle").click(function(e) {
+        e.preventDefault();
+        $("#ingle").attr('disabled', 'disabled');
+        $("#ingle").val('');
+        $("#cp_ingle").removeAttr('disabled');
+        $("#sp_ingle").attr('disabled', 'disabled');
+    });
+//============================ 14R M. SUPERIORES =======================================
+$("#cp_msup").click(function(e) {
+    e.preventDefault();
+    $("#msup").removeAttr('disabled');
+    $("#sp_msup").removeAttr('disabled');
+    $("#cp_msup").attr('disabled', 'disabled');
+});
+$("#sp_msup").click(function(e) {
+    e.preventDefault();
+    $("#msup").attr('disabled', 'disabled');
+    $("#msup").val('');
+    $("#cp_msup").removeAttr('disabled');
+    $("#sp_msup").attr('disabled', 'disabled');
+});
+//============================ 15R M. INFERIORES =======================================
+$("#cp_minf").click(function(e) {
+    e.preventDefault();
+    $("#minf").removeAttr('disabled');
+    $("#sp_minf").removeAttr('disabled');
+    $("#cp_minf").attr('disabled', 'disabled');
+});
+$("#sp_minf").click(function(e) {
+    e.preventDefault();
+    $("#minf").attr('disabled', 'disabled');
+    $("#minf").val('');
+    $("#cp_minf").removeAttr('disabled');
+    $("#sp_minf").attr('disabled', 'disabled');
+});
+//============================ 1S ORG SENTIDOS =======================================
+$("#cp_sorganos").click(function(e) {
+    e.preventDefault();
+    $("#sorganos").removeAttr('disabled');
+    $("#sp_sorganos").removeAttr('disabled');
+    $("#cp_sorganos").attr('disabled', 'disabled');
+});
+$("#sp_sorganos").click(function(e) {
+    e.preventDefault();
+    $("#sorganos").attr('disabled', 'disabled');
+    $("#sorganos").val('');
+    $("#cp_sorganos").removeAttr('disabled');
+    $("#sp_sorganos").attr('disabled', 'disabled');
+});
+//============================ 2S RESPIRATORIO =======================================
+$("#cp_srespiratorio").click(function(e) {
+    e.preventDefault();
+    $("#srespiratorio").removeAttr('disabled');
+    $("#sp_srespiratorio").removeAttr('disabled');
+    $("#cp_srespiratorio").attr('disabled', 'disabled');
+});
+$("#sp_srespiratorio").click(function(e) {
+    e.preventDefault();
+    $("#srespiratorio").attr('disabled', 'disabled');
+    $("#srespiratorio").val('');
+    $("#cp_srespiratorio").removeAttr('disabled');
+    $("#sp_srespiratorio").attr('disabled', 'disabled');
+});
+//============================ 3S CARDIO-VASCULAR =======================================
+$("#cp_scardio").click(function(e) {
+    e.preventDefault();
+    $("#scardio").removeAttr('disabled');
+    $("#sp_scardio").removeAttr('disabled');
+    $("#cp_scardio").attr('disabled', 'disabled');
+});
+$("#sp_scardio").click(function(e) {
+    e.preventDefault();
+    $("#scardio").attr('disabled', 'disabled');
+    $("#scardio").val('');
+    $("#cp_scardio").removeAttr('disabled');
+    $("#sp_scardio").attr('disabled', 'disabled');
+});
+//============================ 4S DIGESTIVO =======================================
+$("#cp_sdigestivo").click(function(e) {
+    e.preventDefault();
+    $("#sdigestivo").removeAttr('disabled');
+    $("#sp_sdigestivo").removeAttr('disabled');
+    $("#cp_sdigestivo").attr('disabled', 'disabled');
+});
+$("#sp_sdigestivo").click(function(e) {
+    e.preventDefault();
+    $("#sdigestivo").attr('disabled', 'disabled');
+    $("#sdigestivo").val('');
+    $("#cp_sdigestivo").removeAttr('disabled');
+    $("#sp_sdigestivo").attr('disabled', 'disabled');
+});
+//============================ 5S GENITAL =======================================
+$("#cp_sgenital").click(function(e) {
+    e.preventDefault();
+    $("#sgenital").removeAttr('disabled');
+    $("#sp_sgenital").removeAttr('disabled');
+    $("#cp_sgenital").attr('disabled', 'disabled');
+});
+$("#sp_sgenital").click(function(e) {
+    e.preventDefault();
+    $("#sgenital").attr('disabled', 'disabled');
+    $("#sgenital").val('');
+    $("#cp_sgenital").removeAttr('disabled');
+    $("#sp_sgenital").attr('disabled', 'disabled');
+});
+//============================ 6S URINARIO =======================================
+$("#cp_surinario").click(function(e) {
+    e.preventDefault();
+    $("#surinario").removeAttr('disabled');
+    $("#sp_surinario").removeAttr('disabled');
+    $("#cp_surinario").attr('disabled', 'disabled');
+});
+$("#sp_surinario").click(function(e) {
+    e.preventDefault();
+    $("#surinario").attr('disabled', 'disabled');
+    $("#surinario").val('');
+    $("#cp_surinario").removeAttr('disabled');
+    $("#sp_surinario").attr('disabled', 'disabled');
+});
+//============================ 7S MUSCULO - ESQUELETICO =======================================
+$("#cp_smusculo").click(function(e) {
+    e.preventDefault();
+    $("#smusculo").removeAttr('disabled');
+    $("#sp_smusculo").removeAttr('disabled');
+    $("#cp_smusculo").attr('disabled', 'disabled');
+});
+$("#sp_smusculo").click(function(e) {
+    e.preventDefault();
+    $("#smusculo").attr('disabled', 'disabled');
+    $("#smusculo").val('');
+    $("#cp_smusculo").removeAttr('disabled');
+    $("#sp_smusculo").attr('disabled', 'disabled');
+});
+//============================ 8S ENDOCRINO =======================================
+$("#cp_sendocrino").click(function(e) {
+    e.preventDefault();
+    $("#sendocrino").removeAttr('disabled');
+    $("#sp_sendocrino").removeAttr('disabled');
+    $("#cp_sendocrino").attr('disabled', 'disabled');
+});
+$("#sp_sendocrino").click(function(e) {
+    e.preventDefault();
+    $("#sendocrino").attr('disabled', 'disabled');
+    $("#sendocrino").val('');
+    $("#cp_sendocrino").removeAttr('disabled');
+    $("#sp_sendocrino").attr('disabled', 'disabled');
+});
+//============================ 9S HEMO - LINFATICO =======================================
+$("#cp_shemo").click(function(e) {
+    e.preventDefault();
+    $("#shemo").removeAttr('disabled');
+    $("#sp_shemo").removeAttr('disabled');
+    $("#cp_shemo").attr('disabled', 'disabled');
+});
+$("#sp_shemo").click(function(e) {
+    e.preventDefault();
+    $("#shemo").attr('disabled', 'disabled');
+    $("#shemo").val('');
+    $("#cp_shemo").removeAttr('disabled');
+    $("#sp_shemo").attr('disabled', 'disabled');
+});
+//============================ 10S NEUROLOGICO =======================================
+$("#cp_sneurologico").click(function(e) {
+    e.preventDefault();
+    $("#sneurologico").removeAttr('disabled');
+    $("#sp_sneurologico").removeAttr('disabled');
+    $("#cp_sneurologico").attr('disabled', 'disabled');
+});
+$("#sp_sneurologico").click(function(e) {
+    e.preventDefault();
+    $("#sneurologico").attr('disabled', 'disabled');
+    $("#sneurologico").val('');
+    $("#cp_sneurologico").removeAttr('disabled');
+    $("#sp_sneurologico").attr('disabled', 'disabled');
+});
 
-    $("#cp_pelvis").click(function(e) {
-        e.preventDefault();
-        $("#pelvis_i").removeAttr('disabled');
-        $("#sp_pelvis").removeAttr('disabled');
-        $("#cp_pelvis").attr('disabled', 'disabled');
-    });
-    $("#sp_pelvis").click(function(e) {
-        e.preventDefault();
-        $("#pelvis_i").attr('disabled', 'disabled');
-        $("#pelvis_i").val('');
-        $("#cp_pelvis").removeAttr('disabled');
-        $("#sp_pelvis").attr('disabled', 'disabled');
-    });
-
-    $("#cp_extremidades").click(function(e) {
-        e.preventDefault();
-        $("#extremidades_i").removeAttr('disabled');
-        $("#sp_extremidades").removeAttr('disabled');
-        $("#cp_extremidades").attr('disabled', 'disabled');
-    });
-    $("#sp_extremidades").click(function(e) {
-        e.preventDefault();
-        $("#extremidades_i").attr('disabled', 'disabled');
-        $("#extremidades_i").val('');
-        $("#cp_extremidades").removeAttr('disabled');
-        $("#sp_extremidades").attr('disabled', 'disabled');
-    });
 });

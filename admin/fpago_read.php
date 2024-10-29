@@ -49,6 +49,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                     <tr>
                                                         <th scope="col" hidden>ID</th>
                                                         <th scope="col">Forma de pago</th>
+                                                        <th scope="col">Aseguradora</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="fpagos"> </tbody>

@@ -12,7 +12,7 @@ include_once '../../variables.php';
                     ON ca.id_medico = me.id_medico
                 WHERE ci.id_cita = '{$id_cita}'";
 
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($conn, $query);//ejecuta la consulta Sql
 
   if(!$result) {
     die('Error en consulta '.mysqli_error($conn));

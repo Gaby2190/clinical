@@ -40,21 +40,21 @@ if (trim($_SESSION['rol']) != trim($admin)) {//Verifica si el rol pertenece al f
                                         <div class="row form-group">
                                             <!-- Elementos del control de especialidad mediante un Select -->
                                             <div class="col-sm-4 my-2 pt-2">
-                                            <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione una Especialidad:</p>
+                                                <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione una Especialidad:</p>
                                             </div>
                                             <div class="col-sm-8 my-2 pt-1">
-                                            <select class="custom-select" id="select_especialidad" required></select>
+                                                <select class="custom-select" id="select_especialidad" required></select>
                                             </div>
                                             <!-- Elementos del control de Medico mediante un Select -->
                                             <div class="col-sm-4 my-2 pt-2" id="div_tmed">
-                                            <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione un Médico:</p>
+                                                <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione un Médico:</p>
                                             </div>
                                             <div class="col-sm-8 my-2 pt-1" id="div_smed">
-                                            <select class="custom-select" id="select_medico" required></select>
+                                                <select class="custom-select" id="select_medico" required></select>
                                             </div>
 
                                             <div class="col-sm-12 mb-1 mt-4">
-                                            <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit">Datos del paciente</h6>
+                                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit">Datos del paciente</h6>
                                             </div>
                                             <!-- Elementos del control de Nacionalidad mediante un Select -->
                                             <div class="col-sm-4 my-2">
@@ -64,7 +64,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {//Verifica si el rol pertenece al f
                                             <!-- Elementos del control de cedula del paciente mediante un input -->
                                             <div class="col-sm-4 my-2">
                                                 <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Cédula:</p>
-<input type="text" class="text-muted f-w-400 form-control" id="cedula_paci" ondrop="return false;" onpaste="return false;" onkeypress="return event.charCode>=48 && event.charCode<=57" size="10" maxlength="10" required>
+                                            <input type="text" class="text-muted f-w-400 form-control" id="cedula_paci" ondrop="return false;" onpaste="return false;" onkeypress="return event.charCode>=48 && event.charCode<=57" size="10" maxlength="10" required>
                                             </div>
                                             <!-- Boton para abrir un modal de busqueda por nombre -->
                                             <div class="col-sm-4 mt-4 pt-3 my-2 pb-0 text-center">

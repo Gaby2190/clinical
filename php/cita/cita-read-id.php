@@ -21,6 +21,7 @@ include_once '../../variables.php';
         $json[] = array(
           'id_cita' => $row['id_cita'],
           'descripcion' => $row['descripcion'],
+          'motivo_con' => $row['motivo_con'],
           'fecha' => $row['fecha'],
           'hora' => $row['hora'],
           'tipo_cita' => $row['tipo_cita'],

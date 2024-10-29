@@ -8,7 +8,7 @@ include_once '../../variables.php';
     $id_caso = $_POST['id_caso'];
 
 
-   $query = "INSERT into cita(fecha,hora, tipo_cita, id, id_caso) 
+    $query = "INSERT into cita(fecha,hora, tipo_cita, id, id_caso) 
             VALUES ('$fecha', '$hora', '$tipo_cita','$cita_agendada', '$id_caso')";
     $result = mysqli_query($conn, $query);
 

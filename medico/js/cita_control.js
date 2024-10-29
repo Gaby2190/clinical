@@ -62,6 +62,68 @@ $(document).ready(function() {
         });
     }
 
+    function ultimaR(id_caso)
+    {
+        const resp2 = $.ajax({
+            type: "POST",
+            url: '../php/cita/cita-list-result.php',
+            data: { id_caso },
+            global: false,
+            async: false,
+            success: function(response) {
+                return response;
+            }
+        }).responseText;
+        console.log(resp2);
+        if (resp2 != false) {
+            const dat = JSON.parse(resp2);
+            var h_cita = dat.hora.slice(0, -3);
+            const datos = {
+                ok: false,
+                msg: `Tiene una cita a la espera de resultados del ${dat.fecha} a las ${h_cita}h`
+            };
+            return datos;
+        } else {
+            const datos = {
+                ok: true,
+                msg: `El paciente no cuenta con citas`
+            };
+            return datos;
+        }
+    }
+    
+    
+    function ultimaA(id_caso)
+    {
+        const resp2 = $.ajax({
+            type: "POST",
+            url: '../php/cita/cita-list-agen.php',
+            data: { id_caso },
+            global: false,
+            async: false,
+            success: function(response) {
+                return response;
+            }
+        }).responseText;
+        console.log(resp2);
+        if (resp2 != false) {
+            const dat = JSON.parse(resp2);
+            var h_cita = dat.hora.slice(0, -3);
+            const datos = {
+                ok: false,
+                msg: `Tiene cita agendada para el ${dat.fecha} a las ${h_cita}h`
+            };
+            return datos;
+        } else {
+            const datos = {
+                ok: true,
+                msg: `El paciente no cuenta con citas`
+            };
+            return datos;
+        }
+    }
+
+
     function ultimaF(id_cas) {
         const id_caso = id_cas;
         const resp = $.ajax({
@@ -74,34 +136,13 @@ $(document).ready(function() {
                 return response;
             }
         }).responseText;
-
+        console.log(resp);
         if (resp == false) {
-
-            const resp2 = $.ajax({
-                type: "POST",
-                url: '../php/cita/cita-list-agen.php',
-                data: { id_caso },
-                global: false,
-                async: false,
-                success: function(response) {
-                    return response;
-                }
-            }).responseText;
-            if (resp2 != false) {
-                const dat = JSON.parse(resp2);
-                var h_cita = dat.hora.slice(0, -3);
-                const datos = {
-                    ok: false,
-                    msg: `Tiene cita agendada para el ${dat.fecha} a las ${h_cita}h`
-                };
-                return datos;
-            } else {
-                const datos = {
-                    ok: true,
-                    msg: `El paciente no cuenta con citas`
-                };
-                return datos;
-            }
+            const datos = {
+                ok: false,
+                msg: "No hay fechas"
+            };
+            return datos;
         } else {
             const datos = {
                 ok: true,
@@ -143,28 +184,47 @@ $(document).ready(function() {
                             const apellido = caso.apellidos_medi;
                             const nom_ape = caso.sufijo + " " + nombre + " " + apellido;
                             const ult_fecha = ultimaF(id_caso);
-                            console.log(ult_fecha);
+                            const ult_agenda = ultimaA(id_caso);
+                            const ult_resultado = ultimaR(id_caso);
+                           // console.log(ult_fecha);
+                            console.log(ult_agenda);
                             let detalle;
-                            if ((caso.descripcion == null) || caso.descripcion == "") {
+                            if ((caso.motivo_con == null) || caso.motivo_con == "") {
                                 detalle = "N/A";
                             } else {
-                                detalle = caso.descripcion;
+                                detalle = caso.motivo_con;
                             }
 
-                            if (ult_fecha.ok == false) {
+                            if (ult_agenda.ok == false) {
                                 template += `
                                         <tr class="bg-blue" casoID="${caso.id_caso}">
                                             <td class="pt-3" hidden>${caso.id_caso}</td>
                                             <td class="pt-3">${nom_ape}</td>
                                             <td class="pt-3">${detalle}</td>
                                             <td class="pt-3">${ult_fecha.msg}</td>
-                                            <td class="pt-3"></td>
+                                            <td class="pt-3">${ult_agenda.msg}</td>
                                         </tr>
                                         <tr id="spacing-row">
                                             <td></td>
                                         </tr>
                                     `;
-                            } else {
+                            } else if (ult_resultado.ok == false) 
+                            {
+                                template += `
+                                        <tr class="bg-blue" casoID="${caso.id_caso}">
+                                            <td class="pt-3" hidden>${caso.id_caso}</td>
+                                            <td class="pt-3">${nom_ape}</td>
+                                            <td class="pt-3">${detalle}</td>
+                                            <td class="pt-3">${ult_fecha.msg}</td>
+                                            <td class="pt-3">${ult_resultado.msg}</td>
+                                        </tr>
+                                        <tr id="spacing-row">
+                                            <td></td>
+                                        </tr>
+                                    `;
+                            }
+                            else
+                                {
                                 template += `
                                     <tr class="bg-blue" casoID="${caso.id_caso}">
                                         <td class="pt-3" hidden>${caso.id_caso}</td>

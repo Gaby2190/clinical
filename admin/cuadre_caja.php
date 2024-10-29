@@ -88,12 +88,6 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                                                 <th scope="col"></th>
                                                                                 <th scope="col"></th>
                                                                                 <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"><I>MÉTODOS DE PAGO</I></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
                                                                             </tr> 
                                                                             <tr>
                                                                                 <th scope="col">Fecha</th>
@@ -101,18 +95,11 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                                                 <th scope="col">Paciente</th>
                                                                                 <th scope="col">Médico</th>
                                                                                 <th scope="col">Consulta</th>
-                                                                                <th scope="col">Tarifa</th>
+                                                                                <th scope="col">TOTAL COBRADO</th>
                                                                                 <th scope="col">Descuento</th>
                                                                                 <th scope="col">Adicionales</th>
                                                                                 <th scope="col">Otros</th>
-                                                                                <th scope="col">TOTAL COBRADO</th>
-                                                                                <th scope="col"><I>Efectivo</I></th>
-                                                                                <th scope="col"><I>Transferencia bancaria</I></th>
-                                                                                <th scope="col"><I>Tarjeta de crédito</I></th>
-                                                                                <th scope="col"><I>Tarjeta de débito</I></th>
-                                                                                <th scope="col"><I>Cheque</I></th>
-                                                                                <th scope="col"><I>Letra de cambio</I></th>
-                                                                                
+                                                                                <th scope="col">Forma de Pago</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="cci_body"></tbody>
@@ -133,45 +120,15 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                                     <table class="table table-striped" id="cce_table">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col">EGRESOS</th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"><I>MÉTODOS DE PAGO</I></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
-                                                                                <th scope="col"></th>
+                                                                                <th colspan="6" style="text-align: center">EGRESOS</th>
                                                                             </tr> 
                                                                             <tr>
                                                                                 <th scope="col">Fecha</th>
                                                                                 <th scope="col">Hora</th>
                                                                                 <th scope="col">Comprobante de pago</th>
                                                                                 <th scope="col">Médico</th>
-                                                                                <th scope="col">Tarifa</th>
-                                                                                <th scope="col">Descuento</th>
-                                                                                <th scope="col">Adicionales</th>
-                                                                                <th scope="col">Comisión banco</th>
-                                                                                <th scope="col">Retención clínica</th>
-                                                                                <th scope="col">Comisión consulta</th>
-                                                                                <th scope="col">Comisión adicionales</th>
                                                                                 <th scope="col">TOTAL PAGADO</th>
-                                                                                <th scope="col"><I>Efectivo</I></th>
-                                                                                <th scope="col"><I>Transferencia bancaria</I></th>
-                                                                                <th scope="col"><I>Tarjeta de crédito</I></th>
-                                                                                <th scope="col"><I>Tarjeta de débito</I></th>
-                                                                                <th scope="col"><I>Cheque</I></th>
-                                                                                <th scope="col"><I>Letra de cambio</I></th>
-                                                                                
+                                                                                <th scope="col">Descuento</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="cce_body"></tbody>

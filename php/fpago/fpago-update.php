@@ -4,8 +4,9 @@ include_once '../../dbconnection.php';
 
     $id = $_POST['id'];
     $nombre = mb_strtoupper($_POST['nombre']);
+    $aseguradora = $_POST['aseguradora'];
 
-    $query = "UPDATE f_pago SET nombre = '$nombre' WHERE id = '$id'";
+    $query = "UPDATE f_pago SET nombre = '$nombre', aseguradora = '$aseguradora' WHERE id = '$id'";
     
     $result = mysqli_query($conn, $query);
 

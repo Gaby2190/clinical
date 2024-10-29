@@ -50,6 +50,8 @@ $(document).ready(function() {
                                 const nom_apem = cita.sufijo + " " + nombrem + " " + apellidom;
                                 //========Unión de un nombre y un apellido PACIENTE ===================
                                 const nom_apep = cita.nombres_paci1 + " " + cita.nombres_paci2 + " " + cita.apellidos_paci1 + " " + cita.apellidos_paci2;
+                                
+                                const seguro = cita.aseguradora;
                                 template += `
                                                 <tr class="bg-blue" citaID="${cita.id_cita}">
                                                     <td class="pt-3" hidden>${cita.id_cita}</td>
@@ -57,8 +59,14 @@ $(document).ready(function() {
                                                     <td class="pt-3">${hora}h</td>
                                                     <td class="pt-3">${nom_apep}</td>
                                                     <td class="pt-3">${nom_apem}</td>
-                                                    <td class="pt-3"><a href="atencion_paci.php?id_paciente=${cita.id_paciente}&id_cita=${cita.id_cita}"" style="color: #fff" class="btn btn-success btn-sm">Atender</a></td>
-                                                </tr>
+                                                    <td class="pt-3"><a href="atencion_paci.php?id_paciente=${cita.id_paciente}&id_cita=${cita.id_cita}"" style="color: #fff" class="btn btn-success btn-sm">Atender Con Formulario</a></td>
+                                                    `;
+                                if (seguro < 2)
+                                {
+                                    template += `<td class="pt-3"><a href="atencion_paci.php?id_paciente=${cita.id_paciente}&id_cita=${cita.id_cita}"" style="color: #fff" class="btn btn-warning btn-sm">Atender Sin Formulario</a></td>`;
+                                }
+                                 template += `             
+                                                    </tr>
                                                 <tr id="scitang-row">
                                                     <td></td>
                                                 </tr>

@@ -9,4 +9,8 @@ $(document).ready(function () {
         e.preventDefault();
         window.open(`../php/reportes/reporte_hcu_002.php?id_caso=${id_caso}`, '_blank');
     });
+    $("#desc_ev").click(function (e) { 
+        e.preventDefault();
+        window.open(`../php/reportes/reporte_hcu_005.php?id_caso=${id_caso}`, '_blank');
+    });
 }); 

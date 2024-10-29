@@ -78,7 +78,13 @@ $(document).ready(function() {
                                 }
                             } 
                         }
-                        console.log(cita);
+                        if (cita.aseguradora>1)
+                        {
+                            console.log("Entro aseguradora");
+                            tarifa = 0;
+                            tipo_cita =  tipo_cita+" - "+cita.fp_nombre;
+                        }
+                        
                            
     
                         //========Separación de un nombre y un apellido MEDICO ===================
@@ -200,6 +206,7 @@ $(document).ready(function() {
                     const tipo_cita = Number(cpagos[0].tipo_cita);
                     const tarifa = Number(cpagos[0].tarifa);
                     const tarifa_control = Number(cpagos[0].tarifa_control);
+                    const id_seguro = Number(cpagos[0].aseguradora);
                     var tarifa_t = 0;
                     if(pago_ingreso == 1){
                         if (tipo_cita == 1) {
@@ -209,6 +216,10 @@ $(document).ready(function() {
                                 tarifa_t = tarifa_control;
                             }
                         }
+                    }
+                    if (id_seguro > 1)
+                    {
+                        tarifa_t = 0;
                     }
                     
                     cpagos.forEach(cp => {

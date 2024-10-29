@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 include_once '../../variables.php';
 
     $id_medico = $_POST['id_medico'];
-    $query = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.comision_c, me.pago_ingreso, me.comision_a, me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control
+    $query = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.comision_c, me.pago_ingreso, me.comision_a, me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control, fp.nombre, fp.aseguradora, am.valor
                 FROM cita AS ci
                 INNER JOIN caso AS ca
                     ON ci.id_caso = ca.id_caso
@@ -12,7 +12,13 @@ include_once '../../variables.php';
                     ON me.id_medico = ca.id_medico
                 INNER JOIN paciente AS pa
                     ON pa.id_paciente = ca.id_paciente
-                WHERE ci.id = '{$cita_cobrada}' AND ca.id_medico = '{$id_medico}' ORDER BY ci.id_cita ASC";
+                INNER JOIN cita_pago as cp
+                	ON ci.id_cita = cp.id_cita
+                INNER JOIN f_pago as fp
+                	ON fp.id = cp.id_f_pago
+                INNER JOIN asegu_med as am
+                	ON am.id_medico = ca.id_medico AND am.id_seguro = fp.aseguradora
+                WHERE ci.id = '{$cita_cobrada}' AND ca.id_medico = '{$id_medico}' ORDER BY ci.id_cita ASC LIMIT 1";
     $result = mysqli_query($conn, $query);
 
   if(!$result) {
@@ -43,7 +49,10 @@ include_once '../../variables.php';
           'nombres_paci1' => $row['nombres_paci1'],
           'apellidos_paci1' => $row['apellidos_paci1'],
           'nombres_paci2' => $row['nombres_paci2'],
-          'apellidos_paci2' => $row['apellidos_paci2']
+          'apellidos_paci2' => $row['apellidos_paci2'],
+          'nombre' => $row['nombre'],
+          'aseguradora' => $row['aseguradora'],
+          'valor' => $row['valor']
         );
         
     }

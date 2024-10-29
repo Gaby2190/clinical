@@ -37,7 +37,7 @@
         <!-- main content start -->
         <div class="main-content">
 
-        <!-- content -->
+         <!-- content -->
             <div class="container-fluid content-top-gap">
                 <div class="d-flex justify-content-center">
                     <div class="col-xl-12 col-md-12">
@@ -103,7 +103,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <!-- Button trigger modal -->
-        <a href="caso_create.php" class="btn btn-primary btn-style" >Mostrar</a>
+                                                    <a href="caso_create.php" class="btn btn-primary btn-style" >Mostrar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <!-- Button trigger modal -->
-        <a  href="cita_control.php" class="btn btn-primary btn-style">Mostrar</a>
+                                                    <a  href="cita_control.php" class="btn btn-primary btn-style">Mostrar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -125,7 +125,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <!-- Button trigger modal -->
-        <a href="cita_age_read.php" class="btn btn-primary btn-style">Mostrar</a>
+                                                    <a href="cita_age_read.php" class="btn btn-primary btn-style">Mostrar</a>
                                                 </div>
                                             </div>
                                         </div>

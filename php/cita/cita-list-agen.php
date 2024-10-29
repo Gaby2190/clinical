@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 include_once '../../variables.php';
 
     $id_caso = $_POST['id_caso'];
-    $query = "SELECT * FROM cita WHERE id_caso = '{$id_caso}' and id = '{$cita_agendada}' ORDER BY fecha DESC";
+    $query = "SELECT * FROM cita WHERE id_caso = '{$id_caso}' and id = '{$cita_agendada}' or id_caso = '{$id_caso}' and id = '{$cita_reagendada}' ORDER BY fecha DESC";
     $result = mysqli_query($conn, $query);
 
   if(!$result) {

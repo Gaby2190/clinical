@@ -169,15 +169,21 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                     </div>
 
                                     <div class="card-block">
-                                        <h6 class="p-b-5 b-b-default f-w-600 tit text-uppercase"><span style="color: red;">*</span>motivo de consulta</h6>
-                                        <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO, Se requiere el motivo por el cual el paciente acude a la cita)</label>
-                                        <br>
-                                        <label class="text-muted f-w-400">Ingrese máximo 2000 caracteres</label>
+                                       
+                                            <h6 class="p-b-5 b-b-default f-w-600 tit text-uppercase"><span style="color: red;">*</span>motivo de consulta</h6>
+                                            <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO, Se requiere el motivo por el cual el paciente acude a la cita)</label>
+                                            <br>
+                                            <label class="text-muted f-w-400">Ingrese máximo 2000 caracteres</label>
+
                                         <div class="row">
-                                            <div class="col-sm-12 my-2">
+                                            <div class="col-sm-10">
                                                 <textarea class="form-control" id="motivo_consulta" size="2000" maxlength="2000" rows="3"></textarea>
                                             </div>
+                                            <div class="col-sm-2 jutify-content-center">
+                                                <button class="btn btn-secondary rounded float-right my-4 mx-1" id="btn_hmc"><span class="fa fa-file-text-o"></span> Historial</button>
+                                            </div>
                                         </div>
+                                       
                                     </div> 
 
                                     <div class="card-block">
@@ -186,8 +192,11 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         <br>
                                         <label class="text-muted f-w-400">Ingrese máximo 2000 caracteres</label>
                                         <div class="row">
-                                            <div class="col-sm-12 my-2">
+                                            <div class="col-sm-10">
                                                 <textarea class="form-control" id="problema_actual" size="2000" maxlength="2000" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-sm-2 jutify-content-center">
+                                                <button class="btn btn-secondary rounded float-right my-4 mx-1" id="btn_hpa"><span class="fa fa-file-text-o"></span> Historial</button>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +259,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
-                                            <p class="f-w-400" style="font-size: 20px;">Genital</p>
+                                            <p class="f-w-400" style="font-size: 20px;">Genito - Urinario</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
                                                 <button id='cp_genital' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_genital' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
@@ -261,7 +270,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
-                                            <p class="f-w-400" style="font-size: 20px;">Urinario</p>
+                                            <p class="f-w-400" style="font-size: 20px;">Piel y Anexos</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
                                                 <button id='cp_urinario' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_urinario' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
@@ -477,17 +486,21 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                 <table class=" table table-striped" id="signosva_table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col">Fecha de medición</th>
-                                                            <th scope="col">Temp. (°C)</th>
+                                                            <th scope="col">Fecha</th>
+                                                            <th scope="col">Temp.</th>
                                                             <th scope="col">Presión arterial</th>
-                                                            <th scope="col">Pulso (min)</th>
-                                                            <th scope="col">Frec. Respiratoria</th> 
-                                                            <th scope="col">Frec. Cardiaca</th>
+                                                            <th scope="col">Pulso </th>
+                                                            <th scope="col">Frec. Resp.</th> 
+                                                            <th scope="col">Frec. Card.</th>
                                                             <th scope="col">Sat. O2</th>
-                                                            <th scope="col">Peso (kg)</th>
-                                                            <th scope="col">Talla (cm)</th>
-                                                            <th scope="col">P.C. (cm)</th>
+                                                            <th scope="col">Peso</th>
+                                                            <th scope="col">Talla</th>
+                                                            <th scope="col">P.Cefal</th>
                                                             <th scope="col">IMC</th>
+                                                            <th scope="col">P. Abdomi.</th>
+                                                            <th scope="col">Hemo. Cap</th>
+                                                            <th scope="col">Gulc. Cap</th>
+                                                            <th scope="col">Pulsio ximetria</th>
                                                             <th scope="col">Opciones</th>
                                                         </tr>
                                                     </thead>
@@ -512,6 +525,17 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Piel - Faneras</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_piel' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_piel' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="piel" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
                                             <p class="f-w-400" style="font-size: 20px;">Cabeza</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
@@ -523,6 +547,61 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Ojos</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_ojos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_ojos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="ojos" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Oídos</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_oidos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_oidos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="oidos" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Nariz</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_nariz' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_nariz' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="nariz" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Boca</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_boca' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_boca' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="boca" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Orofaringe</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_orofaringe' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_orofaringe' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="orofaringe" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
                                             <p class="f-w-400" style="font-size: 20px;">Cuello</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
@@ -530,6 +609,17 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                             </div>
                                             <div class="col-sm-6 my-2">
                                                 <input type="text" class="form-control" id="cuello_i" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Axilas - Mamas</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_axilas' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_axilas' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="axilas" size="255" maxlength="255" disabled>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -556,24 +646,157 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
-                                            <p class="f-w-400" style="font-size: 20px;">Pelvis</p>
+                                            <p class="f-w-400" style="font-size: 20px;">Columna Vertebral</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
-                                                <button id='cp_pelvis' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_pelvis' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                                <button id='cp_columna' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_columna' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                             </div>
                                             <div class="col-sm-6 my-2">
-                                                <input type="text" class="form-control" id="pelvis_i" size="255" maxlength="255" disabled>
+                                                <input type="text" class="form-control" id="columna" size="255" maxlength="255" disabled>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-4 my-2">
-                                            <p class="f-w-400" style="font-size: 20px;">Extremidades</p>
+                                            <p class="f-w-400" style="font-size: 20px;">Ingle - Periné</p>
                                             </div>
                                             <div class="col-sm-2 my-2">
-                                                <button id='cp_extremidades' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_extremidades' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                                <button id='cp_ingle' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_ingle' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                             </div>
                                             <div class="col-sm-6 my-2">
-                                                <input type="text" class="form-control" id="extremidades_i" size="255" maxlength="255" disabled>
+                                                <input type="text" class="form-control" id="ingle" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Miembros Superiores</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_msup' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_msup' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="msup" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Miembros Inferiores</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_minf' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_minf' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="minf" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <!-------------------------- SISTEMICO ---------------------->
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Organos de los sentidos</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_sorganos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sorganos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="sorganos" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Respiratorio</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_srespiratorio' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_srespiratorio' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="srespiratorio" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Cardio - Vascular</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_scardio' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_scardio' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="scardio" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Digestivo</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_sdigestivo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sdigestivo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="sdigestivo" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Genital</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_sgenital' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sgenital' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="sgenital" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Urinario</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_surinario' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_surinario' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="surinario" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Músculo - Esquelético</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_smusculo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_smusculo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="smusculo" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Endócrino</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_sendocrino' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sendocrino' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="sendocrino" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Hemo - Linfático</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_shemo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_shemo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="shemo" size="255" maxlength="255" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 my-2">
+                                            <p class="f-w-400" style="font-size: 20px;">Neurológico</p>
+                                            </div>
+                                            <div class="col-sm-2 my-2">
+                                                <button id='cp_sneurologico' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sneurologico' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
+                                            </div>
+                                            <div class="col-sm-6 my-2">
+                                                <input type="text" class="form-control" id="sneurologico" size="255" maxlength="255" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -664,8 +887,11 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         <br>
                                         <label class="text-muted f-w-400">Ingrese máximo 10000 caracteres</label>
                                         <div class="row">
-                                            <div class="col-sm-12 my-2">
+                                            <div class="col-sm-10">
                                                 <textarea class="form-control" id="evolucion" size="10000" maxlength="10000" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-sm-2 jutify-content-center">
+                                                <button class="btn btn-secondary rounded float-right my-4 mx-1" id="btn_hevo"><span class="fa fa-file-text-o"></span> Historial</button>
                                             </div>
                                         </div>
                                     </div>
@@ -977,8 +1203,8 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                 </div>
 
                 <!--Modal: Signos vitales y antropometria-->
-                <div class="modal fade" id="modalSignosVA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" style="max-width: 700px!important;" role="document">
+                <div class="modal fade bd-example-modal-lg" id="modalSignosVA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 98%!important;" role="document">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <h4 class="modal-title w-100 font-weight-bold">Añadir signos vitales y antropometría</h4>
@@ -988,13 +1214,13 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                             </div>
                             <div class="modal-body mx-3">
                                 <div class="row  my-2">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Temperatura °C:</p>
                                             <input step="any" type="number" class="text-muted f-w-400 form-control" id="temperatura" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Presión arterial:</p>
                                             <div class="row">
@@ -1008,50 +1234,75 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                              
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row  my-2">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Pulso (min):</p>
                                             <input type="text" class="text-muted f-w-400 form-control" id="pulso" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Frecuencia respiratoria:</p>
                                             <input type="text" class="text-muted f-w-400 form-control" id="frecuencia_r" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row  my-2">
-                                    <div class="col-sm-6">
+                                <div class="row  my-2">                                   
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Frecuencia cardiaca:</p>
                                             <input type="text" class="text-muted f-w-400 form-control" id="frecuencia_c" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Saturación de oxígeno:</p>
                                             <input step="any" type="number" class="text-muted f-w-400 form-control" id="sat_o" required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row  my-2">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Peso (kg):</p>
                                             <input step="any" type="number" class="text-muted f-w-400 form-control" id="peso" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Talla (cm):</p>
                                             <input type="text" class="text-muted f-w-400 form-control" id="talla" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row  my-2">
+                                    
+                                    <div class="col-sm-3">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12">Perímetro Abdominal (cm):</p>
+                                            <input type="text" class="text-muted f-w-400 form-control" id="p_abdominal" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12">Hemoglobina capilar (g/dl)</p>
+                                            <input step="any" type="number" class="text-muted f-w-400 form-control" id="hemo_cap" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12">Glucosa capilar (mg/dl)</p>
+                                            <input step="any" type="number" class="text-muted f-w-400 form-control" id="gluc_cap" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12">Pulsioximetria (%)</p>
+                                            <input step="any" type="number" class="text-muted f-w-400 form-control" id="pulsio" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                     <div class="col-sm-12">
-                                    <h5 class="modal-title w-100">Datos Pediatricos</h5>
+                                        <h5 class="modal-title w-100">Datos Pediatricos</h5>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="input-group my-3">
@@ -1060,9 +1311,10 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                     </div>
                                 </div>                             
-                            </div>
+                            
                             <div class="modal-footer d-flex justify-content-center">
                                 <button class="btn btn-primary" id="add_signosva" data-dismiss="modal">Añadir</button>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -1201,6 +1453,93 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                     </div>
                 </div>
 
+                <!--Modal: Historial Motivo Consulta-->
+                <div class="modal fade" id="modalhpa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px!important;" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Historial - Problema Actual</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                            <div class="col-12 table-responsive">
+                                    <table class=" table table-striped" id="hpa_table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Descripci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hpa_body"></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!--Modal: Historial Motivo Consulta-->
+            <div class="modal fade" id="modalhevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px!important;" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Historial - Evoluci&oacute;n</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                            <div class="col-12 table-responsive">
+                                    <table class=" table table-striped" id="hevo_table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Descripci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hevo_body"></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal: Historial Motivo Consulta-->
+                 <div class="modal fade" id="modalhmc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px!important;" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Historial - Motivo Consulta</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+
+                            <div class="col-12 table-responsive">
+                                    <table class=" table table-striped" id="hmc_table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Descripci&oacute;n</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hmc_body"></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!--Modal: Historial SVA-->
                 <div class="modal fade" id="modalSva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" style="max-width: 1300px!important;" role="document">
@@ -1227,6 +1566,10 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                 <th scope="col">Peso (kg)</th>
                                                 <th scope="col">Talla (cm)</th>
                                                 <th scope="col">IMC</th>
+                                                <th scope="col">P. Abdomi.</th>
+                                                <th scope="col">Hemo. Cap</th>
+                                                <th scope="col">Gulc. Cap</th>
+                                                <th scope="col">Pulsio ximetria</th>
                                             </tr>
                                         </thead>
                                         <tbody id="hsva_body"></tbody>

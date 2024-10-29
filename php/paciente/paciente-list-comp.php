@@ -5,7 +5,7 @@ if(isset($_POST['id_paciente'])) {
 
   $id_paciente = $_POST['id_paciente'];
  
-  $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad , san.nombre as sangre  
+ $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad , san.nombre as sangre  
             from paciente as pa 
             INNER JOIN genero as gen 
                 ON pa.gen_id = gen.id

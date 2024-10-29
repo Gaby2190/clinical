@@ -1,5 +1,5 @@
 <?php
-    include_once '../../dbconnection.php'; Llama la conexion a la base de datos
+    include_once '../../dbconnection.php'; //Llama la conexion a la base de datos
    // Recibe los parametros por el POST
     $fecha_registro = $_POST['fecha_registro'];
     $id_medico = $_POST['id_medico'];
@@ -12,6 +12,7 @@
    
    //Ejecuta la consulta SQL a la base de datos
    $result = mysqli_query($conn, $query);
+   $id = mysqli_insert_id($conn);
 
    //Valida si la consulta fue fallida
     if (!$result) {
@@ -20,5 +21,5 @@
     }
 
     //En caso exitoso devuele el mensaje caso registrado exitosamente
-    echo "Caso registrado exitosamente";  
+    echo $id;
 ?>

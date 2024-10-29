@@ -30,6 +30,14 @@
                 </ul>
             </li>
             <li class="menu-list">
+                <a href="#"><i class="fa fa-shield"></i>
+                <span class="text-uppercase">Seguros<i class="lnr lnr-chevron-right"></i></span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="segu_create.php">Registrar</a> </li>
+                    <li><a href="segu_read.php">Actualizar</a> </li>
+                </ul>
+            </li>
+            <li class="menu-list">
                 <a href="#"><i class="fa fa-credit-card"></i>
                 <span class="text-uppercase">Forma de pago<i class="lnr lnr-chevron-right"></i></span></a>
                 <ul class="sub-menu-list">
@@ -52,6 +60,7 @@
                 <a href="#"><i class="fa fa-calendar"></i>
                 <span class="text-uppercase">Citas<i class="lnr lnr-chevron-right"></i></span></a>
                 <ul class="sub-menu-list">
+                    <li><a href="cita_age_doc.php">Agenda Médicos</a> </li>
                     <li><a href="cita_age_read.php">Citas agendadas</a> </li>
                     <li><a href="historial_citas.php">Historial de citas</a> </li>
                 </ul>

@@ -204,7 +204,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
             data: {txt_search},
             success: function (response) {
                 let pacientes = JSON.parse(response);
-                console.log(pacientes);
+                //console.log(pacientes);
                 let template = '';
                 pacientes.forEach(paci => {
                     //========Unión de un nombre y un apellido ===================
@@ -317,7 +317,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
             url: '../php/paciente/paciente-add-usr.php',
             data: postUsr,
             success: function(response) {
-                console.log(response);
+             //   console.log(response);
                 $.ajax({
                     type: "POST",
                     url: '../php/paciente/paciente-list-usr.php',
@@ -342,7 +342,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                             data: postData,
                             url: "../php/paciente/paciente-add-c.php",
                             success: function(response) {
-                                console.log(response);
+                               // console.log(response);
                                 $.ajax({
                                     type: "POST",
                                     url: '../php/paciente/paciente-list-dat.php',
@@ -368,7 +368,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                             url: '../php/caso/caso-add.php',
                                             data: postCaso,
                                             success: function(response) {
-                                                console.log(response);// se imprime en la consola el mesnaje devuelto
+                                                //console.log(response);// se imprime en la consola el mesnaje devuelto
                                                 const datosCaso = {
                                                     fecha_registro: f_actual,
                                                     id_paciente: id_paciente,
@@ -415,7 +415,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
             url: '../php/caso/caso-add.php',
             data: postCaso,
             success: function(response) {
-                console.log(response);
+                //console.log(response);
                 const datosCaso = {
                     fecha_registro: f_actual,
                     id_paciente: id_paciente,

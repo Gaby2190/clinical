@@ -302,6 +302,13 @@ $(document).ready(function() {
                             }
                         }
 
+                        if(cita.aseguradora > 1)
+                            {
+                                tipo_cita = tipo_cita+" - "+cita.nombre;
+                                tarifa = cita.valor;
+                            }
+
+
                         const hora = cita.hora.slice(0, -3);
 
                         //========Unión de un nombre y un apellido PACIENTE ===================
@@ -315,6 +322,10 @@ $(document).ready(function() {
                         }else{
                             c_c = com_c;                            
                         }
+                        if(cita.aseguradora > 1)
+                            {
+                                c_c = 0;
+                            }
                         const c_a = (((Number(adicionales))*com_a)/100);
 
                         array_citas.push({

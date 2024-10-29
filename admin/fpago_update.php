@@ -49,6 +49,11 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                 <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Forma de pago:</p>
                                                 <input type="text" class="text-muted f-w-400 form-control" id="fpago" size="100" maxlength="100" required>
                                             </div>
+                                            <div class="col-sm-6 my-2">
+                                                <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Aseguradora</p>
+                                                <select id="select_segu" class="custom-select" required>                                                   
+                                                </select>
+                                            </div>
                                             <div class="col-sm-12 my-2 justify-content-right">
                                                 <button class="btn btn-primary rounded float-right" id="btn_datos"><span class="fa fa-pencil-square-o"></span> ACTUALIZAR</button>
                                             </div>

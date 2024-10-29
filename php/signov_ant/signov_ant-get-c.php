@@ -19,6 +19,7 @@ include_once '../../dbconnection.php';
     while($row = mysqli_fetch_array($result)) {
         $json[] = array(
         'fecha' => $row['fecha'],
+        'hora' => $row['hora'],
         'temperatura' => $row['temperatura'],
         'presion_as' => $row['presion_as'],
         'presion_ad' => $row['presion_ad'],
@@ -28,7 +29,11 @@ include_once '../../dbconnection.php';
         'sat_o' => $row['sat_o'],
         'peso' => $row['peso'],
         'talla' => $row['talla'],
-        'perimetro' => $row['perimetro_c']
+        'perimetro' => $row['perimetro_c'],
+        'p_abdominal' => $row['p_abdominal'],
+        'h_capilar' => $row['h_capilar'],
+        'g_capilar' => $row['g_capilar'],
+        'pulsio' => $row['pulsio'],
         );
     }
   

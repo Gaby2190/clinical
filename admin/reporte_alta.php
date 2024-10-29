@@ -45,7 +45,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                         <div class="row my-2">
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-5 my-2">
-                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Reporte SNS-MSP / HCU-form.001 / 2008:</p>
+                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Reporte SNS-MSP / HCU-form.001 / 2021:</p>
                                             </div>
                                             <div class="col-sm-3 my-2">
                                                 <button class="btn btn-primary" id="desc_pa"><span class="fa fa-download"></span> DESCARGAR</button>
@@ -55,10 +55,20 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                         <div class="row my-2">
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-5 my-2">
-                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Reporte SNS-MSP / HCU-form.002 / 2008:</p>
+                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Reporte SNS-MSP / HCU-form.002 / 2021:</p>
                                             </div>
                                             <div class="col-sm-3 my-2">
                                                 <button class="btn btn-primary" id="desc_ce"><span class="fa fa-download"></span> DESCARGAR</button>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                        </div>
+                                        <div class="row my-2">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5 my-2">
+                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Reporte SNS-MSP / HCU-form.005 / 2021:</p>
+                                            </div>
+                                            <div class="col-sm-3 my-2">
+                                                <button class="btn btn-primary" id="desc_ev"><span class="fa fa-download"></span> DESCARGAR</button>
                                             </div>
                                             <div class="col-sm-2"></div>
                                         </div>

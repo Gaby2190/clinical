@@ -58,105 +58,206 @@ $(document).ready(function() {
             //hora
             const hora = d.getHours() + ':' + d.getMinutes();
             const id_usuario = $("#id_usuario").val();
+            const id_f_pago = $('#select_fpago').val();
+            var id_seguro=1;
             $.ajax({
                 type: "POST",
-                url: "../php/tarifa-med.php",
-                data: {id_cita},
+                url: "../php/cita/seguro.php",
+                data: {id_f_pago},
                 success: function (response) {
-                    const tipo_cita = Number(JSON.parse(response).tipo_cita);
-                    const pago_ingreso = Number(JSON.parse(response).pago_ingreso);
-                     const id_f_pago = $('#select_fpago').val();
-                    console.log(pago_ingreso);
-                    console.log(tipo_cita);
-                    if (pago_ingreso == 1) {
-                        console.log(tipo_cita);
-                        if (tipo_cita == 1) {
-                            const tarifa = JSON.parse(response).tarifa;
-                            console.log(tarifa);
-                            const postPago = {
-                                id_f_pago: id_f_pago,
-                                descripcion: "PAGO DE TARIFA DE CITA NORMAL",
-                                costo: tarifa,
-                                id_cita: id_cita,
-                                fecha_p: f_actual,
-                                hora_p: hora,
-                                id_usuario
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "../php/cita_pago/cita_pago-add.php",
-                                data: postPago,
-                                success: function(response) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/cita/cita-espera.php",
-                                        data: { id_cita },
-                                        success: function(response) {
-                                           document.getElementById('btn_espera_ing').disabled = true;
-                                          
-                                            $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                            $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                            $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                            $('#modalPush').modal("show");
-                                            window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                            
-                                            
-                                            
-                                        }
-                                    });
-                                }
-                            });
-                        }else{
-                            console.log("control");
-                            const tarifa_control = JSON.parse(response).tarifa_control;
-                            const postPago = {
-                                id_f_pago: id_f_pago,
-                                descripcion: "PAGO DE TARIFA DE CITA DE CONTROL",
-                                costo: tarifa_control,
-                                id_cita: id_cita,
-                                fecha_p: f_actual,
-                                hora_p: hora,
-                                id_usuario
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "../php/cita_pago/cita_pago-add.php",
-                                data: postPago,
-                                success: function(response) {
-                                    console.log(response);
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/cita/cita-espera.php",
-                                        data: { id_cita },
-                                        success: function(response) {
-                                            document.getElementById('btn_espera_ing').disabled = true;
-                                            $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                            $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                            $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                            $('#modalPush').modal("show");
-                                            window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }else{ 
+                    id_seguro = JSON.parse(response).aseguradora;
+                    console.log(id_seguro);
+                    if (id_seguro>1)
+                    { //----------- Forma de pago es aseguradora -------------------
+                        console.log("entro por aseguradora");
                         $.ajax({
                             type: "POST",
-                            url: "../php/cita/cita-espera.php",
-                            data: { id_cita },
-                            success: function(response) {
-                                $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                $('#modalPush').modal("show");
-                                window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                            url: "../php/tarifa-med.php",
+                            data: {id_cita},
+                            success: function (response) {
+                                const tipo_cita = Number(JSON.parse(response).tipo_cita);
+                                
+                                if (tipo_cita == 1) {
+                                    const tarifa = 0.00;
+                                    const postPago = {
+                                        id_f_pago: id_f_pago,
+                                        descripcion: "PAGO DE TARIFA DE CITA NORMAL",
+                                        costo: tarifa,
+                                        id_cita: id_cita,
+                                        fecha_p: f_actual,
+                                        hora_p: hora,
+                                        id_usuario
+                                    };
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../php/cita_pago/cita_pago-add.php",
+                                        data: postPago,
+                                        success: function(response) {
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "../php/cita/cita-espera.php",
+                                                data: { id_cita },
+                                                success: function(response) {
+                                                    document.getElementById('btn_espera_ing').disabled = true;
+                                                    
+                                                    $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                                    $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                                    $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                                    $('#modalPush').modal("show");
+                                                    window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                                    
+                                                    
+                                                    
+                                                }
+                                            });
+                                        }
+                                    });
+                                }else{
+                                    console.log("control");
+                                    const tarifa_control = 0.00;
+                                    const postPago = {
+                                        id_f_pago: id_f_pago,
+                                        descripcion: "PAGO DE TARIFA DE CITA DE CONTROL",
+                                        costo: tarifa_control,
+                                        id_cita: id_cita,
+                                        fecha_p: f_actual,
+                                        hora_p: hora,
+                                        id_usuario
+                                    };
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../php/cita_pago/cita_pago-add.php",
+                                        data: postPago,
+                                        success: function(response) {
+                                            console.log(response);
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "../php/cita/cita-espera.php",
+                                                data: { id_cita },
+                                                success: function(response) {
+                                                    document.getElementById('btn_espera_ing').disabled = true;
+                                                    $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                                    $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                                    $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                                    $('#modalPush').modal("show");
+                                                    window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                                
                             }
                         });
                     }
-                    
+                    else
+                    {//------------ Forma de pago es sin seguro ---------------------
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/tarifa-med.php",
+                            data: {id_cita},
+                            success: function (response) {
+                                const tipo_cita = Number(JSON.parse(response).tipo_cita);
+                                const pago_ingreso = Number(JSON.parse(response).pago_ingreso);
+                                 
+                                console.log(pago_ingreso);
+                                console.log(tipo_cita);
+                                if (pago_ingreso == 1) {
+                                    console.log(tipo_cita);
+                                    if (tipo_cita == 1) {
+                                        const tarifa = JSON.parse(response).tarifa;
+                                        console.log(tarifa);
+                                        const postPago = {
+                                            id_f_pago: id_f_pago,
+                                            descripcion: "PAGO DE TARIFA DE CITA NORMAL",
+                                            costo: tarifa,
+                                            id_cita: id_cita,
+                                            fecha_p: f_actual,
+                                            hora_p: hora,
+                                            id_usuario
+                                        };
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../php/cita_pago/cita_pago-add.php",
+                                            data: postPago,
+                                            success: function(response) {
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "../php/cita/cita-espera.php",
+                                                    data: { id_cita },
+                                                    success: function(response) {
+                                                       document.getElementById('btn_espera_ing').disabled = true;
+                                                      
+                                                        $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                                        $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                                        $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                                        $('#modalPush').modal("show");
+                                                        window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }else{
+                                        console.log("control");
+                                        const tarifa_control = JSON.parse(response).tarifa_control;
+                                        const postPago = {
+                                            id_f_pago: id_f_pago,
+                                            descripcion: "PAGO DE TARIFA DE CITA DE CONTROL",
+                                            costo: tarifa_control,
+                                            id_cita: id_cita,
+                                            fecha_p: f_actual,
+                                            hora_p: hora,
+                                            id_usuario
+                                        };
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../php/cita_pago/cita_pago-add.php",
+                                            data: postPago,
+                                            success: function(response) {
+                                                console.log(response);
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "../php/cita/cita-espera.php",
+                                                    data: { id_cita },
+                                                    success: function(response) {
+                                                        document.getElementById('btn_espera_ing').disabled = true;
+                                                        $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                                        $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                                        $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                                        $('#modalPush').modal("show");
+                                                        window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                }else{ 
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../php/cita/cita-espera.php",
+                                        data: { id_cita },
+                                        success: function(response) {
+                                            $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                            $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                            $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                            $('#modalPush').modal("show");
+                                            window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                        }
+                                    });
+                                }
+                                
+                            }
+                        });
+                    }
                 }
             });
+
+
+
+            
         });
     });
 

@@ -90,7 +90,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                                                     <th scope="col">Hora</th>
                                                                                     <th scope="col">Paciente</th>
                                                                                     <th scope="col">Médico</th>
-                                                                                    <th scope="col">Opciones</th>
+                                                                                    <th colspan="2" style="text-align: center">Opciones</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="resultados_body"></tbody>

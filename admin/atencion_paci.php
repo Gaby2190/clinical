@@ -1000,7 +1000,21 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                             <input type="text" class="text-muted f-w-400 form-control" id="talla" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
                                         </div>
                                     </div>
-                                </div>                             
+                                </div>
+                                <div class="row  my-2">
+                                    <div class="col-sm-6">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Perímetro Obdominal (cm):</p>
+                                            <input step="any" type="number" class="text-muted f-w-400 form-control" id="p_abdominal" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group my-3">
+                                            <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Hemoglobina Capilar (g/dl):</p>
+                                            <input type="text" class="text-muted f-w-400 form-control" id="talla" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>
+                                        </div>
+                                    </div>
+                                </div>                            
                             </div>
                             <div class="modal-footer d-flex justify-content-center">
                                 <button class="btn btn-primary" id="add_signosva" data-dismiss="modal">Añadir</button>

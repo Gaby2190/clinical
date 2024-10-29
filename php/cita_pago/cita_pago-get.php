@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 
     $id_cita= $_POST['id_cita'];
 
-    $query = "SELECT cp.*, fp.nombre, me.tarifa, me.tarifa_control, me.pago_ingreso, ci.tipo_cita
+    $query = "SELECT cp.*, fp.nombre, me.tarifa, me.tarifa_control, me.pago_ingreso, ci.tipo_cita, fp.aseguradora
                 FROM cita_pago as cp
                 INNER JOIN f_pago as fp
                     ON cp.id_f_pago = fp.id
@@ -34,7 +34,8 @@ include_once '../../dbconnection.php';
         'tarifa' => $row['tarifa'],
         'tarifa_control' => $row['tarifa_control'],
         'pago_ingreso' => $row['pago_ingreso'],
-        'tipo_cita' => $row['tipo_cita']
+        'tipo_cita' => $row['tipo_cita'],
+        'aseguradora' => $row['aseguradora']
         );
     }
   

@@ -4,6 +4,7 @@ $(document).ready(function() {
     var estado;
     getMedico(); 
     cargarEspe();
+    cargarSegu();
 
     //Limitar caracteres de tarifa normal
     var tar = document.getElementById('tarifa');
@@ -34,7 +35,8 @@ $(document).ready(function() {
     });
 
     //==========Variable de antecedentes personales para tabla=========//
-    var esp = []; 
+    var esp = [];
+    var segu = []; 
 
     // Obtener Especialidades
     $.ajax({
@@ -53,6 +55,25 @@ $(document).ready(function() {
                 $('#select_especialidad').html(template);
         }
     });
+
+    // Obtener Seguro
+    $.ajax({
+        type: "POST",
+        async: false,
+        url: "../php/aseguradora/segu-get.php",
+        success: function (response) {
+            const aseguradoras = JSON.parse(response);
+                let template = '<option selected="selected"></option>';
+                aseguradoras.forEach(segu => {
+                    template += `
+                    <option value="${segu.id}">${segu.nombre}</option>
+                    `;
+                });
+
+                $('#select_aseguradoras').html(template);
+        }
+    });
+
 
     function getMedico() {
         $.post('../php/medico/medico-list.php', { id_medico }, (response) => {
@@ -100,16 +121,61 @@ $(document).ready(function() {
                 const especialidades = JSON.parse(response);
                 especialidades.forEach(especialidad => {
                     $("#especialidades_table>tbody").append(`<tr>
-                                                                <tdhidden></td>
-                                                                <td>${especialidad.nombre}</td>
-                                                                <td>${especialidad.universidad}</td>
-                                                                <td>${especialidad.pais}</td>
-                                                                <td></td>
-                                                            </tr>`);
+                        <tdhidden></td>
+                        <td>${especialidad.nombre}</td>
+                        <td>${especialidad.universidad}</td>
+                        <td>${especialidad.pais}</td>
+                        <td></td>
+                    </tr>`);
                 });
             } 
         });
     }
+
+    $('#valor_seguro').change(function(e) {
+        e.preventDefault();
+        valor = document.getElementById("valor_seguro").value;
+        id_segu = document.getElementById("valor_seguro").name;
+
+        const postAseguradora = {
+            id_segu: id_segu,
+            valor: valor,
+            id_medico: id_medico
+        };  
+        $.ajax({
+            type: "POST",
+            url: "../php/medico/aseguradora-update.php",
+            data: postAseguradora,
+            success: function (response) {
+                $('#texto_modal').html(response);
+                $('#modal_icon').attr("class", "fa fa-pencil-square fa-4x animated rotateIn mb-4");
+                $('#modalPush').modal("show");
+            }
+        });
+
+    });
+
+    function cargarSegu() {
+        $.ajax({
+            type: "POST",
+            url: "../php/medico/aseguradora.php",
+            async: false,
+            data: {id_medico},
+            success: function (response) {
+                const aseguradoras = JSON.parse(response);
+                aseguradoras.forEach(segu => {
+                    $("#seguros_table>tbody").append(`<tr>
+                        <td hidden>${segu.id_seguro}</td>
+                        <td>${segu.aseguradora}</td>
+                        <td><input type="number" class="form-control" id="valor_seguro" size="100" maxlength="3" value="${segu.valor}" name="${segu.id_seguro}"></td>
+                        <td></td>
+                    </tr>`);
+                });
+            } 
+        });
+    }
+
+  
 
     $('#add_espe').click(function(e) {
         e.preventDefault();
@@ -152,12 +218,57 @@ $(document).ready(function() {
         const universidad = un;
         const pais = pa;
         $("#especialidades_table>tbody").append(`<tr idE="${id_esp}" espeID="${especialidad}" univID="${universidad}" paisID="${pais}">
-                                                        <td id='id_es' hidden>${id_esp}</td>
-                                                        <td id='espe'>${especialidad}</td>
-                                                        <td id='univ'>${universidad}</td>
-                                                        <td id='upais'>${pais}</td>
-                                                        <td><button id='eliminar' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
-                                                    </tr>`);
+                <td id='id_es' hidden>${id_esp}</td>
+                <td id='espe'>${especialidad}</td>
+                <td id='univ'>${universidad}</td>
+                <td id='upais'>${pais}</td>
+                <td><button id='eliminar' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
+            </tr>`);
+    }
+
+    // ===============================   Añadir Aseguradora ========================
+    $('#add_segu').click(function(e) {
+        e.preventDefault();
+
+        if ($('#select_aseguradoras').val() == "") {
+            $('#texto_modal').html('Ingrese datos en los campos obligatorios');
+            $('#modal_icon').attr('style', "color: orange");
+            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+            $('#modalPush').modal("show");
+            $('#select_aseguradoras').val('');
+            $('#val_seguro').val('');
+        } else {
+
+            //==============================Añadir los datos a la tabla y al arreglo definido arriba===============//
+            const select = document.getElementById("select_aseguradoras");
+            const aseguradora = select.options[select.selectedIndex].text;
+
+            const dat = {
+                id_segu: $('#select_aseguradoras').val(),
+                asegu: aseguradora,
+                valor: $('#val_seguro').val()
+            };
+
+            segu.push(dat);
+
+            addSegu($('#select_aseguradoras').val(), aseguradora ,$('#val_seguro').val());
+            console.log(segu);
+            $('#select_aseguradoras').val('');
+            $('#val_seguro').val('');
+        }
+
+    });
+
+    function addSegu(id,as, val) {
+        const id_segu = id; 
+        const aseguradora = as;
+        const valor = val;
+        $("#seguros_table>tbody").append(`<tr idS="${id_segu}" asID="${aseguradora}" valor="${valor}">
+                <td id='id_segu' hidden >${id_segu}</td>
+                <td id='segu'>${aseguradora}</td>
+                <td id='val'>${valor}</td>
+                <td><button id='eliminar_segu' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
+            </tr>`);
     }
 
     ///======== Botón de eliminar especialidad=====/////
@@ -184,6 +295,34 @@ $(document).ready(function() {
 
 
     });
+
+
+
+    ///======== Botón de eliminar seguro=====/////
+    $(document).on('click', '#eliminar_segu', (e) => {
+        const element = $(this)[0].activeElement.parentElement.parentElement;
+        const id_s = $(element).attr('idS');
+        const aseguradora = $(element).attr('asID');
+        const valor = $(element).attr('valor');
+
+        const busqueda_segu = JSON.stringify({
+            id_segu: id_s,
+            asegu: aseguradora,
+            valor: valor
+        });
+        let indice = segu.findIndex(segu => JSON.stringify(segu) === busqueda_segu);
+        segu.splice(indice, 1);
+        
+        $("#seguros_body > tr").remove();
+        cargarSegu();
+        segu.forEach(seg => {
+            addSegu(seg.id_segu, seg.asegu ,seg.valor); 
+        });
+
+
+    });
+
+  
 
 
     //RESTABLECER CONTRASEñA
@@ -303,6 +442,7 @@ $(document).ready(function() {
                             pais: e.pais,
                             id_medico: id_medico
                         };
+                    
 
                         $.ajax({
                             type: "POST",
@@ -314,10 +454,28 @@ $(document).ready(function() {
                         });
                     });
                     esp = [];
+                    segu.forEach(s => {
+                        const postAseguradora = {
+                            id_segu: s.id_segu,
+                            valor: s.valor,
+                            id_medico: id_medico
+                        };
+                    
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/aseguradora/aseguradora.php",
+                            data: postAseguradora,
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        });
+                    });
+                    esp = [];
                     $('#texto_modal').html("Datos de médico modificados satisfactoriamente");
                     $('#modal_icon').attr("class", "fa fa-pencil-square fa-4x animated rotateIn mb-4");
                     $('#modalPush').modal("show");
-                    setTimeout(function() { window.location.href = "med_read.php"; }, 3000);
+                   // setTimeout(function() { window.location.href = "med_read.php"; }, 3000);
                     
                 }
             });

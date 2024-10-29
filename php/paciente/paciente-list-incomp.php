@@ -6,13 +6,16 @@ if(isset($_POST['id_paciente'])) {
 
   $id_paciente = $_POST['id_paciente'];
  
-  $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad 
-            from paciente as pa 
-            INNER JOIN genero as gen 
-                ON pa.gen_id = gen.id
-            INNER JOIN nacionalidad as nac  
-                ON pa.nac_id = nac.id
-            where id_paciente = '$id_paciente'";
+  $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad , san.nombre as sangre  
+  from paciente as pa 
+  INNER JOIN genero as gen 
+      ON pa.gen_id = gen.id
+  INNER JOIN nacionalidad as nac  
+      ON pa.nac_id = nac.id
+  INNER JOIN sangre as san 
+      ON pa.san_id = san.id
+  where id_paciente = '$id_paciente'";
+
   $result = mysqli_query($conn, $query);
 
   if(!$result) {
@@ -31,14 +34,14 @@ if(isset($_POST['id_paciente'])) {
           'fechan_paci' => $row['fechan_paci'],
           'telefono_paci' => $row['telefono_paci'],
           'celular_paci' => $row['celular_paci'],
-          //'correo_paci' => $row['correo_paci'],
-          //'direccion_paci' => $row['direccion_paci'],
+          'correo_paci' => $row['correo_paci'],
+          'direccion_paci' => $row['direccion_paci'],
           'imagen' => $row['imagen'],
           'contacto_nom' => $row['contacto_nom'],
           'contacto_ape' => $row['contacto_ape'],
           'contacto_par' => $row['contacto_par'],
           'contacto_num' => $row['contacto_num'],
-          //'sangre' => $row['sangre'],
+          'sangre' => $row['sangre'],
           'nacionalidad' => $row['nacionalidad'],
           'genero' => $row['genero'],
           'id_gen' => $row['id_gen'],

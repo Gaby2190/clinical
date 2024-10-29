@@ -8,7 +8,7 @@ include_once '../../dbconnection.php';
     $id_cita = $_POST['id_cita'];
 
 
-   $query = "INSERT into examen_fr(examen_fr,cp,descripcion,id_cita) 
+    $query = "INSERT into examen_fr(examen_fr,cp,descripcion,id_cita) 
             VALUES ('$examen_fr','$cp','$descripcion','$id_cita')";
     $result = mysqli_query($conn, $query);
 

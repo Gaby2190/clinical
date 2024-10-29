@@ -479,7 +479,7 @@ $(document).ready(function() {
                 if (actualizacion === 0){
                     $.ajax({
                         type: "POST",
-                        url: "../php/paciente/paciente-list-incomp.php",
+                        url: "../php/paciente/paciente-list-comp.php",
                         data: { id_paciente },
                         success: function(response) {
                             console.log(response);
@@ -565,11 +565,11 @@ $(document).ready(function() {
                             }
             
                             $("#nacionalidad_paci").html(paciente.nacionalidad);
-                            $("#sangre_paci").html("");
+                            $("#sangre_paci").html(paciente.sangre);
                             $('#telefono_paci').html(paciente.telefono_paci);
                             $('#celular_paci').html(paciente.celular_paci);
-                            $('#correo_paci').html("");
-                            $('#direccion_paci').html("");
+                            $('#correo_paci').html(paciente.correo_paci);
+                            $('#direccion_paci').html(paciente.direccion_paci);
                             $('#contacto_nom').html(paciente.contacto_nom);
                             $('#contacto_ape').html(paciente.contacto_ape);
                             $('#contacto_par').html(paciente.contacto_par);
@@ -2210,17 +2210,19 @@ $(document).ready(function() {
                             const datCaso = {
                                 motivo_con: $("#motivo_consulta").val(),
                                 problema_act: $("#problema_actual").val(),
-                                id_caso: id_caso
+                                id_cita: id_cita
                             };
     
+                           
                             $.ajax({
                                 type: "POST",
-                                url: "../php/caso/mc-pa-add.php",
+                                url: "../php/cita/mc-pa-add.php",
                                 data: datCaso,
                                 success: function (response) {
                                     console.log(response);
                                 }
                             });
+                            
                             
                             //Almacenar los signos vitales y antropometría
                             if (signosva.length > 0) {
@@ -2500,6 +2502,14 @@ $(document).ready(function() {
                             $.ajax({
                                 type: "POST",
                                 url: "../php/caso/mc-pa-add.php",
+                                data: datCaso,
+                                success: function (response) {
+                                    console.log(response);
+                                }
+                            });
+                            $.ajax({
+                                type: "POST",
+                                url: "../php/cita/mc-pa-add.php",
                                 data: datCaso,
                                 success: function (response) {
                                     console.log(response);

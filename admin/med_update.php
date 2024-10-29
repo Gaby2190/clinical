@@ -157,6 +157,26 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600 tit">Convenios Seguros</h6>
+                                    <div class="card-block">
+                                        <div class="row">
+                                            <div class="col-12 table-responsive">
+                                                <table class=" table table-striped" id="seguros_table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Aseguradora</th>
+                                                            <th scope="col">Valor</th>
+                                                            <th scope="col">Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="seguros_body"></tbody>
+                                                </table>
+                                                <a class="btn btn-secondary" data-toggle="modal" style="color: #fff" data-target="#modalSeguros"><span class="fa fa-plus"></span> Añadir</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12 my-4">
                                     <button class="btn btn-primary rounded float-right" id="btn_datos"><span class="fa fa-pencil-square-o"></span> ACTUALIZAR</button>
                                 </div>
@@ -236,7 +256,43 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                         </div>
                     </div>
 
-            </div>
+                </div>
+                 <!--Modal: Seguros-->
+                 <div class="modal fade" id="modalSeguros" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content"> 
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Añadir Seguro</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                                </div>
+                                <div class="modal-body mx-3">
+
+                                    <div class="input-group my-3">
+                                        <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Aseguradora:</p>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-graduation-cap prefix grey-text"></i></span>
+                                        </div>
+                                        <select class="custom-select" id="select_aseguradoras" required></select>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <p class="f-w-600 text-uppercase col-sm-12">Valor:</p>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-university prefix grey-text"></i></span>
+                                        </div>
+                                        <input type="text" id="val_seguro" class="form-control validate" size="100" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-primary" id="add_segu" data-dismiss="modal">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             <!-- //content -->
         </div>
         <!-- main content end-->

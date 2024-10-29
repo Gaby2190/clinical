@@ -17,7 +17,8 @@ if(isset($_POST['id'])) {
     while($row = mysqli_fetch_array($result)) {
         $json[] = array(
             'id' => $row['id'],
-            'nombre' => $row['nombre']
+            'nombre' => $row['nombre'],
+            'aseguradora' => $row['aseguradora']
         );
         
     }

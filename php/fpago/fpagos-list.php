@@ -2,7 +2,11 @@
 
 include_once '../../dbconnection.php';
 
-  $query = "SELECT * FROM f_pago ORDER BY id ASC";
+  $query = "SELECT f.*, a.nombre as aseguradora
+            FROM f_pago as f
+             INNER JOIN aseguradora as a
+                ON f.aseguradora = a.id
+            ORDER BY f.id ASC";
     
   $result = mysqli_query($conn, $query);
   if(!$result) {
@@ -13,7 +17,8 @@ include_once '../../dbconnection.php';
   while($row = mysqli_fetch_array($result)) {
     $json[] = array(
       'id' => $row['id'],
-      'nombre' => $row['nombre']
+      'nombre' => $row['nombre'],
+      'aseguradora' => $row['aseguradora']
     );
   }
   
