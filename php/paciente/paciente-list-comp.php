@@ -5,14 +5,13 @@ if(isset($_POST['id_paciente'])) {
 
   $id_paciente = $_POST['id_paciente'];
  
- $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad , san.nombre as sangre  
+ $query = "SELECT pa.*, gen.nombre as genero, gen.id as id_gen , nac.nombre as nacionalidad  
             from paciente as pa 
             INNER JOIN genero as gen 
                 ON pa.gen_id = gen.id
             INNER JOIN nacionalidad as nac  
                 ON pa.nac_id = nac.id
-            INNER JOIN sangre as san 
-                ON pa.san_id = san.id
+           
             where id_paciente = '$id_paciente'";
   $result = mysqli_query($conn, $query);
 

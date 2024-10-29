@@ -184,9 +184,8 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="card-block" id="ros_normal">
-                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">revisión actual de órganos y sistemas</h6>
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">revisión actual de órganos y sistemas</h6>
+                                    <div class="card-block" id="ros_normal">  
                                         <div class="row">
                                             <div class="col-sm-6 my-2"></div>
                                             <div class="col-sm-3 my-2">

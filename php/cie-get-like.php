@@ -3,7 +3,7 @@
 include_once '../dbconnection.php';
 
      $valor = strtr(trim($_POST['descripcion']), " ", "%");
-    $query = "SELECT * FROM diagnosticoscie10 where descripcion like '%$valor%'";
+     $query = "SELECT * FROM diagnosticoscie10 where descripcion like '%$valor%' limit 50";
     
     $result = mysqli_query($conn, $query);
     if(!$result) {

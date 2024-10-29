@@ -11,7 +11,8 @@ $nombres1=$_GET['nombres1'];
 $nombres2=$_GET['nombres2'];
 $apellidos1=$_GET['apellidos1'];
 $apellidos2=$_GET['apellidos2'];
-
+$fecha_cita=$_GET['fecha_cita'];
+$turno=$_GET['turno'];
 
 
 
@@ -61,6 +62,8 @@ $apellidos2=$_GET['apellidos2'];
                                                         <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Primer nombre:</p>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="id_paciente" value="<?php echo $id_paciente; ?>" required>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="id_medico" value="<?php echo $id_medico; ?>" required>
+                                                         <input type="hidden" class="text-muted f-w-400 form-control" id="fecha_cita" value="<?php echo $fecha_cita; ?>" required>
+                                                         <input type="hidden" class="text-muted f-w-400 form-control" id="turno" value="<?php echo $turno; ?>" required>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="id_especialidad" value="<?php echo $id_especialidad; ?>" required>
                                                         <input type="text" class="text-muted f-w-400 form-control" id="nombres_paci1"  value="<?php echo $nombres1; ?>" size="50" maxlength="50" required>
                                                     </div>
@@ -108,6 +111,34 @@ $apellidos2=$_GET['apellidos2'];
                                         </form>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal: mConfirmación de cita creacion-->
+                <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-notify modal-info modal-dialog-centered" role="document">
+
+                        <div class="modal-content text-center">
+
+                            <div class="modal-header d-flex justify-content-center">
+                                <p class="heading text-uppercas">Confirmación</p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <i class="" style="color: rgb(57, 160, 57)" id="modal_icon_c"></i>
+
+                                <p id="texto_modal_c"></p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="crear">Aceptar</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </div>

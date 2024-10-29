@@ -141,16 +141,34 @@ $(document).ready(function() {
                             });
                         }
                     }else{ 
+                        const postPago = {
+                            id_f_pago: id_f_pago,
+                            descripcion: "PAGO DE TARIFA DE CITA",
+                            costo: 0,
+                            id_cita: id_cita,
+                            fecha_p: f_actual,
+                            hora_p: hora,
+                            id_usuario
+                        };
                         $.ajax({
                             type: "POST",
-                            url: "../php/cita/cita-espera.php",
-                            data: { id_cita },
+                            url: "../php/cita_pago/cita_pago-add.php",
+                            data: postPago,
                             success: function(response) {
-                                $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                $('#modalPush').modal("show");
-                                window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                console.log(response);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../php/cita/cita-espera.php",
+                                    data: { id_cita },
+                                    success: function(response) {
+                                        document.getElementById('btn_espera_ing').disabled = true;
+                                        $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                                        $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                                        $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                                        $('#modalPush').modal("show");
+                                        window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                                    }
+                                });
                             }
                         });
                     }

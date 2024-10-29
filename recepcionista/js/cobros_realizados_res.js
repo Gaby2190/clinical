@@ -69,12 +69,8 @@ $(document).ready(function() {
         costo_fp = 0;
         $("#fp_body > tr").remove();
         $('#gen_reporte').attr('disabled', 'disabled');
-         
-            
-               $('#respuesta').html('<div class="d-flex align-items-center"><strong>Espere porfavor estamos buscando las coincidencias...           </strong><div class="spinner-border text-info ml-auto" role="status" aria-hidden="true"></div></div>');
+         $('#respuesta').html('<div class="d-flex align-items-center"><strong>Espere porfavor estamos buscando las coincidencias...           </strong><div class="spinner-border text-info ml-auto" role="status" aria-hidden="true"></div></div>');
                $('#div_table_hcitas').hide();
-              
-            
         listarcobros($("#select_medico").val());
       });
 
@@ -174,7 +170,7 @@ $(document).ready(function() {
             data: {id_medico},
             url: '../php/cita/cita-cobrada.php',
             success: function(response) {
-                 $("#respuesta").html('');
+                $("#respuesta").html('');
                 if (response == false) {
                     $('#texto_modal').html("No se encuentran citas cobradas");
                     $('#modal_icon').attr('style', "color: orange");
@@ -184,7 +180,6 @@ $(document).ready(function() {
                     $("#div_table_cobros").hide();
                     $('#div_f_pago').hide();
                 } else {
-                    
                     $("#div_table_cobros").show();
                     const citas = JSON.parse(response);
                     let template = '';
@@ -302,13 +297,6 @@ $(document).ready(function() {
                             }
                         }
 
-                        if(cita.aseguradora > 1)
-                            {
-                                tipo_cita = tipo_cita+" - "+cita.nombre;
-                                tarifa = cita.valor;
-                            }
-
-
                         const hora = cita.hora.slice(0, -3);
 
                         //========Unión de un nombre y un apellido PACIENTE ===================
@@ -322,10 +310,6 @@ $(document).ready(function() {
                         }else{
                             c_c = com_c;                            
                         }
-                        if(cita.aseguradora > 1)
-                            {
-                                c_c = 0;
-                            }
                         const c_a = (((Number(adicionales))*com_a)/100);
 
                         array_citas.push({

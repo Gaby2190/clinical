@@ -277,80 +277,61 @@ $(document).ready(function() {
                     const id_fpago = f_pago.id;
                     const nombre = f_pago.nombre;
                     const aseguradora = f_pago.aseguradora;
-                    template += `
-                                <tr class="bg-blue">`;
-                    var ingreso=0;        
-                    //==================== AÑADIRA TOTALES INGRESOS =======================
+                    
+                    //==================== AÑADIR TOTALES INGRESOS =======================
+                    var ingreso=0;
+                    var egreso=0;
                     $.ajax({
                         type: "POST", 
                         data: {fecha, id_usuario, id_fpago},
                         url: '../php/cuadre_caja/total_ingresos.php',
-                        success: function(response) {
-                            
-                            if (response == false) {
-                                ingreso=0;
-                                    template += `
-                                                    <td class="pt-3">${nombre}</td>
-                                                    <td class="pt-3">$0.00</td>                                    
-                                                `;
-                            } else { 
-                            
+                        success: function(response) {                   
                                 const t_ingresos = JSON.parse(response);
                                 
                                 t_ingresos.forEach(t_ingreso => {
-                                    ingreso=t_ingreso.total;
-                                    template += `
-                                                    <td class="pt-3">${t_ingreso.nombre}</td>
-                                                    <td class="pt-3">$${t_ingreso.total}</td>                                    
-                                                `;
-                                })
-                            
-                            }
-                        }
-                    });
-                    //======================= AÑADIR TOTALES EGRESOS ==================
-                    $.ajax({
-                        type: "POST", 
-                        data: {fecha, id_usuario, id_fpago},
-                        url: '../php/cuadre_caja/total_egresos.php',
-                        success: function(response) {
-                            var egreso=0;
-                                const t_egresos = JSON.parse(response);
-                                t_egresos.forEach(t_egreso => {
-                                    if ((t_egreso.nombre == null)||(t_egreso.total == null))
+                                    ingreso=t_ingreso.total;                                    
+                                    if(ingreso === null)
                                     {
-                                        console.log('2');
-                                        egreso=0;
-                                        template += `
-                                        <td class="pt-3">$${egreso}</td>
-                                    `;
-                                    
-                                    }
-                                    else
-                                    {
-                                        egreso=t_egreso.total;
-                                        template += `
-                                                    <td class="pt-3">$${t_egreso.total}</td>
-                                                `;
-                                    }
+                                        ingreso=0;                                        
+                                    }                                        
                                 })
-                                template += `
-                                                    <td class="pt-3">$${ingreso-egreso}</td>
-                                                </tr>
-                                                `;
-                                
-                            
-                            $('#ciet_body').html(template);
-                        }
-                    });
 
-                })
+                                //======================= AÑADIR TOTALES EGRESOS ==================
+                  
+                                $.ajax({
+                                    type: "POST", 
+                                    data: {fecha, id_usuario, id_fpago},
+                                    url: '../php/cuadre_caja/total_egresos.php',
+                                        success: function(response) {
+                                
+                                            const t_egresos = JSON.parse(response);
+                                            
+                                            t_egresos.forEach(t_egreso => {
+                                                egreso=t_egreso.total;
+                                                console.log("Egreso: "+nombre+" "+egreso);
+                                                
+                                                if (egreso === null)
+                                                {        
+                                                    egreso = 0;
+                                                }
+                                            
+                                                template += '<tr class="bg-blue">';
+                                                template += `<td class="pt-3">${nombre}</td><td class="pt-3">$${ingreso}</td>`;
+                                                template += `<td class="pt-3">$${egreso}</td>`;
+                                                template += `<td class="pt-3">$${ingreso-egreso}</td></tr>`;                        
+                                                console.log(template);
+                                                $('#ciet_body').html(template);
+
+                                            });
+                                        }                            
+                                });
+                        }
+                    });
+                    
+                });
+                
             }
-        })
-    
-        
-        
-        
+        });   
         
         $('#div_ciet_table').show();
         $('#div_btn_pdf').show();

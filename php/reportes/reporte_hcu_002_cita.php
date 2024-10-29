@@ -4,7 +4,24 @@ include_once '../../dbconnection.php';
 include_once '../../variables.php';
 
 date_default_timezone_set('America/Guayaquil'); 
-$id_caso = $_GET['id_caso'];
+$id_cita_consulta = $_GET['id_cita'];
+$id_caso = 0;
+
+$query = "SELECT id_caso from cita
+WHERE id_cita ='$id_cita_consulta'";
+
+$result = mysqli_query($conn, $query);
+if(!$result) {
+    die('Consulta fallida'. mysqli_error($conn));
+}
+
+while($row = mysqli_fetch_array($result)) {
+    $id_caso = $row['id_caso'];
+}
+
+
+
+
 
 function calcular_edad($fecha,$fecha_registro) {
     $fecha_nac = new DateTime(date('Y/m/d',strtotime($fecha))); 
@@ -13,7 +30,7 @@ function calcular_edad($fecha,$fecha_registro) {
     return $edad;
 }
 
-$hoja=1;
+$hoja=0;
 
 class PDF extends FPDF {
 // Cabecera de página
@@ -82,6 +99,9 @@ if(!$result) {
 }
 
 while($row = mysqli_fetch_array($result)) {
+    $hoja++;
+    if ($row['id_cita']==$id_cita_consulta) 
+{
     $tipo_cita = $row['tipo_cita'];
     $id_caso = $row['id_caso'];
     $motivo_con = $row['motivo_con'];
@@ -141,7 +161,7 @@ while($row = mysqli_fetch_array($result)) {
         $pdf->Cell(30,5,"CE-".$id_caso."-".$id_cita,1,0,'C');
         $pdf->Cell(10,5,$hoja,1,1,'C');
 
-        $hoja++;
+       
 
         $pdf->SetFont('Arial','B', 6);
         $pdf->Cell(40,5,utf8_decode('PRIMER APELLIDO'),1,0,'C',true);
@@ -1577,7 +1597,7 @@ while($row = mysqli_fetch_array($result)) {
         $pdf->Cell(40,15,utf8_decode($nautorizacion_medi),'LRTB',0,'C');
         $pdf->Cell(75,15,utf8_decode(''),'LRTB',0,'C');
         $pdf->Cell(75,15,utf8_decode(''),'LRTB',1,'C');
-       
+}     
 }
 $pdf->Output("reporte_hcu_002.pdf","I",true);
 ?>

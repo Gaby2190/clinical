@@ -39,16 +39,13 @@
             </li>
             <li class="menu-list">
                 <a href="#"><i class="fa fa-address-book"></i>
-                <span class="text-uppercase">Casos<i class="lnr lnr-chevron-right"></i></span></a>
+                <span class="text-uppercase">Agenda<i class="lnr lnr-chevron-right"></i></span></a>
                 <ul class="sub-menu-list">
+                    <li><a href="cita_age_doc.php">Agenda Médicos</a> </li>
+                    <!-- 
                     <li><a href="caso_create.php">Caso nuevo</a> </li>
                     <li><a href="cita_control.php">Cita de control</a> </li>
-                </ul>
-            </li>
-             <li class="menu-list">
-                <a href="#"><i class="fa fa-calendar"></i>
-                <span class="text-uppercase">Citas<i class="lnr lnr-chevron-right"></i></span></a>
-                <ul class="sub-menu-list">
+                    -->
                     <li><a href="cita_age_read.php">Citas agendadas</a> </li>
                     <li><a href="historial_citas.php">Historial de citas</a> </li>
                 </ul>

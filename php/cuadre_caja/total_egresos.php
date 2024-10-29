@@ -24,10 +24,10 @@ include_once '../../variables.php';
     $json = array();
     while($row = mysqli_fetch_array($result)) {
         $json[] = array(
+          
           'total' => $row['total'],
           'nombre' => $row['nombre']
-        );
-        
+        ); 
     }
 
     if (empty($json)) {

@@ -92,6 +92,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                 </ul>
                                             </div>
                                         </div>
+                                        <!--
                                         <div class="col-sm-4 pr-sm-2 statistics-grid">
                                             <div class="card card_border border-primary-top p-4">
                                                 <i class="fa fa-money"> </i>
@@ -112,6 +113,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                 </ul>
                                             </div>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </div>

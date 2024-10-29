@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 
   $id_caso = $_POST['id_caso'];
  
-  $query = "SELECT ca.*, p.nombres_paci1, p.apellidos_paci1, p.nombres_paci2, p.apellidos_paci2, p.correo_paci, p.celular_paci, me.sufijo, me.nombres_medi, me.apellidos_medi, me.nom_ape_medi
+  $query = "SELECT ca.*, p.nombres_paci1, p.apellidos_paci1, p.nombres_paci2, p.apellidos_paci2, p.correo_paci, p.celular_paci, p.cedula_paci, me.sufijo, me.nombres_medi, me.apellidos_medi, me.nom_ape_medi, me.cedula_medi, me.celular_medi
             FROM caso AS ca
             INNER JOIN paciente AS p
                 ON p.id_paciente = ca.id_paciente
@@ -35,7 +35,10 @@ include_once '../../dbconnection.php';
           'sufijo' => $row['sufijo'],
           'nombres_medi' => $row['nombres_medi'],
           'apellidos_medi' => $row['apellidos_medi'],
-          'nom_ape_medi' => $row['nom_ape_medi']
+          'nom_ape_medi' => $row['nom_ape_medi'],
+          'cedula_paci' => $row['cedula_paci'],
+          'cedula_medi' => $row['cedula_medi'],
+          'celular_medi' => $row['celular_medi']
         );
         
     }

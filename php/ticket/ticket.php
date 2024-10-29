@@ -42,7 +42,7 @@
                     <td><label id="t_cita"></label></td>
                 </tr>
                 <tr>
-                    <td><label id="lbl_cobrar"></label></td>
+                    <td><strong><label id="f_pago"></label></strong></td>
                 </tr>
             </tbody>
         </table>

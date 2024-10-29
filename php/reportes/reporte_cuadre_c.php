@@ -203,7 +203,7 @@ $query_e = "SELECT me_p.*, me.sufijo, me.nom_ape_medi ,fp.nombre
              	ON fp.id=me_p.id_f_pago
              INNER JOIN medico as me
              	ON me.id_medico = pa.id_medico
-             WHERE me_p.fecha_p = '{$fecha}' and pa.id_usuario = '{$id_usuario}' GROUP BY me_p.id_pago ORDER BY me_p.hora_p ASC";
+             WHERE me_p.fecha_p = '{$fecha}' and pa.id_usuario = '{$id_usuario}' ORDER BY me_p.id_pago  ASC";
 
 $result_e = mysqli_query($conn, $query_e);
 if(!$result_e) {
@@ -273,7 +273,7 @@ for ($i=0; $i < sizeof($fp); $i++) {
                     INNER JOIN paciente AS pa ON pa.id_paciente = ca.id_paciente 
                     INNER JOIN usuario as usu ON pa.id_usuario = usu.id_usuario
                     INNER JOIN f_pago AS fp ON fp.id = ci_pa.id_f_pago
-                WHERE ci_pa.fecha_p = '{$fecha}' and ci_pa.id_usuario = '{$id_usuario}' and fp.id='{$fp[$i]['id']}' GROUP BY fp.nombre ASC";
+                WHERE ci_pa.fecha_p = '{$fecha}' and ci_pa.id_usuario = '{$id_usuario}' and fp.id='{$fp[$i]['id']}' ORDER BY fp.nombre ASC";
 
         $result_ing = mysqli_query($conn, $query_ing);
         if(!$result_ing) {

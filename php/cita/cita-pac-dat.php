@@ -35,7 +35,8 @@ include_once '../../variables.php';
           'nombres_medi' => $row['nombres_medi'],
           'apellidos_medi' => $row['apellidos_medi'],
           'tarifa' => $row['tarifa'],
-          'tarifa_control' => $row['tarifa_control']
+          'tarifa_control' => $row['tarifa_control'],
+          'evolucion' => $row['evolucion']
         );
         
     }

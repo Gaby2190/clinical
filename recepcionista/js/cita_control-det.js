@@ -54,7 +54,7 @@ $(document).ready(function() {
                                         <td class="pt-3">${nom_ape}</td>
                                         <td class="pt-3">${detalle}</td>
                                         <td class="pt-3">${ult_fecha.msg}</td>
-                                        <td class="pt-3"><a href="cita_create.php?id_caso=${id_caso}&id=0" id='agendar_item'><span class="fa fa-calendar btn"></span>Agendar</a></td>
+                                        <td class="pt-3"><a href="#" id='agendar_item'><span class="fa fa-calendar btn"></span>Agendar</a></td>
                                     </tr>
                                     <tr id="spacing-row">
                                         <td></td>
@@ -225,7 +225,7 @@ $(document).ready(function() {
                                         <td class="pt-3">${nom_ape}</td>
                                         <td class="pt-3">${detalle}</td>
                                         <td class="pt-3">${ult_fecha.msg}</td>
-                                        <td class="pt-3"><a href="cita_create.php?id_caso=${id_caso}&id=0" id='agendar_item'><span class="fa fa-calendar btn"></span>Agendar</a></td>
+                                        <td class="pt-3"><a href="#" id='agendar_item'><span class="fa fa-calendar btn"></span>Agendar</a></td>
                                     </tr>
                                     <tr id="spacing-row">
                                         <td></td>
@@ -262,5 +262,129 @@ $(document).ready(function() {
                 $(this).show();
         });
     });
+    //OJO-------------------------
+    $(document).on('click', '#agendar_item', (e) => {
+        
+        e.preventDefault();
+        const elemento = $(this)[0].activeElement.parentElement.parentElement;
+        const hora = $("#turno").val();
+        const id_caso = $(elemento).attr('casoID');
+        const fecha = $("#fecha_cita").val();
+        const numeroDia = new Date(fecha).getDay();
+        const dias = [
+            'domingo',
+            'lunes',
+            'martes',
+            'miércoles',
+            'jueves',
+            'viernes',
+            'sábado',
+          ];
+        const nombreDia = dias[numeroDia+1];
+
+        const dataCita = {
+            fecha: fecha,
+            hora: hora,
+            tipo_cita: 0,
+            id_caso: id_caso
+        };
+        
+        $('#texto_modal_c').html(`Generar cita para el día ${nombreDia} (${fecha}) a las ${hora}h`);
+        $('#modal_icon_c').attr("class", "fa fa-calendar fa-4x animated rotateIn mb-4");
+        $('#modalConfirmacion').modal("show");
+
+        $('#crear').click(function(e) {
+            e.preventDefault();
+            $("#citas_body tr").remove();
+            $('#div_table').hide();
+            $.ajax({ 
+                type: "POST",
+                url: '../php/cita/cita-add.php',
+                data: dataCita,
+                success: function(response) {
+                    $('#texto_modal').html(response);
+                    $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                    $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/caso/caso-get.php",
+                        data: {id_caso},
+                        success: function (response) {
+                            const paci = JSON.parse(response);
+                            const datMail = {
+                                medico: paci.sufijo + " " + paci.nombres_medi + " " + paci.apellidos_medi,
+                                tipo_cita: 0,
+                                nom_ape: paci.nombres_paci1 + " " + paci.nombres_paci2 + " " + paci.apellidos_paci1 + " " + paci.apellidos_paci2,
+                                correo: paci.correo_paci,
+                                fecha: fecha,
+                                hora: hora
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: "../php/notificacion/mail/cita-mail.php",
+                                data: datMail,
+                                success: function (response) {
+                                    console.log(response);
+                                    var settings = {
+                                        "url": "https://api.massend.com/api/sms",
+                                        "method": "POST",
+                                        "timeout": 0,
+                                        "headers": {
+                                            "Content-Type": "application/json"
+                                        },
+                                        "data": JSON.stringify({
+                                            "user": "cesmed@massend.com",
+                                            "pass": "cesmed123",
+                                            "mensajeid": "44934",
+                                            "campana": "CLINICAL CESMED S.C.",
+                                            "telefono": "0986006073",
+                                            "dni": "0401234372",
+                                            "tipo": "1",
+                                            "ruta": "0",
+                                            "datos": "dato1,dato2,dato3"
+                                        }),
+                                        };
+                                        
+                                        $.ajax(settings).done(function (response) {
+                                        console.log(response);
+                                        });
+                                    
+                                        var settings = {
+                                            "url": "https://api.massend.com/api/sms",
+                                            "method": "POST",
+                                            "timeout": 0,
+                                            "headers": {
+                                                "Content-Type": "application/json"
+                                            },
+                                            "data": JSON.stringify({
+                                                "user": "cesmed@massend.com",
+                                                "pass": "cesmed123",
+                                                "mensajeid": "44937",
+                                                "campana": "CLINICAL CESMED S.C.",
+                                                "telefono": "0967011968",
+                                                "dni": "1003333604",
+                                                "tipo": "1",
+                                                "ruta": "0",
+                                                "datos": "Viviana Ruano,20/10/2024,18:00"
+                                            }),
+                                            };
+                                            
+                                            $.ajax(settings).done(function (response) {
+                                            console.log(response);
+                                            });
+                                }
+                            });
+                        }
+                    });
+                    //setTimeout(function() { window.location.href = "cita_age_doc.php"; }, 3000);
+                        
+                   
+                } 
+            });
+        });
+
+    });
+
 
 });

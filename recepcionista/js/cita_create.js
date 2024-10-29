@@ -308,9 +308,9 @@ $(document).ready(function() {
                         setTimeout(function() { window.location.href = "caso_create.php"; }, 3000);
                     }
                     if(Number(tipo_cita) == 0){
-                        setTimeout(function() { window.location.href = "cita_control.php"; }, 3000);
+                        setTimeout(function() { window.location.href = "cita_age_doc.php"; }, 3000);
                     }
-                }
+                } 
             });
         });
 

@@ -62,6 +62,16 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                             </div>
                                             <div class="col-sm-2"></div>
                                         </div>
+                                        <div class="row my-2">
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5 my-2">
+                                                <p class="m-b-10 f-w-600" style="font-size: 20px">Formulario MSP-002 :</p>
+                                            </div>
+                                            <div class="col-sm-3 my-2">
+                                                <button class="btn btn-primary" id="desc_certmed"><span class="fa fa-download"></span> DESCARGAR</button>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
