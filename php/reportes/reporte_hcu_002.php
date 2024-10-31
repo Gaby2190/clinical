@@ -535,8 +535,8 @@ while($row = mysqli_fetch_array($result)) {
 
         $desc_af = '';
         for ($i=0; $i < sizeof($antecedentes_f); $i++) {
-            if (($antecedentes_f[$i]['descripcion'] != null) || ($antecedentes_f[$i]['descripcion'] != '')) {
-            $desc_af = $desc_af.$antecedentes_f[$i]['nombre'].' en '.$antecedentes_f[$i]['parentesco'].' - '.$antecedentes_f[$i]['descripcion'].'. ';
+            if (($antecedentes_f[$i]['nombre'] != null) || ($antecedentes_f[$i]['nombre'] != '')) {
+             $desc_af = $desc_af.$antecedentes_f[$i]['nombre'].' en '.$antecedentes_f[$i]['parentesco'].' - '.$antecedentes_f[$i]['descripcion'].'. ';
             }
         }
 
@@ -1532,7 +1532,7 @@ while($row = mysqli_fetch_array($result)) {
 
 
 
-        $celdas = (235 - $pdf->GetY())/5;
+        $celdas = (225 - $pdf->GetY())/5;
         for ($i=0; $i < $celdas; $i++) { 
             $pdf->SetFillColor(238,238,238);
             $pdf->Cell(190,5,'',1,1,'C',true);

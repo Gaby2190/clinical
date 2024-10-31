@@ -1055,20 +1055,25 @@ $(document).ready(function() {
                             {
                                 imc=0;
                             }
-                            $("#signosva_table>tbody").append(`<tr>
-                                                            <td id='fe'>${sva.fecha}</td>
-                                                            <td id='te'>${sva.temperatura} °C</td>
-                                                            <td id='pa'>${sva.presion_as}/${sva.presion_ad}</td>
-                                                            <td id='pu'>${sva.pulso}</td>
-                                                            <td id='fr'>${sva.frecuencia_r}</td>
-                                                            <td id='fc'>${sva.frecuencia_c}</td>
-                                                            <td id='so'>${sva.sat_o}%</td>
-                                                            <td id='p'>${sva.peso}kg</td>
-                                                            <td id='t'>${sva.talla}cm</td>
-                                                             <td id='t'>${sva.perimetro}cm</td>
-                                                            <td id='imc' style="background-color: ${color}; color: ${c_txt}">${imc}</td>
-                                                            <td></td>
-                                                        </tr>`);
+                            $("#signosva_table>tbody").append(`<tr fe_sva="${fecha}" hor_sva="${hora}" te_sva="${temperatura}" pas_sva="${presion_as}" pad_sva="${presion_ad}" pu_sva="${pulso}" fr_sva="${frecuencia_r}" fc_sva="${frecuencia_c}" so_sva="${sat_o}" p_sva="${peso}" t_sva="${talla}" per_sva="${perimetro}" padb_sva="${p_abdominal}" hemoc_sva="${hemo_capilar}" glucc_sva="${gluc_capilar}" pulsio_sva="${pulsiometria}">
+                                <td id='fe'>${fecha} ${hora}</td>
+                                <td id='hr' class='d-none'>${hora}</td>
+                                <td id='te'>${temperatura} °C</td>
+                                <td id='pa'>${presion_as}/${presion_ad}</td>
+                                <td id='pu'>${pulso}</td>
+                                <td id='fr'>${frecuencia_r}</td>
+                                <td id='fc' >${frecuencia_c}</td>
+                                <td id='so'>${sat_o}%</td>
+                                <td id='p'>${peso}kg</td>
+                                <td id='t'>${talla}cm</td>
+                                <td id='per'>${perimetro}cm</td>
+                                <td id='imc' style="background-color: ${color}; color: ${c_txt}">${imc}</td>
+                                <td id='pabdo'>${p_abdominal}cm</td>
+                                <td id='hcap'>${hemo_capilar}g/dl</td>
+                                <td id='gcap'>${gluc_capilar}mg/dl</td>
+                                <td id='pulsio'>${pulsiometria}%</td>
+                                <td><button id='eliminar_sva' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
+                            </tr>`);
                         });
                     }
                 });
@@ -1782,7 +1787,7 @@ $(document).ready(function() {
                                 }
                             }
                         }
-
+//OJO
                         id_cita_tmp = r.id_cita;
                         array_recetas.push({
                             'id_plan_t': r.id_plan_t,
@@ -2499,7 +2504,7 @@ $(document).ready(function() {
                                 id_caso: id_caso
                             };
     
-                            $.ajax({
+                          /*  $.ajax({
                                 type: "POST",
                                 url: "../php/caso/mc-pa-add.php",
                                 data: datCaso,
@@ -2507,6 +2512,7 @@ $(document).ready(function() {
                                     console.log(response);
                                 }
                             });
+                            */
                             $.ajax({
                                 type: "POST",
                                 url: "../php/cita/mc-pa-add.php",

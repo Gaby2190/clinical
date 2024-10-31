@@ -806,12 +806,16 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div> 
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <p class="f-w-400 mb-3 mt-4" style="font-size: 18px;">Signos de Alarma (campo opcional) Ingrese solo en caso de ser necesario</p>
+                                                <br>
+                                                <h4 class="p-b-5 f-w-400 tit text-uppercase text-center">Signos de Alarma</h4>
+                                                <p class="f-w-400 mb-3 mt-4" style="font-size: 16px;"> (campo opcional) Ingrese solo en caso de ser necesario</p>
                                                 <label class="text-muted f-w-400">Ingrese máximo 700 caracteres</label>
                                                 <textarea class="form-control" id="signos_alarma" size="700" maxlength="700" rows="3"></textarea>
                                             </div>
                                             <div class="col-sm-6">
-                                                <p class="f-w-400 mb-3 mt-4" style="font-size: 18px;">Recomendaciones NO Farmacológicas (campo opcional) Ingrese solo en caso de ser necesario</p>
+                                            <br>
+                                                <h5 class="p-b-5 f-w-400 tit text-uppercase text-center">Recomendaciones NO Farmacológicas</h5>
+                                                <p class="f-w-400 mb-3 mt-4" style="font-size: 16px;">(campo opcional) Ingrese solo en caso de ser necesario</p>
                                                 <label class="text-muted f-w-400">Ingrese máximo 700 caracteres</label>
                                                 <textarea class="form-control" id="rec_no_far" size="700" maxlength="700" rows="3"></textarea>
                                             </div>

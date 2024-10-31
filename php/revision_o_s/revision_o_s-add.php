@@ -6,10 +6,13 @@ include_once '../../dbconnection.php';
     $cp = $_POST['cp'];
     $descripcion = mb_strtoupper($_POST['descripcion']);
     $id_cita = $_POST['id_cita'];
+    
+    $query = "DELETE FROM revision_o_s WHERE orga_sist = '$orga_sist' AND id_cita='$id_cita';";
+    $result = mysqli_query($conn, $query);
 
 
-   $query = "INSERT into revision_o_s(orga_sist,cp,descripcion,id_cita) 
-            VALUES ('$orga_sist','$cp','$descripcion','$id_cita')";
+    $query = "INSERT into revision_o_s(orga_sist,cp,descripcion,id_cita) 
+            VALUES ('$orga_sist','$cp','$descripcion','$id_cita');";
     $result = mysqli_query($conn, $query);
 
     if (!$result) {

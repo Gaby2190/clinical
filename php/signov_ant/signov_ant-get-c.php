@@ -3,12 +3,13 @@
 include_once '../../dbconnection.php';
 
     $id_caso = $_POST['id_caso'];
+    $id_cita = $_POST['id_cita'];
 
     $query = "SELECT sva.*, ci.id_cita, ci.id_caso 
               FROM signov_ant as sva 
               INNER JOIN cita as ci 
                 ON sva.id_cita = ci.id_cita 
-              WHERE ci.id_caso = '{$id_caso}' ORDER BY ci.fecha ASC";
+              WHERE ci.id_caso = '{$id_caso}'   AND ci.id_cita <> '{$id_cita}' ORDER BY ci.fecha ASC";
     
     $result = mysqli_query($conn, $query);
     if(!$result) {
@@ -33,7 +34,7 @@ include_once '../../dbconnection.php';
         'p_abdominal' => $row['p_abdominal'],
         'h_capilar' => $row['h_capilar'],
         'g_capilar' => $row['g_capilar'],
-        'pulsio' => $row['pulsio'],
+        'pulsio' => $row['pulsio']
         );
     }
   

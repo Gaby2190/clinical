@@ -55,7 +55,7 @@ $(document).ready(function() {
                                                 $("#organos_i").removeAttr('disabled');
                                                 $("#sp_organos").removeAttr('disabled');
                                                 $("#cp_organos").attr('disabled', 'disabled');
-                                                $("#organos_i").attr("placeholder", r.descripcion);
+                                                $("#organos_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#organos_i").attr('disabled', 'disabled');
@@ -68,7 +68,7 @@ $(document).ready(function() {
                                                 $("#respiratorio_i").removeAttr('disabled');
                                                 $("#sp_respiratorio").removeAttr('disabled');
                                                 $("#cp_respiratorio").attr('disabled', 'disabled');
-                                                $("#respiratorio_i").attr("placeholder", r.descripcion);
+                                                $("#respiratorio_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#respiratorio_i").attr('disabled', 'disabled');
@@ -81,7 +81,7 @@ $(document).ready(function() {
                                                 $("#cardiov_i").removeAttr('disabled');
                                                 $("#sp_cardiov").removeAttr('disabled');
                                                 $("#cp_cardiov").attr('disabled', 'disabled');
-                                                $("#cardiov_i").attr("placeholder", r.descripcion);
+                                                $("#cardiov_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#cardiov_i").attr('disabled', 'disabled');
@@ -94,7 +94,7 @@ $(document).ready(function() {
                                                 $("#digestivo_i").removeAttr('disabled');
                                                 $("#sp_digestivo").removeAttr('disabled');
                                                 $("#cp_digestivo").attr('disabled', 'disabled');
-                                                $("#digestivo_i").attr("placeholder", r.descripcion);
+                                                $("#digestivo_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#cardiov_i").attr('disabled', 'disabled');
@@ -108,7 +108,7 @@ $(document).ready(function() {
                                                 $("#genital_i").removeAttr('disabled');
                                                 $("#sp_genital").removeAttr('disabled');
                                                 $("#cp_genital").attr('disabled', 'disabled');
-                                                $("#genital_i").attr("placeholder", r.descripcion);
+                                                $("#genital_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#genital_i").attr('disabled', 'disabled');
@@ -122,7 +122,7 @@ $(document).ready(function() {
                                                 $("#urinario_i").removeAttr('disabled');
                                                 $("#sp_urinario").removeAttr('disabled');
                                                 $("#cp_urinario").attr('disabled', 'disabled');
-                                                $("#urinario_i").attr("placeholder", r.descripcion);
+                                                $("#urinario_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#urinario_i").attr('disabled', 'disabled');
@@ -135,7 +135,7 @@ $(document).ready(function() {
                                                 $("#musculoe_i").removeAttr('disabled');
                                                 $("#sp_musculoe").removeAttr('disabled');
                                                 $("#cp_musculoe").attr('disabled', 'disabled');
-                                                $("#musculoe_i").attr("placeholder", r.descripcion);
+                                                $("#musculoe_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#musculoe_i").attr('disabled', 'disabled');
@@ -149,7 +149,7 @@ $(document).ready(function() {
                                                 $("#endocrino_i").removeAttr('disabled');
                                                 $("#sp_endocrino").removeAttr('disabled');
                                                 $("#cp_endocrino").attr('disabled', 'disabled');
-                                                $("#endocrino_i").attr("placeholder", r.descripcion);
+                                                $("#endocrino_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#endocrino_i").attr('disabled', 'disabled');
@@ -163,7 +163,7 @@ $(document).ready(function() {
                                                 $("#hemol_i").removeAttr('disabled');
                                                 $("#sp_hemol").removeAttr('disabled');
                                                 $("#cp_hemol").attr('disabled', 'disabled');
-                                                $("#hemol_i").attr("placeholder", r.descripcion);
+                                                $("#hemol_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#hemol_i").attr('disabled', 'disabled');
@@ -177,7 +177,7 @@ $(document).ready(function() {
                                                 $("#nervioso_i").removeAttr('disabled');
                                                 $("#sp_nervioso").removeAttr('disabled');
                                                 $("#cp_nervioso").attr('disabled', 'disabled');
-                                                $("#nervioso_i").attr("placeholder", r.descripcion);
+                                                $("#nervioso_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#nervioso_i").attr('disabled', 'disabled');
@@ -206,7 +206,7 @@ $(document).ready(function() {
                                                 $("#cabeza_i").removeAttr('disabled');
                                                 $("#sp_cabeza").removeAttr('disabled');
                                                 $("#cp_cabeza").attr('disabled', 'disabled');
-                                                $("#cabeza_i").attr("placeholder", r.descripcion);
+                                                $("#cabeza_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#cabeza_i").attr('disabled', 'disabled');
@@ -219,7 +219,7 @@ $(document).ready(function() {
                                                 $("#cuello_i").removeAttr('disabled');
                                                 $("#sp_cuello").removeAttr('disabled');
                                                 $("#cp_cuello").attr('disabled', 'disabled');
-                                                $("#cuello_i").attr("placeholder", r.descripcion);
+                                                $("#cuello_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#cuello_i").attr('disabled', 'disabled');
@@ -232,7 +232,7 @@ $(document).ready(function() {
                                                 $("#torax_i").removeAttr('disabled');
                                                 $("#sp_torax").removeAttr('disabled');
                                                 $("#cp_torax").attr('disabled', 'disabled');
-                                                $("#torax_i").attr("placeholder", r.descripcion);
+                                                $("#torax_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#torax_i").attr('disabled', 'disabled');
@@ -245,7 +245,7 @@ $(document).ready(function() {
                                                 $("#abdomen_i").removeAttr('disabled');
                                                 $("#sp_abdomen").removeAttr('disabled');
                                                 $("#cp_abdomen").attr('disabled', 'disabled');
-                                                $("#abdomen_i").attr("placeholder", r.descripcion);
+                                                $("#abdomen_i").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#abdomen_i").attr('disabled', 'disabled');
@@ -258,7 +258,7 @@ $(document).ready(function() {
                                                 $("#piel").removeAttr('disabled');
                                                 $("#sp_piel").removeAttr('disabled');
                                                 $("#cp_piel").attr('disabled', 'disabled');
-                                                $("#piel").attr("placeholder", r.descripcion);
+                                                $("#piel").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#piel").attr('disabled', 'disabled');
@@ -271,7 +271,7 @@ $(document).ready(function() {
                                                 $("#ojos").removeAttr('disabled');
                                                 $("#sp_ojos").removeAttr('disabled');
                                                 $("#cp_ojos").attr('disabled', 'disabled');
-                                                $("#ojos").attr("placeholder", r.descripcion);
+                                                $("#ojos").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#ojos").attr('disabled', 'disabled');
@@ -284,7 +284,7 @@ $(document).ready(function() {
                                                 $("#oidos").removeAttr('disabled');
                                                 $("#sp_oidos").removeAttr('disabled');
                                                 $("#cp_oidos").attr('disabled', 'disabled');
-                                                $("#oidos").attr("placeholder", r.descripcion);
+                                                $("#oidos").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#oidos").attr('disabled', 'disabled');
@@ -297,7 +297,7 @@ $(document).ready(function() {
                                                 $("#nariz").removeAttr('disabled');
                                                 $("#sp_nariz").removeAttr('disabled');
                                                 $("#cp_nariz").attr('disabled', 'disabled');
-                                                $("#nariz").attr("placeholder", r.descripcion);
+                                                $("#nariz").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#nariz").attr('disabled', 'disabled');
@@ -310,7 +310,7 @@ $(document).ready(function() {
                                                 $("#boca").removeAttr('disabled');
                                                 $("#sp_boca").removeAttr('disabled');
                                                 $("#cp_boca").attr('disabled', 'disabled');
-                                                $("#boca").attr("placeholder", r.descripcion);
+                                                $("#boca").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#boca").attr('disabled', 'disabled');
@@ -323,7 +323,7 @@ $(document).ready(function() {
                                                 $("#orofaringe").removeAttr('disabled');
                                                 $("#sp_orofaringe").removeAttr('disabled');
                                                 $("#cp_orofaringe").attr('disabled', 'disabled');
-                                                $("#orofaringe").attr("placeholder", r.descripcion);
+                                                $("#orofaringe").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#orofaringe").attr('disabled', 'disabled');
@@ -336,7 +336,7 @@ $(document).ready(function() {
                                                 $("#axilas").removeAttr('disabled');
                                                 $("#sp_axilas").removeAttr('disabled');
                                                 $("#cp_axilas").attr('disabled', 'disabled');
-                                                $("#axilas").attr("placeholder", r.descripcion);
+                                                $("#axilas").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#axilas").attr('disabled', 'disabled');
@@ -349,7 +349,7 @@ $(document).ready(function() {
                                                 $("#columna").removeAttr('disabled');
                                                 $("#sp_columna").removeAttr('disabled');
                                                 $("#cp_columna").attr('disabled', 'disabled');
-                                                $("#columna").attr("placeholder", r.descripcion);
+                                                $("#columna").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#columna").attr('disabled', 'disabled');
@@ -363,7 +363,7 @@ $(document).ready(function() {
                                                 $("#ingle").removeAttr('disabled');
                                                 $("#sp_ingle").removeAttr('disabled');
                                                 $("#cp_ingle").attr('disabled', 'disabled');
-                                                $("#ingle").attr("placeholder", r.descripcion);
+                                                $("#ingle").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#ingle").attr('disabled', 'disabled');
@@ -376,7 +376,7 @@ $(document).ready(function() {
                                                 $("#msup").removeAttr('disabled');
                                                 $("#sp_msup").removeAttr('disabled');
                                                 $("#cp_msup").attr('disabled', 'disabled');
-                                                $("#msup").attr("placeholder", r.descripcion);
+                                                $("#msup").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#msup").attr('disabled', 'disabled');
@@ -389,7 +389,7 @@ $(document).ready(function() {
                                                 $("#minf").removeAttr('disabled');
                                                 $("#sp_minf").removeAttr('disabled');
                                                 $("#cp_minf").attr('disabled', 'disabled');
-                                                $("#minf").attr("placeholder", r.descripcion);
+                                                $("#minf").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#minf").attr('disabled', 'disabled');
@@ -402,7 +402,7 @@ $(document).ready(function() {
                                                 $("#sorganos").removeAttr('disabled');
                                                 $("#sp_sorganos").removeAttr('disabled');
                                                 $("#cp_sorganos").attr('disabled', 'disabled');
-                                                $("#sorganos").attr("placeholder", r.descripcion);
+                                                $("#sorganos").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#sorganos").attr('disabled', 'disabled');
@@ -415,7 +415,7 @@ $(document).ready(function() {
                                                 $("#srespiratorio").removeAttr('disabled');
                                                 $("#sp_srespiratorio").removeAttr('disabled');
                                                 $("#cp_srespiratorio").attr('disabled', 'disabled');
-                                                $("#srespiratorio").attr("placeholder", r.descripcion);
+                                                $("#srespiratorio").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#srespiratorio").attr('disabled', 'disabled');
@@ -428,7 +428,7 @@ $(document).ready(function() {
                                                 $("#scardio").removeAttr('disabled');
                                                 $("#sp_scardio").removeAttr('disabled');
                                                 $("#cp_scardio").attr('disabled', 'disabled');
-                                                $("#scardio").attr("placeholder", r.descripcion);
+                                                $("#scardio").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#scardio").attr('disabled', 'disabled');
@@ -441,7 +441,7 @@ $(document).ready(function() {
                                                 $("#sdigestivo").removeAttr('disabled');
                                                 $("#sp_sdigestivo").removeAttr('disabled');
                                                 $("#cp_sdigestivo").attr('disabled', 'disabled');
-                                                $("#sdigestivo").attr("placeholder", r.descripcion);
+                                                $("#sdigestivo").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#sdigestivo").attr('disabled', 'disabled');
@@ -454,7 +454,7 @@ $(document).ready(function() {
                                                 $("#sgenital").removeAttr('disabled');
                                                 $("#sp_sgenital").removeAttr('disabled');
                                                 $("#cp_sgenital").attr('disabled', 'disabled');
-                                                $("#sgenital").attr("placeholder", r.descripcion);
+                                                $("#sgenital").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#sgenital").attr('disabled', 'disabled');
@@ -467,7 +467,7 @@ $(document).ready(function() {
                                                 $("#surinario").removeAttr('disabled');
                                                 $("#sp_surinario").removeAttr('disabled');
                                                 $("#cp_surinario").attr('disabled', 'disabled');
-                                                $("#surinario").attr("placeholder", r.descripcion);
+                                                $("#surinario").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#surinario").attr('disabled', 'disabled');
@@ -480,7 +480,7 @@ $(document).ready(function() {
                                                 $("#smusculo").removeAttr('disabled');
                                                 $("#sp_smusculo").removeAttr('disabled');
                                                 $("#cp_smusculo").attr('disabled', 'disabled');
-                                                $("#smusculo").attr("placeholder", r.descripcion);
+                                                $("#smusculo").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#smusculo").attr('disabled', 'disabled');
@@ -493,7 +493,7 @@ $(document).ready(function() {
                                                 $("#sendocrino").removeAttr('disabled');
                                                 $("#sp_sendocrino").removeAttr('disabled');
                                                 $("#cp_sendocrino").attr('disabled', 'disabled');
-                                                $("#sendocrino").attr("placeholder", r.descripcion);
+                                                $("#sendocrino").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#sendocrino").attr('disabled', 'disabled');
@@ -506,7 +506,7 @@ $(document).ready(function() {
                                                 $("#shemo").removeAttr('disabled');
                                                 $("#sp_shemo").removeAttr('disabled');
                                                 $("#cp_shemo").attr('disabled', 'disabled');
-                                                $("#shemo").attr("placeholder", r.descripcion);
+                                                $("#shemo").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#shemo").attr('disabled', 'disabled');
@@ -519,7 +519,7 @@ $(document).ready(function() {
                                                 $("#sneurologico").removeAttr('disabled');
                                                 $("#sp_sneurologico").removeAttr('disabled');
                                                 $("#cp_sneurologico").attr('disabled', 'disabled');
-                                                $("#sneurologico").attr("placeholder", r.descripcion);
+                                                $("#sneurologico").val(r.descripcion);
                                             }
                                             if (r.cp == "0") {
                                                 $("#sneurologico").attr('disabled', 'disabled');
@@ -561,7 +561,7 @@ $(document).ready(function() {
           //  $("#problema_actual").attr('disabled', 'disabled');
             $("#problema_actual").val(problema_act);
         }
-        //ojo
+        
         if (evolucion == "" || evolucion == null) {
             $("#evolucion").removeAttr('disabled');
         }else{
@@ -1315,7 +1315,7 @@ $(document).ready(function() {
                     $.ajax({ 
                         type: "POST",
                         url: "../php/signov_ant/signov_ant-get-c.php",
-                        data: { id_caso },
+                        data: { id_caso, id_cita },
                         success: function(response) {
                             const signosv_ant = JSON.parse(response);
                             cont_sva += signosv_ant.length;
@@ -1365,6 +1365,55 @@ $(document).ready(function() {
         $("#modalSva").modal("show");
     });
 
+    cargarSvaPrevios();
+
+    function cargarSvaPrevios() { 
+        $.ajax({
+            type: "POST",
+            url: "../php/paciente/paciente-list-incomp.php",
+            async: false,
+            data: { id_paciente },
+            success: function(response) {
+                const paciente = JSON.parse(response);
+                const edad = Number(calcularEdad(paciente.fechan_paci).substr(0,2));
+                console.log(edad);
+                $.ajax({ 
+                    type: "POST",
+                    url: "../php/signov_ant/signov_ant-get.php",
+                    async: false,
+                    data: { id_cita },
+                    success: function(response) {
+                        const signosv_ant = JSON.parse(response);
+                        signosv_ant.forEach(sva => {
+                                addSignosVA(sva.fecha, sva.hora, sva.temperatura, sva.presion_as, sva.presion_ad, sva.pulso, sva.frecuencia_r, sva.frecuencia_c,sva.sat_o, sva.peso, sva.talla, sva.perimetro, sva.p_abdominal, sva.h_capilar, sva.g_capilar, sva.pulsio);
+                                //==============================Añadir los datos al arreglo definido arriba===============//
+                                const dat = {
+                                    fecha: sva.fecha,
+                                    hora: sva.hora,
+                                    temperatura: sva.temperatura,
+                                    presion_as: sva.presion_as,
+                                    presion_ad: sva.presion_ad,
+                                    pulso: sva.pulso,
+                                    frecuencia_r: sva.frecuencia_r,
+                                    frecuencia_c: sva.frecuencia_c,
+                                    sat_o: sva.sat_o,
+                                    peso: sva.peso,
+                                    talla: sva.talla,
+                                    perimetro: sva.perimetro,
+                                    p_abdominal: sva.p_abdominal,
+                                    hemo_cap: sva.h_capilar,
+                                    gluc_cap: sva.g_capilar,
+                                    pulsio: sva.pulsio
+                                };
+                                
+                                signosva.push(dat);
+                                console.log(signosva);
+                        });
+                    }
+                });
+            }
+        });
+    }
     //===========================================Función historial Motivo COnsulta a la tabla recibiendo datos=====================================//
    
     
@@ -1989,7 +2038,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "../php/plan_t/planes_t-get-caso.php",
-            data: {id_caso_g},
+            data: {id_caso_g, id_cita},
             async: false,
             success: function (response) {
                 console.log(response);
@@ -2046,6 +2095,33 @@ $(document).ready(function() {
                 }
             }
         });
+        $.ajax({
+            type: "POST",
+            url: "../php/plan_t/planes_t-get-cita.php",
+            data: {id_cita},
+            async: false,
+            success: function (response) {
+                console.log(response);
+                if (response != false) {
+                    const resp = JSON.parse(response);
+                    resp.forEach(r => {
+
+                        array_recetas.push({
+                            'id_plan_t': r.id_plan_t,
+                            'datos_m': r.datos_m,
+                            'via_a': r.via_a,
+                            'cantidad': r.cantidad,
+                            'indicaciones': r.indicaciones
+                        });
+                        
+                        addPT(r.datos_m, null, r.via_a, r.cantidad, r.indicaciones);
+                        
+                    })
+                }
+            }
+        });
+
+       
     }
 
     //Mostrar modal
@@ -2454,7 +2530,7 @@ $(document).ready(function() {
                             };
                             $.ajax({
                                 type: "POST",
-                                url: "../php/caso/mc-pa-add.php",
+                                url: "../php/cita/mc-pa-add.php",
                                 data: datCaso,
                                 success: function (response) {
                                     console.log(response);
@@ -3075,7 +3151,7 @@ $(document).ready(function() {
                                     setTimeout(function() { window.location.href = `reporte_cita.php?id_cita=${id_cita}`; }, 3000);
                                  }
                             });
-                            //OJO-EVOLUCION
+                            
                             
     
                             
@@ -3119,12 +3195,16 @@ $(document).ready(function() {
             }
         }).responseText).id_caso;
 
-        if ((($("#motivo_consulta").val() == "")&&(!$("#motivo_consulta").attr('disabled'))) || (($("#problema_actual").val() == "")&&(!$("#problema_actual").attr('disabled'))) || signosva.length == 0) {
+        if ((($("#motivo_consulta").val() == "")&&(!$("#motivo_consulta").attr('disabled'))) || (($("#problema_actual").val() == "")&&(!$("#problema_actual").attr('disabled'))) ) {
             $('#texto_modal').html('Ingrese los valores obligatorios: Motivo de Consulta, Enfermedad, Signos Vitales');
             $('#modal_icon').attr('style', "color: orange");
             $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
             $('#modalPush').modal("show");
         } else {
+            $('#texto_modal').html('Espere mientras guardamos los datos en borrador');
+            $('#modal_icon').attr('style', "color: orange");
+            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+            $('#modalPush').modal("show");
            //Guardar Antecedentes personales si existen
            if (antecedentes.length > 0) {
                antecedentes.forEach(a => {
@@ -3173,14 +3253,7 @@ $(document).ready(function() {
                id_caso: id_caso,
                id_cita: id_cita
            };
-           $.ajax({
-               type: "POST",
-               url: "../php/caso/mc-pa-add.php",
-               data: datCaso,
-               success: function (response) {
-                   console.log(response);
-               }
-           });
+           
            $.ajax({
                 type: "POST",
                 url: "../php/cita/mc-pa-add.php",
@@ -3661,43 +3734,28 @@ $(document).ready(function() {
               }
           });
       });
- 
-       //Verificar si la cita es CONTROL antes de Guardar
-       if (Number(tipo_cita_g) === 0) {
-        if ( $("#evolucion").val() == "") {
-            $('#texto_modal').html('Ingrese los valores obligatorios: Evolución');
-            $('#modal_icon').attr('style', "color: orange");
-            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
-            $('#modalPush').modal("show");
-        } else {
-             
                                                   
-                    const select = document.getElementById("select_contingencia");
-                    const contingencia = select.options[select.selectedIndex].text;
-                    //Guardar datos de la cita (Signos de alarma, Recomendaciones no farmacológicas, evolución, días reposo y t_contingencia)
-                    const datCita = {
-                        signos_a: $("#signos_alarma").val(),
-                        recomendaciones_nf: $("#rec_no_far").val(),
-                        evolucion: $("#evolucion").val(),
-                        t_contingencia: contingencia,
-                        dias_reposo: $("#dias_reposo").val(),
-                        id_cita: id_cita
-                    }; 
+        const select = document.getElementById("select_contingencia");
+        const contingencia = select.options[select.selectedIndex].text;
+        //Guardar datos de la cita (Signos de alarma, Recomendaciones no farmacológicas, evolución, días reposo y t_contingencia)
+        const datCita = {
+            signos_a: $("#signos_alarma").val(),
+            recomendaciones_nf: $("#rec_no_far").val(),
+            evolucion: $("#evolucion").val(),
+            t_contingencia: contingencia,
+            dias_reposo: $("#dias_reposo").val(),
+            id_cita: id_cita
+        }; 
 
-                    $.ajax({ 
-                        type: "POST",
-                        url: "../php/cita/sa-rnf-add.php",
-                        data: datCita,
-                        success: function (response) {
-                            console.log(response);
-                        }
-                    });
+        $.ajax({ 
+            type: "POST",
+            url: "../php/cita/sa-rnf-add.php",
+            data: datCita,
+            success: function (response) {
+                console.log(response);
+            }
+        });
                     
-                 }
-              
-        }
-     
-
            //Establecer la cita como resultado//
            $.ajax({
                type: "POST",
@@ -3705,82 +3763,17 @@ $(document).ready(function() {
                data: { id_cita },
                success: function(response) {
                    console.log(response);
+                    $('#modalPush').modal("hide");
+                    $('#texto_modal').html('Información guardada con exito.');
+                    $('#modal_icon').attr('style', "color: green");
+                    $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                   //setTimeout(function() { window.location.href = `sala_espera.php`; }, 3000);
                }
            });
            
- 
-           //Mostrar mensaje de Guardado de Datos
-           $('#texto_modal').html('Los datos de la cita se han guardado exitosamente como borrador');
-           $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
-           $('#modalPush').modal("show");
-           
+         
 
-           antecedentes = [];
-           antecedentesf = [];
-           signosva = [];
-           cont_sva = 0;
-           diagnosticos = [];
-           cont_diag = 0;
-           plan_t = [];
-           alergias = [];
-           adicionales = [];
-           //Verificar si la cita es CONTROL antes de Guardar
-        if (Number(tipo_cita_g) === 0) {
-            if ( $("#evolucion").val() == "") {
-                $('#texto_modal').html('Ingrese los valores obligatorios: Evolución');
-                $('#modal_icon').attr('style', "color: orange");
-                $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
-                $('#modalPush').modal("show");
-            } else {
-                 //Guardar datos del descuento
-                 $.ajax({
-                     type: "POST",
-                     url: "../php/cita/cita-pac-dat.php",
-                     data: { id_cita },
-                     success: function(response) {
-                         const tarifa = Number(JSON.parse(response).tarifa);
-                         const descuento = Number($("#descuento").val());
-    
-                         if (descuento > tarifa) {
-                             $('#texto_modal').html('El descuento no puede ser mayor que la tarifa');
-                             $('#modal_icon').attr('style', "color: orange");
-                             $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
-                             $('#modalPush').modal("show");
-                         } else {
-                                 
-                            const select = document.getElementById("select_contingencia");
-                            const contingencia = select.options[select.selectedIndex].text;
-                            //Guardar datos de la cita (Signos de alarma, Recomendaciones no farmacológicas, evolución, días reposo y t_contingencia)
-                            const datCita = {
-                                signos_a: $("#signos_alarma").val(),
-                                recomendaciones_nf: $("#rec_no_far").val(),
-                                evolucion: $("#evolucion").val(),
-                                t_contingencia: contingencia,
-                                dias_reposo: $("#dias_reposo").val(),
-                                id_cita: id_cita
-                            }; 
-    
-                            $.ajax({ 
-                                type: "POST",
-                                url: "../php/cita/sa-rnf-add.php",
-                                data: datCita,
-                                success: function (response) {
-                                    console.log(response);
-                                    setTimeout(function() { window.location.href = `reporte_cita.php?id_cita=${id_cita}`; }, 3000);
-                                }
-                            });
- 
-                         }
-                     }
-                 });      
-            }
-        } 
-        else
-        {
-         setTimeout(function() { window.location.href = `reporte_cita.php?id_cita=${id_cita}`; }, 3000);
-        }
-            
-        
         }
     });
 

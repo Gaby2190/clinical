@@ -1,14 +1,11 @@
 <?php
 include_once '../../dbconnection.php';
 
-    $id_caso = $_POST['id_caso_g'];
     $id_cita = $_POST['id_cita'];
 
-    $query = "SELECT pt.*, ci.fecha, ci.id_cita
+    $query = "SELECT pt.*
               FROM plan_t as pt
-              INNER JOIN cita as ci
-                ON pt.id_cita = ci.id_cita
-              WHERE ci.id_caso = '{$id_caso}' AND pt.id_cita <> '{$id_cita}' ORDER BY ci.fecha DESC";
+              WHERE pt.id_cita = '{$id_cita}'";
     $result = mysqli_query($conn, $query);
 
     if(!$result) {
@@ -19,7 +16,6 @@ include_once '../../dbconnection.php';
     while($row = mysqli_fetch_array($result)) {
         $json[] = array(
             'id_cita' => $row['id_cita'],
-            'fecha' => $row['fecha'],
             'id_plan_t' => $row['id_plan_t'],
             'datos_m' => $row['datos_m'],
             'via_a' => $row['via_a'],

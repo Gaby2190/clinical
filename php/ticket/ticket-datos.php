@@ -1,8 +1,8 @@
 <?php
-include_once '../dbconnection.php';
+include_once '../../dbconnection.php';
 $id_cita = $_POST['id_cita'];
 
-$query = "SELECT ci.*, ca.id_medico, me.sufijo, me.apellidos_medi , me.nombres_medi, me.nom_ape_medi, me.pago_ingreso, me.tarifa, me.tarifa_control, pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2, fp.nombre
+$query = "SELECT ci.*, ca.id_medico, me.sufijo, me.apellidos_medi , me.nombres_medi, me.nom_ape_medi, me.pago_ingreso, me.tarifa, me.tarifa_control, pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2
             FROM cita AS ci
             INNER JOIN caso AS ca
                 ON ci.id_caso = ca.id_caso
@@ -10,10 +10,6 @@ $query = "SELECT ci.*, ca.id_medico, me.sufijo, me.apellidos_medi , me.nombres_m
                 ON ca.id_medico = me.id_medico
             INNER JOIN paciente as pa
                 ON ca.id_paciente = pa.id_paciente
-            INNER JOIN cita_pago AS cp
-            	ON cp.id_cita = ci.id_cita
-            INNER JOIN f_pago AS fp
-            	ON fp.id = cp.id_f_pago
             WHERE ci.id_cita = '{$id_cita}'";
 
 
@@ -44,9 +40,7 @@ while($row = mysqli_fetch_array($result)) {
         'nombres_paci2' => $row['nombres_paci2'],
         'apellidos_paci2' => $row['apellidos_paci2'],
         'sufijo' => $row['sufijo'],
-        'nombre' => $row['nombre'],
         'nom_ape_medi' => $row['nom_ape_medi']
-        
     );
 }
 
