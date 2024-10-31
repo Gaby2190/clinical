@@ -568,6 +568,14 @@ $(document).ready(function() {
           //  $("#problema_actual").attr('disabled', 'disabled');
             $("#evolucion").val(evolucion);
         }
+        $("#signos_alarma").val(JSON.parse(response).signos_a);
+        $("#rec_no_far").val(JSON.parse(response).recomendaciones_nf);
+        $("#detalle_certificado").val(JSON.parse(response).detalle_certificado);
+        $("#semana_embarazo").val(JSON.parse(response).semana_embarazo);
+        $("#dias_reposo").val(JSON.parse(response).dias_reposo);
+        $("#descuento").val(JSON.parse(response).descuento);
+        
+       
     }
    });
  
@@ -2373,6 +2381,39 @@ $(document).ready(function() {
 
     });
     
+    cargarAdicionalesPrevios();
+
+    function cargarAdicionalesPrevios() {
+        $.ajax({
+            type: "POST",
+            url: "../php/adicional-read.php",
+            async: false,
+            data: { id_cita },
+            success: function(response) {
+                if (response != false) {
+                const res_adi = JSON.parse(response);
+                res_adi.forEach(adi => {
+                    let servicio="EXAMEN";
+                    if (adi.id==2)
+                    {
+                        servicio = "PROCEDIMIENTO";
+                    }
+                    const dat = {
+                        id_servicio: adi.id,
+                        servicio: servicio,
+                        descripcion: adi.descripcion,
+                        costo: adi.costo
+                    };
+                    console.log(dat);
+                    adicionales.push(dat);
+                    console.log(adicionales);
+                    addAdic(adi.id, servicio, adi.descripcion, adi.costo);
+                    
+                });
+                }
+            }
+        });
+    }
     //===========================================Función añadir plan de tratamiento a la tabla recibiendo datos=====================================//
     function addAdic(idS, tS, dAdd, cAdd) {
         const id_servicio = idS;
@@ -3103,6 +3144,7 @@ $(document).ready(function() {
                             });
     
                             //Añadir los exámenes o procemientos en base a la cita//
+                           
                             if (adicionales.length > 0) {
                                 adicionales.forEach(a => {
                                     const datAdic = {
@@ -3123,6 +3165,18 @@ $(document).ready(function() {
                                         }
                                     });
                                 });
+                            }
+
+                            if (adicionales.length == 0) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../php/adicional-delete.php",
+                                    data: {id_cita},
+                                    success: function(response) {
+                                        console.log(response);
+                                    }
+                                });
+                                
                             }
                             
                             //Guardar el detalle para el certificado médico
@@ -3734,6 +3788,78 @@ $(document).ready(function() {
               }
           });
       });
+
+      //Almacenar diagnóstico
+      diagnosticos.forEach(d => {
+        const datDiag = {
+            descripcion: d.diagnos,
+            pre_def: d.t_diagnostico,
+            id_cie: d.idCie,
+            diagnostico_esp: d.diagnostico_esp,
+            id_cita: id_cita
+        };
+        $.ajax({
+            type: "POST",
+            url: "../php/diagnostico/diagnostico-add.php",
+            data: datDiag,
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    });
+
+    //Almacenar alergias
+    if (alergias.length > 0) {
+        alergias.forEach(a => {
+            const datAler = {
+                fecha: a.fecha,
+                descripcion: a.descripcion,
+                id_medico: id_medico,
+                id_paciente: id_paciente
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../php/alergia/alergia-add.php",
+                data: datAler,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    }
+
+    //Almacenar plan de tratamiento
+    if (plan_t.length > 0) {
+        plan_t.forEach(p => {
+            const datPT = {
+                datos_m: p.d_medicamento,
+                via_a: p.via_a_txt,
+                cantidad: p.c_medicamento,
+                indicaciones: p.indicaciones,
+                id_cita: id_cita
+            };
+            console.log(datPT);
+
+            $.ajax({
+                type: "POST",
+                url: "../php/plan_t/plan_t-add.php",
+                data: datPT,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+        $.ajax({
+            type: "POST",
+            url: "../php/plan_t/plan_t-cod.php",
+            data: {id_cita,id_medico},
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
+
                                                   
         const select = document.getElementById("select_contingencia");
         const contingencia = select.options[select.selectedIndex].text;
@@ -3755,6 +3881,42 @@ $(document).ready(function() {
                 console.log(response);
             }
         });
+
+         //Añadir los exámenes o procemientos en base a la cita//
+      
+         if (adicionales.length > 0) {
+             adicionales.forEach(a => {
+                 const datAdic = {
+                     descripcion: a.descripcion,
+                     costo: a.costo,
+                     id_cita: id_cita,
+                     id: a.id_servicio
+
+                 };
+                 console.log(datAdic);
+
+                 $.ajax({
+                     type: "POST",
+                     url: "../php/adicional.php",
+                     data: datAdic,
+                     success: function(response) {
+                         console.log(response);
+                     }
+                 });
+             });
+         }
+
+         if (adicionales.length == 0) {
+             $.ajax({
+                 type: "POST",
+                 url: "../php/adicional-delete.php",
+                 data: {id_cita},
+                 success: function(response) {
+                     console.log(response);
+                 }
+             });
+             
+         }
                     
            //Establecer la cita como resultado//
            $.ajax({
@@ -3768,7 +3930,7 @@ $(document).ready(function() {
                     $('#modal_icon').attr('style', "color: green");
                     $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
                     $('#modalPush').modal("show");
-                   //setTimeout(function() { window.location.href = `sala_espera.php`; }, 3000);
+                   setTimeout(function() { window.location.href = `sala_espera.php`; }, 3000);
                }
            });
            

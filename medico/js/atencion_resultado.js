@@ -2063,6 +2063,30 @@ $(document).ready(function() {
         }
 
     });
+
+    cargarAdicionalesPrevios();
+
+    function cargarAdicionalesPrevios() {
+        $.ajax({
+            type: "POST",
+            url: "../php/adicional-read.php",
+            async: false,
+            data: { id_cita },
+            success: function(response) {
+                const adicionales = JSON.parse(response);
+                adicinales.forEach(adi => {
+                    
+
+                    $("#antecedentesf_table>tbody").append(`<tr>
+                                                                <td>${ante.nombre}</td>
+                                                                <td>${ante.parentesco}</td>
+                                                                <td>${desc}</td>
+                                                                <td></td>
+                                                            </tr>`);
+                });
+            }
+        });
+    }
     
     //===========================================Función añadir plan de tratamiento a la tabla recibiendo datos=====================================//
     function addAdic(idS, tS, dAdd, cAdd) {

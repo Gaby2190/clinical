@@ -20,7 +20,7 @@ $(document).ready(function () {
         e.preventDefault();
         window.open(`../php/reportes/certificado_medico.php?id_cita=${id_cita}`, '_blank');
     });
-    $("#desc_certmed").click(function (e) { 
+    $("#desc_form002").click(function (e) { 
         e.preventDefault();
         window.open(`../php/reportes/reporte_hcu_002_cita.php?id_cita=${id_cita}`, '_blank');
     });

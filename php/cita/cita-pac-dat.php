@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 include_once '../../variables.php';
 
     $id_cita = $_POST['id_cita'];
-    $query = "SELECT ci.*, ca.id_medico, ca.motivo_con, ca.problema_act, me.tarifa, me.tarifa_control, me.sufijo, me.nombres_medi, me.apellidos_medi
+    $query = "SELECT ci.*, ca.id_medico, me.tarifa, me.tarifa_control, me.sufijo, me.nombres_medi, me.apellidos_medi
                 FROM cita AS ci
                 INNER JOIN caso AS ca
                     ON ci.id_caso = ca.id_caso
@@ -36,7 +36,13 @@ include_once '../../variables.php';
           'apellidos_medi' => $row['apellidos_medi'],
           'tarifa' => $row['tarifa'],
           'tarifa_control' => $row['tarifa_control'],
-          'evolucion' => $row['evolucion']
+          'evolucion' => $row['evolucion'],
+          'signos_a' => $row['signos_a'],
+          'recomendaciones_nf' => $row['recomendaciones_nf'],
+          'detalle_certificado' => $row['detalle_certificado'],
+          'semana_embarazo' => $row['semana_embarazo'],
+          'dias_reposo' => $row['dias_reposo'],
+          'descuento' => $row['descuento']
         );
         
     }
