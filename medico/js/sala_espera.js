@@ -63,7 +63,7 @@ $(document).ready(function() {
                                                     `;
                                 if (seguro < 2)
                                 {
-                                    template += `<td class="pt-3"><a href="reporte_cita.php?id_cita=${cita.id_cita}"" style="color: #fff" class="btn btn-warning btn-sm">Atender Sin Formulario</a></td>`;
+                                    template += `<td class="pt-3"><a href="atencion_paci_sin.php?id_paciente=${cita.id_paciente}&id_cita=${cita.id_cita}"" style="color: #fff" class="btn btn-warning btn-sm">Atender Sin Formulario</a></td>`;
                                 }
                                  template += `             
                                                     </tr>
