@@ -49,9 +49,16 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                     <div class="row">
                                         <div class="col-sm-4 pl-sm-2 statistics-grid">
                                             <div class="card card_border border-primary-top p-4">
+                                                <i class="lnr lnr-users"> </i>
+                                                <h3 class="text-danger number" id="total_se"></h3>
+                                                <p class="stat-text"><a href="sala_espera.php"> CITAS EN SALA DE ESPERA</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 pl-sm-2 statistics-grid">
+                                            <div class="card card_border border-primary-top p-4">
                                                 <i class="lnr lnr-calendar-full"> </i>
                                                 <h3 class="text-primary number" id="total_cp"></h3>
-                                                <p class="stat-text">TOTAL DE CITAS - PENDIETES</p>
+                                                <p class="stat-text">TOTAL DE CITAS - AGENDADAS</p>
                                             </div>
                                         </div>
                                         <div class="col-sm-4 pl-sm-2 statistics-grid">
@@ -61,25 +68,26 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                 <p class="stat-text">TOTAL DE CITAS - ATENDIDAS</p>
                                             </div>
                                         </div>
+                                        
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-4 pl-sm-2 statistics-grid">
                                             <div class="card card_border border-primary-top p-4">
-                                                <i class="fa fa-money"> </i>
+                                                <i class="lnr lnr-smile"> </i>
                                                 <h3 class="text-danger number" id="total_cc"></h3>
                                                 <p class="stat-text">TOTAL DE CITAS - COBRADAS</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                                        <div class="col-sm-4 pl-sm-2 statistics-grid">
                                             <div class="card card_border border-primary-top p-4">
-                                                <i class="fa fa-address-book"> </i>
+                                                <i class="lnr lnr-file-empty"> </i>
                                                 <h3 class="text-primary number" id="total_ca_a"></h3>
                                                 <p class="stat-text">TOTAL DE CASOS - ABIERTOS</p>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 pl-sm-2 statistics-grid">
+                                        <div class="col-sm-4 pl-sm-2 statistics-grid">
                                             <div class="card card_border border-primary-top p-4">
-                                                <i class="fa fa-archive"> </i>
+                                                <i class="lnr lnr-paperclip"> </i>
                                                 <h3 class="text-success number" id="total_ca_c"></h3>
                                                 <p class="stat-text">TOTAL DE CASOS - CERRADOS</p>
                                             </div>

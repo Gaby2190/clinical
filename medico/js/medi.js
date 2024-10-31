@@ -10,6 +10,21 @@ $(document).ready(function() {
         $('#name_medi').html(medico.sufijo + " " + medico.nombres_medi + " " + medico.apellidos_medi);
         $.ajax({
             type: "POST",
+            url: "../php/medico/dashboard/citas_sala.php",
+            data: {id_medico},
+            success: function (response) {
+                if (response != false) {
+                    const citas = JSON.parse(response);
+                    const num_cita = citas.length;
+                    $('#total_se').html(num_cita);
+                }else{
+                    $('#total_se').html(0);
+                }
+                
+            }
+        });
+        $.ajax({
+            type: "POST",
             url: "../php/medico/dashboard/citas_pendientes.php",
             data: {id_medico},
             success: function (response) {
