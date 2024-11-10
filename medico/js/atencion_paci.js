@@ -2457,6 +2457,10 @@ $(document).ready(function() {
     //===================================================BOTÓN PARA GUARDAR TODOS LOS DATOS EN LA BASE DE DATOS====================================//
     $("#btn_guardar").click(function(e) {
         e.preventDefault();
+        $('#texto_modal').html('Procesando Información');
+        $('#modal_icon').attr('style', "color: orange");
+        $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+        $('#modalPush').modal("show");
         //Almacenar el id del médico en variable
         const id_medico = JSON.parse($.ajax({
             type: "POST",
@@ -2484,7 +2488,7 @@ $(document).ready(function() {
        
         
             if ((($("#motivo_consulta").val() == "")&&(!$("#motivo_consulta").attr('disabled'))) || (($("#problema_actual").val() == "")&&(!$("#problema_actual").attr('disabled')))  || cont_diag == 0) {
-                $('#texto_modal').html('Ingrese los valores obligatorios: Motivo de Consulta, Enfermedad, Signos Vitales, Diagnóstico');
+                $('#texto_modal').html('Ingrese los valores obligatorios: Motivo de Consulta, Enfermedad, Signos Vitales ,Diagnóstico');
                 $('#modal_icon').attr('style', "color: orange");
                 $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
                 $('#modalPush').modal("show");
@@ -3198,6 +3202,7 @@ $(document).ready(function() {
                                 success: function(response) {
                                     console.log(response);
                                     //Mostrar mensaje de Guardado de Datos
+                                   
                                     $('#texto_modal').html('La cita ha sido atendida y los datos se han guardado exitosamente');
                                     $('#modal_icon').attr('style', "color: green");
                                     $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
@@ -3225,6 +3230,10 @@ $(document).ready(function() {
     //===================================================BOTÓN PARA GUARDAR COMO BORRADOR====================================//
     $("#btn_borrador").click(function(e) {
         e.preventDefault();
+        $('#texto_modal').html('Procesando Información');
+        $('#modal_icon').attr('style', "color: orange");
+        $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+        $('#modalPush').modal("show");
         //Almacenar el id del médico en variable
         const id_medico = JSON.parse($.ajax({
             type: "POST",
@@ -3255,11 +3264,6 @@ $(document).ready(function() {
             $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
             $('#modalPush').modal("show");
         } else {
-            $('#texto_modal').html('Espere mientras guardamos los datos en borrador');
-            $('#modal_icon').attr('style', "color: orange");
-            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
-            $('#modalPush').modal("show");
-
             $.ajax({
                 type: "POST",
                 url: "../php/cita/cita-pac-dat.php",
@@ -3968,12 +3972,12 @@ $(document).ready(function() {
                 data: { id_cita },
                 success: function(response) {
                     console.log(response);
-                        $('#modalPush').modal("hide");
+                        
                         $('#texto_modal').html('Información guardada con exito.');
                         $('#modal_icon').attr('style', "color: green");
                         $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
                         $('#modalPush').modal("show");
-                    // setTimeout(function() { window.location.href = `sala_espera.php`; }, 3000);
+                     setTimeout(function() { window.location.href = `sala_espera.php`; }, 3000);
                 }
             });
             
@@ -4518,8 +4522,5 @@ $("#sp_sneurologico").click(function(e) {
     $("#revision_de_organos").hide();
     $("#signos_vitales").hide();
     $("#examen_fisico").hide();
-    
-
-
-
+   
 });

@@ -249,7 +249,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
    $('#apellidos_paci1').attr('disabled', 'disabled');
    $('#apellidos_paci2').attr('disabled', 'disabled');
    $('#celular_paci').attr('disabled', 'disabled');
-   $('#select_nacionalidad').attr('disabled', 'disabled');
+   //$('#select_nacionalidad').attr('disabled', 'disabled');
   
    $('#datos_btn').attr('disabled', 'disabled'); //deshabilita el objeto boton datos_btn
 
@@ -293,6 +293,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                    $('#texto_modal').html(validarCedula(cedula));
                    $('#modal_icon').attr('style', "color: orange");
                    $('#modal_icon').attr("class", "fa fa-id-card fa-4x animated rotateIn mb-4");
+                   $('#progreso').attr('style',"visibility:hidden");
                    $('#modalPush').modal("show");
                }
            } else {//Si la cedula no tiene 10 digitos o no es ecuatoriana
@@ -652,6 +653,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                 $('#texto_modal').html(response);
                                                                 $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
                                                                 $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
+                                                                $('#progreso').attr('style',"visibility:hidden");
                                                                 $('#modalPush').modal("show");
                                                                 $.ajax({
                                                                     type: "POST",
@@ -691,7 +693,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                     "data": JSON.stringify({
                                                                         "user": "cesmed@massend.com",
                                                                         "pass": "cesmed123",
-                                                                        "mensajeid": "44934",
+                                                                        "mensajeid": "44967",
                                                                         "campana": "CLINICAL CESMED S.C.",
                                                                         "telefono": num_paci,
                                                                         "dni": cedula_paci,
@@ -732,6 +734,8 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                         $.ajax(settings).done(function (response) {
                                                                         console.log(response);
                                                                         });
+
+                                                                        
                                                                         setTimeout(function() { window.location.href = "rece.php"; }, 3000);
                                                                     }
                                                                 });
@@ -798,6 +802,10 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
 //============================ REGISTRAR CASO ===================================
    $('#citas-datos').submit(function(e) {//click en el boton registrar del formulario
        e.preventDefault();// se previene el llamado del evento
+            $('#texto_modal').html('Registrando Cita...');
+            $('#modal_icon').attr('style', "color:orange");
+            $('#progreso').attr('style',"visibility:visible");
+            $('#modalPush').modal("show");
        const id_medico = $("#select_medico").val();// Toma el valor del select_medico
        const id_especialidad = $("#select_especialidad").val();// Toma el valor del select_especialidad
        
@@ -805,6 +813,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
            type: "POST", //define el metodo de envio de los datos
            url: "../php/caso/caso-paci-verif.php", //se indica el destino 
            data: {id_medico, id_especialidad, id_paciente}, //se definen los datos a enviar
+           
            success: function (response) { //en caso la respuesta de la ejecucion se exitosa.
                if (response != false) {// evalua su la respuesta es falsa
                    
@@ -899,6 +908,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                     $('#texto_modal').html(response);
                     $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
                     $('#modal_icon').attr("class", "fa fa-check fa-4x animated rotateIn mb-4");
+                    $('#progreso').attr('style',"visibility:hidden");
                     $('#modalPush').modal("show");
                     $.ajax({
                         type: "POST",
@@ -923,9 +933,16 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                 }
                             });
                            
-                            
+                            var dia = fecha.getDay();
+                            var mes = fecha.getMonth();
+                            var year = fecha.getFullYear();
+
+                            const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+                            mes = (meses[mes]);
+
+                            fecha_msn=$dia+" de "+$mes+" del "+$year;
                             //---------------- Envio Mensajes Pacientes -----------------------
-                            const datos_msn = paci.nombres_paci1 + " " + paci.apellidos_paci1 + "," + fecha + "," + hora + "," + paci.nom_ape_medi;
+                            const datos_msn = paci.nombres_paci1 + " " + paci.apellidos_paci1 + "," + fecha_msn + "," + hora + "," + paci.nom_ape_medi;
                             const num_paci = paci.celular_paci;
                             const cedula_paci = paci.cedula_paci;
                             
@@ -939,7 +956,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                 "data": JSON.stringify({
                                     "user": "cesmed@massend.com",
                                     "pass": "cesmed123",
-                                    "mensajeid": "44934",
+                                    "mensajeid": "44967",
                                     "campana": "CLINICAL CESMED S.C.",
                                     "telefono": num_paci,
                                     "dni": cedula_paci,
@@ -953,7 +970,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                    console.log(response);
                                 });
                                 //-------------- Envio Mensajes Medicos ---------------------
-                                const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
+                                const datos_msn_doc = paci.nom_ape_medi + ","+ fecha_msn + "," + hora;
                                 const num_doc = paci.celular_medi;
                                 const cedula_doc = paci.cedula_medi;
 
@@ -980,6 +997,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                     $.ajax(settings).done(function (response) {
                                        console.log(response);
                                     });
+                                
                         }
                     });
                     setTimeout(function() { window.location.href = "rece.php"; }, 3000);

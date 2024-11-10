@@ -10,7 +10,9 @@
 
 
     <div class="logo-icon text-center">
-        <a href="rece.php" title="logo"><img src="../assets/images/logo_cesmed.png" alt="logo-icon" style="height:47px;""> </a>
+        <a href="rece.php" title="logo">
+            <img src="../assets/images/logo_cesmed.png" alt="logo-icon" style="height:47px;"> 
+        </a>
     </div>
     <!-- //logo end -->
 
@@ -48,6 +50,7 @@
                     -->
                     <li><a href="cita_age_read.php">Citas agendadas</a> </li>
                     <li><a href="historial_citas.php">Historial de citas</a> </li>
+                    
                 </ul>
             </li>
 
@@ -59,6 +62,7 @@
                     <li><a href="cobros_realizados.php">Cobros realizados</a> </li>
                     <li><a href="historial_pagos.php">Historial de pagos</a> </li>
                     <li><a href="cuadre_caja.php">Cuadre de caja diario</a> </li>
+                    
                 </ul>
             </li>
 
@@ -85,54 +89,6 @@
 
             <div class="user-dropdown-details d-flex">
 
-                <div class="profile_details_left">
-                    <ul class="nofitications-dropdown">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-bell-o"></i><span class="badge blue">3</span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="notification_header">
-                                        <h3>You have 3 new notifications</h3>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#" class="grid">
-                                        <div class="user_img"><img src="../assets/images/avatar1.jpg" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Johnson purchased template</p>
-                                            <span>Just Now</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="odd">
-                                    <a href="#" class="grid">
-                                        <div class="user_img"><img src="../assets/images/avatar2.jpg" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>New customer registered </p>
-                                            <span>1 hour ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="grid">
-                                        <div class="user_img"><img src="../assets/images/avatar3.jpg" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor sit amet </p>
-                                            <span>2 hours ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="#all" class="bg-primary">See all notifications</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
                 <div class="profile_details">
                     <ul>
                         <li class="dropdown profile_details_drop">
@@ -148,9 +104,9 @@
                                 <li class="user-info">
                                     <h5 class="user-name" id="nom_usr"></h5>
                                 </li>
-                                <li> <a href="perfil.php"><i class="lnr lnr-user"></i>Mi Perfil</a> </li>
-                                <li> <a href="c_contrasena.php"><i class="lnr lnr-cog"></i>Cambio de contraseña</a></li>
-                                <li class="logout"> <a href="../login/login.php?cerrar_sesion=1"><i class="fa fa-power-off"></i>Cerrar sesión</a> </li>
+                                <li> <a href="perfil.php"><i class="lnr lnr-user"></i>Perfil</a> </li>
+                                <li> <a href="c_contrasena.php"><i class="lnr lnr-cog"></i>Cambiar Clave</a></li>
+                                <li class="logout"> <a href="../login/login.php?cerrar_sesion=1"><i class="fa fa-power-off"></i>Salir</a> </li>
                             </ul>
                         </li>
                     </ul>

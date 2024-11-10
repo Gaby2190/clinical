@@ -362,9 +362,12 @@ while($row = mysqli_fetch_array($result)) {
         $pdf->Cell(15,3,utf8_decode('FORMACIÓN'),'LRB',1,'C',true);
         $pdf->SetFont('Arial','', 7);
 
-
-        $pdf->MultiCell(190,5,utf8_decode('*'.$str_ant_p.'*'),1,'L');
-
+        if(strlen($str_ant_p)>0){
+            $pdf->MultiCell(190,5,utf8_decode('*'.$str_ant_p.'*'),1,'L');
+        }
+        else{
+            $pdf->MultiCell(190,5,utf8_decode('*Sin Antecedentes Patológicos Identificados*'),1,'L');
+        }
 
         $celdas = (95 - $pdf->GetY())/5;
         for ($i=0; $i < $celdas; $i++) { 
@@ -895,7 +898,15 @@ while($row = mysqli_fetch_array($result)) {
         }
 
         $pdf->SetFont('Arial','', 7);
-        $pdf->MultiCell(190,4,utf8_decode('*'.$desc_ros.'*'),1,'L');
+
+        if (strlen($desc_ros)>0)
+        {
+            $pdf->MultiCell(190,4,utf8_decode('*'.$desc_ros.'*'),1,'L');
+        }
+        else
+        {
+            $pdf->MultiCell(190,4,utf8_decode('*No se registro ninguna patología*'),1,'L');
+        }
 
 
         $celdas = (270 - $pdf->GetY())/5;
@@ -1245,7 +1256,18 @@ while($row = mysqli_fetch_array($result)) {
         }
 
         $pdf->SetFont('Arial','', 8);
-        $pdf->MultiCell(190,4,utf8_decode('*'.$desc_efr.'*'),1,'L');
+        
+        if (strlen($desc_efr)>0){
+            $pdf->MultiCell(190,4,utf8_decode('*'.$desc_efr.'*'),1,'L');
+        }
+        else
+        {
+            $pdf->MultiCell(190,4,utf8_decode('*No se registran ninguna patología*'),1,'L');
+        }
+
+
+
+
         $celdas = (120 - $pdf->GetY())/5;
         for ($i=0; $i < $celdas; $i++) { 
             $pdf->SetFillColor(238,238,238);
@@ -1509,6 +1531,25 @@ while($row = mysqli_fetch_array($result)) {
             $planes_t[$i]['cantidad'].'.   ';
         }
 
+        $query9 = "SELECT  ci.signos_a, ci.recomendaciones_nf
+            FROM  cita as ci
+            Inner JOIN caso as ca
+                ON ci.id_caso = ca.id_caso
+            WHERE ca.id_caso = '$id_caso' and ci.fecha='$fecha_norm' and ci.hora='$hora_norm';";
+        $result9 = mysqli_query($conn, $query9);
+        if(!$result9) {
+        die('Consulta fallida'. mysqli_error($conn));
+        }
+
+        while($row = mysqli_fetch_array($result9)) {
+            $signos_a = $row['signos_a'];
+            $recomendaciones_nf = $row['recomendaciones_nf'];
+        }
+
+
+
+
+
         $pdf->SetFont('Arial','B', 10);
         $pdf->SetFillColor(153,153,153);
         $pdf->SetTextColor(34,68,93);
@@ -1528,8 +1569,15 @@ while($row = mysqli_fetch_array($result)) {
             $desc_pt = $desc_pt.' - Recomendaciones no farmacológicas '.$recomendaciones_nf;
         }
         $desc_pt = preg_replace("/[\r\n|\n|\r]+/", " ", $desc_pt);
-        $pdf->MultiCell(190,5,utf8_decode('*'.$desc_pt.'*'),1,'L');
-
+        
+        if(strlen($desc_pt)>0){
+        
+            $pdf->MultiCell(190,5,utf8_decode('*'.$desc_pt.'*'),1,'L');
+        
+        }
+        else{
+            $pdf->MultiCell(190,5,utf8_decode('*No se registra Plan de Tratamiento*'),1,'L');  
+        }
 
 
         $celdas = (225 - $pdf->GetY())/5;

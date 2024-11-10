@@ -45,12 +45,12 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                     <div class="card-block">
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">Citas Agendadas</h6>
                                         <form id="citas-datos">
-                                            <div class="container">
+                                           
                                                 <div class="row form-group">
                                                      <div class="col-sm-4 my-2 pt-2">
                                                         <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Seleccione una Especialidad:</p>
                                                     </div>
-                                                    <div class="col-sm-8 my-2 pt-1">
+                                                    <div class="col-sm-8 col-xs-4 my-2 pt-1">
                                                         <select class="custom-select" id="select_especialidad" required></select>
                                                     </div>
                                                     <!-- Elementos del control de Medico mediante un Select -->
@@ -71,8 +71,11 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                         <a style="color: #fff;" class="btn btn-primary" id="list_citas"><span class="fa fa-search"></span> Buscar Citas</a>
                                                     </div>
                                                 </div>
-
-                                            <div class="container" id="div_table">
+                                            
+                                            
+                                            
+                                            
+                                                <div id="div_table">
                                                 <div class="row form-group">
                                                     <div class="container">
                                                         <div class="row">
@@ -80,8 +83,8 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                                 <table class="table table-striped" id="citas_table">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col">FECHA</th>
-                                                                            <th scope="col">Hora de ingreso a cita</th>
+                                                                            <th scope="col">Fecha</th>
+                                                                            <th scope="col">Hora cita</th>
                                                                             <th scope="col">Estado</th>
                                                                         </tr>
                                                                     </thead>
@@ -141,7 +144,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                     <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Celular:</p>
                                                     <input type="tel" class="text-muted f-w-400 form-control" id="celular_paci" pattern="[0-9]{10}" size="10" maxlength="10" autocomplete="of" required>
                                                 </div>
-                                            </div>
+                                           
                                             <!-- Boton de registrar la cita. -->
                                             <div class="col-sm-12 my-2">
                                             <button class="btn btn-primary text-uppercase btn-lg float-right my-4" type="submit" id="datos_btn"><span class="fa fa-floppy-o"></span> Registrar</button>
@@ -175,7 +178,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                             <!--Body-->
                             <div class="modal-body">
 
-                                <i class="" style="color: rgb(57, 160, 57)" id="modal_icon"></i>
+                                <i class="" style="color: rgb(57, 160, 57)" id="modal_icon"><img id="progreso" src='../assets/images/progreso.gif'/></i>
 
                                 <p id="texto_modal"></p>
 

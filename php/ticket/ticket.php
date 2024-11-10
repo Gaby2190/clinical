@@ -27,13 +27,13 @@
                     <td><label id="medico"></label></td>
                 </tr>
                 <tr>
-                    <td><strong><label id="turno"></label></strong></td>
+                    <td><label id="turno"></label></td>
                 </tr>
                 <tr>
-                    <td><label id="fecha"></label></td>
+                    <td><strong><label id="fecha"></label></strong></td>
                 </tr>
                 <tr>
-                    <td><label id="hora"></label></td>
+                    <td><strong><label id="hora"></label></strong></td>
                 </tr>
                 <tr>
                     <td><label id="paciente"></label></td>
@@ -43,6 +43,9 @@
                 </tr>
                 <tr>
                     <td><strong><label id="f_pago"></label></strong></td>
+                </tr>
+                <tr>
+                    <td><strong><label id="valor"></label></strong></td>
                 </tr>
             </tbody>
         </table>

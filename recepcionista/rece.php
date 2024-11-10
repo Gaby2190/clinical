@@ -91,29 +91,19 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                             <div class="card card_border">
                                 <div class="card-body pb-0">
                                     <div class="row">
-                                        <div class="col-lg-3 pr-lg-2 chart-grid">
+                                        
+                                        <div class="col-lg-4 pr-lg-2 chart-grid">
                                             <div class="card text-center card_border">
                                                 <div class="card-header chart-grid__header">
-                                                    Agendar Cita Nueva
+                                                    Agenda Medicos
                                                 </div>
                                                 <div class="card-body">
                                                     <!-- Button trigger modal -->
-                                                    <a href="caso_create.php" class="btn btn-primary btn-style" >Mostrar</a>
+                                                    <a  href="cita_age_doc.php" class="btn btn-primary btn-style">Mostrar</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 pr-lg-2 chart-grid">
-                                            <div class="card text-center card_border">
-                                                <div class="card-header chart-grid__header">
-                                                    Agendar Cita Control
-                                                </div>
-                                                <div class="card-body">
-                                                    <!-- Button trigger modal -->
-                                                    <a  href="cita_control.php" class="btn btn-primary btn-style">Mostrar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 pr-lg-2 chart-grid">
+                                        <div class="col-lg-4 pr-lg-2 chart-grid">
                                             <div class="card text-center card_border">
                                                 <div class="card-header chart-grid__header">
                                                     Citas Agendadas
@@ -124,7 +114,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 pr-lg-2 chart-grid">
+                                        <div class="col-lg-4 pr-lg-2 chart-grid">
                                             <div class="card text-center card_border">
                                                 <div class="card-header chart-grid__header">
                                                     Cobrar Citas
@@ -186,7 +176,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
     <script>
         $(window).load(function() {
             // Animate loader off screen
-            $(".se-pre-con").fadeOut("slow");;
+            $(".se-pre-con").fadeOut("slow");
         });
     </script>
     <!--// loading-gif Js -->

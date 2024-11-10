@@ -2,7 +2,7 @@
 
 include_once '../dbconnection.php';
 
-    $query = "SELECT * FROM nacionalidad";
+    $query = "SELECT * FROM nacionalidad ORDER BY nombre";
     
     $result = mysqli_query($conn, $query);
     if(!$result) {

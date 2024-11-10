@@ -3,7 +3,7 @@
     font-family: 'Times New Roman';
 }
 
-#turno {
+#fecha, #hora {
     font-size: 25px;
     font-family: 'Times New Roman';
 }
