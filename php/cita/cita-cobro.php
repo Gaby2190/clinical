@@ -14,7 +14,7 @@ include_once '../../variables.php';
                     ON pa.id_paciente = ca.id_paciente
                 INNER JOIN usuario as usu
                     ON pa.id_usuario = usu.id_usuario
-                WHERE ci.id = '{$cita_atendida}'  ORDER BY ci.fecha DESC, ci.hora DESC";
+                WHERE ci.id = '{$cita_atendida}' OR ci.id = '{$cita_espera}'  ORDER BY ci.fecha DESC, ci.hora DESC";
     $result = mysqli_query($conn, $query);
 
   if(!$result) {

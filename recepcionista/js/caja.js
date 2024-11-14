@@ -95,7 +95,7 @@ $(document).ready(function() {
                         const nom_apep = cita.nombres_paci1 + " " + cita.nombres_paci2 + " " + cita.apellidos_paci1 + " " + cita.apellidos_paci2;
                         const total = tarifa - cita.descuento + adicionales + otros;
     
-                        if (Number(cita.actualizacion) == 1) {
+                        if (Number(cita.actualizacion) === 0) {
                             if (total < 0) {
                                 template += `
                                             <tr class="bg-blue" citaID="${cita.id_cita}" citaTotal="${total}">
@@ -138,6 +138,7 @@ $(document).ready(function() {
                                                 `;
                             }
                         }
+                        /*
                         if (Number(cita.actualizacion) === 0) {
                             if (total < 0) {
                                 template += `
@@ -181,6 +182,7 @@ $(document).ready(function() {
                                                 `;
                             }
                         }
+                            */
     
                     }); 
                     $('#cobros_body').html(template);
@@ -227,7 +229,7 @@ $(document).ready(function() {
                         c_total += costo;
                     });
                     console.log(c_total + "/" + total);
-                    if(Number(c_total-tarifa_t)==Number(total)){
+                    if(Number(c_total-tarifa_t)>=Number(total)){
                         $('#texto_modal_conf').html('Desea realizar el cobro');
                         $('#modal_icon_conf').attr('style', "color: #22445d");
                         $('#modal_icon_conf').attr("class", "fa fa-question-circle fa-4x animated rotateIn mb-4");

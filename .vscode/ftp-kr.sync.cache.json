@@ -428,8 +428,8 @@
         },
         "cita_ticket.js": {
           "type": "-",
-          "size": 16356,
-          "lmtime": 0,
+          "size": 16360,
+          "lmtime": 1731288405583.4612,
           "modified": false
         },
         "cobros_realizados.js": {
@@ -1350,7 +1350,44 @@
         "lmtime": 0,
         "modified": false
       },
-      "cita_pago": {},
+      "cita_pago": {
+        "cita_pago-add.php": {
+          "type": "-",
+          "size": 732,
+          "lmtime": 0,
+          "modified": false
+        },
+        "cita_pago-delete.php": {
+          "type": "-",
+          "size": 368,
+          "lmtime": 0,
+          "modified": false
+        },
+        "cita_pago-get.php": {
+          "type": "-",
+          "size": 1542,
+          "lmtime": 1731286139824.5625,
+          "modified": false
+        },
+        "cita_pago-get_id.php": {
+          "type": "-",
+          "size": 776,
+          "lmtime": 0,
+          "modified": false
+        },
+        "tarjeta_pago-get.php": {
+          "type": "-",
+          "size": 815,
+          "lmtime": 0,
+          "modified": false
+        },
+        "transferencia_b-get.php": {
+          "type": "-",
+          "size": 660,
+          "lmtime": 0,
+          "modified": false
+        }
+      },
       "citas_atendidas": {},
       "cobro.php": {
         "type": "-",
@@ -1857,17 +1894,40 @@
           "lmtime": 0,
           "modified": false
         },
-        "src": {},
+        "src": {
+          "Mike42": {
+            "Escpos": {
+              "ticket-datos-comp.php": {
+                "type": "-",
+                "size": 2019,
+                "lmtime": 1730856953705.4663,
+                "modified": false
+              }
+            }
+          }
+        },
+        "ticket-datos-comp copy.php": {
+          "type": "-",
+          "size": 2019,
+          "lmtime": 1730856953705.4663,
+          "modified": false
+        },
         "ticket-datos-comp.php": {
           "type": "-",
           "size": 2019,
           "lmtime": 1730856953705.4663,
           "modified": false
         },
+        "ticket-datos-pre.php": {
+          "type": "-",
+          "size": 1842,
+          "lmtime": 1731288558745.8115,
+          "modified": false
+        },
         "ticket-datos.php": {
           "type": "-",
-          "size": 1760,
-          "lmtime": 1730320540255.4092,
+          "size": 729,
+          "lmtime": 1731286288017.5647,
           "modified": false
         },
         "ticket-turno.php": {
@@ -1878,20 +1938,20 @@
         },
         "ticket.css": {
           "type": "-",
-          "size": 465,
-          "lmtime": 1730857552149.0862,
+          "size": 540,
+          "lmtime": 1731287013661.727,
           "modified": false
         },
         "ticket.js": {
           "type": "-",
-          "size": 1123,
-          "lmtime": 1730857950307.5647,
+          "size": 1733,
+          "lmtime": 1731288775920.557,
           "modified": false
         },
         "ticket.php": {
           "type": "-",
-          "size": 2363,
-          "lmtime": 1730857750168.4143,
+          "size": 2250,
+          "lmtime": 1731286886226.5554,
           "modified": false
         }
       },
@@ -2013,8 +2073,8 @@
       },
       "cita_ticket.php": {
         "type": "-",
-        "size": 9369,
-        "lmtime": 0,
+        "size": 12731,
+        "lmtime": 1731282929683.4338,
         "modified": false
       },
       "cobros_realizados.php": {
@@ -2111,8 +2171,8 @@
         },
         "cita_age_doc.js": {
           "type": "-",
-          "size": 53906,
-          "lmtime": 1731030323327.2192,
+          "size": 54350,
+          "lmtime": 1731287267172.5146,
           "modified": false
         },
         "cita_age_read.js": {
@@ -2153,8 +2213,8 @@
         },
         "cita_ticket.js": {
           "type": "-",
-          "size": 10173,
-          "lmtime": 1730320274226.7646,
+          "size": 10189,
+          "lmtime": 1731288487502.517,
           "modified": false
         },
         "cobros_realizados.js": {

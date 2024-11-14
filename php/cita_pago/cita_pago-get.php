@@ -14,7 +14,7 @@ include_once '../../dbconnection.php';
                     ON ci.id_caso = ca.id_caso
                 INNER JOIN medico as me
                     ON ca.id_medico = me.id_medico
-                WHERE cp.id_cita = '{$id_cita}'";
+                WHERE cp.id_cita = $id_cita";
     
     $result = mysqli_query($conn, $query);
     if(!$result) {

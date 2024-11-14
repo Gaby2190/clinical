@@ -42,11 +42,9 @@
                     <td><label id="t_cita"></label></td>
                 </tr>
                 <tr>
-                    <td><strong><label id="f_pago"></label></strong></td>
+                    <td id="f_pago"></td>                    
                 </tr>
-                <tr>
-                    <td><strong><label id="valor"></label></strong></td>
-                </tr>
+                
             </tbody>
         </table>
         </div>

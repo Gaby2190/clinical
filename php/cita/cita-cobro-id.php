@@ -11,7 +11,7 @@ include_once '../../variables.php';
                 INNER JOIN usuario as usu ON pa.id_usuario = usu.id_usuario 
                 INNER JOIN cita_pago as cip ON ci.id_cita = cip.id_cita 
                 INNER JOIN f_pago as fp ON fp.id = cip.id_f_pago 
-                WHERE ci.id = '{$cita_atendida}' and ci.id_cita = '{$id_cita}' ORDER BY ci.id_cita ASC LIMIT 1";
+                WHERE ci.id_cita = '{$id_cita}' ORDER BY ci.id_cita ASC LIMIT 1";
     $result = mysqli_query($conn, $query);
 
   if(!$result) {

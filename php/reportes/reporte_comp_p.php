@@ -183,7 +183,7 @@ while($row = mysqli_fetch_array($result)) {
 
  
 //Query citas cobradas
-$query_cb = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control, pag.fecha_gen, am.valor, am.id_seguro, fp.nombre
+$query_cb = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control, pag.fecha_gen, am.valor, am.id_seguro, fp.nombre, cp.costo
                 FROM cita AS ci
                 INNER JOIN caso AS ca
                     ON ci.id_caso = ca.id_caso
@@ -201,7 +201,7 @@ $query_cb = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.sufijo, me.nombres_med
                 	ON fp.id = cp.id_f_pago
                 INNER JOIN asegu_med as am
                 	ON am.id_seguro = fp.aseguradora and am.id_medico = ca.id_medico
-                WHERE ci.id = '{$cita_finalizada}' AND ca.id_medico = '{$id_medico}' AND d_pa.id_pago = '{$id_pago}' ORDER BY ci.id_cita ASC LIMIT 1";
+                WHERE ci.id = '{$cita_finalizada}' AND ca.id_medico = '{$id_medico}' AND d_pa.id_pago = '{$id_pago}' GROUP BY ci.id_cita ORDER BY ci.id_cita ASC";
   //echo $query_cb;
     $result_cb = mysqli_query($conn, $query_cb);
 
@@ -234,7 +234,8 @@ $query_cb = "SELECT ci.*, ca.id_medico, ca.id_paciente,me.sufijo, me.nombres_med
         'fecha_gen' => $row['fecha_gen'],
         'valor' => $row['valor'],
         'id_seguro' => $row['id_seguro'],
-        'nombre' => $row['nombre']
+        'nombre' => $row['nombre'],
+        'costo' => $row['costo']
       );
       
   }
@@ -338,30 +339,33 @@ for ($i=0; $i < sizeof($cita_c); $i++) {
   if ($cita_c[$i]['id_seguro']==1)
   {
     if (floatval($cita_c[$i]['tipo_cita'] == 1)) {
-      $pdf->Cell(12,5,utf8_decode('$ '.number_format($cita_c[$i]['tarifa'],2)),1,0,'C');  
-      $total = $total + floatval($cita_c[$i]['tarifa']);
-      $consultas_t += floatval($cita_c[$i]['tarifa']);
+      $pdf->Cell(12,5,utf8_decode('$ '.number_format($cita_c[$i]['costo'],2)),1,0,'C');  
+      $total = $total + floatval($cita_c[$i]['costo']);
+      $consultas_t += floatval($cita_c[$i]['costo']);
     }
     if (floatval($cita_c[$i]['tipo_cita'] == 0)) {
-      $pdf->Cell(12,5,utf8_decode('$ '.number_format($cita_c[$i]['tarifa_control'],2)),1,0,'C');
-      $total = $total + floatval($cita_c[$i]['tarifa_control']);
-      $consultas_t += floatval($cita_c[$i]['tarifa_control']);
+      $pdf->Cell(12,5,utf8_decode('$ '.number_format($cita_c[$i]['costo'],2)),1,0,'C');
+      $total = $total + floatval($cita_c[$i]['costo']);
+      $consultas_t += floatval($cita_c[$i]['costo']);
 
     }
     if (floatval($comision_c) > 5) {
-      $c_c += (($consultas_t - $descuentos_t)*$comision_c/100);
-     
+      $porcentaje=floatval($comision_c)/100;
+      $c_c = floatval($consultas_t-$descuentos_t)*$porcentaje;
+   
     }else{
-      $c_c += (sizeof($cita_c) * $comision_c);
+      $c_c += floatval($comision_c);
       
     }
+
+    
   }
   else
   {
       $pdf->Cell(12,5,utf8_decode('$ '.number_format($cita_c[$i]['valor'],2)),1,0,'C');  
       $total = $total + floatval($cita_c[$i]['valor']);
       $consultas_t += floatval($cita_c[$i]['valor']);
-      $c_c += 0;
+      
   }
 
 
@@ -458,7 +462,7 @@ $pdf->Cell(5);
 $pdf->Cell(37,5,utf8_decode('(A) Adicionales:'),0,0,'L');
 $pdf->Cell(20,5,utf8_decode('$ '.number_format($adicionales_t,2)),0,0,'L');
 $pdf->Cell(20);
-$c_c = 0;
+
 
 $pdf->Cell(60,5,utf8_decode('(CC) Comisión Consulta:'),0,0,'L');
 $pdf->Cell(20,5,utf8_decode('$ '.number_format($c_c,2)),0,1,'L');
@@ -473,15 +477,54 @@ $pdf->Cell(5);
 $pdf->Cell(37,5,utf8_decode('(RC) Retención Clínica:'),0,0,'L');
 $pdf->Cell(20,5,utf8_decode('$ '.number_format($retencion_cli_t,2)),0,0,'L');
 $pdf->Cell(20);
-$pdf->SetFont('Arial','',9);
+$pdf->SetFont('Arial','B',9);
 
 $pdf->Cell(60,5,utf8_decode('TOTAL (TC-CC-CA+A-CB-RC-TB):'),0,0,'L');
 $pdf->Cell(20,5,utf8_decode('$ '.number_format((($consultas_t-$descuentos_t) - $c_c - ($adicionales_t*$comision_a/100) + $adicionales_t - number_format($transferencia_b_t,2) - $comision_ban_t - $retencion_cli_t),2)),0,1,'L');
 $pdf->Cell(5); 
 $pdf->Cell(37,5,utf8_decode('(TB) Transfer. Bancarias:'),0,0,'L');
 $pdf->Cell(20,5,utf8_decode('$ '.number_format($transferencia_b_t,2)),0,0,'L');
-$pdf->SetFont('Arial','',9);
+$pdf->SetFont('Arial','B',9);
+$pdf->Ln(10); 
+$pdf->Cell(5); 
+$pdf->Cell(60,5,utf8_decode('FORMAS DE PAGO'),0,1,'L');
+//Consultar Comisión y Retención
+$query_mp = "SELECT mp.costo, mp.descripcion, mp.fecha_p, mp.hora_p, fp.nombre  
+FROM `medico_pago` as mp
+INNER JOIN f_pago as fp
+ON fp.id = mp.id_f_pago
+ WHERE id_pago = '{$id_pago}' ";
+$result_mp = mysqli_query($conn, $query_mp);
+if(!$result_mp) {
+  die('Error en consulta '.mysqli_error($conn));
+}
+$pdf->SetFont('Arial','B',7);
+$pdf->Cell(5); 
+$pdf->Cell(20,5,utf8_decode('Fecha'),1,0,'C');
+$pdf->Cell(15,5,utf8_decode('Hora'),1,0,'C');
+$pdf->Cell(15,5,utf8_decode('costo'),1,0,'C');
+$pdf->Cell(60,5,utf8_decode('Forma de Pago'),1,0,'C');
+$pdf->Cell(70,5,utf8_decode('Observación'),1,1,'C');
+$pdf->SetFont('Arial','',7);
+while($row = mysqli_fetch_array($result_mp)) {
+      $costo = $row['costo'];
+      $descripcion = $row['descripcion'];
+      $fecha_p = $row['fecha_p'];
+      $hora_p = $row['hora_p'];
+      $nombre = $row['nombre'];
+      $pdf->Cell(5); 
+      $pdf->Cell(20,5,utf8_decode($fecha_p),1,0,'C');
+      $pdf->Cell(15,5,utf8_decode($hora_p),1,0,'C');
+      $pdf->Cell(15,5,utf8_decode($costo),1,0,'C');
+      $pdf->Cell(60,5,utf8_decode($nombre),1,0,'C');
+      $pdf->Cell(70,5,utf8_decode($descripcion),1,1,'C');
+      
+}
+
+
+
 $pdf->Ln(35);
+
 $pdf->Cell(5); 
 $pdf->Cell(80,5,utf8_decode('Comprobante de pago generado por:'),'T',0,'C');
 $pdf->Cell(20); 

@@ -3,11 +3,19 @@
     font-family: 'Times New Roman';
 }
 
-#fecha, #hora {
-    font-size: 25px;
+#f_pago {
+    font-size: 12px;
     font-family: 'Times New Roman';
 }
 
+#fecha, #hora{
+    font-size: 25px;
+    font-family: 'Times New Roman';
+}
+#turno{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
 td,
 th,
 tr,
@@ -17,8 +25,8 @@ table {
 
 td,
 th{
-    width: 290px;
-    max-width: 290px;
+    width: 300px;
+    max-width: 300px;
     word-break: break-all;
 }
 
@@ -28,8 +36,8 @@ th{
 }
 
 .ticket {
-    width: 290px;
-    max-width: 290px;
+    width: 300px;
+    max-width: 300px;
 }
 
 /* img {

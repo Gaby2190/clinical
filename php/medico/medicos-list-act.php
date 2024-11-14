@@ -2,7 +2,13 @@
 
 include_once '../../dbconnection.php';
 
-    $query = "SELECT * FROM medico WHERE estado_medi = 1 order by apellidos_medi ASC";
+    $query = "SELECT me.* FROM `cita` as ci
+INNER JOIN caso as ca
+ON ci.id_caso = ca.id_caso
+INNER JOIN medico as me
+ON me.id_medico = ca.id_medico
+WHERE me.estado_medi=1 AND ( ci.id=3 OR ci.id=6 OR ci.id=7)
+GROUP BY me.cedula_medi;";
     
   $result = mysqli_query($conn, $query);
   if(!$result) {

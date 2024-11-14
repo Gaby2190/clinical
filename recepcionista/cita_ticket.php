@@ -46,39 +46,55 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">DATOS de la cita</h6>
                                         <div class="row justify-content-center">
                                             <input type="text" id="id_cita" value="<?php echo($id_cita);?>" required hidden>
-                                            <input type="text" class="form-control" id="id_usuario" value="<?php echo($id_usuario);?>" required hidden>
-                                            <div class="col-sm-12 my-2">
+                
+                                            <div class="col-sm-6 my-2">
                                                 <label class="text-muted f-w-400 text-center" id="medico"></label>
                                             </div>
-                                            <div class="col-sm-12 my-2">
-                                                <label class="text-muted f-w-400" id="turno"></label>
-                                            </div>
-                                            <div class="col-sm-12 my-2">
-                                                <label class="text-muted f-w-400" id="fecha"></label>
-                                            </div>
-                                            <div class="col-sm-12 my-2">
-                                                <label class="text-muted f-w-400" id="hora"></label>
-                                            </div>
-                                            <div class="col-sm-12 my-2">
+                                            <div class="col-sm-6 my-2">
                                                 <label class="text-muted f-w-400" id="paciente"></label>
                                             </div>
-                                            <div class="col-sm-12 my-2">
+                                            <div class="col-sm-3 my-2">
+                                                <label class="text-muted f-w-400" id="turno"></label>
+                                            </div>
+                                            <div class="col-sm-3 my-2">
+                                                <label class="text-muted f-w-400" id="fecha"></label>
+                                            </div>
+                                            <div class="col-sm-3 my-2">
+                                                <label class="text-muted f-w-400" id="hora"></label>
+                                            </div>
+                                            
+                                            <div class="col-sm-3 my-2">
                                                 <label class="text-muted f-w-400" id="t_cita"></label>
                                             </div>
                                             <div class="col-sm-12 my-2">
-                                                <label style="color: red; font-weight: bold;" id="lbl_cobrar"></label>
+                                                <label style="color: red; font-weight: bold; font-size: 20px" id="lbl_cobrar"></label>
                                             </div>
-                                            <div class="col-4">
-                                                <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Forma de pago:</p>
-                                                <select class="custom-select d-inline-flex p-2" id="select_fpago" required></select>
+                                            <div class="card-block">
+                                                <p CLASS="align-center" style="font-size: 25px;color: #22445d;">PAGOS REGISTRADOS</p>     
+                                                <br>
+                                                <div class="col-12 table-responsive">
+                                                    <table class=" table table-striped" id="fp_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Forma de pago</th>
+                                                                <th scope="col">Descripción</th>
+                                                                <th scope="col">Cantidad ($)</th>
+                                                                <th scope="col">Opciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="fp_body"></tbody>
+                                                    </table>
+                                                    <a class="btn btn-success" data-toggle="modal" style="color: #fff" data-target="#modalFp"><span class="fa fa-plus"></span> Añadir</a>
+                                                </div>   
                                             </div>
+                                            
 
                                         </div>
 
                                         <div class="row">
                                             
                                             <div class="col-sm-12 my-2 justify-content-right">
-                                                <button class="btn btn-primary rounded float-right my-4 mx-1" id="btn_espera_ing"><span class="fa fa-ticket"></span> Imprimir Ticket</button>
+                                                <button class="btn btn-primary rounded float-right my-4 mx-1" id="btn_espera_ing" disabled><span class="fa fa-ticket"></span> Imprimir Ticket</button>
                                             </div>
                                         </div>
 
@@ -89,6 +105,38 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                     </div>
                 </div>
 
+
+                <div class="modal fade" id="modalFp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Añadir forma de pago</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+                                <div class="input-group mb-3">
+                                    <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Forma de pago:</p>
+                                    <select class="custom-select" id="select_fpago" required></select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <p class="f-w-600 text-uppercase col-sm-12">Descripción:</p>
+                                    <textarea id="descripcion" class="form-control validate" size="255" maxlength="255" rows="4" required></textarea>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Cantidad:</p>
+                                    <input placeholder="Dólares ($)" step="any" type="number" class="text-muted f-w-400 form-control" id="costo" required>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-primary" id="add_fpago" data-dismiss="modal">Añadir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--Modal: INFORMACION-->
                 <div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-notify modal-info modal-dialog-centered" role="document">

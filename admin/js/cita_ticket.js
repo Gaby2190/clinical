@@ -2,7 +2,7 @@ $(document).ready(function() {
     const id_cita = $("#id_cita").val();
     $.ajax({
         type: "POST",
-        url: "../php/ticket-datos.php",
+        url: "../php/ticket-datos-pre.php",
         data: {id_cita},
         success: function (response) {
             const datos = JSON.parse(response);

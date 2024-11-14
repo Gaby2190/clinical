@@ -736,7 +736,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                         });
 
                                                                         
-                                                                        setTimeout(function() { window.location.href = "rece.php"; }, 3000);
+                                                                        setTimeout(function() { window.location.href = "rece.php"; }, 1000);
                                                                     }
                                                                 });
                                                                 

@@ -66,6 +66,9 @@ $(document).ready(function() {
 
     $( "#select_medico" ).change(function() {
         formas_pago = [];
+        array_citas  = [];
+        array_citas_c  = [];
+        id_citas = [];
         costo_fp = 0;
         $("#fp_body > tr").remove();
         $('#gen_reporte').attr('disabled', 'disabled');
@@ -152,6 +155,7 @@ $(document).ready(function() {
                                             success: function(response) {
                                                 if (i == (id_citas.length-1)) {
                                                     window.open(`../php/reportes/reporte_comp_p.php?id_medico=${id_medico}&id_usuario=${id_usuario}&id_pago=${id_pago}`, '_blank');
+                                                    setTimeout(function() { window.location.href = "rece.php"; }, 3000);
                                                 }
                                             }
                                         });
@@ -294,11 +298,11 @@ $(document).ready(function() {
                         var tarifa = 0;
                         if (cita.tipo_cita == "1") {
                             tipo_cita = "Normal";
-                            tarifa = cita.tarifa;
+                            tarifa = cita.costo;
                         }else{
                             if (cita.tipo_cita == "0") {
                                 tipo_cita = "Control";
-                                tarifa = cita.tarifa_control;
+                                tarifa = cita.costo;
                             }
                         }
 
@@ -352,8 +356,8 @@ $(document).ready(function() {
                                         <tr class="bg-blue" citaID="${cita.id_cita}">
                                             <td class="pt-3" hidden>${cita.id_cita}</td>
                                             <td><input class="form-check-input" type="checkbox" id="check_cita"></td>
-                                            <td class="pt-3">${cita.fecha}</td>
-                                            <td class="pt-3">${hora}h</td>
+                                            <td class="pt-3">${cita.id_cita}</td>
+                                            <td class="pt-3">${cita.fecha} ${hora}h</td>
                                             <td class="pt-3">${nom_apep}</td>
                                             <td class="pt-3">${tipo_cita}</td>
                                             <td class="pt-3">$${Number(tarifa).toFixed(2)}</td>
@@ -376,8 +380,8 @@ $(document).ready(function() {
                                         <tr class="bg-blue" citaID="${cita.id_cita}">
                                             <td class="pt-3" hidden>${cita.id_cita}</td>
                                             <td><input class="form-check-input" type="checkbox" id="check_cita"></td>
-                                            <td class="pt-3">${cita.fecha}</td>
-                                            <td class="pt-3">${hora}h</td>
+                                            <td class="pt-3">${cita.id_cita} </td>
+                                            <td class="pt-3">${cita.fecha} ${hora}h</td>
                                             <td class="pt-3">${nom_apep}</td>
                                             <td class="pt-3">${tipo_cita}</td>
                                             <td class="pt-3">$${Number(tarifa).toFixed(2)}</td>
@@ -526,6 +530,7 @@ $(document).ready(function() {
         const id_cita = $(element).attr('citaID');
         $(element).toggleClass("checked");
         if( $(element).hasClass("checked") ) {
+            console.log(array_citas);
             for (let i = 0; i < array_citas.length; i++) {
                 if ( Number(array_citas[i].id_cita) == Number(id_cita) ) {
                     array_citas_c.push(array_citas[i]);

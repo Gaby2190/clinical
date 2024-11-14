@@ -18,9 +18,24 @@ $(document).ready(function () {
                 $("#t_cita").html("Tipo de Cita: Control");
             }
            
-            $("#f_pago").html("Forma de Pago: <br>"+ datos.nombre+ "</br>");
+            $.ajax({
+                type: "POST",
+                url: "ticket-datos.php",
+                data: {id_cita},
+                async:false,
+                success: function (response) {
+                    if (response != false) {
+                        const cpagos = JSON.parse(response);
+                        cpagos.forEach(cp => {
+                            var descripcion = cp.descripcion;
+                            var f_pago = cp.nombre;
+                            var costo = cp.costo;
+                            $("#f_pago").append(`<label><strong>${f_pago}:</strong> ${descripcion} <strong>$${costo}</strong></label><br>`);
+                        });
+                    }
 
-            $("#valor").html("Valor Cancelado: "+ datos.costo+ "USD");
+                }
+            });
                     
                
 

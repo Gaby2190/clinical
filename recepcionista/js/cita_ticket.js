@@ -2,11 +2,11 @@ $(document).ready(function() {
     const id_cita = $("#id_cita").val();
     $.ajax({
         type: "POST",
-        url: "../php/ticket/ticket-datos.php",
+        url: "../php/ticket/ticket-datos-pre.php",
         data: {id_cita},
         success: function (response) {
             const datos = JSON.parse(response);
-            $("#medico").html(datos.sufijo +" "+ datos.apellidos_medi +" "+ datos.nombres_medi);
+            $("#medico").html(datos.sufijo +" "+ datos.nom_ape_medi);
             $("#turno").html("Turno N°: "+ datos.id_cita);
             $("#fecha").html("Fecha: "+ datos.fecha);
             $("#hora").html("Hora: "+ datos.hora.substring(0, 5) + "h");
@@ -48,134 +48,23 @@ $(document).ready(function() {
         $('#modal_icon_e').attr("class", "fa fa-question-circle fa-4x animated rotateIn mb-4");
         $('#modalEspera').modal("show");
         $(document).on('click', '#btn_espera', function() {
-            const id_cita = $("#id_cita").val();
-            //======FECHA Y HORAS ACTUALES=====
-            var d = new Date();
-            var month = d.getMonth() + 1;
-            var day = d.getDate();
-            //fecha
-            var f_actual = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-            //hora
-            const hora = d.getHours() + ':' + d.getMinutes();
-            const id_usuario = $("#id_usuario").val();
+            
             $.ajax({
                 type: "POST",
-                url: "../php/tarifa-med.php",
-                data: {id_cita},
-                success: function (response) {
-                    const tipo_cita = Number(JSON.parse(response).tipo_cita);
-                    const pago_ingreso = Number(JSON.parse(response).pago_ingreso);
-                     const id_f_pago = $('#select_fpago').val();
-                    console.log(pago_ingreso);
-                    console.log(tipo_cita);
-                    if (pago_ingreso == 1) {
-                        console.log(tipo_cita);
-                        if (tipo_cita == 1) {
-                            const tarifa = JSON.parse(response).tarifa;
-                            console.log(tarifa);
-                            const postPago = {
-                                id_f_pago: id_f_pago,
-                                descripcion: "PAGO DE TARIFA DE CITA NORMAL",
-                                costo: tarifa,
-                                id_cita: id_cita,
-                                fecha_p: f_actual,
-                                hora_p: hora,
-                                id_usuario
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "../php/cita_pago/cita_pago-add.php",
-                                data: postPago,
-                                success: function(response) {
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/cita/cita-espera.php",
-                                        data: { id_cita },
-                                        success: function(response) {
-                                           document.getElementById('btn_espera_ing').disabled = true;
-                                          
-                                            $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                            $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                            $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                            $('#modalPush').modal("show");
-                                            window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                            
-                                            
-                                            
-                                        }
-                                    });
-                                }
-                            });
-                        }else{
-                            console.log("control");
-                            const tarifa_control = JSON.parse(response).tarifa_control;
-                            const postPago = {
-                                id_f_pago: id_f_pago,
-                                descripcion: "PAGO DE TARIFA DE CITA DE CONTROL",
-                                costo: tarifa_control,
-                                id_cita: id_cita,
-                                fecha_p: f_actual,
-                                hora_p: hora,
-                                id_usuario
-                            };
-                            $.ajax({
-                                type: "POST",
-                                url: "../php/cita_pago/cita_pago-add.php",
-                                data: postPago,
-                                success: function(response) {
-                                    console.log(response);
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/cita/cita-espera.php",
-                                        data: { id_cita },
-                                        success: function(response) {
-                                            document.getElementById('btn_espera_ing').disabled = true;
-                                            $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                            $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                            $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                            $('#modalPush').modal("show");
-                                            window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }else{ 
-                        const postPago = {
-                            id_f_pago: id_f_pago,
-                            descripcion: "PAGO DE TARIFA DE CITA",
-                            costo: 0,
-                            id_cita: id_cita,
-                            fecha_p: f_actual,
-                            hora_p: hora,
-                            id_usuario
-                        };
-                        $.ajax({
-                            type: "POST",
-                            url: "../php/cita_pago/cita_pago-add.php",
-                            data: postPago,
-                            success: function(response) {
-                                console.log(response);
-                                $.ajax({
-                                    type: "POST",
-                                    url: "../php/cita/cita-espera.php",
-                                    data: { id_cita },
-                                    success: function(response) {
-                                        document.getElementById('btn_espera_ing').disabled = true;
-                                        $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                        $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                        $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                        $('#modalPush').modal("show");
-                                        window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    
+                url: "../php/cita/cita-espera.php",
+                data: { id_cita },
+                success: function(response) {
+                    $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                    $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                    $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                    window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                    setTimeout(function() { window.location.href = "rece.php"; }, 1000);
                 }
             });
-        });
+                      
+        });                             
+                       
     });
 
      //Cargar formas de pago
@@ -194,5 +83,161 @@ $(document).ready(function() {
             $('#select_fpago').html(template);
         }
     });
+    var cont_fp=0;
 
+    //==========Cargar cita pagos a la tabla========//
+    cargarCitasPago();
+
+    function cargarCitasPago() {
+        $.ajax({
+            type: "POST",
+            url: "../php/cita_pago/cita_pago-get.php",
+            data: { id_cita },
+            async:false,
+            success: function(response) {
+                if (response != false) {
+                    const cpagos = JSON.parse(response);
+                    cpagos.forEach(cp => {
+                        const id_cita_pago = cp.id_cita_pago;
+                        const descripcion = cp.descripcion;
+                        const f_pago = cp.nombre;
+                        const costo = cp.costo;
+                        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}'>
+                                                        <td>${f_pago}</td>
+                                                        <td>${descripcion}</td>
+                                                        <td>$${costo}</td>
+                                                        <td><button id='eliminar_fp' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
+                                                    </tr>`);
+                        cont_fp +=1;
+                        console.log(cont_fp);
+                        if (cont_fp>=1)
+                            {
+                                $('#btn_espera_ing').removeAttr('disabled');
+                            }
+                            else
+                            {
+                                $('#btn_espera_ing').attr('disabled', 'disabled');
+                            }
+                    }); 
+                }      
+            }
+        });
+    }
+   
+    //Clic en el boton del modal para añadir otros
+    $('#add_fpago').click(function(e) {
+        
+        e.preventDefault();
+        const id_f_pago = $('#select_fpago').val();
+        const f_pago = $('#select_fpago option:selected').html();
+        const descripcion = $('#descripcion').val();
+        const costo = $('#costo').val();
+        const id_usuario = $("#id_usuario").val();
+        //======FECHA Y HORAS ACTUALES=====
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        //fecha
+        var fecha_p = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+        //hora
+        const hora_p = d.getHours() + ':' + d.getMinutes();
+
+        if (costo == "") {
+            $('#texto_modal').html('Ingrese datos en los campos obligatorios');
+            $('#modal_icon').attr('style', "color: orange");
+            $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+            $('#modalPush').modal("show");
+            $('#descripcion').val('');
+            $('#costo').val('');
+        } else {
+           
+            $.ajax({
+                type: "POST",
+                url: "../php/cita_pago/cita_pago-add.php",
+                data: {
+                    id_f_pago,
+                    descripcion,
+                    costo,
+                    id_cita,
+                    fecha_p,
+                    hora_p,
+                    id_usuario
+                },
+                success: function (response) {
+                    console.log(response);
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/cita_pago/cita_pago-get_id.php",
+                        data: {
+                            id_f_pago,
+                            descripcion,
+                            costo
+                        },
+                        success: function (response) {
+                            const id_cita_pago = JSON.parse(response).id_cita_pago;
+                            const descripcion = JSON.parse(response).descripcion;
+                            const costo = JSON.parse(response).costo;
+                            addCP(id_cita_pago, f_pago, descripcion,costo);
+                            cont_fp +=1;
+                            console.log(cont_fp);
+                            if (cont_fp>=1)
+                                {
+                                    $('#btn_espera_ing').removeAttr('disabled');
+                                }
+                                else
+                                {
+                                    $('#btn_espera_ing').attr('disabled', 'disabled');
+                                }
+                        }
+                    });
+                }
+            });
+            $('#descripcion').val('');
+            $('#costo').val('');
+        }
+
+    });
+
+     //Funcion para cargar los datos en la tabla
+     function addCP(id,fP,dCP, cCP) {
+        const id_cita_pago = id;
+        const f_pago = fP;
+        const descripcion = dCP;
+        const costo = cCP;
+        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}'>
+                                                    <td>${f_pago}</td>
+                                                    <td>${descripcion}</td>
+                                                    <td>$${costo}</td>
+                                                    <td><button id='eliminar_fp' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
+                                                </tr>`);
+    }
+
+    ///Botón de eliminar/////
+    $(document).on('click', '#eliminar_fp', (e) => {
+        
+        const element = $(this)[0].activeElement.parentElement.parentElement;
+        const id_cita_pago = $(element).attr('idCP');
+        const costo = $(element).attr('cCP');
+        $("#fp_body > tr").remove();
+        $.ajax({
+            type: "POST",
+            url: "../php/cita_pago/cita_pago-delete.php",
+            data:{id_cita_pago},
+            success: function (response) {
+                console.log(response);
+                cargarCitasPago();
+                cont_fp -=1;
+                console.log(cont_fp);
+                if (cont_fp>=1)
+                {
+                    $('#btn_espera_ing').removeAttr('disabled');
+                }
+                else
+                {
+                    $('#btn_espera_ing').attr('disabled', 'disabled');
+                }
+            }
+        });
+        
+    });
 });

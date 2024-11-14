@@ -43,7 +43,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                             <div class="row m-l-0 m-r-0">
                                 <div class="col-sm-12">
                                     <div class="card-block">
-                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">Citas Agendadas</h6>
+                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">Agenda Medicos</h6>
                                         <form id="citas-datos">
                                            
                                                 <div class="row form-group">
