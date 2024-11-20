@@ -349,9 +349,11 @@ $(document).ready(function() {
                         
                         if (verif_tarjeta == "true") {
                             //Comprobar si existen valores de cero en la comisi�0�7pn del banco y la retenci��n de la cl��nica
-                            if((Number(val_comision_ban == 0) || val_retencion_cli == 0)){
-                                verif = false;
-                            }
+                            /*
+                                if((Number(val_comision_ban == 0) || val_retencion_cli == 0)){
+                                    verif = false;
+                                }
+                            */
                             template += `
                                         <tr class="bg-blue" citaID="${cita.id_cita}">
                                             <td class="pt-3" hidden>${cita.id_cita}</td>
@@ -442,7 +444,7 @@ $(document).ready(function() {
     var costo_fp = 0;
     //Clic en el boton del modal para añadir otros
     $('#add_fpago').click(function(e) {
-        e.preventDefault();
+        e.preventDefault(); //evitar la accion por defecto
         const id_f_pago = $('#select_fpago').val();
         const f_pago = $('#select_fpago option:selected').html();
         const descripcion = $('#descripcion').val();
