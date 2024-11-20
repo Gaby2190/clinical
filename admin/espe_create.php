@@ -1,9 +1,9 @@
 <?php
-include_once("../sesion.php");
-include_once("../variables.php");
+include_once("../sesion.php");//llama al archivo que controla el tiempo de la sesión 
+include_once("../variables.php");//llama a las variables globales que utilizamos en la programación
 if (trim($_SESSION['rol']) != trim($admin)) {
     echo"<script>window.location.replace('../index.php');</script>";
-}
+}//Si el rol es diferente de adimin no redirige a la pagina principal
 ?>
 <!doctype html>
 <html lang="es">
@@ -12,6 +12,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Detecta el ancho del dispositivo-->
 
     <title>Nueva Especialidad</title>
 

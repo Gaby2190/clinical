@@ -331,7 +331,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         </div>
                                     </div>
 
-                                    <div class="card-block">
+                                    <div class="card-block" >
                                         <h6 class="p-b-5 b-b-default f-w-600 tit text-uppercase"><span style="color: red;">*</span>signos vitales y antropometría</h6>
                                         <label style="font-size:15px" class="m-b-20">(CAMPO OBLIGATORIO)</label>
                                         <br>
@@ -373,7 +373,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                             <th scope="col">Presión arterial</th>
                                                             <th scope="col">Pulso </th>
                                                             <th scope="col">Frec. Resp.</th> 
-                                                            <th scope="col">Frec. Card.</th>
+                                                            <th scope="col" hidden>Frec. Card.</th>
                                                             <th scope="col">Sat. O2</th>
                                                             <th scope="col">Peso</th>
                                                             <th scope="col">Talla</th>
@@ -1065,7 +1065,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                     </div>
                                 </div>
                                 <div class="row  my-2">                                   
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-3" hidden>
                                         <div class="input-group my-3">
                                             <p class="f-w-600 text-uppercase col-sm-12">Frecuencia cardiaca:</p>
                                             <input type="text" class="text-muted f-w-400 form-control" id="frecuencia_c" onkeypress="return event.charCode>=48 && event.charCode<=57" maxlength="3" required>

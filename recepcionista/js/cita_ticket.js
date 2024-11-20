@@ -8,6 +8,7 @@ $(document).ready(function() {
             const datos = JSON.parse(response);
             $("#medico").html(datos.sufijo +" "+ datos.nom_ape_medi);
             $("#turno").html("Turno N°: "+ datos.id_cita);
+            let fecha_cita=datos.fecha;
             $("#fecha").html("Fecha: "+ datos.fecha);
             $("#hora").html("Hora: "+ datos.hora.substring(0, 5) + "h");
             $("#paciente").html("Paciente: "+ datos.apellidos_paci1 +" "+ datos.apellidos_paci2+" "+ datos.nombres_paci1+" "+ datos.nombres_paci2);
@@ -33,6 +34,27 @@ $(document).ready(function() {
                         $("#lbl_cobrar").html("Realizar cobro de la cita: $0 dólares");
                     }
                     
+                }
+            });
+           
+            
+              let  id_medico= datos.id_medico;
+              let   id_paciente= datos.id_paciente;
+            
+
+            $.ajax({
+                type: 'POST',
+                url: '../php/ticket/ticket-ult-cita.php',
+                data: {id_medico, id_paciente},
+                success: function (response){
+                    const dat_fecha = JSON.parse(response);
+                    let ult_fecha = dat_fecha.ult_cita;
+                    console.log(ult_fecha);
+                    console.log(fecha_cita);
+
+                    var diff = new Date(fecha_cita).getTime() - new Date(ult_fecha).getTime();
+                                    
+                    $("#ult_cita").html("Ultima cita: "+ dat_fecha.ult_cita + "(Hace "+diff/(1000*60*60*24)+" dias)");
                 }
             });
         }

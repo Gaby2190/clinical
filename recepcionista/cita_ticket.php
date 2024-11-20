@@ -47,17 +47,20 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                         <div class="row justify-content-center">
                                             <input type="text" id="id_cita" value="<?php echo($id_cita);?>" required hidden>
                 
-                                            <div class="col-sm-6 my-2">
+                                            <div class="col-sm-4 my-2">
                                                 <label class="text-muted f-w-400 text-center" id="medico"></label>
                                             </div>
-                                            <div class="col-sm-6 my-2">
+                                            <div class="col-sm-4 my-2">
                                                 <label class="text-muted f-w-400" id="paciente"></label>
                                             </div>
-                                            <div class="col-sm-3 my-2">
+                                            <div class="col-sm-4 my-2">
                                                 <label class="text-muted f-w-400" id="turno"></label>
                                             </div>
                                             <div class="col-sm-3 my-2">
                                                 <label class="text-muted f-w-400" id="fecha"></label>
+                                            </div>
+                                            <div class="col-sm-3 my-2">
+                                                <strong><label class="text-muted f-w-400" id="ult_cita"></label></strong>
                                             </div>
                                             <div class="col-sm-3 my-2">
                                                 <label class="text-muted f-w-400" id="hora"></label>

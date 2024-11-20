@@ -19,5 +19,5 @@ include_once '../../dbconnection.php';
   }
   
     $jsonstring = json_encode($json);// se convierte el array en una cadena json
-    echo $jsonstring;//se devuelve el resultado exitoso al caso_create.js
+    echo $jsonstring;//se devuelve el resultado exitoso al segu_read.js
 ?>

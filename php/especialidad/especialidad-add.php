@@ -13,7 +13,7 @@ include_once '../../dbconnection.php';
         die('Consulta Fallida');
     }
 
-    echo "Registro exitoso de la Especialidad";  
+    echo "La especialidad fue ingresada exitosamente ";  
 
 
 ?>

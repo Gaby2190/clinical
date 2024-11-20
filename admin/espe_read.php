@@ -49,6 +49,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                                     <tr>
                                                         <th scope="col" hidden>ID</th>
                                                         <th scope="col">Especialidad</th>
+                                                        <th scope="col">Opciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="especialidades"> </tbody>

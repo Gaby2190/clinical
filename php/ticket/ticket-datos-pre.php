@@ -2,7 +2,11 @@
 include_once '../../dbconnection.php';
 $id_cita = $_POST['id_cita'];
 
-$query = "SELECT ci.*, ca.id_medico, me.sufijo, me.apellidos_medi , me.nombres_medi, me.nom_ape_medi, me.pago_ingreso, me.tarifa, me.tarifa_control, pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2
+$query = "SELECT ci.*, 
+            ca.id_medico, 
+            me.sufijo, me.apellidos_medi , 
+            me.nombres_medi, me.nom_ape_medi, me.pago_ingreso, me.tarifa, me.tarifa_control, 
+            pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2, pa.id_paciente
             FROM cita AS ci
             INNER JOIN caso AS ca
                 ON ci.id_caso = ca.id_caso
@@ -42,6 +46,7 @@ while($row = mysqli_fetch_array($result)) {
         'sufijo' => $row['sufijo'],
         'nombre' => $row['nombre'],
         'nom_ape_medi' => $row['nom_ape_medi'],
+        'id_paciente' => $row['id_paciente'],
         'costo' => $row['costo']
         
     );

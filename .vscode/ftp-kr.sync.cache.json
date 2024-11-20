@@ -2,9 +2,9 @@
   "ftp://vscode_admin@clinical2.0.cesmed.ec@ftp.cesmed.ec:21": {
     ".ftpquota": {
       "type": "-",
-      "size": 13,
+      "size": 14,
       "lmtime": 0,
-      "modified": false
+      "modified": true
     },
     ".git": {},
     ".htaccess": {
@@ -211,14 +211,14 @@
       },
       "espe_create.php": {
         "type": "-",
-        "size": 6056,
-        "lmtime": 0,
+        "size": 6292,
+        "lmtime": 1731866290922.4668,
         "modified": false
       },
       "espe_read.php": {
         "type": "-",
-        "size": 4258,
-        "lmtime": 0,
+        "size": 4345,
+        "lmtime": 1731962167972.2947,
         "modified": false
       },
       "espe_update.php": {
@@ -452,8 +452,8 @@
         },
         "espe_read.js": {
           "type": "-",
-          "size": 1059,
-          "lmtime": 0,
+          "size": 1227,
+          "lmtime": 1731965975871.7485,
           "modified": false
         },
         "espe_update.js": {
@@ -464,8 +464,8 @@
         },
         "fpago_create.js": {
           "type": "-",
-          "size": 599,
-          "lmtime": 0,
+          "size": 609,
+          "lmtime": 1731867811523.4885,
           "modified": false
         },
         "fpago_read.js": {
@@ -596,8 +596,8 @@
         },
         "segu_create.js": {
           "type": "-",
-          "size": 652,
-          "lmtime": 0,
+          "size": 651,
+          "lmtime": 1731867206433.0227,
           "modified": false
         },
         "segu_read.js": {
@@ -608,8 +608,8 @@
         },
         "segu_update.js": {
           "type": "-",
-          "size": 1333,
-          "lmtime": 0,
+          "size": 1337,
+          "lmtime": 1731970888937.6333,
           "modified": false
         }
       },
@@ -735,8 +735,8 @@
       },
       "segu_update.php": {
         "type": "-",
-        "size": 5946,
-        "lmtime": 0,
+        "size": 5940,
+        "lmtime": 1731969292913.854,
         "modified": false
       },
       "usuarios.php": {
@@ -819,8 +819,8 @@
       },
       "atencion_paci.php": {
         "type": "-",
-        "size": 117925,
-        "lmtime": 1730319514470.3345,
+        "size": 117940,
+        "lmtime": 1731973625948.1675,
         "modified": false
       },
       "atencion_paci_sin.php": {
@@ -923,14 +923,14 @@
         },
         "atencion_paci.js": {
           "type": "-",
-          "size": 214747,
-          "lmtime": 1731028216038.9897,
+          "size": 215851,
+          "lmtime": 1731549970594.0305,
           "modified": false
         },
         "atencion_paci_sin.js": {
           "type": "-",
-          "size": 214535,
-          "lmtime": 1730408122524.318,
+          "size": 215209,
+          "lmtime": 1731546732404.1897,
           "modified": false
         },
         "atencion_resultado.js": {
@@ -1134,7 +1134,50 @@
       "alergia": {},
       "antecedente_f": {},
       "antecedente_p": {},
-      "aseguradora": {},
+      "aseguradora": {
+        "aseguradora-add.php": {
+          "type": "-",
+          "size": 358,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradora-list.php": {
+          "type": "-",
+          "size": 562,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradora-update.php": {
+          "type": "-",
+          "size": 380,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradora.php": {
+          "type": "-",
+          "size": 454,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradoras-list-med.php": {
+          "type": "-",
+          "size": 847,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradoras-list.php": {
+          "type": "-",
+          "size": 845,
+          "lmtime": 1731968123785.4448,
+          "modified": false
+        },
+        "segu-get.php": {
+          "type": "-",
+          "size": 481,
+          "lmtime": 0,
+          "modified": false
+        }
+      },
       "asistente": {},
       "cajero": {},
       "caso": {},
@@ -1183,20 +1226,20 @@
         },
         "cita-cobrada.php": {
           "type": "-",
-          "size": 2676,
-          "lmtime": 0,
+          "size": 3678,
+          "lmtime": 1731441171967.922,
           "modified": false
         },
         "cita-cobro-id.php": {
           "type": "-",
-          "size": 2507,
-          "lmtime": 0,
+          "size": 2476,
+          "lmtime": 1731536439955.7644,
           "modified": false
         },
         "cita-cobro.php": {
           "type": "-",
-          "size": 2272,
-          "lmtime": 0,
+          "size": 2300,
+          "lmtime": 1731536208064.195,
           "modified": false
         },
         "cita-descuento.php": {
@@ -1471,7 +1514,38 @@
         "lmtime": 0,
         "modified": false
       },
-      "especialidad": {},
+      "especialidad": {
+        "especialidad-add.php": {
+          "type": "-",
+          "size": 369,
+          "lmtime": 1731868078937.6748,
+          "modified": false
+        },
+        "especialidad-list.php": {
+          "type": "-",
+          "size": 563,
+          "lmtime": 0,
+          "modified": false
+        },
+        "especialidad-update.php": {
+          "type": "-",
+          "size": 382,
+          "lmtime": 0,
+          "modified": false
+        },
+        "especialidades-list-med.php": {
+          "type": "-",
+          "size": 668,
+          "lmtime": 0,
+          "modified": false
+        },
+        "especialidades-list.php": {
+          "type": "-",
+          "size": 848,
+          "lmtime": 0,
+          "modified": false
+        }
+      },
       "especialidad.php": {
         "type": "-",
         "size": 551,
@@ -1502,6 +1576,18 @@
       "historial_citas": {},
       "lib": {},
       "medico": {
+        "aseguradora-update.php": {
+          "type": "-",
+          "size": 456,
+          "lmtime": 0,
+          "modified": false
+        },
+        "aseguradora.php": {
+          "type": "-",
+          "size": 770,
+          "lmtime": 0,
+          "modified": false
+        },
         "dashboard": {
           "casos-abiertos.php": {
             "type": "-",
@@ -1557,6 +1643,90 @@
             "lmtime": 1730395607339.1777,
             "modified": false
           }
+        },
+        "especialidad.php": {
+          "type": "-",
+          "size": 776,
+          "lmtime": 0,
+          "modified": false
+        },
+        "estado-update.php": {
+          "type": "-",
+          "size": 1202,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-add-usr.php": {
+          "type": "-",
+          "size": 629,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-add.php": {
+          "type": "-",
+          "size": 1880,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-list-dat.php": {
+          "type": "-",
+          "size": 1265,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-list-id.php": {
+          "type": "-",
+          "size": 969,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-list-usr.php": {
+          "type": "-",
+          "size": 852,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-list.php": {
+          "type": "-",
+          "size": 1520,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medico-update.php": {
+          "type": "-",
+          "size": 1806,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medicos-list-act-esp.php": {
+          "type": "-",
+          "size": 1408,
+          "lmtime": 0,
+          "modified": false
+        },
+        "medicos-list-act.php": {
+          "type": "-",
+          "size": 1257,
+          "lmtime": 1731433595282.2546,
+          "modified": false
+        },
+        "medicos-list.php": {
+          "type": "-",
+          "size": 1265,
+          "lmtime": 0,
+          "modified": false
+        },
+        "password-update.php": {
+          "type": "-",
+          "size": 420,
+          "lmtime": 0,
+          "modified": false
+        },
+        "upload-img-medi.php": {
+          "type": "-",
+          "size": 785,
+          "lmtime": 0,
+          "modified": false
         }
       },
       "medico_pago": {},
@@ -1788,8 +1958,8 @@
         },
         "reporte_comp_p.php": {
           "type": "-",
-          "size": 19828,
-          "lmtime": 0,
+          "size": 21187,
+          "lmtime": 1731535622522.4958,
           "modified": false
         },
         "reporte_cuadre_c.php": {
@@ -1920,8 +2090,8 @@
         },
         "ticket-datos-pre.php": {
           "type": "-",
-          "size": 1842,
-          "lmtime": 1731288558745.8115,
+          "size": 1961,
+          "lmtime": 1731974721628.3096,
           "modified": false
         },
         "ticket-datos.php": {
@@ -1936,10 +2106,16 @@
           "lmtime": 0,
           "modified": false
         },
+        "ticket-ult-cita.php": {
+          "type": "-",
+          "size": 708,
+          "lmtime": 1731978843724.244,
+          "modified": false
+        },
         "ticket.css": {
           "type": "-",
-          "size": 540,
-          "lmtime": 1731287013661.727,
+          "size": 622,
+          "lmtime": 1731543094832.7876,
           "modified": false
         },
         "ticket.js": {
@@ -2031,8 +2207,8 @@
       },
       "cita_age_doc.php": {
         "type": "-",
-        "size": 24109,
-        "lmtime": 1731030055622.201,
+        "size": 24108,
+        "lmtime": 1731344212173.4116,
         "modified": false
       },
       "cita_age_read.php": {
@@ -2073,14 +2249,14 @@
       },
       "cita_ticket.php": {
         "type": "-",
-        "size": 12731,
-        "lmtime": 1731282929683.4338,
+        "size": 12979,
+        "lmtime": 1731978958197.6274,
         "modified": false
       },
       "cobros_realizados.php": {
         "type": "-",
-        "size": 25172,
-        "lmtime": 0,
+        "size": 25185,
+        "lmtime": 1731422217919.3555,
         "modified": false
       },
       "css": {},
@@ -2153,8 +2329,8 @@
         },
         "caja.js": {
           "type": "-",
-          "size": 19104,
-          "lmtime": 1727964072876.1682,
+          "size": 19165,
+          "lmtime": 1731537243784.557,
           "modified": false
         },
         "caja_res.js": {
@@ -2213,14 +2389,14 @@
         },
         "cita_ticket.js": {
           "type": "-",
-          "size": 10189,
-          "lmtime": 1731288487502.517,
+          "size": 11083,
+          "lmtime": 1731978903287.307,
           "modified": false
         },
         "cobros_realizados.js": {
           "type": "-",
-          "size": 30005,
-          "lmtime": 1727966734509.056,
+          "size": 30271,
+          "lmtime": 1731535321814.1199,
           "modified": false
         },
         "cobros_realizados_res.js": {

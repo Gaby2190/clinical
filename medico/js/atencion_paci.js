@@ -2485,14 +2485,36 @@ $(document).ready(function() {
             }
         }).responseText).id_caso;
 
-       
-        
-            if ((($("#motivo_consulta").val() == "")&&(!$("#motivo_consulta").attr('disabled'))) || (($("#problema_actual").val() == "")&&(!$("#problema_actual").attr('disabled')))  || cont_diag == 0) {
-                $('#texto_modal').html('Ingrese los valores obligatorios: Motivo de Consulta, Enfermedad, Signos Vitales ,Diagnóstico');
+            if($("#motivo_consulta").val()==""){
+
+                $('#texto_modal').html('Por favor, Ingrese motivo de consulta');
+                $('#modal_icon').attr('style',"color:orange");
+                $('#modal_icon').attr("class","fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+                $('#modalPush').modal("show");
+                $('#motivo_consulta').trigger( "focus" );
+
+            } else if ($("#problema_actual").val()==""){
+                $('#texto_modal').html('Por favor, Ingrese el problema actual');
+                $('#modal_icon').attr('style',"color:orange");
+                $('#modal_icon').attr("class","fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+                $('#modalPush').modal("show");  
+                $('#problema_actual').trigger( "focus" );
+                
+            } else if ( cont_diag == 0) {
+                $('#texto_modal').html('Por favor, Ingrese minimo un diagnostico ');
                 $('#modal_icon').attr('style', "color: orange");
                 $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
                 $('#modalPush').modal("show");
-            } else {
+                $('#add_diag_modal').trigger( "focus" );
+
+            } else if (cont_sva == 0){
+                $('#texto_modal').html('Por favor, Ingrese minimo una toma de signos vitales ');
+                $('#modal_icon').attr('style', "color: orange");
+                $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
+                $('#modalPush').modal("show");
+                $('#signosva_body').trigger( "focus" );
+            } 
+            else {
                  //Guardar datos del descuento
                  $.ajax({
                      type: "POST",

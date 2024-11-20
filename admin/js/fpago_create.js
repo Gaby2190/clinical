@@ -2,6 +2,7 @@ $(document).ready(function() {
     $('#fpago-datos').submit(e => {
         e.preventDefault();
         const fpago = $('#fpago').val();
+        
         $.ajax({
             type: "POST",
             url: "../php/fpago/fpago-add.php",

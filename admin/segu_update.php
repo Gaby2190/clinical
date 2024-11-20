@@ -44,7 +44,7 @@ if (trim($_SESSION['rol']) != trim($admin)) {
                                     <div class="card-block">
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">nombre - Aseguradora</h6>
                                         <div class="row">
-                                        <input type="text" id="id_segu" value="<?php echo($id_segu);?>" required hidden>
+                                        <input type="text" id="id_segu" value="<?php echo($id_segu);?>" required >
                                             <div class="col-sm-12 my-2">
                                                 <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Nombre de la aseguradora:</p>
                                                 <input type="text" class="text-muted f-w-400 form-control" id="aseguradora" size="100" maxlength="100" required>

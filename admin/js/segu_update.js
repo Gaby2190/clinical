@@ -11,7 +11,7 @@ $(document).ready(function() {
     }
 
 
-    //ACTUALIZAR DATOS DE USUARIO
+    //ACTUALIZAR DATOS DE ASEGURADORA
     $('#btn_datos').click(function(e) {
         e.preventDefault();
         const postData = {
@@ -29,7 +29,7 @@ $(document).ready(function() {
                 $('#texto_modal').html(response);
                 $('#modal_icon').attr("class", "fa fa-pencil-square fa-4x animated rotateIn mb-4");
                 $('#modalPush').modal("show");
-                setTimeout(function() { window.location.href = "espe_read.php"; }, 3000);
+                setTimeout(function() { window.location.href = "segu_read.php"; }, 3000);
             });
         }
 
