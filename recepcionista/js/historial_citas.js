@@ -65,7 +65,7 @@ $(document).ready(function() {
     $(document).on('click', '#certificado_m', (e) => {
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id_cita = $(element).attr('citaID');
-        window.open(`../php/reportes/certificado_medico.php?id_cita=${id_cita}`, '_blank');
+        window.open(`../php/reportes/word/certificado_word.php?id_cita=${id_cita}`, '_blank');
     });
     
     $(document).on('click', '#receta_m', (e) => {

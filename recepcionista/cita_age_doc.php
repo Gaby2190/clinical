@@ -96,33 +96,41 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- Cita seleccionada --->
-                                                    <div class="col-sm-4 my-2 pt-2" id="div_lturno">
+                                                   
+                                                </div>
+                                                 <!-- Cita seleccionada --->
+                                                <div class="col-sm-4 my-2 pt-2" id="div_lturno">
                                                         <p class="m-b-10 f-w-600 text-uppercase"><span style="color: red;">*</span>Turno Seleccionado:</p>
                                                     </div>
                                                     <div class="col-sm-4 my-2 pt-1" id="div_turno">
                                                     <input type="text" class="form-control" id="turno" size="50" maxlength="50" required>
                                                     </div>
-                                                </div>
-                                            
+
                                                 <div class="row form-group" id="div_datos_paciente">
-                                                <div class="col-sm-12 mb-1 mt-4">
-                                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit">Datos del paciente</h6>
-                                                </div>
-                                                <!-- Elementos del control de Nacionalidad mediante un Select -->
-                                                <div class="col-sm-4 my-2">
-                                                    <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Nacionalidad:</p>
-                                                    <select class="custom-select" id="select_nacionalidad" required></select>
-                                                </div>
-                                                <!-- Elementos del control de cedula del paciente mediante un input -->
-                                                <div class="col-sm-4 my-2">
-                                                    <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Cédula:</p>
-                                                <input type="text" class="text-muted f-w-400 form-control" id="cedula_paci" ondrop="return false;" onpaste="return false;" onkeypress="return event.charCode>=48 && event.charCode<=57" size="10" maxlength="10" required>
-                                                </div>
-                                                <!-- Boton para abrir un modal de busqueda por nombre -->
-                                                <div class="col-sm-4 mt-4 pt-3 my-2 pb-0 text-center">
-                                                    <a style="color: #fff;" class="btn" id="buscar_btn"><span class="fa fa-search"></span> Realizar busqueda por nombres</a>
-                                                </div>
+                                                    <div class="col-sm-12 mb-1 mt-4">
+                                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit">Datos del paciente</h6>
+                                                    </div>
+                                                    <!-- Elementos del control de Nacionalidad mediante un Select -->
+                                                    <div class="col-sm-4 my-2">
+                                                        <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Nacionalidad:</p>
+                                                        <select class="custom-select" id="select_nacionalidad" required></select>
+                                                    </div>
+                                                    <!-- Elementos del control de cedula del paciente mediante un input -->
+                                                    <div class="col-sm-4 my-2">
+                                                        <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Cédula:</p>
+                                                        <input type="text" class="text-muted f-w-400 form-control" id="cedula_paci" ondrop="return false;" onpaste="return false;" onkeypress="return event.charCode>=48 && event.charCode<=57" size="10" maxlength="10" required>
+                                                    </div>
+                                                    <!-- Elementos del control de sin cedula del paciente mediante un input -->
+                                                    <div class="col-sm-2 my-2">
+                                                        <input class="form-check-input" type="checkbox" value="" id="sin_ced">
+                                                        <label class="form-check-label m-b-10 f-w-600" for="sin_ced">
+                                                            Sin Cédula
+                                                        </label>
+                                                    </div>
+                                                    <!-- Boton para abrir un modal de busqueda por nombre -->
+                                                    <div class="col-sm-2 my-2">
+                                                        <a style="color: #fff;" class="btn" id="buscar_btn"><span class="fa fa-search"></span> Realizar busqueda por nombres</a>
+                                                    </div>
 
                                                 <div class="col-sm-6 my-2">
                                                     <p class="m-b-10 f-w-600"><span style="color: red;">*</span>Primer nombre:</p>

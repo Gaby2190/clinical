@@ -678,8 +678,18 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                             }
                                                                         });
 
+                                                                        var dia = new Date(fecha).getDate();
+                                                                        var mes = new Date(fecha).getMonth();
+                                                                        var year = new Date(fecha).getFullYear();
+
+                                                                        const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+                                                                        mes = (meses[mes]);
+
+                                                                        fecha_msn=dia+" de "+mes+" del "+year;
+
                                                                         //---------------- Envio Mensajes Pacientes -----------------------
-                                                                const datos_msn = paci.nombres_paci1 + " " + paci.apellidos_paci1 + "," + fecha + "," + hora + "," + paci.nom_ape_medi;
+                                                                        /*
+                                                                const datos_msn = paci.nombres_paci1 + " " + paci.apellidos_paci1 + "," + fecha_msn + "," + hora + "," + paci.nom_ape_medi;
                                                                 const num_paci = paci.celular_paci;
                                                                 const cedula_paci = paci.cedula_paci;
                                                                 
@@ -706,6 +716,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                     $.ajax(settings).done(function (response) {
                                                                     console.log(response);
                                                                     });
+                                                                    */
                                                                     //-------------- Envio Mensajes Medicos ---------------------
                                                                     const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
                                                                     const num_doc = paci.celular_medi;
@@ -871,7 +882,8 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
         $("#div_lturno").show();
         $("#div_turno").show();
         $("#div_datos_paciente").show();
-        location.hash = "#div_lturno";
+        location.hash = "#div_datos_paciente";
+       // $( "#div_datos_paciente" ).trigger( "focus" );
         
 
     });
@@ -880,6 +892,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
           
         const hora = $('#turno').val();
         const fecha = $('#fecha_cita').val();
+        console.log(fecha);
         const numeroDia = new Date(fecha).getDay();
         const dias = [
             'domingo',
@@ -933,15 +946,16 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                 }
                             });
                            
-                            var dia = fecha.getDay();
-                            var mes = fecha.getMonth();
-                            var year = fecha.getFullYear();
+                            var dia = new Date(fecha).getDay();
+                            var mes = new Date(fecha).getMonth();
+                            var year = new Date(fecha).getFullYear();
 
                             const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
                             mes = (meses[mes]);
 
-                            fecha_msn=$dia+" de "+$mes+" del "+$year;
+                            fecha_msn=dia+" de "+mes+" del "+year;
                             //---------------- Envio Mensajes Pacientes -----------------------
+                            /*
                             const datos_msn = paci.nombres_paci1 + " " + paci.apellidos_paci1 + "," + fecha_msn + "," + hora + "," + paci.nom_ape_medi;
                             const num_paci = paci.celular_paci;
                             const cedula_paci = paci.cedula_paci;
@@ -969,8 +983,9 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                 $.ajax(settings).done(function (response) {
                                    console.log(response);
                                 });
+                                */
                                 //-------------- Envio Mensajes Medicos ---------------------
-                                const datos_msn_doc = paci.nom_ape_medi + ","+ fecha_msn + "," + hora;
+                                const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
                                 const num_doc = paci.celular_medi;
                                 const cedula_doc = paci.cedula_medi;
 
@@ -1006,6 +1021,55 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
         
 
     }
+
+    $(document).on('click', '#sin_ced', (e) => {
+        
+        if ($('#sin_ced').is(":checked"))
+            {
+               // Buscar horarios de citas para la fecha seleccionada en base al medico y fecha y almacenar en array (PACIENTE EN ESPERA)
+                let maximo = 0;
+                $.ajax({
+                    type: "POST",
+                    url: '../php/cita/cita-max.php',
+                    global: false,
+                    async: false,
+                    success: function(response) {
+                        const datos_max = JSON.parse(response);
+                        maximo = Number(datos_max.maximo)+1;
+                    }
+                });
+                console.log(maximo);
+                $('#cedula_paci').val(maximo);
+                $('#cedula_paci').attr('disabled', 'disabled');
+
+                $('#nombres_paci1').removeAttr('disabled');
+                $('#apellidos_paci1').removeAttr('disabled');
+                $('#nombres_paci2').removeAttr('disabled');
+                $('#apellidos_paci2').removeAttr('disabled');
+                $('#celular_paci').removeAttr('disabled');
+                $('#datos_btn').removeAttr('disabled');
+                $('#celular_paci').removeAttr('disabled');
+            }
+            else
+            {
+                $('#cedula_paci').val('');
+                $('#cedula_paci').removeAttr('disabled');
+                $('#nombres_paci1').val('');
+                $('#nombres_paci1').attr('disabled', 'disabled');
+                $('#apellidos_paci1').val('');
+                $('#apellidos_paci1').attr('disabled', 'disabled');
+                $('#nombres_paci2').val('');
+                $('#nombres_paci2').attr('disabled', 'disabled');
+                $('#apellidos_paci2').val('');
+                $('#apellidos_paci2').attr('disabled', 'disabled');
+                $('#celular_paci').val('');
+                $('#celular_paci').attr('disabled', 'disabled');
+               
+                $('#datos_btn').attr('disabled', 'disabled');
+                $('#celular_paci').attr('disabled', 'disabled');
+                
+            }
+    });
 
 
 

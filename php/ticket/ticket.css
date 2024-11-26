@@ -3,8 +3,8 @@
     font-family: 'Times New Roman';
 }
 
-#f_pago {
-    font-size: 12px;
+#f_pago, #ladi, #adicionales, #fp, #medico {
+    font-size: 14px;
     font-family: 'Times New Roman';
 }
 
@@ -13,7 +13,7 @@
     font-family: 'Times New Roman';
 }
 #turno{
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
 }
 td,

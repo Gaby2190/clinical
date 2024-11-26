@@ -75,55 +75,44 @@ $(document).ready(function() {
         $('#modalEspera').modal("show");
         $(document).on('click', '#btn_espera', function() {
             
-            $.ajax({
+             //Añadir los exámenes o procemientos en base a la cita//
+             $.ajax({
                 type: "POST",
-                url: "../php/cita/cita-espera.php",
-                data: { id_cita },
+                url: "../php/adicional-delete.php",
+                data: {id_cita},
                 success: function(response) {
-                    //Añadir los exámenes o procemientos en base a la cita//
-                    $.ajax({
-                        type: "POST",
-                        url: "../php/adicional-delete.php",
-                        data: {id_cita},
-                        success: function(response) {
-                            console.log(response);
-                            console.log(adicionales.length);
-                            var verificacion=0;
-                            if (adicionales.length > 0) {
-                                adicionales.forEach(a => {
-                                    const datAdic = {
-                                        descripcion: a.descripcion,
-                                        costo: a.costo,
-                                        id_cita: id_cita,
-                                        id: a.id_servicio                                                                  
-                                    };
-                                    console.log(datAdic);
-        
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/adicional.php",
-                                        data: datAdic,
-                                        success: function(response) {
-                                            console.log(response);
-                                           
-                                        }
-                                    });
-                                });
-                            }
-                            
-                            
-                                $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                $('#modalPush').modal("show");
-                                window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                setTimeout(function() { window.location.href = "rece.php"; }, 1000); 
-                            
-                        }
-                    });
-                    
+                    console.log(response);
+                    console.log(adicionales.length);
+                    var verificacion=0;
+                    if (adicionales.length > 0) {
+                        adicionales.forEach(a => {
+                            const datAdic = {
+                                descripcion: a.descripcion,
+                                costo: a.costo,
+                                id_cita: id_cita,
+                                id: a.id_servicio                                                                  
+                            };
+                            console.log(datAdic);
 
-                   
+                            $.ajax({
+                                type: "POST",
+                                url: "../php/adicional.php",
+                                data: datAdic,
+                                success: function(response) {
+                                    console.log(response);
+                                   
+                                }
+                            });
+                        });
+                    }
+                    
+                    
+                        $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                        $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                        $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                        $('#modalPush').modal("show");
+                        window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                        setTimeout(function() { window.location.href = "rece.php"; }, 1000); 
                     
                 }
             });

@@ -326,53 +326,41 @@ $(document).ready(function() {
                                 data: datMail,
                                 success: function (response) {
                                     console.log(response);
-                                    var settings = {
-                                        "url": "https://api.massend.com/api/sms",
-                                        "method": "POST",
-                                        "timeout": 0,
-                                        "headers": {
-                                            "Content-Type": "application/json"
-                                        },
-                                        "data": JSON.stringify({
-                                            "user": "cesmed@massend.com",
-                                            "pass": "cesmed123",
-                                            "mensajeid": "44934",
-                                            "campana": "CLINICAL CESMED S.C.",
-                                            "telefono": "0986006073",
-                                            "dni": "0401234372",
-                                            "tipo": "1",
-                                            "ruta": "0",
-                                            "datos": "dato1,dato2,dato3"
-                                        }),
-                                        };
-                                        
-                                        $.ajax(settings).done(function (response) {
-                                        console.log(response);
-                                        });
+                                    const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
+                                const num_doc = paci.celular_medi;
+                                const cedula_doc = paci.cedula_medi;
+
+                                var dia = new Date(fecha).getDay();
+                                var mes = new Date(fecha).getMonth();
+                                var year = new Date(fecha).getFullYear();
+
+                                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+                                mes = (meses[mes]);
+
+                                fecha_msn=dia+" de "+mes+" del "+year;
+                                var settings = {
+                                    "url": "https://api.massend.com/api/sms",
+                                    "method": "POST",
+                                    "timeout": 0,
+                                    "headers": {
+                                        "Content-Type": "application/json"
+                                    },
+                                    "data": JSON.stringify({
+                                        "user": "cesmed@massend.com",
+                                        "pass": "cesmed123",
+                                        "mensajeid": "44937",
+                                        "campana": "CLINICAL CESMED S.C.",
+                                        "telefono": num_doc,
+                                        "dni": cedula_doc,
+                                        "tipo": "1",
+                                        "ruta": "0",
+                                        "datos": datos_msn_doc
+                                    }),
+                                    };
                                     
-                                        var settings = {
-                                            "url": "https://api.massend.com/api/sms",
-                                            "method": "POST",
-                                            "timeout": 0,
-                                            "headers": {
-                                                "Content-Type": "application/json"
-                                            },
-                                            "data": JSON.stringify({
-                                                "user": "cesmed@massend.com",
-                                                "pass": "cesmed123",
-                                                "mensajeid": "44937",
-                                                "campana": "CLINICAL CESMED S.C.",
-                                                "telefono": "0967011968",
-                                                "dni": "1003333604",
-                                                "tipo": "1",
-                                                "ruta": "0",
-                                                "datos": "Viviana Ruano,20/10/2024,18:00"
-                                            }),
-                                            };
-                                            
-                                            $.ajax(settings).done(function (response) {
-                                            console.log(response);
-                                            });
+                                    $.ajax(settings).done(function (response) {
+                                       console.log(response);
+                                    });
                                 }
                             });
                         }

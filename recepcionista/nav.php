@@ -50,6 +50,7 @@
                     -->
                     <li><a href="cita_age_read.php">Citas agendadas</a> </li>
                     <li><a href="historial_citas.php">Historial de citas</a> </li>
+                    <li><a href="disp_med.php">Disponibilidad Médicos</a> </li>
                     
                 </ul>
             </li>
@@ -59,6 +60,7 @@
                 <span class="text-uppercase">Caja<i class="lnr lnr-chevron-right"></i></span></a>
                 <ul class="sub-menu-list">
                     <li><a href="c_pendientes.php">Cobros pendientes</a> </li>
+                    <li><a href="historial_tickets.php">Historial de Tickets</a> </li>
                     <li><a href="cobros_realizados.php">Cobros realizados</a> </li>
                     <li><a href="historial_pagos.php">Historial de pagos</a> </li>
                     <li><a href="cuadre_caja.php">Cuadre de caja diario</a> </li>

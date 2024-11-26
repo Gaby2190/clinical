@@ -12,7 +12,7 @@ include_once '../../variables.php';
                     ON me.id_medico = ca.id_medico
                 INNER JOIN paciente AS pa
                     ON pa.id_paciente = ca.id_paciente
-                WHERE ci.fecha = '{$fecha}' and (ci.id = '{$cita_agendada}' or ci.id = '{$cita_reagendada}')  ORDER BY ci.fecha DESC";
+                WHERE ci.fecha = '{$fecha}' and (ci.id = '{$cita_agendada}' or ci.id = '{$cita_reagendada}')  ORDER BY me.nombres_medi DESC, ci.hora ASC";
 
     $result = mysqli_query($conn, $query);
 

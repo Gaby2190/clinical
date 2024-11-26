@@ -571,7 +571,7 @@ $(document).ready(function() {
                 com_ban += Number(e.comision_ban);
                 ret_cli += Number(e.retencion_cli);
                 com_c = Number(e.com_c);
-                c_c += Number(e.comision_con);
+                if(e.tarifa>0){c_c += Number(e.comision_con);}
                 com_a = Number(e.com_a);
                 c_a += Number(e.comision_adi);
                 transferencia += Number(e.transferencia);

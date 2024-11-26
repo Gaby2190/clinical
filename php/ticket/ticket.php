@@ -24,16 +24,20 @@
         <table>
             <tbody>
                 <tr>
-                    <td><label id="medico"></label></td>
+                    <td><strong><label id="medico"></label></strong></td>
                 </tr>
-                <tr>
-                    <td><label id="turno"></label></td>
-                </tr>
+                
                 <tr>
                     <td><strong><label id="fecha"></label></strong></td>
                 </tr>
                 <tr>
                     <td><strong><label id="hora"></label></strong></td>
+                </tr>
+                <tr>
+                    <td><label>La hora indica es referencial.</label></td>
+                </tr>
+                <tr>
+                    <td></br></td>
                 </tr>
                 <tr>
                     <td><label id="paciente"></label></td>
@@ -42,9 +46,20 @@
                     <td><label id="t_cita"></label></td>
                 </tr>
                 <tr>
+                    <td><label id="turno"></label></td>
+                </tr>
+                <tr>
+                    <td id="fp"><strong>FORMA DE PAGO</strong></td>                    
+                </tr>
+                <tr>
                     <td id="f_pago"></td>                    
                 </tr>
-                
+                <tr>
+                    <td id="ladi"><strong>ADICIONALES</strong></td>                    
+                </tr>
+                <tr>
+                    <td id="adicionales"></td>                    
+                </tr>
             </tbody>
         </table>
         </div>

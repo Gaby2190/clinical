@@ -819,8 +819,8 @@
       },
       "atencion_paci.php": {
         "type": "-",
-        "size": 117940,
-        "lmtime": 1731973625948.1675,
+        "size": 118014,
+        "lmtime": 1732570478140.9368,
         "modified": false
       },
       "atencion_paci_sin.php": {
@@ -995,8 +995,8 @@
         },
         "historial_citas.js": {
           "type": "-",
-          "size": 5319,
-          "lmtime": 0,
+          "size": 5326,
+          "lmtime": 1732290182470.1294,
           "modified": false
         },
         "m_cita.js": {
@@ -1268,14 +1268,14 @@
         },
         "cita-list-fech-med.php": {
           "type": "-",
-          "size": 1895,
-          "lmtime": 0,
+          "size": 1916,
+          "lmtime": 1732291066567.031,
           "modified": false
         },
         "cita-list-fech.php": {
           "type": "-",
-          "size": 1822,
-          "lmtime": 0,
+          "size": 1842,
+          "lmtime": 1732291532467.6416,
           "modified": false
         },
         "cita-list-paci-med.php": {
@@ -1290,10 +1290,22 @@
           "lmtime": 0,
           "modified": false
         },
+        "cita-list-result copy.php": {
+          "type": "-",
+          "size": 856,
+          "lmtime": 1726081799413.455,
+          "modified": false
+        },
         "cita-list-result.php": {
           "type": "-",
           "size": 856,
           "lmtime": 0,
+          "modified": false
+        },
+        "cita-max.php": {
+          "type": "-",
+          "size": 572,
+          "lmtime": 1732160778910.6208,
           "modified": false
         },
         "cita-med-list-esp.php": {
@@ -2003,6 +2015,22 @@
           "size": 21619,
           "lmtime": 0,
           "modified": false
+        },
+        "word": {
+          "certificado_word.php": {
+            "type": "-",
+            "size": 9225,
+            "lmtime": 1732591093950.1013,
+            "modified": false
+          },
+          "index.php": {
+            "type": "-",
+            "size": 332,
+            "lmtime": 0,
+            "modified": false
+          },
+          "librerias": {},
+          "plantillas": {}
         }
       },
       "revision_o_s": {
@@ -2347,8 +2375,8 @@
         },
         "cita_age_doc.js": {
           "type": "-",
-          "size": 54350,
-          "lmtime": 1731287267172.5146,
+          "size": 57640,
+          "lmtime": 1732210174980.031,
           "modified": false
         },
         "cita_age_read.js": {
@@ -2359,8 +2387,8 @@
         },
         "cita_control-det.js": {
           "type": "-",
-          "size": 18594,
-          "lmtime": 1730153460272.1404,
+          "size": 17687,
+          "lmtime": 1732210199356.3098,
           "modified": false
         },
         "cita_control.js": {
@@ -2395,8 +2423,8 @@
         },
         "cobros_realizados.js": {
           "type": "-",
-          "size": 30271,
-          "lmtime": 1731535321814.1199,
+          "size": 30378,
+          "lmtime": 1732073511338.204,
           "modified": false
         },
         "cobros_realizados_res.js": {

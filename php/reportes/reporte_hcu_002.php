@@ -543,6 +543,14 @@ while($row = mysqli_fetch_array($result)) {
             }
         }
 
+//ojo
+        if(strlen($desc_af)>0){
+            $pdf->MultiCell(190,5,utf8_decode('*'.$desc_af.'*'),1,'L');
+        }
+        else{
+            $pdf->MultiCell(190,5,utf8_decode('*Sin Antecedentes Patológicos Identificados*'),1,'L');
+        }
+
 
         $pdf->MultiCell(190,5,utf8_decode('*'.$desc_af.'*'),1,'L');
         $celdas = (125 - $pdf->GetY())/5;

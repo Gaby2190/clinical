@@ -298,7 +298,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="js/rece.js"></script>
 
-    <script src="js/cita_ticket.js"></script>
+    <script src="js/cita_ticket_his.js"></script>
 
 </body>
 

@@ -92,7 +92,7 @@ $(document).ready(function() {
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id_cita = $(element).attr('citaID');
         const id_paciente = $(element).attr('pacienteID');
-        window.open(`m_cita.php?id_paciente=${id_paciente}&id_cita=${id_cita}`, '_blank');
+        window.open(`atencion_paci.php?id_paciente=${id_paciente}&id_cita=${id_cita}`, '_blank');
     });
 
     //Busqueda en la tabla de pacientes

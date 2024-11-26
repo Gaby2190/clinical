@@ -7,8 +7,7 @@
     $id = $_POST['id'];
 
 
-    $query = "DELETE FROM adicional WHERE id_cita'$id_cita';";
-    $result = mysqli_query($conn, $query);
+    
 
     $query = "INSERT into adicional(descripcion,costo,id_cita,id) VALUES ('$descripcion','$costo','$id_cita','$id')";
     $result = mysqli_query($conn, $query);

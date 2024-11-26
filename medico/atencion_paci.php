@@ -226,7 +226,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_organos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_organos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="organos_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="organos_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -237,7 +237,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_respiratorio' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_respiratorio' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="respiratorio_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="respiratorio_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -248,7 +248,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_cardiov' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_cardiov' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="cardiov_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="cardiov_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -259,7 +259,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_digestivo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_digestivo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="digestivo_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="digestivo_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -270,7 +270,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_genital' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_genital' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="genital_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="genital_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -281,7 +281,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_urinario' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_urinario' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="urinario_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="urinario_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -292,7 +292,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_musculoe' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_musculoe' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="musculoe_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="musculoe_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -303,7 +303,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_endocrino' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_endocrino' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="endocrino_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="endocrino_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -314,7 +314,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_hemol' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_hemol' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="hemol_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="hemol_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -325,7 +325,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_nervioso' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_nervioso' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="nervioso_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="nervioso_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,7 +417,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_piel' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_piel' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="piel" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="piel" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -428,7 +428,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_cabeza' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_cabeza' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="cabeza_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="cabeza_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -439,7 +439,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_ojos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_ojos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="ojos" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="ojos" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -450,7 +450,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_oidos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_oidos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="oidos" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="oidos" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -461,7 +461,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_nariz' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_nariz' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="nariz" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="nariz" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -472,7 +472,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_boca' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_boca' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="boca" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="boca" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -483,7 +483,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_orofaringe' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_orofaringe' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="orofaringe" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="orofaringe" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -494,7 +494,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_cuello' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_cuello' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="cuello_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="cuello_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -505,7 +505,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_axilas' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_axilas' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="axilas" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="axilas" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -516,7 +516,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_torax' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_torax' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="torax_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="torax_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -527,7 +527,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_abdomen' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_abdomen' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="abdomen_i" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="abdomen_i" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -538,7 +538,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_columna' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_columna' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="columna" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="columna" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -549,7 +549,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_ingle' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_ingle' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="ingle" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="ingle" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -560,7 +560,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_msup' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_msup' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="msup" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="msup" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -571,7 +571,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_minf' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_minf' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="minf" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="minf" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <!-------------------------- SISTEMICO ---------------------->
@@ -583,7 +583,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_sorganos' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sorganos' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="sorganos" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="sorganos" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -594,7 +594,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_srespiratorio' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_srespiratorio' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="srespiratorio" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="srespiratorio" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -605,7 +605,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_scardio' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_scardio' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="scardio" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="scardio" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -616,7 +616,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_sdigestivo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sdigestivo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="sdigestivo" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="sdigestivo" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -627,7 +627,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_sgenital' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sgenital' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="sgenital" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="sgenital" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -638,7 +638,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_surinario' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_surinario' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="surinario" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="surinario" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -649,7 +649,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_smusculo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_smusculo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="smusculo" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="smusculo" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -660,7 +660,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_sendocrino' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sendocrino' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="sendocrino" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="sendocrino" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -671,7 +671,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_shemo' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_shemo' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="shemo" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="shemo" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -682,7 +682,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                                     <button id='cp_sneurologico' style="color: #fff" class="btn btn-primary btn-sm">CP</button> / <button id='sp_sneurologico' style="color: #fff" class="btn btn-primary btn-sm" disabled>SP</button>
                                                 </div>
                                                 <div class="col-sm-6 my-2">
-                                                    <input type="text" class="form-control" id="sneurologico" size="255" maxlength="255" disabled>
+                                                    <input type="text" class="form-control" id="sneurologico" size="1000" maxlength="1000" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -938,7 +938,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
 
                                 <div class="input-group mb-3">
                                     <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Descripción:</p>
-                                    <textarea class="form-control" class="form-control validate" id="descripcion_ante" rows="7" size="255" maxlength="255"></textarea>                                  
+                                    <textarea class="form-control" class="form-control validate" id="descripcion_ante" rows="7" size="1000" maxlength="1000"></textarea>                                  
                                 </div>
 
                             </div>
@@ -973,7 +973,7 @@ if (trim($_SESSION['rol']) != trim($medi)) {
 
                                 <div class="input-group mb-3">
                                     <p class="f-w-600 text-uppercase col-sm-12">Descripción:</p>
-                                    <textarea id="descripcion_antef" class="form-control validate" size="255" maxlength="255" rows="5" required></textarea>
+                                    <textarea id="descripcion_antef" class="form-control validate" size="1000" maxlength="1000" rows="5" required></textarea>
                                 </div>
 
                             </div>
