@@ -2019,8 +2019,8 @@
         "word": {
           "certificado_word.php": {
             "type": "-",
-            "size": 9225,
-            "lmtime": 1732591093950.1013,
+            "size": 10452,
+            "lmtime": 1732630540018.7168,
             "modified": false
           },
           "index.php": {
@@ -2030,7 +2030,26 @@
             "modified": false
           },
           "librerias": {},
-          "plantillas": {}
+          "plantillas": {
+            "CERTIFICADO.docx": {
+              "type": "-",
+              "size": 78055,
+              "lmtime": 1732630436145.3208,
+              "modified": false
+            },
+            "~$RTIFICADO.docx": {
+              "type": "-",
+              "size": 162,
+              "lmtime": 1732630424282.3733,
+              "modified": false
+            },
+            "~WRL0003.tmp": {
+              "type": "-",
+              "size": 77943,
+              "lmtime": 0,
+              "modified": false
+            }
+          }
         }
       },
       "revision_o_s": {
@@ -2375,9 +2394,9 @@
         },
         "cita_age_doc.js": {
           "type": "-",
-          "size": 57640,
+          "size": 57636,
           "lmtime": 1732210174980.031,
-          "modified": false
+          "modified": true
         },
         "cita_age_read.js": {
           "type": "-",
@@ -2417,15 +2436,21 @@
         },
         "cita_ticket.js": {
           "type": "-",
-          "size": 11083,
+          "size": 17939,
           "lmtime": 1731978903287.307,
+          "modified": true
+        },
+        "cita_ticket_his.js": {
+          "type": "-",
+          "size": 17321,
+          "lmtime": 0,
           "modified": false
         },
         "cobros_realizados.js": {
           "type": "-",
-          "size": 30378,
+          "size": 30394,
           "lmtime": 1732073511338.204,
-          "modified": false
+          "modified": true
         },
         "cobros_realizados_res.js": {
           "type": "-",
@@ -2447,13 +2472,19 @@
         },
         "historial_citas.js": {
           "type": "-",
-          "size": 4363,
-          "lmtime": 0,
+          "size": 4366,
+          "lmtime": 1732630705208.7395,
           "modified": false
         },
         "historial_pagos.js": {
           "type": "-",
           "size": 2345,
+          "lmtime": 0,
+          "modified": false
+        },
+        "historial_tickets.js": {
+          "type": "-",
+          "size": 2436,
           "lmtime": 0,
           "modified": false
         },
