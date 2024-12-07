@@ -1,5 +1,6 @@
 $(document).ready(function() { 
-
+    var adicionales = [];
+    var otros = [];
     getServicio();
     const id_cita = $("#id_cita").val();
     $.ajax({
@@ -64,7 +65,43 @@ $(document).ready(function() {
         }
     });
 
-    
+    function guardar_adi(){
+        $.ajax({
+            type: "POST",
+            url: "../php/adicional-delete.php",
+            data: {id_cita},
+            success: function(response) {
+                console.log(response);
+                console.log(adicionales.length);
+                var verificacion=0;
+                if (adicionales.length > 0) {
+                    adicionales.forEach(a => {
+                        const datAdic = {
+                            descripcion: a.descripcion,
+                            costo: a.costo,
+                            id_cita: id_cita,
+                            id: a.id_servicio                                                                  
+                        };
+                        console.log(datAdic);
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/adicional.php",
+                            data: datAdic,
+                            success: function(response) {
+                                console.log(response);
+                               
+                            }
+                        });
+                    });
+                }
+                
+                
+                   
+                
+            }
+        });
+    }
 
     $("#btn_espera_ing").click(function (e) { 
         e.preventDefault();
@@ -81,46 +118,13 @@ $(document).ready(function() {
                 data: { id_cita },
                 success: function(response) {
                     //Añadir los exámenes o procemientos en base a la cita//
-                    $.ajax({
-                        type: "POST",
-                        url: "../php/adicional-delete.php",
-                        data: {id_cita},
-                        success: function(response) {
-                            console.log(response);
-                            console.log(adicionales.length);
-                            var verificacion=0;
-                            if (adicionales.length > 0) {
-                                adicionales.forEach(a => {
-                                    const datAdic = {
-                                        descripcion: a.descripcion,
-                                        costo: a.costo,
-                                        id_cita: id_cita,
-                                        id: a.id_servicio                                                                  
-                                    };
-                                    console.log(datAdic);
-        
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../php/adicional.php",
-                                        data: datAdic,
-                                        success: function(response) {
-                                            console.log(response);
-                                           
-                                        }
-                                    });
-                                });
-                            }
-                            
-                            
-                                $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
-                                $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
-                                $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
-                                $('#modalPush').modal("show");
-                                window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
-                                setTimeout(function() { window.location.href = "rece.php"; }, 1000); 
-                            
-                        }
-                    });
+                    guardar_adi();
+                    $('#texto_modal').html("Se ha ingresado satisfactoriamente al paciente a sala de espera");
+                    $('#modal_icon').attr('style', "color: rgb(57, 160, 57)");
+                    $('#modal_icon').attr("class", "fa fa-clock-o fa-4x animated rotateIn mb-4");
+                    $('#modalPush').modal("show");
+                    window.open(`../php/ticket/ticket.php?id_cita=${id_cita}`, '_blank');
+                    setTimeout(function() { window.location.href = "rece.php"; }, 1000); 
                     
 
                    
@@ -146,12 +150,34 @@ $(document).ready(function() {
                 `;
             });
             $('#select_fpago').html(template);
+            $('#select_fpagoadi').html(template);
         }
     });
+     //Cargar tipos de pago
+     $.ajax({
+        async: false,
+        url: '../php/tpago/tpagos-list.php',
+        type: 'POST',
+        success: function(response) {
+            const tpagos = JSON.parse(response);
+            let template = '';
+            tpagos.forEach(tp => {
+                template += `
+                <option value="${tp.id_tipo_pago}">${tp.descripcion}</option>
+                `;
+            });
+            $('#select_tpago').html(template);
+            
+        }
+    });
+    
+            
+       
     var cont_fp=0;
 
     //==========Cargar cita pagos a la tabla========//
     cargarCitasPago();
+    
 
     function cargarCitasPago() {
         $.ajax({
@@ -166,10 +192,13 @@ $(document).ready(function() {
                         const id_cita_pago = cp.id_cita_pago;
                         const descripcion = cp.descripcion;
                         const f_pago = cp.nombre;
+                        const tp_descripcion = cp.tp_descripcion;
+                        const id_tipo_pago = cp.id_tipo_pago;
                         const costo = cp.costo;
-                        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}'>
+                        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}' desC='${descripcion}' tP='${id_tipo_pago}'>
                                                         <td>${f_pago}</td>
                                                         <td>${descripcion}</td>
+                                                        <td>${tp_descripcion}</td>
                                                         <td>$${costo}</td>
                                                         <td><button id='eliminar_fp' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
                                                     </tr>`);
@@ -195,6 +224,8 @@ $(document).ready(function() {
         e.preventDefault();
         const id_f_pago = $('#select_fpago').val();
         const f_pago = $('#select_fpago option:selected').html();
+        const id_t_pago = $('#select_tpago').val();
+        const t_pago = $('#select_tpago option:selected').html();
         const descripcion = $('#descripcion').val();
         const costo = $('#costo').val();
         const id_usuario = $("#id_usuario").val();
@@ -226,7 +257,9 @@ $(document).ready(function() {
                     id_cita,
                     fecha_p,
                     hora_p,
-                    id_usuario
+                    id_usuario,
+                    id_t_pago,
+                    t_pago
                 },
                 success: function (response) {
                     console.log(response);
@@ -242,36 +275,54 @@ $(document).ready(function() {
                             const id_cita_pago = JSON.parse(response).id_cita_pago;
                             const descripcion = JSON.parse(response).descripcion;
                             const costo = JSON.parse(response).costo;
-                            addCP(id_cita_pago, f_pago, descripcion,costo);
+                            addCP(id_cita_pago, f_pago, descripcion,costo, t_pago, id_t_pago);
                             cont_fp +=1;
                             console.log(cont_fp);
                             if (cont_fp>=1)
                                 {
                                     $('#btn_espera_ing').removeAttr('disabled');
+                                    
                                 }
                                 else
                                 {
                                     $('#btn_espera_ing').attr('disabled', 'disabled');
+                                    
                                 }
+                                if(id_t_pago==3)
+                                {
+                                    guardar_adicionales();
+                                    
+                                }
+                                
+                                if(id_t_pago==5)
+                                    {
+                                        guardar_enfermeria();
+                                        
+                                    }
+                                    
+                                        $('#descripcion').val('');
+                                        $('#costo').val('');
+                                    
                         }
                     });
                 }
             });
-            $('#descripcion').val('');
-            $('#costo').val('');
+            
         }
 
     });
 
      //Funcion para cargar los datos en la tabla
-     function addCP(id,fP,dCP, cCP) {
+     function addCP(id,fP,dCP, cCP, tP, itP) {
         const id_cita_pago = id;
         const f_pago = fP;
+        const t_pago = tP;
         const descripcion = dCP;
         const costo = cCP;
-        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}'>
+        $("#fp_table>tbody").append(`<tr idCP='${id_cita_pago}' cCP='${costo}' desC='${descripcion}' tP='${itP}'>
                                                     <td>${f_pago}</td>
                                                     <td>${descripcion}</td>
+                                                    <td>${t_pago}</td>
                                                     <td>$${costo}</td>
                                                     <td><button id='eliminar_fp' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
                                                 </tr>`);
@@ -282,7 +333,9 @@ $(document).ready(function() {
         
         const element = $(this)[0].activeElement.parentElement.parentElement;
         const id_cita_pago = $(element).attr('idCP');
+        const descripcion = $(element).attr('desC');
         const costo = $(element).attr('cCP');
+        const id_tipo_pago = $(element).attr('tP');
         $("#fp_body > tr").remove();
         $.ajax({
             type: "POST",
@@ -301,6 +354,33 @@ $(document).ready(function() {
                 {
                     $('#btn_espera_ing').attr('disabled', 'disabled');
                 }
+
+                if (id_tipo_pago==3)
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "../php/cita_pago/adi_pago-delete.php",
+                        data:{id_cita,descripcion,costo},
+                        success: function (response) {
+                            console.log(response);
+                            adicionales = [];
+                            cargarAdicionalesPrevios();
+                        }
+                    });
+                }
+                if (id_tipo_pago==5)
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/cita_pago/otr_pago-delete.php",
+                            data:{id_cita,descripcion,costo},
+                            success: function (response) {
+                                console.log(response);
+                                otros = [];
+                                cargarOtrosPrevios();
+                            }
+                        });
+                    }   
             }
         });
         
@@ -308,30 +388,15 @@ $(document).ready(function() {
 
 
       //==========Variable Adicionales=========//
-      var adicionales = [];
+     
 
 //===================================================Click en añadir un adicional====================================//
-$('#add_adicional').click(function(e) {
-    e.preventDefault();
-    const id_servicio = $('#select_servicio').val();
-    const descripcion = $('#descripcion_adi').val();
-    const costo = $('#costo_adi').val();
-
-    if (id_servicio == "" || descripcion == "" || costo == "") {
-        $('#texto_modal').html('Ingrese datos en los campos obligatorios');
-        $('#modal_icon').attr('style', "color: orange");
-        $('#modal_icon').attr("class", "fa fa-exclamation-circle fa-4x animated rotateIn mb-4");
-        $('#modalPush').modal("show");
-        $('#select_servicio').val('');
-        $('#descripcion_adi').val('');
-        $('#costo_adi').val('');
-    } else {
-        /* Para obtener el texto */
-        const select = document.getElementById("select_servicio");
-        const servicio = select.options[select.selectedIndex].text;
-        
-        addAdic(id_servicio,servicio,descripcion,costo);
-        //==============================Añadir los datos al arreglo definido arriba===============//
+function guardar_adicionales(){
+   
+    const id_servicio = 2;
+    const servicio = "PROCEDIMIENTO";
+    const descripcion = $('#descripcion').val();
+    const costo = $('#costo').val();
         const dat = {
             id_servicio: id_servicio,
             servicio: servicio,
@@ -341,14 +406,35 @@ $('#add_adicional').click(function(e) {
         console.log(dat);
         adicionales.push(dat);
         console.log(adicionales);
-
-        $('#select_servicio').val('');
-        $('#descripcion_adi').val('');
-        $('#costo_adi').val('');
-        
+        const id_usuario = $("#id_usuario").val();
+    
+        guardar_adi();
+        $('#descripcion').val('');
+        $('#costo').val('');
+       
     }
 
-});
+
+
+function getServicio() {
+    $.ajax({
+        async: false,
+        url: '../php/servicio.php',
+        type: 'POST',
+        success: function(response) {
+            const servicios = JSON.parse(response);
+            let template = '<option selected="selected"></option>';
+            servicios.forEach(servicio => {
+                template += `
+                <option value="${servicio.id}">${servicio.nombre}</option>
+                `;
+            });
+            $('#select_servicio').html(template);
+        }
+    });
+}
+
+
 
 cargarAdicionalesPrevios();
 
@@ -375,72 +461,89 @@ function cargarAdicionalesPrevios() {
                 };
                
                 adicionales.push(dat);
-                
-                addAdic(adi.id, servicio, adi.descripcion, adi.costo);
+                console.log(adicionales);
                 
             });
             }
         }
     });
 }
-//===========================================Función añadir plan de tratamiento a la tabla recibiendo datos=====================================//
-function addAdic(idS, tS, dAdd, cAdd) {
-    const id_servicio = idS;
-    const servicio = tS;
-    const descripcion = dAdd;
-    const costo = cAdd;
 
-    $("#adicionales_table>tbody").append(`<tr idS='${id_servicio}' tS='${servicio}' dAdd='${descripcion}' cAdd='${costo}'>
-                                                <td>${servicio}</td>
-                                                <td>${descripcion}</td>
-                                                <td>${costo}</td>
-                                                <td><button id='eliminar_adic' style="color: #fff" class="btn btn-danger btn-sm">Eliminar</button></td>
-                                            </tr>`);
-    
-}
-
-///======== Botón de eliminar adicional=====/////
-$(document).on('click', '#eliminar_adic', (e) => {
-    const element = $(this)[0].activeElement.parentElement.parentElement;
-    const id_servicio = $(element).attr('idS');
-    const servicio = $(element).attr('tS');
-    const descripcion = $(element).attr('dAdd');
-    const costo = $(element).attr('cAdd');
-
-    const busqueda = JSON.stringify({
-        id_servicio: id_servicio,
-        servicio: servicio,
-        descripcion: descripcion,
-        costo: costo
-    });
-
-    let indice = adicionales.findIndex(adic => JSON.stringify(adic) === busqueda);
-    adicionales.splice(indice, 1);
-    $("#adicionales_body > tr").remove();
+function guardar_enfermeria(){
    
-    adicionales.forEach(a => {
-        addAdic(a.id_servicio, a.servicio, a.descripcion, a.costo);
-    });
-});
+    
+    const descripcion = $('#descripcion').val();
+    const costo = $('#costo').val();
+        const dat = {
+            descripcion: descripcion,
+            costo: costo
+        };
+        console.log(dat);
+        otros.push(dat);
+        console.log(otros);
+      
+        guardar_enfer();
+        $('#descripcion').val('');
+        $('#costo').val('');
+       
+    }
+
+    function guardar_enfer(){
+        $.ajax({
+            type: "POST",
+            url: "../php/otros-delete.php",
+            data: {id_cita},
+            success: function(response) {
+                console.log(response);
+                console.log(otros.length);
+                if (otros.length > 0) {
+                    otros.forEach(a => {
+                        const datotros = {
+                            descripcion: a.descripcion,
+                            costo: a.costo,
+                            id_cita: id_cita                                                                
+                        };
+                        console.log(datotros);
+                        $.ajax({
+                            type: "POST",
+                            url: "../php/otros.php",
+                            data: datotros,
+                            success: function(response) {
+                                console.log(response); 
+                            }
+                        });
+                    });
+                }  
+            }
+        });
+    }
 
 
-function getServicio() {
+    cargarOtrosPrevios();
+
+function cargarOtrosPrevios() {
     $.ajax({
+        type: "POST",
+        url: "../php/otros-read.php",
         async: false,
-        url: '../php/servicio.php',
-        type: 'POST',
+        data: { id_cita },
         success: function(response) {
-            const servicios = JSON.parse(response);
-            let template = '<option selected="selected"></option>';
-            servicios.forEach(servicio => {
-                template += `
-                <option value="${servicio.id}">${servicio.nombre}</option>
-                `;
+            if (response != false) {
+            const res_otro = JSON.parse(response);
+            res_otro.forEach(otr => {
+                
+                const dat_otr = {
+                    descripcion: otr.descripcion,
+                    costo: otr.costo
+                };
+               
+                otros.push(dat_otr);
+                console.log(otros);
+                
             });
-            $('#select_servicio').html(template);
+            }
         }
     });
 }
-
 
 });

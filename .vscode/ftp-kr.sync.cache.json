@@ -1126,9 +1126,9 @@
       },
       "adicional.php": {
         "type": "-",
-        "size": 599,
+        "size": 497,
         "lmtime": 1730393311266.9326,
-        "modified": false
+        "modified": true
       },
       "administrador": {},
       "alergia": {},
@@ -1385,6 +1385,12 @@
           "size": 624,
           "lmtime": 0,
           "modified": false
+        },
+        "cita-agendada.php": {
+          "type": "-",
+          "size": 929,
+          "lmtime": 1732725400216.1138,
+          "modified": false
         }
       },
       "cita_actualizada.php": {
@@ -1514,6 +1520,32 @@
           "modified": false
         }
       },
+      "disponibilidad": {
+        "disponibilidad-add.php": {
+          "type": "-",
+          "size": 420,
+          "lmtime": 1732636274287.596,
+          "modified": false
+        },
+        "disponibilidad-del.php": {
+          "type": "-",
+          "size": 510,
+          "lmtime": 1732725528911.881,
+          "modified": false
+        },
+        "disponibilidad-get.php": {
+          "type": "-",
+          "size": 770,
+          "lmtime": 1732721738408.4182,
+          "modified": false
+        },
+        "disponibilidad-list-id.php": {
+          "type": "-",
+          "size": 720,
+          "lmtime": 1732726904293.8464,
+          "modified": false
+        }
+      },
       "enfermedades-get.php": {
         "type": "-",
         "size": 484,
@@ -1585,7 +1617,26 @@
         "lmtime": 0,
         "modified": false
       },
-      "historial_citas": {},
+      "historial_citas": {
+        "cita_diagnostico.php": {
+          "type": "-",
+          "size": 725,
+          "lmtime": 0,
+          "modified": false
+        },
+        "historial_citas-get.php": {
+          "type": "-",
+          "size": 1806,
+          "lmtime": 1733151713021.5203,
+          "modified": false
+        },
+        "historial_citas-med-get.php": {
+          "type": "-",
+          "size": 1917,
+          "lmtime": 0,
+          "modified": false
+        }
+      },
       "lib": {},
       "medico": {
         "aseguradora-update.php": {
@@ -2201,6 +2252,20 @@
         "size": 414,
         "lmtime": 0,
         "modified": false
+      },
+      "rango": {
+        "rango-add.php": {
+          "type": "-",
+          "size": 470,
+          "lmtime": 1732636870689.0122,
+          "modified": false
+        },
+        "rango-list-id.php": {
+          "type": "-",
+          "size": 628,
+          "lmtime": 1732640443792.5518,
+          "modified": false
+        }
       }
     },
     "recepcionista": {
@@ -2254,9 +2319,9 @@
       },
       "cita_age_doc.php": {
         "type": "-",
-        "size": 24108,
+        "size": 24811,
         "lmtime": 1731344212173.4116,
-        "modified": false
+        "modified": true
       },
       "cita_age_read.php": {
         "type": "-",
@@ -2296,8 +2361,14 @@
       },
       "cita_ticket.php": {
         "type": "-",
-        "size": 12979,
+        "size": 16754,
         "lmtime": 1731978958197.6274,
+        "modified": true
+      },
+      "cita_ticket_his.php": {
+        "type": "-",
+        "size": 16758,
+        "lmtime": 0,
         "modified": false
       },
       "cobros_realizados.php": {
@@ -2311,6 +2382,12 @@
         "type": "-",
         "size": 20315,
         "lmtime": 1729867019275.5305,
+        "modified": false
+      },
+      "disp_med.php": {
+        "type": "-",
+        "size": 24871,
+        "lmtime": 1732726385507.6836,
         "modified": false
       },
       "envio_sms.js": {
@@ -2335,6 +2412,18 @@
         "type": "-",
         "size": 9427,
         "lmtime": 0,
+        "modified": false
+      },
+      "historial_tickets.js": {
+        "type": "-",
+        "size": 2432,
+        "lmtime": 0,
+        "modified": false
+      },
+      "historial_tickets.php": {
+        "type": "-",
+        "size": 9538,
+        "lmtime": 1733151978773.2825,
         "modified": false
       },
       "js": {
@@ -2394,9 +2483,9 @@
         },
         "cita_age_doc.js": {
           "type": "-",
-          "size": 57636,
-          "lmtime": 1732210174980.031,
-          "modified": true
+          "size": 57676,
+          "lmtime": 1733327159545.4346,
+          "modified": false
         },
         "cita_age_read.js": {
           "type": "-",
@@ -2470,6 +2559,12 @@
           "lmtime": 1698159650542.5,
           "modified": false
         },
+        "disp_med.js": {
+          "type": "-",
+          "size": 20071,
+          "lmtime": 1732726642955.8145,
+          "modified": false
+        },
         "historial_citas.js": {
           "type": "-",
           "size": 4366,
@@ -2484,8 +2579,8 @@
         },
         "historial_tickets.js": {
           "type": "-",
-          "size": 2436,
-          "lmtime": 0,
+          "size": 2434,
+          "lmtime": 1733152027808.4695,
           "modified": false
         },
         "otros_cobros.js": {
@@ -2557,9 +2652,9 @@
       },
       "nav.php": {
         "type": "-",
-        "size": 5662,
+        "size": 5832,
         "lmtime": 1730741778490.318,
-        "modified": false
+        "modified": true
       },
       "otros_cobros.php": {
         "type": "-",
@@ -2630,8 +2725,8 @@
     },
     "sesion.php": {
       "type": "-",
-      "size": 277,
-      "lmtime": 0,
+      "size": 278,
+      "lmtime": 1733152920166.5898,
       "modified": false
     },
     "variables.php": {

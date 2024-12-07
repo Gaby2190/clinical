@@ -45,7 +45,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                             <div class="row form-group">
                                                 <div class="container" id="div_table_hpagos">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" style="width:30%" id="busc_medi" placeholder="Ingrese el nombre del médico...">
+                                                    <input type="text" class="form-control" style="width:30%" id="busc_medi" placeholder="Ingrese el indicio a buscar">
                                                 </div> 
                                                     <div class="row form-group">
                                                         <div class="container">

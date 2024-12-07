@@ -9,10 +9,12 @@ include_once '../../dbconnection.php';
     $fecha_p = $_POST['fecha_p'];
     $hora_p = $_POST['hora_p'];
     $id_usuario = $_POST['id_usuario'];
+    $id_t_pago = $_POST['id_t_pago'];
+    $t_pago = $_POST['t_pago'];
+    
 
-
-    $query = "INSERT into cita_pago(descripcion,costo,id_cita,id_f_pago,fecha_p,hora_p,id_usuario) 
-            VALUES ('$descripcion','$costo','$id_cita','$id_f_pago','$fecha_p','$hora_p','$id_usuario')";
+    echo $query = "INSERT into cita_pago(descripcion,costo,id_cita,id_f_pago,fecha_p,hora_p,id_usuario, id_tipo_pago) 
+            VALUES ('$descripcion','$costo','$id_cita','$id_f_pago','$fecha_p','$hora_p','$id_usuario','$id_t_pago')";
     $result = mysqli_query($conn, $query);
 
     if (!$result) {
@@ -20,7 +22,7 @@ include_once '../../dbconnection.php';
         echo "fallo";
     }
 
-    echo "Forma de pago registrada exit��samente";  
+    echo "Forma de pago registrada exitosamente";  
 
 
 ?>

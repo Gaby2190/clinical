@@ -4,7 +4,7 @@ include_once '../../dbconnection.php';
 
     $id_cita= $_POST['id_cita'];
 
-    $query = "SELECT cp.*, fp.nombre, me.tarifa, me.tarifa_control, me.pago_ingreso, ci.tipo_cita, fp.aseguradora
+    $query = "SELECT cp.*, fp.nombre, me.tarifa, me.tarifa_control, me.pago_ingreso, ci.tipo_cita, fp.aseguradora, tp.descripcion as tp_descripcion, tp.id_tipo_pago
                 FROM cita_pago as cp
                 INNER JOIN f_pago as fp
                     ON cp.id_f_pago = fp.id
@@ -14,6 +14,8 @@ include_once '../../dbconnection.php';
                     ON ci.id_caso = ca.id_caso
                 INNER JOIN medico as me
                     ON ca.id_medico = me.id_medico
+                INNER JOIN tipo_pago as tp
+                    ON tp.id_tipo_pago = cp.id_tipo_pago
                 WHERE cp.id_cita = $id_cita";
     
     $result = mysqli_query($conn, $query);
@@ -35,7 +37,9 @@ include_once '../../dbconnection.php';
         'tarifa_control' => $row['tarifa_control'],
         'pago_ingreso' => $row['pago_ingreso'],
         'tipo_cita' => $row['tipo_cita'],
-        'aseguradora' => $row['aseguradora']
+        'aseguradora' => $row['aseguradora'],
+        'id_tipo_pago' => $row['id_tipo_pago'],
+        'tp_descripcion' => $row['tp_descripcion']
         );
     }
   

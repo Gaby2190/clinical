@@ -24,7 +24,7 @@
         <table>
             <tbody>
                 <tr>
-                    <td><strong><label id="medico"></label></strong></td>
+                    <td><label id="medico"></label></td>
                 </tr>
                 
                 <tr>
@@ -32,9 +32,6 @@
                 </tr>
                 <tr>
                     <td><strong><label id="hora"></label></strong></td>
-                </tr>
-                <tr>
-                    <td><label>La hora indica es referencial.</label></td>
                 </tr>
                 <tr>
                     <td></br></td>
@@ -48,23 +45,19 @@
                 <tr>
                     <td><label id="turno"></label></td>
                 </tr>
+                
                 <tr>
-                    <td id="fp"><strong>FORMA DE PAGO</strong></td>                    
+                    <td></br> <strong>COBROS REALIZADOS</strong></td>
                 </tr>
                 <tr>
                     <td id="f_pago"></td>                    
                 </tr>
-                <tr>
-                    <td id="ladi"><strong>ADICIONALES</strong></td>                    
-                </tr>
-                <tr>
-                    <td id="adicionales"></td>                    
-                </tr>
+                
             </tbody>
         </table>
         </div>
-        <p class="centrado">AGENDA TU PRÓXIMA CITA
-            <br>0992552373 - 062985931
+        <p class="centrado"><strong>AGENDA TU PRÓXIMA CITA
+            <br>0992552373 - 062985931</strong>
             <br>www.cesmed.ec
             <br><br>¡Gracias por preferirnos!</p>
     </div>

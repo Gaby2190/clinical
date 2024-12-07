@@ -81,6 +81,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                             <tr>
                                                                 <th scope="col">Forma de pago</th>
                                                                 <th scope="col">Descripción</th>
+                                                                <th scope="col">Tipo Pago</th>
                                                                 <th scope="col">Cantidad ($)</th>
                                                                 <th scope="col">Opciones</th>
                                                             </tr>
@@ -90,23 +91,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                     <a class="btn btn-success" data-toggle="modal" style="color: #fff" data-target="#modalFp"><span class="fa fa-plus"></span> Añadir</a>
                                                 </div>   
                                             </div>
-                                            <div class="card-block">
-                                                <p CLASS="align-center" style="font-size: 25px;color: #22445d;">PAGOS ADICIONALES</p>     
-                                                <br>
-                                                <div class="col-12 table-responsive">
-                                                <table class=" table table-striped" id="adicionales_table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Tipo de servicio</th>
-                                                            <th scope="col">Descripción</th>
-                                                            <th scope="col">Costo ($)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="adicionales_body"></tbody>
-                                                </table>
-                                                <a class="btn btn-success" data-toggle="modal" style="color: #fff" data-target="#modalAdicionales" ><span class="fa fa-plus"></span> Añadir adicional</a>
-                                                </div>   
-                                            </div>
+                                            
                                             
 
                                         </div>
@@ -139,6 +124,10 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                 <div class="input-group mb-3">
                                     <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Forma de pago:</p>
                                     <select class="custom-select" id="select_fpago" required></select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Tipo de pago:</p>
+                                    <select class="custom-select" id="select_tpago" required></select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <p class="f-w-600 text-uppercase col-sm-12">Descripción:</p>
@@ -223,6 +212,10 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                     <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Tipo de Servicio:</p>
                                     <select class="custom-select" id="select_servicio" required></select>
                                 </div>
+                                <div class="input-group mb-3">
+                                    <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Forma de pago:</p>
+                                    <select class="custom-select" id="select_fpagoadi" required></select>
+                                </div>
 
                                 <div class="input-group mb-3">
                                     <p class="f-w-600 text-uppercase col-sm-12"><span style="color: red;">*</span>Descripción:</p>
@@ -298,7 +291,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="js/rece.js"></script>
 
-    <script src="js/cita_ticket_his.js"></script>
+    <script src="js/cita_ticket.js"></script>
 
 </body>
 

@@ -13,7 +13,7 @@ include_once '../../variables.php';
                 ON ca.id_medico = me.id_medico
               INNER JOIN paciente as pa
                 ON ca.id_paciente = pa.id_paciente
-              WHERE (ci.id = '$cita_atendida' or ci.id = '$cita_cobrada' or ci.id = '$cita_finalizada') and concat_ws(' ', pa.nombres_paci1,pa.nombres_paci2,pa.apellidos_paci1,pa.apellidos_paci2) like '%$paciente%' ORDER BY ci.fecha DESC";
+              WHERE (ci.id = '$cita_atendida' or ci.id = '$cita_cobrada' or ci.id = '$cita_finalizada' or ci.id = '$cita_espera') and concat_ws(' ', pa.nombres_paci1,pa.nombres_paci2,pa.apellidos_paci1,pa.apellidos_paci2) like '%$paciente%' ORDER BY ci.fecha DESC";
     
     
     $result = mysqli_query($conn, $query);

@@ -8,7 +8,7 @@ $(document).ready(function () {
             const datos = JSON.parse(response);
             console.log(datos);
             $("#medico").html(datos.sufijo +" "+ datos.nom_ape_medi);
-            $("#turno").html("Ref: "+ datos.id_cita);
+            $("#turno").html("Referencia: "+ datos.id_cita);
             $("#fecha").html("Fecha: "+ datos.fecha);
             $("#hora").html("Hora: "+ datos.hora.substring(0, 5) + "h");
             $("#paciente").html("Paciente: "+ datos.apellidos_paci1 +" "+ datos.apellidos_paci2+" "+ datos.nombres_paci1);
@@ -30,30 +30,16 @@ $(document).ready(function () {
                             var descripcion = cp.descripcion;
                             var f_pago = cp.nombre;
                             var costo = cp.costo;
-                            $("#f_pago").append(`<label><strong>${f_pago}:</strong> ${descripcion} <strong>$${costo}</strong></label><br>`);
+                            var tipo_pago = cp.tipo_pago;
+                            
+                            $("#f_pago").append(`<label>${descripcion} ${tipo_pago}: <strong>$${costo} ${f_pago}</strong></label><br>`);
                         });
                     }
 
                 }
             });
 
-            $.ajax({
-                type: "POST",
-                url: "../adicional-read.php",
-                data: {id_cita},
-                async:false,
-                success: function (response) {
-                    if (response != false) {
-                        const adicionales = JSON.parse(response);
-                        adicionales.forEach(adi => {
-                            var descripcion = adi.descripcion;
-                            var costo = adi.costo;
-                            $("#adicionales").append(`<label>${descripcion} <strong>$${costo}</strong></label><br>`);
-                        });
-                    }
-
-                }
-            });
+            
                     
                
 

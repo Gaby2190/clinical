@@ -716,7 +716,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                     $.ajax(settings).done(function (response) {
                                                                     console.log(response);
                                                                     });
-                                                                    */
+                                                                    
                                                                     //-------------- Envio Mensajes Medicos ---------------------
                                                                     const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
                                                                     const num_doc = paci.celular_medi;
@@ -746,7 +746,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                                                         console.log(response);
                                                                         });
 
-                                                                        
+                                                                        */
                                                                         setTimeout(function() { window.location.href = "rece.php"; }, 1000);
                                                                     }
                                                                 });
@@ -983,7 +983,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                 $.ajax(settings).done(function (response) {
                                    console.log(response);
                                 });
-                                */
+                               
                                 //-------------- Envio Mensajes Medicos ---------------------
                                 const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
                                 const num_doc = paci.celular_medi;
@@ -1012,6 +1012,8 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
                                     $.ajax(settings).done(function (response) {
                                        console.log(response);
                                     });
+
+                                     */
                                 
                         }
                     });

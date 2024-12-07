@@ -66,13 +66,13 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                                         <table class="table table-striped" id="citas_pac_table">
                                                                             <thead>
                                                                                 <tr> 
-                                                                                    <th scope="col" hidden>ID</th>
-                                                                                    <th scope="col">Tipo Cita</th>
-                                                                                    <th scope="col">Fecha</th>
-                                                                                    <th scope="col">Hora</th>
-                                                                                    <th scope="col">Paciente</th>
-                                                                                    <th scope="col">Médico</th>
-                                                                                    <th scope="col">Opciones</th>
+                                                                                    <th scope="col-md-auto" hidden>ID</th>
+                                                                                    <th scope="col-md-auto">Tipo Cita</th>
+                                                                                    <th scope="col-md-auto">Fecha</th>
+                                                                                    <th scope="col-md-auto">Hora</th>
+                                                                                    <th scope="col-md-auto">Paciente</th>
+                                                                                    <th scope="col-md-auto">Médico</th>
+                                                                                    <th scope="col-4 row justify-content-md-center">Opciones</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody id="citas_body"></tbody>

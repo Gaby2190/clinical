@@ -59,7 +59,18 @@ $(document).ready(function() {
                                             <td class="pt-3">${hora}h</td>
                                             <td class="pt-3">${nom_apep}</td>
                                             <td class="pt-3">${nom_apem}</td>
-                                            <td class="pt-3"><a href="paci_espera.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-success btn-sm">Ingresar a sala de espera</a>    <a href="cita_reagendar.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Reagendar</a> <a href="#" id='cancelar' style="color: #fff" class="btn btn-danger btn-sm">Cancelar</a></td>
+                                            <td class="pt-3">
+                                                <a href="paci_espera.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-success btn-sm">Ingresar a sala de espera</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="cita_reagendar.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Reagendar Cita</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="#" id='cancelar' style="color: #fff" class="btn btn-danger btn-sm">Cancelar Cita</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="cita_ticket_his.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm">Registrar Abono</a>
+                                            </td>
                                         </tr>
                                         <tr id="scitang-row">
                                             <td></td>
@@ -94,7 +105,8 @@ $(document).ready(function() {
                                         </td>
                                         <td class="pt-3">${paci.cedula_paci}</td>
                                         <td class="pt-3">${paci.celular_paci}</td>
-                                        <td class="pt-3"><a href="#" id='add_item'><span class="fa fa-plus btn"></span>Seleccionar</a></td>
+                                        <td class="pt-3">
+                                        <a href="#" id='add_item'><span class="fa fa-plus btn"></span>Seleccionar</a></td>
                                     </tr>
                                     <tr id="spacing-row">
                                         <td></td>
@@ -149,7 +161,18 @@ $(document).ready(function() {
                                             <td class="pt-3">${hora}h</td>
                                             <td class="pt-3">${nom_apep}</td>
                                             <td class="pt-3">${nom_apem}</td>
-                                            <td class="pt-3"><a href="paci_espera.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-success btn-sm">Ingresar a sala de espera</a>    <a href="cita_reagendar.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Reagendar</a> <a href="#" id='cancelar' style="color: #fff" class="btn btn-danger btn-sm">Cancelar</a></td>
+                                            <td class="pt-3">
+                                                <a href="paci_espera.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-success btn-sm">Ingresar a sala de espera</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="cita_reagendar.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Reagendar Cita</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="#" id='cancelar' style="color: #fff" class="btn btn-danger btn-sm">Cancelar Cita</a>
+                                            </td>
+                                            <td class="pt-3">
+                                                <a href="cita_ticket_his.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm">Registrar Abono</a>
+                                            </td>
                                         </tr>
                                         <tr id="scitang-row">
                                             <td></td>

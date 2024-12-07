@@ -13,7 +13,6 @@ $(document).ready(function() {
                     $('#modalPush').modal("show");
                     $('#div_table_hpagos').hide();
                     $("#hpagos_body > tr").remove(); 
-
                 } else { 
                     const resp = JSON.parse(response);
                     let template = '';
