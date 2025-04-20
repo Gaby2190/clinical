@@ -1,9 +1,11 @@
 <?php
-define('DURACION_SESION','14400'); // 1hora
+define('DURACION_SESION','3600'); // 1hora
 ini_set("session.cookie_lifetime",DURACION_SESION);
 ini_set("session.gc_maxlifetime",DURACION_SESION); 
-ini_set("session.save_path","/tmp");
+
 session_cache_expire(DURACION_SESION);
+
 session_start();
-session_regenerate_id(true);
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 1 Jan 1900 05:00:00 GMT"); // Indicamos una fecha en el pasado
 ?>

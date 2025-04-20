@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $database = "cesmedec_clinical";
-$username = "cesmedec_clinical";
-$password = "Cesmed1994*";
+$username = "root";
+$password = "";
 
 // Crear conexi��n
 $conn = new mysqli($servername, $username, $password, $database);
