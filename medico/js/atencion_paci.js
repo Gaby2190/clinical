@@ -879,25 +879,23 @@ $(document).ready(function() {
     function getTarifa() {
         $.ajax({
             type: "POST",
-            url: "../php/cita/cita-pac-dat.php",
+            url: "../php/cita_pago/cita_pago-get.php",
             data: { id_cita },
+            async:false,
             success: function(response) {
-                const cita = JSON.parse(response);
                 var tarifa = 0;
-                if (cita.tipo_cita == "1") {
-                    tarifa = cita.tarifa;
-                }else{
-                    if (cita.tipo_cita == "0") {
-                        tarifa = cita.tarifa_control;
+                if (response != false) {
+                    const cpagos = JSON.parse(response);
+                    cpagos.forEach(cp => {
+                        tarifa += Number(cp.costo);
+                    });               
+                    console.log(Number(tarifa));
+                    $("#tarifa").html(`$ ${tarifa.toFixed(2)}`);
+                    if (Number(tarifa) == 0) {
+                        $("#descuento").attr('disabled', 'disabled');
+                    }else{
+                        $("#descuento").removeAttr('disabled');
                     }
-                } 
-
-                console.log(Number(tarifa));
-                $("#tarifa").html(`$ ${tarifa}`);
-                if (Number(tarifa) == 0) {
-                    $("#descuento").attr('disabled', 'disabled');
-                }else{
-                    $("#descuento").removeAttr('disabled');
                 }
             }
         });

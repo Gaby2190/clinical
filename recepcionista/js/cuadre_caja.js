@@ -84,43 +84,31 @@ $(document).ready(function() {
                         }                 
                         const hora = cita.hora_p.slice(0, -3);
                         var tipo_cita = "";
-                        var tarifa = 0;
+                                      
+                                                   
+                        var tarifa = cita.costo;
                         
-                        
-                       
-                            if (cita.tipo_cita == "1") {
-                                tipo_cita = "Normal";
-                                tarifa = cita.costo;
-                            }else{
-                                if (cita.tipo_cita == "0") {
-                                    tipo_cita = "Control";
-                                    tarifa = cita.costo;
-                                }
-                            }
-                       
-                        
-                           
-    
                         //========Separaci贸n de un nombre y un apellido MEDICO ===================
-                        const nombrem = cita.nombres_medi;
-                        const apellidom = cita.apellidos_medi;
-                        const nom_apem = cita.sufijo + " " + nombrem + " " + apellidom;
+                        const nombrem = cita.nom_ape_medi;
+                      
+                        const nom_apem = cita.sufijo + " " + nombrem;
                         //========Uni贸n de un nombre y un apellido PACIENTE ===================
                         const nom_apep = cita.nombres_paci1 + " " + cita.nombres_paci2 + " " + cita.apellidos_paci1 + " " + cita.apellidos_paci2;
                         const total = tarifa - cita.descuento + adicionales + otros;
                         
                         template += `
                                     <tr class="bg-blue" citaID="${cita.id_cita}" citaTotal="${total}">
+                                        <td class="pt-3">${cita.id_cita}</td>
                                         <td class="pt-3">${cita.fecha_p}</td>
                                         <td class="pt-3">${hora}h</td>
                                         <td class="pt-3">${nom_apep}</td>
                                         <td class="pt-3">${nom_apem}</td>
-                                        <td class="pt-3">${tipo_cita}</td>
+                                        <td class="pt-3">${cita.tipo_pago}</td>
                                         <td class="pt-3"><B>$${tarifa}</B></td>
                                         <td class="pt-3">$${cita.descuento}</td>
                                         <td class="pt-3">$${Number(adicionales).toFixed(2)}</td>
                                         <td class="pt-3">$${Number(otros).toFixed(2)}</td>
-                                        <td class="pt-3"><B>${cita.nombre}</B></td>`;
+                                        <td class="pt-3"><B>${cita.forma_pago}</B></td>`;
 
                         template += `</tr>`;
     

@@ -7,7 +7,7 @@ date_default_timezone_set('America/Guayaquil');
 $id_cita_consulta = $_GET['id_cita'];
 $id_caso = 0;
 
-echo $query = "SELECT id_caso from cita
+$query = "SELECT id_caso from cita
 WHERE id_cita ='$id_cita_consulta'";
 
 $result = mysqli_query($conn, $query);
@@ -135,7 +135,7 @@ while($row = mysqli_fetch_array($result)) {
         {
             $edad = calcular_edad($fechan_paci,$fecha_registro);
         }
-echo $edad;
+//echo $edad;
         //---------------------------------- BLOQUE A - DATOS ESTABLECIMIENTO ---------------------------------
         $pdf->SetFont('Arial','B', 10);
         $pdf->SetFillColor(153,153,153);
@@ -1599,5 +1599,5 @@ echo $edad;
         $pdf->Cell(75,15,utf8_decode(''),'LRTB',1,'C');
 }     
 }
-//$pdf->Output("reporte_hcu_002.pdf","I",true);
+$pdf->Output("reporte_hcu_002.pdf","I",true);
 ?>

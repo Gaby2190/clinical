@@ -349,13 +349,15 @@ for ($i=0; $i < sizeof($cita_c); $i++) {
       $consultas_t += floatval($cita_c[$i]['costo']);
 
     }
-    if (floatval($comision_c) > 5) {
-      $porcentaje=floatval($comision_c)/100;
-      $c_c = floatval($consultas_t-$descuentos_t)*$porcentaje;
-   
-    }else{
-      $c_c += floatval($comision_c);
-      
+    if (floatval($cita_c[$i]['costo'])>0){
+      if (floatval($comision_c) > 5) {
+        $porcentaje=floatval($comision_c)/100;
+        $c_c = floatval($consultas_t-$descuentos_t)*$porcentaje;
+    
+      }else{
+        $c_c += floatval($comision_c);
+        
+      }
     }
 
     

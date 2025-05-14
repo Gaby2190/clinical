@@ -74,6 +74,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                                                 <th scope="col"></th>
                                                                                 <th scope="col"></th>
                                                                                 <th scope="col"></th>
+                                                                                <th scope="col"></th>
                                                                                 <th scope="col">INGRESOS</th>
                                                                                 <th scope="col"></th>
                                                                                 <th scope="col"></th>
@@ -82,6 +83,7 @@ if (trim($_SESSION['rol']) != trim($rece)) {
                                                                                 <th scope="col"></th>
                                                                             </tr> 
                                                                             <tr>
+                                                                                <th scope="col">Id Cita</th>
                                                                                 <th scope="col">Fecha</th>
                                                                                 <th scope="col">Hora</th>
                                                                                 <th scope="col">Paciente</th>

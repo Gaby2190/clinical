@@ -27,14 +27,22 @@ $(document).ready(function() {
                 success: function (response) {
                     const tipo_cita = Number(JSON.parse(response).tipo_cita);
                     const pago_ingreso = Number(JSON.parse(response).pago_ingreso);
-                    if (pago_ingreso == 1) {
+                    const id_seguro = Number(JSON.parse(response).id_seguro);
+                    if ((pago_ingreso == 1)&&(id_seguro > 0)) {
                         if (tipo_cita == 1) {
                             $("#lbl_cobrar").html(`Realizar cobro de la cita: $${JSON.parse(response).tarifa} dólares`);
                         }else{
                             $("#lbl_cobrar").html(`Realizar cobro de la cita: $${JSON.parse(response).tarifa_control} dólares`);
                         }
                     }else{ 
-                        $("#lbl_cobrar").html("Realizar cobro de la cita: $0 dólares");
+                        if (id_seguro == 0)
+                        {
+                            $("#lbl_cobrar").html("Realizar cobro de la cita: $0 dólares");
+                        }
+                        else
+                        {
+                            $("#lbl_cobrar").html("Realizar cobro de la cita de acuerdo a la Aseguradora");                            
+                        }
                     }
                     
                 }

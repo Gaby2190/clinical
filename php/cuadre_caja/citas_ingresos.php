@@ -7,7 +7,7 @@ include_once '../../variables.php';
    $id_usuario = $_POST['id_usuario'];
   
    
-    $query = "SELECT ci.id_cita, 
+    $query = "SELECT ci.id_cita, ci.descuento,
 	   cp.descripcion, cp.costo, cp.fecha_p, cp.hora_p,
        me.sufijo, me.nom_ape_medi, me.comision_c, me.comision_a,
        pa.nombres_paci1, pa.nombres_paci2, pa.apellidos_paci1, pa.apellidos_paci2,
@@ -42,6 +42,7 @@ include_once '../../variables.php';
           'id_cita' => $row['id_cita'],
           'descripcion' => $row['descripcion'],
           'costo' => $row['costo'],
+          'descuento' => $row['descuento'],
           'fecha_p' => $row['fecha_p'],
           'hora_p' => $row['hora_p'],
           'sufijo' => $row['sufijo'],
@@ -52,7 +53,6 @@ include_once '../../variables.php';
           'nombres_paci2' => $row['nombres_paci2'],
           'apellidos_paci1' => $row['apellidos_paci1'],
           'apellidos_paci2' => $row['apellidos_paci2'],
-          'nom_ape_medi' => $row['nom_ape_medi'],
           'id' => $row['id'],
           'forma_pago' => $row['forma_pago'],
           'id_tipo_pago' => $row['id_tipo_pago'],

@@ -72,9 +72,11 @@ $(document).ready(function() {
                         }else{
                             if (cita.tipo_cita == "1") {
                                 tipo_cita = "Normal";
+                                tarifa = cita.tarifa;
                             }else{
                                 if (cita.tipo_cita == "0") {
                                     tipo_cita = "Control";
+                                    tarifa = cita.tarifa_control;
                                 }
                             } 
                         }
@@ -110,7 +112,7 @@ $(document).ready(function() {
                                                 <td class="pt-3"><a href="#" id="adic_id"><u>$${Number(adicionales).toFixed(2)}</u></a></td>
                                                 <td class="pt-3"><a href="#" id="otro_id"><u>$${Number(otros).toFixed(2)}</u></a></td>
                                                 <td class="pt-3" style="color: red">$${total}</td>
-                                                <td class="pt-3"><a href="otros_cobros.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm" id="otros">Otros</a> <a href="cita_pago.php?total=${total}&id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Forma de pago</a> <a href="#" style="color: #fff" class="btn btn-success btn-sm" id="cobrar">Cobrar</a></td>
+                                                <td class="pt-3"><a href="otros_cobros.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm" id="otros">Otros</a> <a href="cita_ticket_cob.php?total=${total}&id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Forma de pago</a> <a href="#" style="color: #fff" class="btn btn-success btn-sm" id="cobrar">Cobrar</a></td>
                                             </tr>
                                             <tr id="scitang-row">
                                                 <td></td>
@@ -130,7 +132,7 @@ $(document).ready(function() {
                                                     <td class="pt-3"><a href="#" id="adic_id"><u>$${Number(adicionales).toFixed(2)}</u></a></td>
                                                     <td class="pt-3"><a href="#" id="otro_id"><u>$${Number(otros).toFixed(2)}</u></a></td>
                                                     <td class="pt-3">$${total}</td>
-                                                    <td class="pt-3"><a href="otros_cobros.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm" id="otros">Otros</a> <a href="cita_pago.php?total=${total}&id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Forma de pago</a> <a href="#" style="color: #fff" class="btn btn-success btn-sm" id="cobrar">Cobrar</a></td>
+                                                    <td class="pt-3"><a href="otros_cobros.php?id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-primary btn-sm" id="otros">Otros</a> <a href="cita_ticket_cob.php?total=${total}&id_cita=${cita.id_cita}" style="color: #fff" class="btn btn-secondary btn-sm">Forma de pago</a> <a href="#" style="color: #fff" class="btn btn-success btn-sm" id="cobrar">Cobrar</a></td>
                                                 </tr>
                                                 <tr id="scitang-row">
                                                     <td></td>
@@ -229,7 +231,7 @@ $(document).ready(function() {
                         c_total += costo;
                     });
                     console.log(c_total + "/" + total);
-                    if(Number(c_total-tarifa_t)>=Number(total)){
+                    if(Number(c_total)==Number(total)){
                         $('#texto_modal_conf').html('Desea realizar el cobro');
                         $('#modal_icon_conf').attr('style', "color: #22445d");
                         $('#modal_icon_conf').attr("class", "fa fa-question-circle fa-4x animated rotateIn mb-4");

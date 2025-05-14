@@ -836,8 +836,8 @@ if (trim($_SESSION['rol']) != trim($medi)) {
                                         <h6 class="m-b-20 p-b-5 b-b-default f-w-600 tit text-uppercase">valores</h6>
                                         <div class="row">
                                             <div class="col-sm-6 my-2">
-                                                <p class="m-b-10 f-w-600">Tarifa de Consulta:</p>
-                                                <label class="text-muted f-w-400" id="tarifa"></label>
+                                                <p class="m-b-10 f-w-600">Total Valores Cobrados al Ingreso:</p>
+                                                <strong><h2 class="text-muted f-w-400" id="tarifa"></h2></strong>
                                             </div>
                                             <div class="col-sm-6 my-2">
                                                 <p class="m-b-10 f-w-600">Descuento:</p>
