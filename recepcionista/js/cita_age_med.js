@@ -42,6 +42,7 @@ $(document).ready(function() {//----- Ejecutar funciones una vez cargar la pagin
        
         //=====Tomar datos del id del caso y de la fecha=====//
         const id_medico = $("#select_medico").val();
+        getSeguros(id_medico);
         const fecha_cita = $('#fecha_cita').val();      
         var tap = 0;
 
@@ -872,8 +873,9 @@ function getDisponibilidad(id_med) {
                         fecha_cita= f_actual;
                     }
                     console.log("cita control");
+                    let seguro = $('#select_seguros').val();  
                     // redirecciona al registro por cita de control
-                    window.location.href = `cita_control-det.php?id_paciente=${id_paciente}&id_medico=${id_medico}&id_especialidad=${id_especialidad}&nombres1=${nombres1}&nombres2=${nombres2}&apellidos1=${apellidos1}&apellidos2=${apellidos2}&fecha_cita=${fecha_cita}&turno=${turno}`;
+                    window.location.href = `cita_control-det.php?id_paciente=${id_paciente}&id_medico=${id_medico}&id_especialidad=${id_especialidad}&nombres1=${nombres1}&nombres2=${nombres2}&apellidos1=${apellidos1}&apellidos2=${apellidos2}&fecha_cita=${fecha_cita}&turno=${turno}&seguro=${seguro}`;
                    })
                  
 
@@ -916,7 +918,7 @@ function getDisponibilidad(id_med) {
                 fecha = f_actual;
             }
         const numeroDia = new Date(fecha).getDay();
-        const dias = [
+        const dias = [!
             'domingo',
             'lunes',
             'martes',

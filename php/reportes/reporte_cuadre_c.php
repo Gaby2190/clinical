@@ -50,8 +50,8 @@ $pdf->SetTextColor(0,0,0);
 $pdf->SetFont('Arial','B', 5);
 $pdf->Cell(12,6,utf8_decode("CITA"),1,0,'C',true);
 $pdf->Cell(8,6,utf8_decode("HORA"),1,0,'C',true);
-$pdf->Cell(55,6,utf8_decode("PACIENTE"),1,0,'C',true);
-$pdf->Cell(11,6,utf8_decode("CONSULTA"),1,0,'C',true);
+$pdf->Cell(46,6,utf8_decode("PACIENTE"),1,0,'C',true);
+$pdf->Cell(20,6,utf8_decode("CONSULTA"),1,0,'C',true);
 $pdf->Cell(20,6,utf8_decode("TOTAL COBRADO"),1,0,'C',true);
 $pdf->Cell(15,6,utf8_decode("DESCUENTO"),1,0,'C',true);
 $pdf->Cell(15,6,utf8_decode("ADICIONALES"),1,0,'C',true);
@@ -60,14 +60,15 @@ $pdf->Cell(44,6,utf8_decode("FORMA DE PAGO"),1,1,'C',true);
 
 
 //CONSULTAS CITAS
-$query_i = "SELECT ci_pa.*, ci.*, ca.id_medico, ca.id_paciente, me.pago_ingreso, me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control, usu.id_usuario, fp.nombre
-                    FROM cita_pago AS ci_pa 
-                    INNER JOIN cita AS ci ON ci_pa.id_cita = ci.id_cita 
-                    INNER JOIN caso AS ca ON ci.id_caso = ca.id_caso 
-                    INNER JOIN medico AS me ON me.id_medico = ca.id_medico 
-                    INNER JOIN paciente AS pa ON pa.id_paciente = ca.id_paciente 
-                    INNER JOIN usuario as usu ON pa.id_usuario = usu.id_usuario
-                    INNER JOIN f_pago AS fp ON fp.id = ci_pa.id_f_pago
+$query_i = "SELECT ci_pa.*, ci.*, ca.id_medico, ca.id_paciente, me.pago_ingreso, me.sufijo, me.nombres_medi, me.apellidos_medi, pa.nombres_paci1, pa.apellidos_paci1, pa.nombres_paci2, pa.apellidos_paci2, me.tarifa, me.tarifa_control, usu.id_usuario, fp.nombre, tp.descripcion AS tipo_pago
+                FROM cita_pago AS ci_pa 
+                INNER JOIN cita AS ci ON ci_pa.id_cita = ci.id_cita 
+                INNER JOIN caso AS ca ON ci.id_caso = ca.id_caso 
+                INNER JOIN medico AS me ON me.id_medico = ca.id_medico 
+                INNER JOIN paciente AS pa ON pa.id_paciente = ca.id_paciente 
+                INNER JOIN usuario as usu ON pa.id_usuario = usu.id_usuario 
+                INNER JOIN f_pago AS fp ON fp.id = ci_pa.id_f_pago 
+                INNER JOIN tipo_pago AS tp ON tp.id_tipo_pago =ci_pa.id_tipo_pago
                 WHERE ci_pa.fecha_p = '{$fecha}' and ci_pa.id_usuario = '{$id_usuario}'   ORDER BY ci_pa.id_cita ASC";
 $result_i = mysqli_query($conn, $query_i);
 
@@ -103,7 +104,9 @@ while($row = mysqli_fetch_array($result_i)) {
           'fecha_p' => $row['fecha_p'],
           'hora_p' => $row['hora_p'],
           'costo' => $row['costo'],
-          'nombre' => $row['nombre']
+          'nombre' => $row['nombre'],
+          'tipo_pago' => $row['tipo_pago']
+          
     );
     
 }
@@ -111,15 +114,9 @@ for ($i=0; $i < sizeof($citas_i); $i++) {
   $pdf->SetFont('Arial','',6);
   $pdf->Cell(12,5,utf8_decode($citas_i[$i]['id_cita']),1,0,'C');
   $pdf->Cell(8,5,utf8_decode(substr($citas_i[$i]['hora'], 0, -3).'h'),1,0,'C');
-  $pdf->Cell(55,5,utf8_decode(ucwords(mb_strtolower($citas_i[$i]['nombres_paci1'].' '.$citas_i[$i]['nombres_paci2'].' '.$citas_i[$i]['apellidos_paci1'].' '.$citas_i[$i]['apellidos_paci2']))),1,0,'C');
-  if(intval($citas_i[$i]['tipo_cita'])==1){
-      $pdf->Cell(11,5,utf8_decode("Normal"),1,0,'C');
-      
-  }
-  if(intval($citas_i[$i]['tipo_cita'])==0){
-      $pdf->Cell(11,5,utf8_decode("Control"),1,0,'C');
-      
-  }
+  $pdf->Cell(46,5,utf8_decode(ucwords(mb_strtolower($citas_i[$i]['nombres_paci1'].' '.$citas_i[$i]['nombres_paci2'].' '.$citas_i[$i]['apellidos_paci1'].' '.$citas_i[$i]['apellidos_paci2']))),1,0,'C');
+ 
+  $pdf->Cell(20,5,utf8_decode($citas_i[$i]['tipo_pago']),1,0,'C');
   $descuento_i = number_format($citas_i[$i]['descuento'],2);
   
   //Adicionales

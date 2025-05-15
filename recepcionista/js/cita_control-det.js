@@ -7,6 +7,7 @@ $(document).ready(function() {
     const id_paciente= document.getElementById("id_paciente").value;
     const id_medico= document.getElementById("id_medico").value;
     const id_especialidad= document.getElementById("id_especialidad").value;
+    const seguro= document.getElementById("seguro").value;
     precargar(id_paciente, id_medico, id_especialidad);
         
     function precargar(id_paciente, id_medico, id_especialidad)
@@ -270,6 +271,7 @@ $(document).ready(function() {
         const hora = $("#turno").val();
         const id_caso = $(elemento).attr('casoID');
         const fecha = $("#fecha_cita").val();
+        const seguro = $("#seguro").val();
         const numeroDia = new Date(fecha).getDay();
         const dias = [
             'domingo',
@@ -286,7 +288,8 @@ $(document).ready(function() {
             fecha: fecha,
             hora: hora,
             tipo_cita: 0,
-            id_caso: id_caso
+            id_caso: id_caso,
+            seguro: seguro
         };
         
         $('#texto_modal_c').html(`Generar cita para el día ${nombreDia} (${fecha}) a las ${hora}h`);
@@ -320,52 +323,57 @@ $(document).ready(function() {
                                 fecha: fecha,
                                 hora: hora
                             };
+                            
                             $.ajax({
                                 type: "POST",
                                 url: "../php/notificacion/mail/cita-mail.php",
                                 data: datMail,
                                 success: function (response) {
                                     console.log(response);
+                                    /*
                                     const datos_msn_doc = paci.nom_ape_medi + ","+ fecha + "," + hora;
-                                const num_doc = paci.celular_medi;
-                                const cedula_doc = paci.cedula_medi;
+                                    const num_doc = paci.celular_medi;
+                                    const cedula_doc = paci.cedula_medi;
 
-                                var dia = new Date(fecha).getDay();
-                                var mes = new Date(fecha).getMonth();
-                                var year = new Date(fecha).getFullYear();
+                                    var dia = new Date(fecha).getDay();
+                                    var mes = new Date(fecha).getMonth();
+                                    var year = new Date(fecha).getFullYear();
 
-                                const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
-                                mes = (meses[mes]);
+                                    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
+                                    mes = (meses[mes]);
 
-                                fecha_msn=dia+" de "+mes+" del "+year;
-                                var settings = {
-                                    "url": "https://api.massend.com/api/sms",
-                                    "method": "POST",
-                                    "timeout": 0,
-                                    "headers": {
-                                        "Content-Type": "application/json"
-                                    },
-                                    "data": JSON.stringify({
-                                        "user": "cesmed@massend.com",
-                                        "pass": "cesmed123",
-                                        "mensajeid": "44937",
-                                        "campana": "CLINICAL CESMED S.C.",
-                                        "telefono": num_doc,
-                                        "dni": cedula_doc,
-                                        "tipo": "1",
-                                        "ruta": "0",
-                                        "datos": datos_msn_doc
-                                    }),
-                                    };
-                                    
-                                    $.ajax(settings).done(function (response) {
-                                       console.log(response);
-                                    });
+                                    fecha_msn=dia+" de "+mes+" del "+year;
+                                    var settings = {
+                                        "url": "https://api.massend.com/api/sms",
+                                        "method": "POST",
+                                        "timeout": 0,
+                                        "headers": {
+                                            "Content-Type": "application/json"
+                                        },
+                                        "data": JSON.stringify({
+                                            "user": "cesmed@massend.com",
+                                            "pass": "cesmed123",
+                                            "mensajeid": "44937",
+                                            "campana": "CLINICAL CESMED S.C.",
+                                            "telefono": num_doc,
+                                            "dni": cedula_doc,
+                                            "tipo": "1",
+                                            "ruta": "0",
+                                            "datos": datos_msn_doc
+                                        }),
+                                        };
+                                        
+                                        $.ajax(settings).done(function (response) {
+                                        console.log(response);
+                                        });
+                                    */
                                 }
+                                    
                             });
+                            
                         }
                     });
-                    //setTimeout(function() { window.location.href = "cita_age_doc.php"; }, 3000);
+                    setTimeout(function() { window.location.href = "rece.php"; }, 3000);
                         
                    
                 } 

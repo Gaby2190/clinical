@@ -28,7 +28,8 @@ $(document).ready(function() {
                     const tipo_cita = Number(JSON.parse(response).tipo_cita);
                     const pago_ingreso = Number(JSON.parse(response).pago_ingreso);
                     const id_seguro = Number(JSON.parse(response).id_seguro);
-                    if ((pago_ingreso == 1)&&(id_seguro > 0)) {
+                    console.log(id_seguro);
+                    if ((pago_ingreso == 1)&&(id_seguro < 2)) {
                         if (tipo_cita == 1) {
                             $("#lbl_cobrar").html(`Realizar cobro de la cita: $${JSON.parse(response).tarifa} dólares`);
                         }else{

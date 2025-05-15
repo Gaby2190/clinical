@@ -13,6 +13,7 @@ $apellidos1=$_GET['apellidos1'];
 $apellidos2=$_GET['apellidos2'];
 $fecha_cita=$_GET['fecha_cita'];
 $turno=$_GET['turno'];
+$seguro=$_GET['seguro'];
 
 
 
@@ -64,6 +65,7 @@ $turno=$_GET['turno'];
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="id_medico" value="<?php echo $id_medico; ?>" required>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="fecha_cita" value="<?php echo $fecha_cita; ?>" required>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="turno" value="<?php echo $turno; ?>" required>
+                                                         <input type="hidden" class="text-muted f-w-400 form-control" id="seguro" value="<?php echo $seguro; ?>" required>
                                                          <input type="hidden" class="text-muted f-w-400 form-control" id="id_especialidad" value="<?php echo $id_especialidad; ?>" required>
                                                         <input type="text" class="text-muted f-w-400 form-control" id="nombres_paci1"  value="<?php echo $nombres1; ?>" size="50" maxlength="50" required>
                                                     </div>
